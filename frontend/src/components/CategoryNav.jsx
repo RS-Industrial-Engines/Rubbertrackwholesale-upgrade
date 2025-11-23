@@ -202,6 +202,7 @@ const CategoryNav = () => {
                   onChange={(e) => {
                     setSelectedBrand(e.target.value);
                     setSelectedModel(''); // Reset model when brand changes
+                    setSelectedTrackSize(''); // Reset track size when brand changes
                   }}
                   className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-4 py-3 focus:outline-none focus:border-orange-500"
                 >
@@ -217,7 +218,10 @@ const CategoryNav = () => {
                 <label className="block text-slate-300 mb-2 font-semibold">Machine Model</label>
                 <select
                   value={selectedModel}
-                  onChange={(e) => setSelectedModel(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedModel(e.target.value);
+                    setSelectedTrackSize(''); // Reset track size when model changes
+                  }}
                   className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-4 py-3 focus:outline-none focus:border-orange-500"
                   disabled={!selectedBrand}
                 >
