@@ -558,13 +558,41 @@ async def search_public_compatibility(
     model: Optional[str] = None,
     track_size: Optional[str] = None
 ):
-    """Search compatibility entries by make, model, or track size (public endpoint)"""
+    """Search compatibility entries by make, model, or track size (public endpoint)
+    Handles space/hyphen normalization for flexible matching (e.g., "svl75" matches "SVL 75")
+    """
     query = {"is_active": True}
     
     if make:
-        query["make"] = {"$regex": make, "$options": "i"}
+        # Normalize: remove spaces, hyphens for flexible matching
+        make_normalized = re.sub(r'[\s\-_]', '', make)
+        query["$or"] = [
+            {"make": {"$regex": make, "$options": "i"}},
+            {"make": {"$regex": make_normalized, "$options": "i"}}
+        ]
+    
     if model:
-        query["model"] = {"$regex": model, "$options": "i"}
+        # Normalize: remove spaces, hyphens for flexible matching
+        model_normalized = re.sub(r'[\s\-_]', '', model)
+        
+        # If make query exists, extend the $or with model conditions
+        if "$or" in query:
+            # Combine make and model searches
+            existing_or = query["$or"]
+            new_or = []
+            for make_condition in existing_or:
+                # Original model
+                new_or.append({**make_condition, "model": {"$regex": model, "$options": "i"}})
+                # Normalized model
+                new_or.append({**make_condition, "model": {"$regex": model_normalized, "$options": "i"}})
+            query["$or"] = new_or
+        else:
+            # Model search only
+            query["$or"] = [
+                {"model": {"$regex": model, "$options": "i"}},
+                {"model": {"$regex": model_normalized, "$options": "i"}}
+            ]
+    
     if track_size:
         query["track_sizes"] = track_size
     
