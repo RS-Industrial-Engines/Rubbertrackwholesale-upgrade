@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Backend API Testing for Rubber Track Compatibility Chart
-Tests the track-sizes, compatibility, and compatibility/search endpoints
+Backend API Testing for Enhanced Search Normalization
+Tests the enhanced search normalization functionality in compatibility and part-numbers APIs
+Focus: space/hyphen variations in search terms (e.g., 'svl75' finding 'SVL 75', '1273807' finding '127-3807')
 """
 
 import requests
