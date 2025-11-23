@@ -82,6 +82,41 @@ const RubberTrackCompatibility = () => {
     setCompatibleMachines([]);
   };
 
+  // Helper function to find track size details, handling N/W variants
+  // If compatibility data has "300x52.5x80 (N)", it will:
+  // 1. First try to find exact match with N variant
+  // 2. Fall back to standard version (no variant) which represents all variants
+  const findTrackSizeDetails = (sizeString) => {
+    // Extract base size and variant from string like "300x52.5x80 (N)"
+    const variantMatch = sizeString.match(/^(.+?)\s*\(([NW])\)$/);
+    
+    if (variantMatch) {
+      const [, baseSize, variant] = variantMatch;
+      
+      // Try to find exact match with specific variant
+      const exactMatch = trackSizes.find(ts => 
+        ts.size === baseSize && ts.width_variant === variant
+      );
+      if (exactMatch) return exactMatch;
+      
+      // Fall back to standard version (no variant specified)
+      const standardMatch = trackSizes.find(ts => 
+        ts.size === baseSize && (!ts.width_variant || ts.width_variant === '')
+      );
+      if (standardMatch) return standardMatch;
+    }
+    
+    // For sizes without variant notation, find exact match or standard version
+    const exactMatch = trackSizes.find(ts => ts.size === sizeString);
+    if (exactMatch) return exactMatch;
+    
+    // Try without spaces/dashes (normalization)
+    const normalizedSearch = sizeString.replace(/[\s\-_]/g, '').toLowerCase();
+    return trackSizes.find(ts => 
+      ts.size.replace(/[\s\-_]/g, '').toLowerCase() === normalizedSearch
+    );
+  };
+
   const convertSize = (trackSize) => {
     if (unit === 'inches') {
       const widthInches = (trackSize.width / 25.4).toFixed(1);
