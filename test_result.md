@@ -205,6 +205,18 @@ frontend:
         comment: "🔍 COMPREHENSIVE CAT 277B TESTING COMPLETED - Mixed results: ✅ RUBBER TRACK COMPATIBILITY CHART WORKS PERFECTLY: 1) Search for 'CAT 277B' finds 1 machine with track size 18x4x56, 2) Modal opens correctly showing track size details, 3) Both 'CAT 277B' and '277B' searches work, 4) Track size button clickable and functional. ❌ FIND PARTS BY EQUIPMENT SECTION PARTIALLY BROKEN: 1) Frontend dropdowns work (Caterpillar and 277B available and selectable), 2) Navigation works (correctly goes to /products?brand=Caterpillar&model=277B&category=Rubber%20Tracks), 3) BUT backend API fails with 404 error: '/api/compatibility/Caterpillar/277B' endpoint missing. ❌ TRACK SIZE SEARCH LIMITATION: Direct search for '18x4x56' in compatibility chart shows 'No machines found' (should find CAT 277B). CONCLUSION: CAT 277B compatibility data exists and works in compatibility chart, but missing API endpoint breaks products page integration. Track loader import was partially successful - frontend compatibility works but backend API integration incomplete."
 
 backend:
+  - task: "Part Numbers Search API Endpoint with Normalization"
+    implemented: true
+    working: "NA"
+    file: "/app/backend/routes/public.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced /api/part-numbers/search endpoint to support normalized search. Now searches with both original query and normalized version (spaces/hyphens removed). Handles part numbers like '1273807' finding '127-3807', model searches like 'svl75' finding 'SVL 75'. Uses regex patterns with re.sub(r'[\s\-_]', '', text) for normalization."
+  
   - task: "Track Loader Compatibility Data Import"
     implemented: true
     working: false
