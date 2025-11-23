@@ -216,6 +216,8 @@ const AdminTrackSizes = () => {
   const resetForm = () => {
     setFormData({
       size: '',
+      width_variant: '',
+      inventory_count: 0,
       price: '',
       description: '',
       is_active: true
