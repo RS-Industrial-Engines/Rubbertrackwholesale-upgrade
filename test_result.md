@@ -243,12 +243,15 @@ backend:
 
   - task: "Compatibility Search API Endpoint"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/backend/routes/public.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced /api/compatibility/search endpoint to support normalized search. Now uses regex patterns with both original and normalized (spaces/hyphens removed) versions of make/model. Should handle searches like 'svl75' finding 'SVL 75' in the database, 'e70b' finding 'E70 B', etc. Uses re.sub(r'[\s\-_]', '', text) for normalization."
       - working: true
         agent: "testing"
         comment: "✅ PASSED - GET /api/compatibility/search?make=Bobcat returns 161 Bobcat machines with their compatible track sizes. Search functionality works correctly for make, model, and track_size parameters."
