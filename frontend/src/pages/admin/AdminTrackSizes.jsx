@@ -243,11 +243,19 @@ const AdminTrackSizes = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="bg-slate-800 border-slate-700">
           <CardContent className="p-6">
             <div className="text-slate-400 text-sm">Total Track Sizes</div>
             <div className="text-3xl font-bold text-white mt-2">{trackSizes.length}</div>
+          </CardContent>
+        </Card>
+        <Card className="bg-slate-800 border-slate-700">
+          <CardContent className="p-6">
+            <div className="text-slate-400 text-sm">Total Inventory</div>
+            <div className="text-3xl font-bold text-green-500 mt-2">
+              {trackSizes.reduce((sum, ts) => sum + (ts.inventory_count || 0), 0)} units
+            </div>
           </CardContent>
         </Card>
         <Card className="bg-slate-800 border-slate-700">
