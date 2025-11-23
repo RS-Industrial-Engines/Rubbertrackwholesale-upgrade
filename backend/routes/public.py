@@ -609,7 +609,9 @@ async def search_public_part_numbers(
     part_type: Optional[str] = None,
     model: Optional[str] = None
 ):
-    """Search part numbers by query string, brand, part type, or compatible model (public endpoint)"""
+    """Search part numbers by query string, brand, part type, or compatible model (public endpoint)
+    Handles space/hyphen normalization for flexible matching (e.g., "1273807" matches "127-3807")
+    """
     from database import part_numbers_collection
     
     search_query = {"is_active": True}
@@ -619,17 +621,47 @@ async def search_public_part_numbers(
     if part_type:
         search_query["part_type"] = part_type
     if model:
-        # Filter by compatible models - search in the array
-        search_query["compatible_models"] = {"$regex": model, "$options": "i"}
-    
-    # If query provided, search in part_number, product_name, and compatible_models
-    if query:
+        # Normalize model for flexible matching
+        model_normalized = re.sub(r'[\s\-_]', '', model)
+        # Filter by compatible models - search in the array with both original and normalized
         search_query["$or"] = [
+            {"compatible_models": {"$regex": model, "$options": "i"}},
+            {"compatible_models": {"$regex": model_normalized, "$options": "i"}}
+        ]
+    
+    # If query provided, search in part_number, product_name, and compatible_models with normalization
+    if query:
+        query_normalized = re.sub(r'[\s\-_]', '', query)
+        
+        search_conditions = [
+            # Original query searches
             {"part_number": {"$regex": query, "$options": "i"}},
             {"product_name": {"$regex": query, "$options": "i"}},
             {"compatible_models": {"$regex": query, "$options": "i"}},
-            {"brand": {"$regex": query, "$options": "i"}}
+            {"brand": {"$regex": query, "$options": "i"}},
+            # Normalized query searches (handles "1273807" matching "127-3807")
+            {"part_number": {"$regex": query_normalized, "$options": "i"}},
+            {"product_name": {"$regex": query_normalized, "$options": "i"}},
+            {"compatible_models": {"$regex": query_normalized, "$options": "i"}}
         ]
+        
+        # If model filter exists, combine with query search
+        if "$or" in search_query:
+            # Merge both OR conditions
+            search_query = {
+                "is_active": True,
+                "$and": [
+                    {"$or": search_query["$or"]},  # model conditions
+                    {"$or": search_conditions}      # query conditions
+                ]
+            }
+            # Re-add other filters
+            if brand:
+                search_query["brand"] = {"$regex": brand, "$options": "i"}
+            if part_type:
+                search_query["part_type"] = part_type
+        else:
+            search_query["$or"] = search_conditions
     
     part_numbers = await part_numbers_collection.find(search_query).sort([("brand", 1), ("part_number", 1)]).to_list(length=500)
     return [serialize_doc(part) for part in part_numbers]
