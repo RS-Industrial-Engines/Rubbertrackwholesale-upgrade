@@ -437,7 +437,13 @@ const CategoryNav = () => {
                      'Select Track Size'}
                 </option>
                 {/* Show compatible sizes if brand+model selected and sizes found, otherwise show all */}
-                {(selectedBrand && selectedModel && compatibleTrackSizes.length > 0 ? compatibleTrackSizes : trackSizes.slice(0, 50)).map(ts => {
+                {(() => {
+                  const sizesToShow = (selectedBrand && selectedModel && compatibleTrackSizes.length > 0) 
+                    ? compatibleTrackSizes 
+                    : trackSizes.slice(0, 50);
+                  console.log(`[CategoryNav] Rendering dropdown with ${sizesToShow.length} sizes. Brand: ${selectedBrand}, Model: ${selectedModel}, Compatible count: ${compatibleTrackSizes.length}`);
+                  return sizesToShow;
+                })().map(ts => {
                   let displaySize = ts.size;
                   if (trackSizeUnit === 'inches' && ts.width && ts.pitch) {
                     const widthInches = (ts.width / 25.4).toFixed(1);
