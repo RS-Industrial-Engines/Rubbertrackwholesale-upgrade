@@ -65,6 +65,44 @@ const CategoryNav = () => {
     fetchData();
   }, []);
 
+  // Fetch compatible track sizes when brand and model are selected
+  useEffect(() => {
+    const fetchCompatibleTrackSizes = async () => {
+      if (!selectedBrand || !selectedModel) {
+        setCompatibleTrackSizes([]);
+        return;
+      }
+
+      try {
+        setLoadingCompatibility(true);
+        
+        // Fetch compatibility data for selected brand+model
+        const response = await axios.get(`${API}/api/compatibility/search`, {
+          params: { make: selectedBrand, model: selectedModel }
+        });
+        
+        if (response.data && response.data.length > 0) {
+          // Get track size names from compatibility data
+          const trackSizeNames = response.data[0].track_sizes || [];
+          
+          // Filter trackSizes to only include compatible ones
+          const compatible = trackSizes.filter(ts => trackSizeNames.includes(ts.size));
+          setCompatibleTrackSizes(compatible);
+        } else {
+          setCompatibleTrackSizes([]);
+        }
+        
+        setLoadingCompatibility(false);
+      } catch (error) {
+        console.error('Failed to fetch compatible track sizes:', error);
+        setCompatibleTrackSizes([]);
+        setLoadingCompatibility(false);
+      }
+    };
+
+    fetchCompatibleTrackSizes();
+  }, [selectedBrand, selectedModel, trackSizes]);
+
   const productTypes = [
     { 
       name: 'Rubber Tracks', 
