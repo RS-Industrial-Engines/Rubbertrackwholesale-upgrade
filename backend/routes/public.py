@@ -596,20 +596,21 @@ async def search_public_compatibility(
 ):
     """Search compatibility entries by make, model, or track size (public endpoint)
     Handles space/hyphen normalization for flexible matching (e.g., "svl75" matches "SVL 75")
+    Uses flexible regex patterns to match terms with optional spaces/hyphens between characters.
     """
     query = {"is_active": True}
     
     if make:
-        # Normalize: remove spaces, hyphens for flexible matching
-        make_normalized = re.sub(r'[\s\-_]', '', make)
+        # Create flexible pattern that matches with optional spaces/hyphens
+        make_pattern = create_flexible_search_pattern(make)
         query["$or"] = [
-            {"make": {"$regex": make, "$options": "i"}},
-            {"make": {"$regex": make_normalized, "$options": "i"}}
+            {"make": {"$regex": make, "$options": "i"}},  # Original
+            {"make": {"$regex": make_pattern, "$options": "i"}}  # Flexible
         ]
     
     if model:
-        # Normalize: remove spaces, hyphens for flexible matching
-        model_normalized = re.sub(r'[\s\-_]', '', model)
+        # Create flexible pattern for model
+        model_pattern = create_flexible_search_pattern(model)
         
         # If make query exists, extend the $or with model conditions
         if "$or" in query:
@@ -619,14 +620,14 @@ async def search_public_compatibility(
             for make_condition in existing_or:
                 # Original model
                 new_or.append({**make_condition, "model": {"$regex": model, "$options": "i"}})
-                # Normalized model
-                new_or.append({**make_condition, "model": {"$regex": model_normalized, "$options": "i"}})
+                # Flexible model pattern
+                new_or.append({**make_condition, "model": {"$regex": model_pattern, "$options": "i"}})
             query["$or"] = new_or
         else:
             # Model search only
             query["$or"] = [
-                {"model": {"$regex": model, "$options": "i"}},
-                {"model": {"$regex": model_normalized, "$options": "i"}}
+                {"model": {"$regex": model, "$options": "i"}},  # Original
+                {"model": {"$regex": model_pattern, "$options": "i"}}  # Flexible
             ]
     
     if track_size:
