@@ -242,8 +242,8 @@ const RubberTrackCompatibility = () => {
                           <div className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wide">All Compatible Sizes:</div>
                           <div className="flex flex-wrap gap-3">
                             {machine.track_sizes.map((size, sizeIdx) => {
-                              // Find track size details including price
-                              const trackSizeDetails = trackSizes.find(ts => ts.size === size);
+                              // Find track size details including price, handling N/W variants
+                              const trackSizeDetails = findTrackSizeDetails(size);
                               const widthInches = trackSizeDetails ? (trackSizeDetails.width / 25.4).toFixed(1) : '';
                               const pitchInches = trackSizeDetails ? (trackSizeDetails.pitch / 25.4).toFixed(2) : '';
                               const links = trackSizeDetails ? trackSizeDetails.links : '';
@@ -255,7 +255,7 @@ const RubberTrackCompatibility = () => {
                                 <div key={sizeIdx} className="flex flex-col bg-slate-700 rounded-lg p-3 hover:bg-slate-650 transition">
                                   <button
                                     onClick={() => {
-                                      const trackSize = trackSizes.find(ts => ts.size === size);
+                                      const trackSize = findTrackSizeDetails(size);
                                       if (trackSize) {
                                         handleTrackSizeClick(trackSize);
                                       }
