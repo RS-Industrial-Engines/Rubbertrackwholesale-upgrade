@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Comprehensive testing of the main hero search bar to verify it works as advertised in the help text with specific search scenarios: track size search (300x55x82), machine brand search (Bobcat), machine brand + model search (Cat 299d), part number search (RT-300-82), and verify help text display"
+user_problem_statement: "Fix space and hyphen normalization in all search sections. User reports that searches fail when entering variations like 'svl75' vs 'svl 75', '1273807' vs '127-3807', 'cat e70' vs 'cat e70b'. All search sections (Rubber Track Compatibility Chart, Find Parts By Equipment, Part Numbers, Universal Search) should handle these variations seamlessly."
 
 frontend:
   - task: "Homepage Main Search Bar Comprehensive Testing"
