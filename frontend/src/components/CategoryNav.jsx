@@ -75,26 +75,32 @@ const CategoryNav = () => {
 
       try {
         setLoadingCompatibility(true);
+        console.log(`[CategoryNav] Fetching compatible track sizes for ${selectedBrand} ${selectedModel}`);
         
         // Fetch compatibility data for selected brand+model
         const response = await axios.get(`${API}/api/compatibility/search`, {
           params: { make: selectedBrand, model: selectedModel }
         });
         
+        console.log(`[CategoryNav] API response:`, response.data);
+        
         if (response.data && response.data.length > 0) {
           // Get track size names from compatibility data
           const trackSizeNames = response.data[0].track_sizes || [];
+          console.log(`[CategoryNav] Track size names from API:`, trackSizeNames);
           
           // Filter trackSizes to only include compatible ones
           const compatible = trackSizes.filter(ts => trackSizeNames.includes(ts.size));
+          console.log(`[CategoryNav] Compatible track sizes found:`, compatible.length, compatible.map(t => t.size));
           setCompatibleTrackSizes(compatible);
         } else {
+          console.log(`[CategoryNav] No compatibility data found`);
           setCompatibleTrackSizes([]);
         }
         
         setLoadingCompatibility(false);
       } catch (error) {
-        console.error('Failed to fetch compatible track sizes:', error);
+        console.error('[CategoryNav] Failed to fetch compatible track sizes:', error);
         setCompatibleTrackSizes([]);
         setLoadingCompatibility(false);
       }
