@@ -125,12 +125,15 @@ frontend:
 
   - task: "Rubber Track Compatibility Chart Search Functionality"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/components/RubberTrackCompatibility.jsx"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "User reported bug: Search fails for models with spaces when user types without spaces (e.g., 'svl75' doesn't find 'SVL 75'). Implemented space/hyphen normalization in searchWithBrandAliases() function in brandMapping.js. Added normalizeForSearch() utility to remove spaces, hyphens, and special chars before comparison. This should handle 'svl75' matching 'SVL 75', 'e70b' matching 'E70 B', etc. Backend compatibility/search endpoint also updated to support normalized search patterns."
       - working: "NA"
         agent: "testing"
         comment: "Testing the search functionality for CAT 299D machines and verifying compatible track sizes display correctly"
