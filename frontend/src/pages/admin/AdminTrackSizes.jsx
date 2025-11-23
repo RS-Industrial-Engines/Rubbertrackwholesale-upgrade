@@ -378,6 +378,36 @@ const AdminTrackSizes = () => {
                   required
                   placeholder="300x55x82"
                 />
+                <p className="text-xs text-slate-400 mt-1">Base track size without N/W designation</p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-300 mb-2">Width Variant</label>
+                  <select
+                    value={formData.width_variant}
+                    onChange={(e) => setFormData({...formData, width_variant: e.target.value})}
+                    className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-4 py-2"
+                  >
+                    <option value="">Standard (No N/W)</option>
+                    <option value="N">N - Narrow</option>
+                    <option value="W">W - Wide</option>
+                  </select>
+                  <p className="text-xs text-slate-400 mt-1">Select if this is a Narrow or Wide variant</p>
+                </div>
+                
+                <div>
+                  <label className="block text-slate-300 mb-2">Inventory Count</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={formData.inventory_count}
+                    onChange={(e) => setFormData({...formData, inventory_count: parseInt(e.target.value) || 0})}
+                    className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-4 py-2"
+                    placeholder="0"
+                  />
+                  <p className="text-xs text-slate-400 mt-1">How many units in stock</p>
+                </div>
               </div>
               
               <div>
