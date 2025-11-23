@@ -648,6 +648,7 @@ async def search_public_part_numbers(
 ):
     """Search part numbers by query string, brand, part type, or compatible model (public endpoint)
     Handles space/hyphen normalization for flexible matching (e.g., "1273807" matches "127-3807")
+    Uses flexible regex patterns to match terms with optional spaces/hyphens between characters.
     """
     from database import part_numbers_collection
     
@@ -658,17 +659,17 @@ async def search_public_part_numbers(
     if part_type:
         search_query["part_type"] = part_type
     if model:
-        # Normalize model for flexible matching
-        model_normalized = re.sub(r'[\s\-_]', '', model)
-        # Filter by compatible models - search in the array with both original and normalized
+        # Create flexible pattern for model
+        model_pattern = create_flexible_search_pattern(model)
+        # Filter by compatible models - search in the array with both original and flexible pattern
         search_query["$or"] = [
             {"compatible_models": {"$regex": model, "$options": "i"}},
-            {"compatible_models": {"$regex": model_normalized, "$options": "i"}}
+            {"compatible_models": {"$regex": model_pattern, "$options": "i"}}
         ]
     
-    # If query provided, search in part_number, product_name, and compatible_models with normalization
+    # If query provided, search in part_number, product_name, and compatible_models with flexible patterns
     if query:
-        query_normalized = re.sub(r'[\s\-_]', '', query)
+        query_pattern = create_flexible_search_pattern(query)
         
         search_conditions = [
             # Original query searches
@@ -676,10 +677,10 @@ async def search_public_part_numbers(
             {"product_name": {"$regex": query, "$options": "i"}},
             {"compatible_models": {"$regex": query, "$options": "i"}},
             {"brand": {"$regex": query, "$options": "i"}},
-            # Normalized query searches (handles "1273807" matching "127-3807")
-            {"part_number": {"$regex": query_normalized, "$options": "i"}},
-            {"product_name": {"$regex": query_normalized, "$options": "i"}},
-            {"compatible_models": {"$regex": query_normalized, "$options": "i"}}
+            # Flexible pattern searches (handles "1273807" matching "127-3807")
+            {"part_number": {"$regex": query_pattern, "$options": "i"}},
+            {"product_name": {"$regex": query_pattern, "$options": "i"}},
+            {"compatible_models": {"$regex": query_pattern, "$options": "i"}}
         ]
         
         # If model filter exists, combine with query search
