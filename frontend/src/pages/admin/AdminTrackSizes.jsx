@@ -467,6 +467,8 @@ const AdminTrackSizes = () => {
               <thead>
                 <tr className="border-b border-slate-700">
                   <th className="text-left text-slate-300 py-3 px-4">Size</th>
+                  <th className="text-left text-slate-300 py-3 px-4">Variant</th>
+                  <th className="text-left text-slate-300 py-3 px-4">Inventory</th>
                   <th className="text-left text-slate-300 py-3 px-4">Width</th>
                   <th className="text-left text-slate-300 py-3 px-4">Pitch</th>
                   <th className="text-left text-slate-300 py-3 px-4">Links</th>
@@ -479,6 +481,26 @@ const AdminTrackSizes = () => {
                 {filteredTrackSizes.map((trackSize) => (
                   <tr key={trackSize.id} className="border-b border-slate-700 hover:bg-slate-700/50">
                     <td className="py-3 px-4 text-white font-medium">{trackSize.size}</td>
+                    <td className="py-3 px-4">
+                      {trackSize.width_variant ? (
+                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                          trackSize.width_variant === 'N' 
+                            ? 'bg-blue-500/20 text-blue-400' 
+                            : 'bg-purple-500/20 text-purple-400'
+                        }`}>
+                          {trackSize.width_variant === 'N' ? 'Narrow' : 'Wide'}
+                        </span>
+                      ) : (
+                        <span className="text-slate-500 text-xs">Standard</span>
+                      )}
+                    </td>
+                    <td className="py-3 px-4">
+                      <span className={`font-semibold ${
+                        trackSize.inventory_count > 0 ? 'text-green-400' : 'text-slate-500'
+                      }`}>
+                        {trackSize.inventory_count || 0} units
+                      </span>
+                    </td>
                     <td className="py-3 px-4 text-slate-300">{trackSize.width ? `${trackSize.width}mm` : '-'}</td>
                     <td className="py-3 px-4 text-slate-300">{trackSize.pitch ? `${trackSize.pitch}mm` : '-'}</td>
                     <td className="py-3 px-4 text-slate-300">{trackSize.links || '-'}</td>
