@@ -258,12 +258,15 @@ backend:
 
   - task: "Compatibility Search API Endpoint"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/backend/routes/public.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ PARTIAL FAILURE - Compatibility search normalization has mixed results: ✅ WORKING: 1) Original spaced searches work ('svl 75' finds 'SVL 75 (Compact Track Loader)'), 2) CAT E70/E70B searches work correctly ('e70' finds 'CAT 307A (Japan E70B)', 'e70b' finds E70B models), 3) Make-only searches work ('bobcat' finds 161 Bobcat machines, 'cat' finds CAT machines), 4) Regression tests pass (existing searches still work). ❌ NOT WORKING: 1) Normalized model searches fail ('svl75' returns 0 results instead of finding 'SVL 75'), 2) Combined make+model normalized searches fail ('kubota' + 'svl75' returns 0 results). ISSUE: Same as part numbers API - normalization logic removes spaces from search term but uses regex substring matching, so 'svl75' doesn't match 'SVL 75 (Compact Track Loader)' because the normalized search term isn't found as a substring in the non-normalized database content."
       - working: "NA"
         agent: "main"
         comment: "Enhanced /api/compatibility/search endpoint to support normalized search. Now uses regex patterns with both original and normalized (spaces/hyphens removed) versions of make/model. Should handle searches like 'svl75' finding 'SVL 75' in the database, 'e70b' finding 'E70 B', etc. Uses re.sub(r'[\s\-_]', '', text) for normalization."
