@@ -207,12 +207,15 @@ frontend:
 backend:
   - task: "Part Numbers Search API Endpoint with Normalization"
     implemented: true
-    working: "NA"
+    working: false
     file: "/app/backend/routes/public.py"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ PARTIAL FAILURE - Part numbers search normalization has mixed results: ✅ WORKING: 1) Hyphenated searches work ('127-3807' finds part), 2) Model compatibility searches work ('e70' finds E70 compatible parts), 3) Combined searches work ('roller' + 'e70' finds roller parts for E70 models), 4) General searches work ('track' finds track-related parts). ❌ NOT WORKING: 1) Normalized part number search fails ('1273807' does not find '127-3807'), 2) Normalized model searches fail ('svl75' does not find parts for 'SVL 75' models). ISSUE: The normalization logic removes spaces/hyphens from search term but uses regex substring matching against database values, rather than normalizing both sides for comparison. The regex approach 'svl75' as substring in 'SVL 75 (Compact Track Loader)' fails because normalized search term doesn't match the non-normalized database content."
       - working: "NA"
         agent: "main"
         comment: "Enhanced /api/part-numbers/search endpoint to support normalized search. Now searches with both original query and normalized version (spaces/hyphens removed). Handles part numbers like '1273807' finding '127-3807', model searches like 'svl75' finding 'SVL 75'. Uses regex patterns with re.sub(r'[\s\-_]', '', text) for normalization."
