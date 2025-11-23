@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronDown, Boxes, Cog, Disc3, Circle } from 'lucide-react';
 import { Card, CardContent } from '../components/ui/card';
 import axios from 'axios';
+import { normalizeBrandName } from '../utils/brandMapping';
 
 const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
