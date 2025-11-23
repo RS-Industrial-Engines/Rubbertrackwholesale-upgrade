@@ -9,6 +9,42 @@ import re
 router = APIRouter()
 
 
+def create_flexible_search_pattern(search_term: str) -> str:
+    """
+    Create a regex pattern that matches the search term with optional spaces, hyphens, or underscores.
+    E.g., 'svl75' becomes 's[\s\-_]*v[\s\-_]*l[\s\-_]*75'
+    E.g., '1273807' becomes '127[\s\-_]*38[\s\-_]*07'
+    This allows 'svl75' to match 'SVL 75', 'SVL-75', etc.
+    """
+    if not search_term:
+        return search_term
+    
+    # Remove existing spaces, hyphens, underscores to get base term
+    base_term = re.sub(r'[\s\-_]', '', search_term)
+    
+    # For very short terms (1-2 chars), don't add patterns
+    if len(base_term) <= 2:
+        return base_term
+    
+    # Build flexible pattern
+    # Strategy: Insert optional space/hyphen/underscore between groups
+    # For alphanumeric transitions and logical breaks
+    pattern_parts = []
+    i = 0
+    while i < len(base_term):
+        pattern_parts.append(re.escape(base_term[i]))
+        i += 1
+        
+        # Add optional space/hyphen pattern after each character, except the last
+        if i < len(base_term):
+            # Don't add after every single character for long strings (too permissive)
+            # Add it strategically: after groups of 2-3 characters
+            if i % 2 == 0 or i % 3 == 0:
+                pattern_parts.append(r'[\s\-_]*')
+    
+    return ''.join(pattern_parts)
+
+
 def serialize_doc(doc):
     """Convert MongoDB document to JSON-serializable dict"""
     if doc and "_id" in doc:
