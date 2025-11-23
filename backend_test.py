@@ -525,7 +525,8 @@ def test_compatibility_search_normalization():
             
             if not found_match:
                 print(f"      ❌ FAILED: No matching entry found for {scenario['expected_make']} {scenario['expected_model_contains']}")
-                print(f"      Sample results: {[f\"{r.get('make')} {r.get('model')}\" for r in data[:3]]}")
+                sample_results = [f"{r.get('make')} {r.get('model')}" for r in data[:3]]
+                print(f"      Sample results: {sample_results}")
                 all_passed = False
                 
         except Exception as e:
