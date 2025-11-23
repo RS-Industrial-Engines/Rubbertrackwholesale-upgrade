@@ -307,8 +307,6 @@ test_plan:
     - "Brand Alias Mapping Feature"
     - "Universal Search Normalization Utility"
     - "Find Parts By Equipment Search Normalization"
-    - "Compatibility Search API Endpoint"
-    - "Part Numbers Search API Endpoint with Normalization"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
