@@ -146,18 +146,45 @@ frontend:
 
   - task: "Brand Alias Mapping Feature"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/utils/brandMapping.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Enhanced with space/hyphen normalization. Now handles 'svl75' matching 'SVL 75', 'e70b' matching 'E70 B'. Added normalizeForSearch() inline function to remove spaces, hyphens, underscores, and special chars before comparison. Maintains all existing brand alias functionality."
       - working: "NA"
         agent: "testing"
         comment: "Testing brand alias mapping functionality to ensure 'caterpillar 299d' finds CAT machines, 'cat 299d' finds CAT machines, and 'ditch witch' finds Ditch-Witch machines in both compatibility chart and top search bar"
       - working: true
         agent: "testing"
         comment: "✅ PASSED - Brand alias mapping functionality works perfectly! Comprehensive testing completed: 1) 'caterpillar 299d' (lowercase) successfully finds 6 CAT 299D machines with correct track sizes (400x86x60 and 450x86x60), 2) 'cat 299d' also finds CAT 299D machines correctly, 3) 'ditch witch' finds 46+ Ditch-Witch machines, 4) Top search bar navigation works with brand aliases (navigates to /products?search=caterpillar%20299d), 5) Modal functionality works for track size details, 6) Case-insensitive search confirmed working. The brandMapping.js utility correctly handles alias conversion: 'caterpillar'→'CAT', 'ditch witch'→'Ditch-Witch'. Both compatibility chart search and top search bar use brand aliases as expected."
+  
+  - task: "Universal Search Normalization Utility"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/utils/searchNormalization.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created new utility file with functions: normalizeForSearch() removes spaces/hyphens/special chars, searchMatches() for basic matching, searchMakeModel() for make/model searches, searchPartNumber() for part number matching, searchMultipleFields() for multi-field searches. This utility is available for all components to use for consistent normalized search behavior."
+  
+  - task: "Find Parts By Equipment Search Normalization"
+    implemented: true
+    working: "NA"
+    file: "/app/frontend/src/pages/ProductsPage.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "ProductsPage.jsx uses the enhanced brandMapping.js searchWithBrandAliases() which now includes normalization. Should handle searches like 'kubota svl75' finding 'Kubota SVL 75', and part numbers like '1273807' finding '127-3807'. Backend API endpoints also enhanced to support normalized searches."
 
   - task: "CAT 277B Track Loader Search Functionality"
     implemented: true
