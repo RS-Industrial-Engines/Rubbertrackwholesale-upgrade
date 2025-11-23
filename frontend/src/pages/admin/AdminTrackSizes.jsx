@@ -24,6 +24,8 @@ const AdminTrackSizes = () => {
   });
   const [formData, setFormData] = useState({
     size: '',
+    width_variant: '',
+    inventory_count: 0,
     price: '',
     description: '',
     is_active: true
