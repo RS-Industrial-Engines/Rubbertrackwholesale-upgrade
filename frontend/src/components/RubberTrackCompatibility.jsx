@@ -104,13 +104,39 @@ const RubberTrackCompatibility = () => {
   };
 
   // Filter machines by search - uses brand alias mapping for Caterpillar→CAT, etc.
+  // Also supports searching by track size (e.g., "400x86x52")
   const filteredMachines = searchQuery
-    ? searchWithBrandAliases(
-        searchQuery,
-        compatibility,
-        (comp) => comp.make,
-        (comp) => comp.model
-      )
+    ? (() => {
+        // First try searching by make/model
+        const makeModelResults = searchWithBrandAliases(
+          searchQuery,
+          compatibility,
+          (comp) => comp.make,
+          (comp) => comp.model
+        );
+        
+        // If make/model search found results, return them
+        if (makeModelResults.length > 0) {
+          return makeModelResults;
+        }
+        
+        // Otherwise, try searching by track size
+        // Normalize search query (remove spaces, hyphens) to match track sizes
+        const normalizedSearch = searchQuery.toLowerCase().replace(/[\s\-_]/g, '');
+        
+        // Check if search looks like a track size (contains 'x' and numbers)
+        if (normalizedSearch.includes('x') && /\d/.test(normalizedSearch)) {
+          return compatibility.filter(comp => {
+            // Check if any of the machine's track sizes match the search
+            return comp.track_sizes.some(size => {
+              const normalizedSize = size.toLowerCase().replace(/[\s\-_]/g, '');
+              return normalizedSize.includes(normalizedSearch) || normalizedSearch.includes(normalizedSize);
+            });
+          });
+        }
+        
+        return [];
+      })()
     : [];
 
   if (loading) {
