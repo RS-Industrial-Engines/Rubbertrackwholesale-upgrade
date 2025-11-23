@@ -291,11 +291,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "CAT 277B Track Loader Search Functionality"
-    - "Track Loader Compatibility Data Import"
-    - "Data Consistency Validation"
-  stuck_tasks:
-    - "Track Loader Compatibility Data Import"
+    - "Rubber Track Compatibility Chart Search Functionality"
+    - "Brand Alias Mapping Feature"
+    - "Universal Search Normalization Utility"
+    - "Find Parts By Equipment Search Normalization"
+    - "Compatibility Search API Endpoint"
+    - "Part Numbers Search API Endpoint with Normalization"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
