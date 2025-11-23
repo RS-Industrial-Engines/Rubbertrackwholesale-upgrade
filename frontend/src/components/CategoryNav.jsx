@@ -383,7 +383,14 @@ const CategoryNav = () => {
             {selectedPartType === 'rubber_tracks' && (
               <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
-                <label className="block text-slate-300 font-semibold">Track Size (Optional)</label>
+                <label className="block text-slate-300 font-semibold">
+                  Track Size (Optional)
+                  {selectedBrand && selectedModel && compatibleTrackSizes.length > 0 && (
+                    <span className="ml-2 text-sm text-orange-400">
+                      ({compatibleTrackSizes.length} compatible sizes for {selectedBrand} {selectedModel})
+                    </span>
+                  )}
+                </label>
                 <div className="flex gap-1 text-xs">
                   <button
                     onClick={() => setTrackSizeUnit('mm')}
@@ -411,9 +418,16 @@ const CategoryNav = () => {
                 value={selectedTrackSize}
                 onChange={(e) => setSelectedTrackSize(e.target.value)}
                 className="w-full bg-slate-700 border border-slate-600 text-white rounded-md px-4 py-3 focus:outline-none focus:border-orange-500"
+                disabled={loadingCompatibility}
               >
-                <option value="">Select Track Size</option>
-                {trackSizes.slice(0, 50).map(ts => {
+                <option value="">
+                  {loadingCompatibility ? 'Loading compatible sizes...' : 
+                   (selectedBrand && selectedModel && compatibleTrackSizes.length > 0) ? 
+                     'Select Compatible Track Size' : 
+                     'Select Track Size'}
+                </option>
+                {/* Show compatible sizes if brand+model selected and sizes found, otherwise show all */}
+                {(selectedBrand && selectedModel && compatibleTrackSizes.length > 0 ? compatibleTrackSizes : trackSizes.slice(0, 50)).map(ts => {
                   let displaySize = ts.size;
                   if (trackSizeUnit === 'inches' && ts.width && ts.pitch) {
                     const widthInches = (ts.width / 25.4).toFixed(1);
@@ -424,10 +438,15 @@ const CategoryNav = () => {
                     <option key={ts.id} value={ts.size}>{displaySize}</option>
                   );
                 })}
-                {trackSizes.length > 50 && (
+                {!compatibleTrackSizes.length && trackSizes.length > 50 && (
                   <option disabled>... and {trackSizes.length - 50} more</option>
                 )}
               </select>
+              {selectedBrand && selectedModel && !loadingCompatibility && compatibleTrackSizes.length === 0 && (
+                <p className="text-sm text-yellow-400 mt-2">
+                  No compatible track sizes found for {selectedBrand} {selectedModel}. Showing all sizes.
+                </p>
+              )}
             </div>
             )}
 
