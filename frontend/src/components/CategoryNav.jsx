@@ -78,9 +78,13 @@ const CategoryNav = () => {
         setLoadingCompatibility(true);
         console.log(`[CategoryNav] Fetching compatible track sizes for ${selectedBrand} ${selectedModel}`);
         
+        // Normalize brand name (e.g., "Caterpillar" -> "CAT", "Ditch Witch" -> "Ditch-Witch")
+        const normalizedBrand = normalizeBrandName(selectedBrand) || selectedBrand;
+        console.log(`[CategoryNav] Normalized brand: ${selectedBrand} -> ${normalizedBrand}`);
+        
         // Fetch compatibility data for selected brand+model
         const response = await axios.get(`${API}/api/compatibility/search`, {
-          params: { make: selectedBrand, model: selectedModel }
+          params: { make: normalizedBrand, model: selectedModel }
         });
         
         console.log(`[CategoryNav] API response:`, response.data);
