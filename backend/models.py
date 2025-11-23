@@ -52,6 +52,8 @@ class TrackSize(BaseModel):
     width: Optional[float] = None  # Width in mm
     pitch: Optional[float] = None  # Pitch in mm
     links: Optional[int] = None  # Number of links
+    width_variant: Optional[str] = None  # Width variant: "N" for Narrow, "W" for Wide, or None for standard
+    inventory_count: int = 0  # Current inventory count for this specific size/variant
     price: Optional[float] = None  # Selling price in USD
     is_in_stock: bool = False  # In stock toggle - determines if price shows on frontend
     description: Optional[str] = None
