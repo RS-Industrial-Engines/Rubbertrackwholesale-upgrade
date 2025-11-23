@@ -16,7 +16,9 @@ const CategoryNav = () => {
   const [trackSizeUnit, setTrackSizeUnit] = useState('mm'); // 'mm' or 'inches'
   const [allMachineModels, setAllMachineModels] = useState({}); // All brands and models combined
   const [trackSizes, setTrackSizes] = useState([]);
+  const [compatibleTrackSizes, setCompatibleTrackSizes] = useState([]); // Track sizes compatible with selected machine
   const [loading, setLoading] = useState(true);
+  const [loadingCompatibility, setLoadingCompatibility] = useState(false);
 
   // Fetch machine models and track sizes from API
   useEffect(() => {
