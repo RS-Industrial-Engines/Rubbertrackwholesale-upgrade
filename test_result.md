@@ -186,6 +186,18 @@ frontend:
         agent: "main"
         comment: "ProductsPage.jsx uses the enhanced brandMapping.js searchWithBrandAliases() which now includes normalization. Should handle searches like 'kubota svl75' finding 'Kubota SVL 75', and part numbers like '1273807' finding '127-3807'. Backend API endpoints also enhanced to support normalized searches."
 
+  - task: "Find Parts By Equipment Dropdown Excavator Models"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/CategoryNav.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "🎉 ALL TESTS PASSED - Find Parts By Equipment dropdown functionality working perfectly after machine_models database fix! Comprehensive testing results: ✅ KUBOTA DROPDOWN: All 5 expected excavator models found (K 005, KX 005, KX 191, KX 60-2, KH 005) out of 58 total models. ✅ YANMAR DROPDOWN: All 5 expected excavator models found (VIO 40, B 22, B 05, B 50, YB 271) out of 84 total models. ✅ FUNCTIONALITY: Both Kubota KX 005 and Yanmar VIO 40 selections work with correct URL navigation. ✅ SCREENSHOTS: Captured showing dropdown menus with new models visible. The 90 newly imported excavator models are now properly synchronized between compatibility and machine_models databases and appearing correctly in Find Parts By Equipment dropdowns. All 10 expected models (5 Kubota + 5 Yanmar) confirmed working."
+
   - task: "CAT 277B Track Loader Search Functionality"
     implemented: true
     working: false
