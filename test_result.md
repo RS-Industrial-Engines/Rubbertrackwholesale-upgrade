@@ -327,8 +327,7 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Universal Search Normalization Utility"
-    - "Find Parts By Equipment Search Normalization"
+    - "Remove NO INFO Excavator Models from Site"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
