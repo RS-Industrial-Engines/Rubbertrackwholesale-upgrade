@@ -43,21 +43,20 @@ def extract_spreadsheet_data(file_path):
         xl_file = pd.ExcelFile(file_path)
         print(f"📋 Found {len(xl_file.sheet_names)} sheets: {xl_file.sheet_names}")
         
-        # Read the first sheet (usually the main data)
-        df = pd.read_excel(file_path, sheet_name=0)
-        print(f"✅ Loaded sheet with {len(df)} rows and {len(df.columns)} columns")
-        print(f"📊 Columns: {list(df.columns)}")
+        # Read the first sheet to understand structure
+        df_sample = pd.read_excel(file_path, sheet_name=0)
+        print(f"📊 Columns in first sheet: {list(df_sample.columns)}")
         
         # Display first few rows to understand structure
-        print("\n📋 First 5 rows preview:")
-        print(df.head())
+        print("\n📋 First 3 rows preview from first sheet:")
+        print(df_sample.head(3))
         
         # Try to identify brand/model columns
         # Common column names: Make, Brand, Model, Machine, etc.
         brand_col = None
         model_col = None
         
-        for col in df.columns:
+        for col in df_sample.columns:
             col_lower = str(col).lower()
             if 'make' in col_lower or 'brand' in col_lower or 'manufacturer' in col_lower:
                 brand_col = col
@@ -68,25 +67,36 @@ def extract_spreadsheet_data(file_path):
         
         if not brand_col or not model_col:
             print("⚠️  Could not auto-identify brand/model columns. Showing all columns:")
-            for i, col in enumerate(df.columns):
+            for i, col in enumerate(df_sample.columns):
                 print(f"  {i}: {col}")
             return None
         
-        # Extract brands and models
+        # Extract brands and models from ALL sheets
         spreadsheet_brands = defaultdict(set)
+        total_rows = 0
         
-        for _, row in df.iterrows():
-            brand = str(row[brand_col]).strip()
-            model = str(row[model_col]).strip()
+        print(f"\n📖 Reading all {len(xl_file.sheet_names)} sheets...")
+        for sheet_name in xl_file.sheet_names:
+            df = pd.read_excel(file_path, sheet_name=sheet_name)
+            sheet_rows = 0
             
-            # Skip empty or NaN values
-            if brand and brand != 'nan' and brand != 'None':
-                if model and model != 'nan' and model != 'None':
-                    spreadsheet_brands[brand].add(model)
+            for _, row in df.iterrows():
+                brand = str(row[brand_col]).strip()
+                model = str(row[model_col]).strip()
+                
+                # Skip empty or NaN values
+                if brand and brand != 'nan' and brand != 'None':
+                    if model and model != 'nan' and model != 'None':
+                        spreadsheet_brands[brand].add(model)
+                        sheet_rows += 1
+            
+            total_rows += sheet_rows
+            print(f"  ✓ {sheet_name}: {sheet_rows} valid entries")
         
-        print(f"✅ Extracted {len(spreadsheet_brands)} brands from spreadsheet")
+        print(f"\n✅ Extracted {len(spreadsheet_brands)} brands from spreadsheet")
         total_models = sum(len(models) for models in spreadsheet_brands.values())
         print(f"✅ Extracted {total_models} total models from spreadsheet")
+        print(f"✅ Processed {total_rows} total entries")
         
         return dict(spreadsheet_brands)
         
