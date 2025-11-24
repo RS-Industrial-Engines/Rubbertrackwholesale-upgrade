@@ -198,6 +198,18 @@ frontend:
         agent: "testing"
         comment: "🎉 ALL TESTS PASSED - Find Parts By Equipment dropdown functionality working perfectly after machine_models database fix! Comprehensive testing results: ✅ KUBOTA DROPDOWN: All 5 expected excavator models found (K 005, KX 005, KX 191, KX 60-2, KH 005) out of 58 total models. ✅ YANMAR DROPDOWN: All 5 expected excavator models found (VIO 40, B 22, B 05, B 50, YB 271) out of 84 total models. ✅ FUNCTIONALITY: Both Kubota KX 005 and Yanmar VIO 40 selections work with correct URL navigation. ✅ SCREENSHOTS: Captured showing dropdown menus with new models visible. The 90 newly imported excavator models are now properly synchronized between compatibility and machine_models databases and appearing correctly in Find Parts By Equipment dropdowns. All 10 expected models (5 Kubota + 5 Yanmar) confirmed working."
 
+  - task: "Remove NO INFO Excavator Models from Site"
+    implemented: false
+    working: false
+    file: "/app/backend/routes/public.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE - NO INFO excavator models removal INCOMPLETE: Testing shows MIXED RESULTS: ✅ DROPDOWNS: Successfully removed from Find Parts By Equipment dropdowns - Kubota dropdown (48 models) does NOT contain forbidden models (KX 005, K 005, KX 191), Yanmar dropdown (4 models) does NOT contain forbidden models (VIO 40, B 22, B 05). ❌ COMPATIBILITY CHART: FAILED removal - 'Kubota KX 005' finds 1 result (should be 0), 'Yanmar VIO 40' finds 6 results (should be 0), 'Yanmar B 22' finds 2 results (should be 0). The 87 'NO INFO' excavator models are still present in the compatibility database and searchable via Rubber Track Compatibility Chart. REQUIRED ACTION: Remove all 'NO INFO' excavator models from the compatibility collection to complete user request. Models should return 'No machines found' message when searched."
+
   - task: "CAT 277B Track Loader Search Functionality"
     implemented: true
     working: false
