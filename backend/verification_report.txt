@@ -1,0 +1,1775 @@
+================================================================================
+🔍 CAMSO DATA VERIFICATION TOOL
+================================================================================
+
+This tool compares the Full & Final Camso Size Chart with the database
+to identify missing brands and models.
+
+
+📄 Reading Excel file: /app/backend/camso_size_chart.xlsx
+📋 Found 26 sheets: ['M Machines', 'A Machines', 'B Machines', 'C Machines', 'D Machines', 'E Machines', 'F Machines', 'G Machines', 'H Machines', 'I Machines', 'J Machines', 'K Machines', 'L Machines', 'N Machines', 'O Machines', 'P Machines', 'Q Machines', 'R Machines', 'S Machines', 'T Machines', 'U Machines', 'V Machines', 'W Machines', 'X Machines', 'Y Machines', 'Z Machines']
+📊 Columns in first sheet: ['Make ', 'Model', 'Size 1', 'Size 2', 'Retail Single Prices ', 'Retail Pair Prices ', 'FB Single Prices', 'FB Pair Prices']
+
+📋 First 3 rows preview from first sheet:
+      Make          Model  ... FB Single Prices FB Pair Prices
+0  Macmoter          L 6C  ...              NaN            NaN
+1  Macmoter           M 1  ...              NaN            NaN
+2  Macmoter  M 1 Miniropa  ...              NaN            NaN
+
+[3 rows x 8 columns]
+
+🔍 Identified columns: Brand='Make ', Model='Model'
+
+📖 Reading all 26 sheets...
+  ✓ M Machines: 425 valid entries
+  ✓ A Machines: 286 valid entries
+  ✓ B Machines: 288 valid entries
+  ✓ C Machines: 528 valid entries
+  ✓ D Machines: 148 valid entries
+  ✓ E Machines: 133 valid entries
+  ✓ F Machines: 122 valid entries
+  ✓ G Machines: 123 valid entries
+  ✓ H Machines: 656 valid entries
+  ✓ I Machines: 323 valid entries
+  ✓ J Machines: 178 valid entries
+  ✓ K Machines: 963 valid entries
+  ✓ L Machines: 92 valid entries
+  ✓ N Machines: 242 valid entries
+  ✓ O Machines: 61 valid entries
+  ✓ P Machines: 153 valid entries
+  ✓ Q Machines: 2 valid entries
+  ✓ R Machines: 57 valid entries
+  ✓ S Machines: 304 valid entries
+  ✓ T Machines: 296 valid entries
+  ✓ U Machines: 21 valid entries
+  ✓ V Machines: 138 valid entries
+  ✓ W Machines: 193 valid entries
+  ✓ X Machines: 1 valid entries
+  ✓ Y Machines: 530 valid entries
+  ✓ Z Machines: 17 valid entries
+
+✅ Extracted 425 brands from spreadsheet
+✅ Extracted 6259 total models from spreadsheet
+✅ Processed 6280 total entries
+
+📊 Fetching data from MongoDB...
+✅ Found 350 brands in database
+✅ Found 4632 total compatibility entries
+
+🔍 COMPARISON ANALYSIS
+================================================================================
+
+================================================================================
+📋 MISSING BRANDS (Present in Spreadsheet, Missing from Database)
+================================================================================
+
+🚨 Found 75 MISSING BRANDS:
+
+  1. Aliva                          (1 models)
+  2. Atalay                         (1 models)
+  3. Baroness                       (1 models)
+  4. Beach Track                    (2 models)
+  5. Bizawa                         (1 models)
+  6. CLAAS                          (1 models)
+  7. Canel Sud                      (1 models)
+  8. Capital                        (1 models)
+  9. Carter                         (4 models)
+ 10. Construction Machinery Services (1 models)
+ 11. Ecomeca                        (1 models)
+ 12. Etec                           (1 models)
+ 13. FRONTEQ                        (1 models)
+ 14. Finmac                         (1 models)
+ 15. Furukawa                       (49 models)
+ 16. Grizzly                        (7 models)
+ 17. Grundodrill                    (7 models)
+ 18. Guangxi                        (1 models)
+ 19. Guidetti                       (1 models)
+ 20. Halla                          (1 models)
+ 21. HeliTrax                       (1 models)
+ 22. Iseki                          (25 models)
+ 23. Iwafuji                        (20 models)
+ 24. Jolly                          (2 models)
+ 25. Kesmac                         (1 models)
+ 26. Kobaschi                       (1 models)
+ 27. LEO                            (24 models)
+ 28. LG                             (1 models)
+ 29. LGMG                           (2 models)
+ 30. Leader                         (1 models)
+ 31. Leguan                         (7 models)
+ 32. Libra                          (32 models)
+ 33. Libra Compact                  (13 models)
+ 34. Lifton                         (1 models)
+ 35. Lionlift                       (1 models)
+ 36. Liugong                        (5 models)
+ 37. Locust                         (1 models)
+ 38. Luyu                           (1 models)
+ 39. Mait                           (1 models)
+ 40. Mantall                        (1 models)
+ 41. Mini-X                         (1 models)
+ 42. Moby                           (1 models)
+ 43. Morrish                        (1 models)
+ 44. Mulag                          (1 models)
+ 45. Nishio                         (1 models)
+ 46. Nordmeyer                      (4 models)
+ 47. Nozawa                         (3 models)
+ 48. O&K (Orestein & Koppel)        (31 models)
+ 49. OMMELIFT                       (3 models)
+ 50. OPERVAL                        (1 models)
+ 51. Octopussy                      (9 models)
+ 52. Oelle                          (6 models)
+ 53. Omega Lift                     (1 models)
+ 54. Opera                          (1 models)
+ 55. Optimas                        (1 models)
+ 56. Orec                           (2 models)
+ 57. Ormac                          (1 models)
+ 58. Orteco                         (4 models)
+ 59. Pactrac                        (1 models)
+ 60. Pc Produzioni                  (1 models)
+ 61. Rolba                          (1 models)
+ 62. Rotair                         (1 models)
+ 63. Ruthmann                       (1 models)
+ 64. SHUGONG                        (1 models)
+ 65. SINOBOOM                       (1 models)
+ 66. Sandberger                     (1 models)
+ 67. Scorpio                        (1 models)
+ 68. Sijnja                         (1 models)
+ 69. TORO                           (9 models)
+ 70. Tokyu                          (1 models)
+ 71. Track Marshall                 (1 models)
+ 72. Trackmaster                    (1 models)
+ 73. Tulsa                          (1 models)
+ 74. Wecan                          (1 models)
+ 75. Yashima                        (1 models)
+
+================================================================================
+📋 MISSING MODELS (Brands exist, but missing specific models)
+================================================================================
+
+⚠️  Found 131 brands with missing models:
+
+
+ALLtrack (3 missing models):
+  - AT300
+  - AT3300
+  - AT800
+
+ASV (4 missing models):
+  - PT 30
+  - RC 30
+  - RT 30
+  - RT 40
+
+Airman (14 missing models):
+  - AX05
+  - AX75-3
+  - HM20
+  - HM20S
+  - HM20SCG
+  - HM20SCG-2
+  - HM20SG-2
+  - HM20SMG
+  - HM20SMG-2
+  - HM20SOG-2
+  - HM25
+  - HM30
+  - HM30SCG-2
+  - HM30SMG-2
+
+Almac (1 missing models):
+  - Jibbi-1670EVO
+
+American Direction Drill (2 missing models):
+  - DD1
+  - DD5
+
+Antec (1 missing models):
+  - HCC2051
+
+Apageo (3 missing models):
+  - 22 (H.D Drilling Machine)
+  - 30 (H.D Drilling Machine)
+  - 48 (H.D Drilling Machine)
+
+Atex (2 missing models):
+  - 500
+  - XC1000D3
+
+Atlas (18 missing models):
+  - 1004
+  - 1204C
+  - 1204LC
+  - 130LC
+  - 360
+  - 604 (94)
+  - 804
+  - 804.2
+  - 804R
+  - AM48R
+  - CT150
+  - CT150R
+  - CT200R
+  - CT230
+  - CT250
+  - CT25N
+  - CT300
+  - CT40N
+
+Ausa (1 missing models):
+  - MH45
+
+Avant Tecno (2 missing models):
+  - Dumper 800
+  - Leguan 135
+
+Baraladi (1 missing models):
+  - Tiger One
+
+Bastei (1 missing models):
+  - SLD251
+
+Benati (2 missing models):
+  - M22
+  - M25
+
+Beretta (1 missing models):
+  - T47 (Drilling Machine)
+
+Bobcat (6 missing models):
+  - 56
+  - 76
+  - E25
+  - E60 [J guiding]
+  - X125
+  - X335
+
+Bonne Esperance (2 missing models):
+  - B35RP
+  - Microsand
+
+Boxer (3 missing models):
+  - 400
+  - TD 327
+  - TL 427
+
+Brokk (2 missing models):
+  - 400D
+  - 70
+
+CASE (3 missing models):
+  - 126
+  - CK62
+  - CK82
+
+CAT (27 missing models):
+  - 252
+  - 262
+  - 262B
+  - 302.4D
+  - 307E 2
+  - 312BL
+  - 312BSR
+  - 312CL
+  - 313BSR
+  - 314CCR
+  - 314CLCR
+  - ME05
+  - MM05
+  - MS020 (NEW)
+  - MS020 (OLD)
+  - MS030
+  - MS035
+  - MS040
+  - MX15
+  - MX30SR
+  - MX35R
+  - MX50
+  - MX55
+  - MXR30
+  - NS020
+  - NS030
+  - NS035
+
+CELA (2 missing models):
+  - Spider 26
+  - Spider 28
+
+CMC (1 missing models):
+  - S19E
+
+CME (2 missing models):
+  - 45C
+  - 55
+
+Camisa (1 missing models):
+  - 480
+
+Cams Libra (1 missing models):
+  - T100
+
+Carmix (2 missing models):
+  - K425
+  - K425-M
+
+Chieftan (3 missing models):
+  - IS335
+  - IS33X
+  - IS35F
+
+Chikusui/Canycom (21 missing models):
+  - BF303
+  - BFG1003(Mini Transporter)
+  - BFP301
+  - BFP301 (Mini Transporter)
+  - BFP413 (Mini Transporter)
+  - BFY3301 (Mini Transporter)
+  - CC1600 (Mini Transporter)
+  - CC200 (Mini Transporter)
+  - Dumper
+  - GC (Mini Transporter)
+  - GC 640R (Mini Transporter)
+  - GC 640T (Mini Transporter)
+  - GCS 40 (Mini Transporter)
+  - GrassCutter
+  - HUKI 280 (Mini Transporter)
+  - HUKI(Mini Transporter)
+  - S160
+  - S25A (Mini Transporter)
+  - SC45
+  - SE2301 (Mini Transporter)
+  - SE3801 (Mini Transporter)
+
+Coltrax (1 missing models):
+  - CX12
+
+Comet (1 missing models):
+  - MT 650 (Mini Transporter)
+
+Commander (2 missing models):
+  - C 12000
+  - C8000
+
+Comoter (1 missing models):
+  - C20
+
+Cormidi (3 missing models):
+  - C1200
+  - C6.50
+  - C6.60
+
+DLGZ (1 missing models):
+  - DL20U
+
+Daewoo (1 missing models):
+  - DSL702
+
+Ditch-Witch (15 missing models):
+  - HT 115
+  - JT 100
+  - JT 1220
+  - JT 1720
+  - JT 20
+  - JT 2020
+  - JT 7020
+  - JT 7020 Mach 1
+  - JT 8020
+  - R 300
+  - RT 12
+  - RT 16
+  - RT 24
+  - ST 1220 MACH 1
+  - XT 1600
+
+Dynapac (6 missing models):
+  - RT 1000
+  - RT 80
+  - VD 25
+  - VD 30
+  - VD 35
+  - X 1
+
+EMCI (1 missing models):
+  - OPTIMA
+
+EuroCAT (5 missing models):
+  - 200HVS
+  - 200LSE
+  - 210HVS
+  - 210LSE
+  - 250LSE
+
+EurocoMach (12 missing models):
+  - E 2500
+  - EP 110 (Lifting Platform)
+  - EP 140 (Lifting Platform)
+  - ES 10.2ZT4
+  - ES 12ZT4
+  - ES 14SR4
+  - ES 22SR
+  - ES 250
+  - ES 28.2ZT
+  - ES 28ZT
+  - ES 400ZT
+  - Es 12X
+
+Eurodig (2 missing models):
+  - Dumpy 500
+  - Dumpy 500(Type 3)
+
+Eurotom (3 missing models):
+  - TS 20
+  - TS 45
+  - TS 45S
+
+FAI (8 missing models):
+  - 220
+  - 222
+  - 225
+  - 226
+  - 232
+  - 245
+  - 25
+  - 250
+
+Fercad (1 missing models):
+  - T 6350
+
+Fiori (1 missing models):
+  - MiniDumper 500
+
+Gehlmax (7 missing models):
+  - A 250SA
+  - GX 20
+  - GX 30
+  - MB 135
+  - MB 245
+  - MB 445
+  - RD 6 (Mini Dumper)
+
+Goman (2 missing models):
+  - X18
+  - X32
+
+HCC (5 missing models):
+  - 205-LD (Mini-Carrier)
+  - 2051 (Mini-Carrier)
+  - 2051-D (Mini-Carrier)
+  - 2051-L (Mini-Carrier)
+  - 2051-LD (Mini-Carrier)
+
+Haihong (1 missing models):
+  - CTX8022
+
+Hainzl (3 missing models):
+  - 200LSE
+  - 210HVS
+  - 350LSE
+
+Hanix (49 missing models):
+  - FB 800-2
+  - H 05
+  - H 22B
+  - H 45
+  - H 45A
+  - N 220(New)
+  - N 220(Old)
+  - N 220R(New)
+  - N 220R(Old)
+  - N 220RC18
+  - N 250(New)
+  - N 250(Old)
+  - N 250R(New)
+  - N 250R(Old)
+  - N 300
+  - N 300R
+  - N 320
+  - N 350
+  - N 350R
+  - N 400-2
+  - N 450-2
+  - N 450R
+  - NH 120
+  - NS 20
+  - RT 100(Dumper)
+  - RT 100B3 (Dumper)
+  - RT 100D3 (Dumper)
+  - RT 300 (Dumper)
+  - RT 400 (Dumper)
+  - RT 50D-3 (Dumper)
+  - RT 80 (Dumper)
+  - S&B12
+  - S&B150
+  - S&B150-2
+  - S&B20
+  - S&B20S
+  - S&B20SR
+  - S&B25
+  - S&B25S
+  - S&B25SR
+  - S&B30
+  - S&B30S
+  - S&B480
+  - S&B500
+  - S&B550
+  - S&B580
+  - S&B800
+  - S&B800-2
+  - X1
+
+Hanta (1 missing models):
+  - SLD 251D
+
+Haulotte (1 missing models):
+  - Star 6C (Lifting Platform)
+
+Hinowa (13 missing models):
+  - DM 25
+  - DM 25S
+  - DM 30L
+  - DM 30L2V
+  - HP 2500 (Mini Dumper)
+  - HS 400
+  - PT 35G (Undercarriage)
+  - PT 35G/300 (undercarriage)
+  - PT25 (Undercarriage)
+  - PT2500 (Undercarriage)
+  - PT2500G/100 (Undercarriage)
+  - PT25G (Undercarriage)
+  - PT3000GL (Undercarriage)
+
+Hitachi (31 missing models):
+  - CG 150 (Dumper)
+  - CG 35 (Dumper)
+  - CG 40 (Dumper)
+  - CG 45 (Dumper)
+  - CG 70 (Dumper)
+  - CG 8
+  - EG 110R (Dumper)
+  - EG 30 (Dumper)
+  - EG 40R (Dumper)
+  - EG 70R (Dumper)
+  - EX 22 (Lotus root)
+  - EX 5
+  - EX 60
+  - EX 60 UR
+  - EX 60 URG
+  - EX 60-1
+  - EX 60-2
+  - EX 60-3
+  - EX 60-3A
+  - EX 60-5
+  - EX 75UL
+  - EX 80
+  - HM 20
+  - HM 25
+  - KX 089 (Lifting platform)
+  - UE 25
+  - VE 20 (not a mini excavator)
+  - VE 30 (not a mini excavator)
+  - ZX 27
+  - ZX 70
+  - ZX 80
+
+Hokuetsu (13 missing models):
+  - HM 20
+  - HM 20S
+  - HM 20SCG-2
+  - HM 20SG-2
+  - HM 20SMG-2
+  - HM 20SOG-2
+  - HM 25
+  - HM 30
+  - HM 30SCG-2
+  - HM 30SG-2
+  - HM 30SMG-2
+  - HM SCG-2
+  - HM SMG-2
+
+Huki (3 missing models):
+  - 280 (Dumper)
+  - 450 (Dumper)
+  - GL 640
+
+Hydro Rain (4 missing models):
+  - X 1000DH3
+  - X 400Y
+  - X 400YD
+  - X 500YD
+
+Hyundai (6 missing models):
+  - HT100V
+  - HX85A
+  - Robex 22-7
+  - Robex 35-5
+  - Robex 35-7
+  - Robex 80-7
+
+ICE(Internationalstruction Equipment INC (1 missing models):
+  - TD 308 (<2004 model)
+
+IHI (28 missing models):
+  - 101 (dumper) ('2002)
+  - 110 (Carrier)
+  - 4J
+  - CC 1600 ROPS
+  - CC 50T
+  - CCH 50T
+  - IS 25
+  - IS 25S
+  - IS 25S-2
+  - IS 27F
+  - IS 27FX
+  - IS 27R
+  - IS 30F
+  - IS 30FX
+  - IS 33SX
+  - IS 35F
+  - IS 35FX
+  - IS 40G
+  - IS 40GX
+  - IS 40GX-2
+  - IS 40GX-3
+  - IS 4F
+  - IS 4FG
+  - IS 4FX
+  - IS 4GX
+  - IS 4GX-3
+  - IS 4J
+  - IS9UX (S/N 1591-1592000)
+
+Imef (4 missing models):
+  - HE 2.22
+  - HE 2.30 ('2001)
+  - HE 24
+  - HE 28
+
+JLG (2 missing models):
+  - ES1530LC(Scissor)
+  - X20J
+
+John Deere (5 missing models):
+  - 25
+  - 30
+  - 80
+  - 80C (US Market)
+  - CT 315
+
+Kobelco (20 missing models):
+  - B 43
+  - B 49
+  - B 50
+  - B 73
+  - B 91
+  - SK 009SR
+  - SS1/2
+  - Sk 015R
+  - Sk 03N2
+  - Sk 09SR('2002)
+  - Sk 100
+  - Sk 100-1
+  - Sk 100-2
+  - Sk 100-3
+  - Sk 115-SR
+  - Sk 115SR
+  - Sk 120
+  - Sk 120-1
+  - Sk 120-2
+  - Sk 120-3
+
+Komatsu (100 missing models):
+  - CD110-2
+  - CD110R
+  - CD110R-1
+  - CD23
+  - CD30R
+  - CD60R
+  - CD60R-1A
+  - D20P
+  - D20P-1
+  - D20P-110
+  - D20P-210
+  - D21
+  - D21A-7
+  - D21P-7
+  - D37AP
+  - D37P
+  - MST1100
+  - MST2000
+  - PC 01-1A(SN>10000)
+  - PC 02
+  - PC 02-1A(SN<10001)
+  - PC 10 (SN<7001)
+  - PC 10 (SN>7000)
+  - PC 10 avance R (25001<SN&lt;27776)
+  - PC 10 avance R (SN>27776)
+  - PC 10-5 (SN<7001)
+  - PC 10-5 (SN>7000)
+  - PC 10-6
+  - PC 10-7 (SN<F25132)
+  - PC 10-7 (SN>F25132)
+  - PC 100
+  - PC 10R
+  - PC 10R-8
+  - PC 12
+  - PC 12 avance R
+  - PC 12-1 (SN>1001)
+  - PC 12-2 R
+  - PC 12-2 avance (3000<SN&lt;4599)
+  - PC 12-2 avance (SN >4600)
+  - PC 120-6
+  - PC 120-7
+  - PC 125
+  - PC 128UU
+  - PC 20-5
+  - PC 20UU-3
+  - PC 28-1 (S/N 1001 - 2357)
+  - PC 38-1
+  - PC 38uu
+  - PC 38uu-1
+  - PC 40
+  - PC 40 avance R (18001 - 24521)
+  - PC 40-1
+  - PC 40-5
+  - PC 40-6
+  - PC 40-7
+  - PC 40FR-1
+  - PC 40R (S/N 18001 - 24521)
+  - PC 45 avance R (S/N 1001 - 3505)
+  - PC 45-1
+  - PC 45-7
+  - PC 45R (1001 - 3505)
+  - PC 50
+  - PC 50-1
+  - PC 50-2 (8001 - 12771)
+  - PC 50-2 avance R (S/N 8001 - 12771)
+  - PC 50uu
+  - PC 50uu-1
+  - PC 50uu-2 (Old)
+  - PC 60 (S/N < 28002)
+  - PC 60 (S/N > 28000)
+  - PC 60-5
+  - PC 60-6 (type 1)
+  - PC 60-7 (S/N > 45000)
+  - PC 60-7 (SN < 45001)
+  - PC 60-7 avance (SN > 45000)
+  - PC 60-7A
+  - PC 60-7AR
+  - PC 60-7B
+  - PC 60-7DQ
+  - PC 60-7E/R
+  - PC 60-8
+  - PC 60-8A
+  - PC 70
+  - PC 70-6
+  - PC 70-7 (SN<45002)
+  - PC 70-7 avance (SN > 45000)
+  - PC 70-7E
+  - PC 70E
+  - PC 70FR-1
+  - PC 75-6
+  - PC 75u-1
+  - PC 75uu
+  - PC 75uu-2 (SN > 5001)
+  - PC02-A
+  - PC12R-7UU
+  - PC12R-8 avance (SN>10001)
+  - PC12UU
+  - PC12UU-1
+  - PC12UU-2
+  - PC15-1
+
+Kubota (124 missing models):
+  - AR 70
+  - AR 80
+  - AR 90
+  - AX 60 Cosmoroad
+  - CR 2700 (mini-carrier)
+  - K 005
+  - K 022 (Lotus root)
+  - K 030-3 (Lotus root)
+  - K 50SR
+  - KC 100 (dumper)
+  - KC 100H (dumper)
+  - KC 120H (dumper)
+  - KC 121H (dumper)
+  - KC 250HR-4
+  - KC 80 (dumper)
+  - KC 80D (dumper)
+  - KH 005
+  - KX 005
+  - KX 191
+  - KX 41SRV-1
+  - KX 60-2
+  - KX 60-3
+  - NX 1500 (Rice harvester)
+  - R1 22
+  - R1 22M
+  - R1 24
+  - R1 241
+  - R1 241M
+  - R1 24M
+  - R1 261
+  - R1 261M
+  - R1 301GL
+  - R1 301HL
+  - R1 301M
+  - R1 301ML
+  - R1 301MLL
+  - R1 301MT
+  - R1 301MTL
+  - R1 30GL
+  - R1 30GML
+  - R1 30L
+  - R1 30M
+  - R1 35
+  - R1 351
+  - R1 351G
+  - R1 351GD2L
+  - R1 351GSDLL
+  - R1 351L
+  - R1 351ML
+  - R1 351MLL
+  - R1 351MW
+  - R1 35G
+  - R1 35GL
+  - R1 35GML
+  - R1 35GMLL
+  - R1 35GMW
+  - R1 35M
+  - R1 40
+  - R1 401
+  - R1 401G
+  - R1 401L
+  - R1 401ML
+  - R1 401MLL
+  - R1 401MLW
+  - R1 401MW
+  - R1 40G
+  - R1 40GL
+  - R1 40GML
+  - R1 40GMLL
+  - R1 40GMW
+  - R1 40M
+  - R1 451
+  - R1 451L
+  - R1 451LL
+  - R1 451TLW
+  - R1 551
+  - R1 551L
+  - R1 551LL
+  - R1 551TLW
+  - RG 13 (Carrier)
+  - RG 15 (Carrier)
+  - RG 30 (Carrier)
+  - RG 60 (Carrier)
+  - RX 1100
+  - RX 1300 (Rice harvester)
+  - RX 145 (Rice harvester)
+  - RX 3600G (Rice harvester)
+  - RX 750 (Rice harcester)
+  - SCL1000
+  - SR 25LW
+  - SR 25M-LW
+  - SR 25M-W
+  - SR 25W (Combine Harvester)
+  - SR 30LW
+  - SR 30M-LW
+  - SR 30M-W
+  - SR 30W (Combine Harvester)
+  - SR 35G-W
+  - SR 35H-W
+  - SR 35LW (SN >10644)
+  - SR 35LW3 (SN > 10312)
+  - SR 40D2LW
+  - SR 40D2W (Combine Harvester)
+  - SR 40DLW
+  - SR 40DW (Combine Harvester)
+  - SR 40LW3
+  - SR 40SDW (Combine Harvester)
+  - SR 40SSDLW (SN > 10312)
+  - SR 40SSDW (Combine Harvester)
+  - SR 45LW3
+  - SR 45SDLW (SN > 10234)
+  - SR 45SDW (Combine Harvester)
+  - SR 45SSDLW (SN > 10234)
+  - SR 45SSDW (Combine Harvester)
+  - SR 50LW
+  - SR 50W
+  - SR 55LW
+  - SR 55LW2
+  - SR 55W
+  - SR 65LW
+  - SR 65LW2
+  - SR 65W
+  - SR 75LW
+  - SR 75W
+
+Link-Belt (1 missing models):
+  - 75 Spin Ace
+
+MBU (2 missing models):
+  - 850
+  - D 750
+
+Macmoter (12 missing models):
+  - M 2 Miniropa
+  - M 2 S
+  - M 3
+  - M 3 Miniropa
+  - M 3 S
+  - M 3S Miniropa
+  - M 4
+  - M 4 Miniropa
+  - M 4 S
+  - M 5
+  - M 5S
+  - SX 8
+
+Maeda (17 missing models):
+  - LC-505
+  - LC755-3
+  - MC168.4
+  - MC205C
+  - MC285
+  - MC285CRM
+  - MC285CRME
+  - MC305
+  - MC305-2
+  - MC305C
+  - MC305CRM
+  - MC305CRME
+  - MC354CRM
+  - MC405
+  - MC405CRM
+  - MC405CRME
+  - NEOX30C
+
+Massey Ferguson (1 missing models):
+  - Harvestor
+
+Maweco (3 missing models):
+  - 640/3
+  - YFW 5
+  - YFW BR
+
+Maxima (1 missing models):
+  - TB 36
+
+Mecalac (5 missing models):
+  - 712MC
+  - 714MC
+  - 714MC E
+  - 714MC H
+  - 8MCR
+
+Menzi Muck (1 missing models):
+  - 100SA
+
+Merlo (7 missing models):
+  - C25.5
+  - Cingo M3.2
+  - Handler 200
+  - M10
+  - M12.2
+  - M4
+  - Roto 38.16 5
+
+Messersi (4 missing models):
+  - CH1-HI
+  - CTL 35
+  - CTL 40
+  - TCH2500
+
+Minicarrier (3 missing models):
+  - Tl 20
+  - YEW 8D
+  - YFWBR
+
+Mitsubishi (78 missing models):
+  - BD 2G-2
+  - MC 10
+  - MC 11
+  - MC 12
+  - MC 120
+  - MC 120G
+  - MC 13
+  - MC 13S
+  - MC 13SU
+  - MC 14
+  - MC 140
+  - MC 140G
+  - MC 15
+  - MC 15S
+  - MC 15SU
+  - MC 16
+  - MC 16G
+  - MC 16GSSC
+  - MC 17
+  - MC 17S
+  - MC 17SU
+  - MC 18
+  - MC 18G
+  - MC 18GSSC
+  - MC 20
+  - MC 20G
+  - MC 210G
+  - MC 22
+  - MC 22G
+  - MC 24
+  - MC 240G
+  - MC 24G
+  - MC 26G
+  - MC 270G
+  - MC 2800(G)
+  - MC 3100(G)
+  - MC 320G
+  - MC 330G
+  - MC 3500D (G)
+  - MC 4000D (G)
+  - MC 400G
+  - MC 405
+  - MC 405G
+  - MC 5000DG
+  - MC 500G
+  - MC 500GX
+  - MC 510G
+  - MC 510GX
+  - MC 8
+  - MS 020
+  - MS 040
+  - MX 15R
+  - MX 55
+  - MXR 30
+  - MXR 30SR
+  - MXR 35
+  - MXR 35R
+  - MXR 35SR
+  - MXR 50
+  - MXR 55
+  - MXR 55R
+  - VG 55
+  - VG 65
+  - VM 1
+  - VM 2
+  - VM 21
+  - VM 3
+  - VM 4G
+  - VM 5G
+  - VM 6G
+  - VS 21G
+  - VS 23G
+  - VS 25G
+  - VS 28G
+  - VS 33G
+  - VY 34G
+  - VY 40G
+  - VY 48G
+
+Morooka (65 missing models):
+  - 12 Ton
+  - CG 100
+  - CG 110
+  - CG 35
+  - CG 45
+  - CG 70
+  - LTX-3500
+  - MC-2000
+  - MK-100
+  - MK-100S
+  - MK-120
+  - MK-120S
+  - MK-140
+  - MK-140S
+  - MK-160
+  - MK-160S
+  - MK-180
+  - MK-200
+  - MK-200S
+  - MK-220
+  - MK-250
+  - MK-300
+  - MK-300S
+  - MK-60S
+  - MK-80S
+  - MS-33
+  - MST 1100
+  - MST 1100-2P
+  - MST 1800
+  - MST 2000
+  - MST 2000E
+  - MST 250
+  - MST 2500
+  - MST 2600
+  - MST 300
+  - MST 3000 VD
+  - MST 300V
+  - MST 300VD
+  - MST 300VDR
+  - MST 3300
+  - MST 3300V
+  - MST 3300VD
+  - MST 400VD
+  - MST 450
+  - MST 500
+  - MST 550
+  - MST 550VD
+  - MST 550VD-58L
+  - MST 600
+  - MST 600B
+  - MST 700
+  - MST 800
+  - MST 800-HR
+  - MST 800E
+  - MST 800V
+  - MST 800VD
+  - MSZ 2000
+  - MX 110
+  - MX 120
+  - Track Carrier 2500
+  - Track Carrier 300
+  - Track Carrier 3300
+  - Track Carrier 3500
+  - Track Carrier 600
+  - Track Carrier 800
+
+Nagano (2 missing models):
+  - NS 20
+  - NS 45
+
+Nante (2 missing models):
+  - NT 45LS
+  - NT 80
+
+New Holland (3 missing models):
+  - E 10SR
+  - E 55SRX
+  - E 9SR
+
+Niko (1 missing models):
+  - HY 20/11 90cm
+
+Nissan (57 missing models):
+  - 100B3
+  - BP 800
+  - N 20
+  - N 220
+  - N 220R
+  - N 220RC18
+  - N 250 (S/N < 133.2.68)
+  - N 250 (S/N >133.2.68)
+  - N 250R
+  - N 250RC18
+  - N 260
+  - N 300
+  - N 300R
+  - N 320
+  - N 350
+  - N 350R
+  - N 400-2
+  - N 450
+  - N 450-2
+  - N 450-2R
+  - N 450R
+  - N 550-2
+  - S&B 115
+  - S&B 12
+  - S&B 12R
+  - S&B 15
+  - S&B 15-2
+  - S&B 150
+  - S&B 150-2
+  - S&B 15R
+  - S&B 15RC
+  - S&B 15S
+  - S&B 15S-3
+  - S&B 15SR
+  - S&B 20
+  - S&B 20 (new)
+  - S&B 20-5
+  - S&B 20R
+  - S&B 20S
+  - S&B 20SR
+  - S&B 220
+  - S&B 225
+  - S&B 25
+  - S&B 25R
+  - S&B 25S
+  - S&B 25SR
+  - S&B 30
+  - S&B 30R
+  - S&B 30S
+  - S&B 330
+  - S&B 45
+  - S&B 480
+  - S&B 500
+  - S&B 550
+  - S&B 580
+  - S&B 800
+  - S&B 800-2
+
+Palazzani (6 missing models):
+  - Ragnot 1.20
+  - TSJ 24 (1st type - lifting platform)
+  - TSJ 28 (Lifting platform)
+  - TSJ 30 (Lifting platform)
+  - TSJ 39/C (Lifting platform)
+  - XTJ 42
+
+Pazzaglia (1 missing models):
+  - FZ 180 (Three remover)
+
+Peljob (10 missing models):
+  - EB 200
+  - EB 200XT
+  - EB 200XTV
+  - EB 22
+  - EB 233
+  - EB 27
+  - EB 506.02
+  - EB 506C
+  - EB 706
+  - EB 750
+
+Piccini (2 missing models):
+  - mini 30
+  - minicat 32
+
+Putzmeister (1 missing models):
+  - BSA 1005 D6R-F
+
+QIYUN (1 missing models):
+  - GTJZD04
+
+RHINOCEROS (1 missing models):
+  - XN 25
+
+Rayco (2 missing models):
+  - C100
+  - RCT 150
+
+Rolatec (2 missing models):
+  - PT 3000
+  - RL 48L (Drilling machine)
+
+Rufener (1 missing models):
+  - RK 1800 (mini-dumper)
+
+SMC (4 missing models):
+  - CX 22 (Mini-crane)
+  - CX 220 (Mini-crane)
+  - CX 3T minicrane
+  - CX 8T minicrane
+
+Sato (2 missing models):
+  - SC 161DC (Mini-carrier)
+  - SC 161DS (Mini-carrier)
+
+Schaefer (1 missing models):
+  - D 500 (Mini-dumper)
+
+Schaeff (13 missing models):
+  - H 10
+  - H 100
+  - H 3
+  - H 5
+  - HR 05
+  - HR 10
+  - HR 3
+  - HR 4
+  - HR 5
+  - HR 8 (old)
+  - N 220
+  - N 300
+  - N 350
+
+Sedidrill (4 missing models):
+  - 200 (drilling machine)
+  - 310 (drilling machine)
+  - 500 (drilling machine)
+  - 80 (drilling machine)
+
+Shin-Towa (3 missing models):
+  - TC 304
+  - TC 334
+  - TC 335
+
+Showa Aircraft (2 missing models):
+  - SWP 042VCB
+  - SWP 062VCB
+
+Smac (1 missing models):
+  - KC 60 (Lifting platform)
+
+So.Ca.Ce (1 missing models):
+  - EUROPA J 265/ 15 (Crane)
+
+Sumitomo (21 missing models):
+  - LS 1600FJ
+  - LS 160LC
+  - LS 200FXJ
+  - S 10FX
+  - S 160
+  - S 160E
+  - S 160F2U
+  - S 70F2
+  - SC 50 (Crane)
+  - SC 50-2 (Crane)
+  - SH 100
+  - SH 4GX3
+  - SH 4J
+  - SH 65U-2
+  - SH 75
+  - SH 75U
+  - SH 75U-2
+  - SH 75U-3
+  - SH 75URG
+  - SH 75X-2
+  - SH 75XU-2
+
+Supertoy (1 missing models):
+  - 700T
+
+TZ (1 missing models):
+  - C801
+
+Tadano (3 missing models):
+  - AC 125S (Lifter platform)
+  - AC 65S (Lifter platform)
+  - AC 65SG (Lifter platform)
+
+Takeuchi (39 missing models):
+  - Huppi 640
+  - TB 020 (OEM 250x96x36)
+  - TB 1200
+  - TB 20
+  - TB 20QR
+  - TB 21
+  - TB 22
+  - TB 25
+  - TB 250R
+  - TB 300
+  - TB 300R
+  - TB 325R
+  - TB 35
+  - TB 350
+  - TB 350R
+  - TB 35S
+  - TB 36
+  - TB 36S
+  - TB 45
+  - TB 45R
+  - TB 68
+  - TB 68S
+  - TB 800
+  - TB 800R
+  - TC 960D3
+  - TC 960D3S
+  - TC 980
+  - TCR 50
+  - TL 126 (Compact Track Loader)
+  - TL 20 (Skid steer loader)
+  - TL 25 (VTS System for Skidsteer Loader)
+  - TL 26 (Compact Track Loader)
+  - TZ 230
+  - TZ 25
+  - TZ 250
+  - TZ 250R
+  - TZ 26
+  - TZ 30
+  - TZ 330
+
+Tanaka (10 missing models):
+  - DC 202 (mini-carrier)
+  - DC 221 (mini-carrier)
+  - DC 222 (mini-carrier)
+  - DC 224 (mini-carrier)
+  - DC 224D (mini-carrier)
+  - DC 224SDS (Mini-carrier)
+  - DC 31 (mini-carrier)
+  - DC 333 (mini-carrier)
+  - TAC 500 (mini-carrier)
+  - TAC 550 (mini-carrier)
+
+Terex (5 missing models):
+  - PT-30
+  - PT-70
+  - TC 10
+  - TC 10Z [OEM 180x72x38]
+  - TC 55
+
+Terra Jet (6 missing models):
+  - 2513 D (drilling machine)
+  - 2614 D (drilling machine)
+  - 3213D (drilling machine)
+  - 5515 D (drilling machine)
+  - 6015 D (drilling machine)
+  - 7520D (drilling machine)
+
+Terramac (2 missing models):
+  - RT14
+  - RT14R
+
+Thomas (3 missing models):
+  - 250 (VTS System for Skidsteer Loader)
+  - 255 TURBO (VTS System for Skidsteer Loader)
+  - T 220 Turbo (Skid steer loader)
+
+Top Steel (4 missing models):
+  - H55
+  - H75
+  - M55
+  - M61
+
+Topcat (3 missing models):
+  - ZY16
+  - ZY26
+  - ZY33
+
+Track Star (1 missing models):
+  - 900
+
+Turchi (1 missing models):
+  - 240/S
+
+Unic (2 missing models):
+  - 94
+  - URW-376CDE (Crane)
+
+Vermeer (4 missing models):
+  - 3 ton
+  - FT 75
+  - PTX 44 (Quad)
+  - RTX 750 (Quad)
+
+Vnk Crane Europe (2 missing models):
+  - UR A376GL
+  - UR A506GL
+
+Volvo (18 missing models):
+  - EC 20
+  - EC 20 (bi-speed / adj. Width)
+  - EC 20 (bi-speed)
+  - EC 20B
+  - EC 20B XT
+  - EC 20B XTV
+  - EC 20C
+  - EC 20D
+  - EC 20T
+  - EC 20TB
+  - EC 20V
+  - EC 20VB
+  - EC 20XT
+  - EC 20XTV
+  - EC 50
+  - EC 70
+  - EC 70B
+  - EC 70W
+
+Wacker Neuson (9 missing models):
+  - 2600RD (old)
+  - 2800RD (old)
+  - 3000RD (old)
+  - 3200RD (old)
+  - DT 25 (Dumper)
+  - ET42
+  - RK 20 (Carrier)
+  - RK 20D
+  - TD 18 (Carrier)
+
+Yamaguchi / Winbull (5 missing models):
+  - WB 1200 (minidumper)
+  - WB 1200-3 (minidumper)
+  - WB 16H (minidumper)
+  - WB 2500 (mini-dumper)
+  - WB 800Z (minidumper)
+
+Yanmar (252 missing models):
+  - 1200SLD
+  - B 03
+  - B 03 Scopy
+  - B 05
+  - B 05 Scopy
+  - B 05R Scopy
+  - B 05SV
+  - B 158
+  - B 22
+  - B 22-2
+  - B 22-2A
+  - B 22-2CR
+  - B 25
+  - B 27 (New)
+  - B 27 (old)
+  - B 27-1
+  - B 27-2
+  - B 2U
+  - B 2V
+  - B 2X
+  - B 2X-1
+  - B 3 (New)
+  - B 3 (old)
+  - B 3-2
+  - B 31
+  - B 32
+  - B 32-2
+  - B 37 (new)
+  - B 37 (old)
+  - B 37-1
+  - B 37-2
+  - B 37-2A
+  - B 43
+  - B 5
+  - B 5-1
+  - B 5-2
+  - B 50
+  - B 50-1
+  - B 50-2
+  - B 50-2A
+  - B 50M
+  - B 6
+  - B 6U
+  - B 7
+  - B-5X
+  - C 120R (Carrier)
+  - C 20R (Carrier)
+  - C 25R (Carrier)
+  - C 30R (Carrier)
+  - C 30R-1 (Carrier)
+  - C 30R-3TV (Carrier)
+  - C 30RY-1 (Carrier)
+  - C 50 (Carrier)
+  - C 50R (Carrier)
+  - C 50R-2 (carrier)
+  - C 50R-3A (carrier)
+  - C 50R-3C (carrier)
+  - C 60 (carrier)
+  - C 60R (Carrier)
+  - C 60R-1 (Carrier)
+  - C 6R (Carrier)
+  - C 80R (Carrier)
+  - C 80R-2 (Carrier)
+  - C 80RA (Carrier)
+  - C40-2K
+  - CA 130(G)P (Combine Harvester)
+  - CA 130(G)PHUW (Combine Harvester)
+  - CA 130(G)PHW (Combine Harvester)
+  - CA 130(G)PJW (Combine Harvester)
+  - CA 135HRW (Combine Harvester)
+  - CA 135M (Combine Harvester)
+  - CA 135MHW (Combine Harvester)
+  - CA 135MUW (Combine Harvester)
+  - CA 135P (Combine Harvester)
+  - CA 135PHUW (Combine Harvester)
+  - CA 135PHW (Combine Harvester)
+  - CA 135PUW (Combine Harvester)
+  - CA 135R (Combine Harvester)
+  - CA 135RHW (Combine Harvester)
+  - CA 140(G)HHW (Combine Harvester)
+  - CA 140(G)HJW (Combine Harvester)
+  - CA 140(G)P (Combine Harvester)
+  - CA 140(G)PHHUW (Combine Harvester)
+  - CA 140(G)PHUW (Combine Harvester)
+  - CA 140(G)PHW (Combine Harvester)
+  - CA 155 (Combine Harvester)
+  - CA 155HW (Combine Harvester)
+  - CA 160(G)P (Combine Harvester)
+  - CA 160(G)PHW (Combine Harvester)
+  - CA 160(G)PJW (Combine Harvester)
+  - CA 160(G)PUW (Combine Harvester)
+  - CA 160HW (Combine Harvester)
+  - CA 160VW (Combine Harvester)
+  - CA 180HW (Combine Harvester)
+  - CA 180JW (Combine Harvester)
+  - CA 185(G)P (Combine Harvester)
+  - CA 185(G)PHW (Combine Harvester)
+  - CA 185(G)PJW (Combine Harvester)
+  - CA 185(G)PUW (Combine Harvester)
+  - CA 215(G)PHW (Combine Harvester)
+  - CA 215(G)PJW (Combine Harvester)
+  - CA 230(G)HHW (Combine Harvester)
+  - CA 230(G)HJW (Combine Harvester)
+  - CA 250(G)HHW (Combine Harvester)
+  - CA 250(G)HJW (Combine Harvester)
+  - CA 255HW (Combine Harvester)
+  - CA 25HW (Combine Harvester)
+  - CA 300GHHW (Combine Harvester)
+  - CA 300GHJW (Combine Harvester)
+  - CA 300S(G)HHW (Combine Harvester)
+  - CA 300S(G)HJW (Combine Harvester)
+  - CA 315HW (Combine Harvester)
+  - CA 315JW (Combine Harvester)
+  - CA 325 (Combine Harvester)
+  - CA 325HW (Combine Harvester)
+  - CA 325SHW (Combine Harvester)
+  - CA 32HW (Combine Harvester)
+  - CA 355GHHW (Combine Harvester)
+  - CA 355GHJW (Combine Harvester)
+  - CA 355SGHHW (Combine Harvester)
+  - CA 355SGHJW (Combine Harvester)
+  - CA 355SGSHW (Combine Harvester)
+  - CA 365HW (Combine Harvester)
+  - CA 365JW (Combine Harvester)
+  - CA 38HW (Combine Harvester)
+  - CA 400 (Combine Harvester)
+  - CA 400HW (Combine Harvester)
+  - CA 400JW (Combine Harvester)
+  - CA 400SHW (Combine Harvester)
+  - CA 435 (Combine Harvester)
+  - CA 450 (Combine Harvester)
+  - CA 450JW (Combine Harvester)
+  - CA 450SHW (Combine Harvester)
+  - CA 455JW (Combine Harvester)
+  - CA 475JW (Combine Harvester)
+  - CA 485JW (Combine Harvester)
+  - CA 500V2 (Combine Harvester)
+  - CA 500V3W (Combine Harvester)
+  - CA 525DJW (Combine Harvester)
+  - CA 525JW (Combine Harvester)
+  - CA 600S-70 Combine Harvester)
+  - CA 600SHW (Combine Harvester)
+  - CA 600SJW (Combine Harvester)
+  - CA 750 (Combine Harvester)
+  - CA 750JW (Combine Harvester)
+  - CO 6R
+  - CS 21 (Combine Harvester)
+  - CS 30 (Combine Harvester)
+  - DC 224
+  - Ee 2DHWJW
+  - Ee 30HWJW
+  - Ee 35(G)HWJW
+  - Ee 35(G)JW
+  - Ee 3DHWJW
+  - Ee 4D(G)HW
+  - Ee 4D(G)JW
+  - Ee 4JW
+  - Ee 85HW
+  - Ee 85JW
+  - Ee 8JW
+  - GC 218(G)HW
+  - GC 218(G)JW
+  - GC 221(G)HW
+  - GC 221(G)JW
+  - GC 325HW
+  - GC 325JW
+  - GC 335HW
+  - GC 335JW
+  - GC 440HW
+  - GC 440JW
+  - GC 451JW
+  - GC 558JW
+  - GC 70HW
+  - GC 70JW
+  - GC 800HW
+  - GC 800JW
+  - GC 80HW
+  - GC 80JW
+  - GC 85JW
+  - GC 90HW
+  - GC 90JW
+  - JV 05
+  - M 22
+  - M 27
+  - M 37
+  - MAX5JW (Combine Harvester)
+  - MAX5V (Combine Harvester)
+  - MAX6JW (Combine Harvester)
+  - MCG 1200 (Carrier)
+  - MCG 8 (Carrier)
+  - SV 05
+  - T80
+  - TC 2200HW (Combine Harvester)
+  - TC 220K (Combine Harvester)
+  - TC 2710 (Combine Harvester)
+  - TC 2800 (Combine Harvester)
+  - TFW 8R
+  - VIO 30
+  - VIO 350
+  - VIO 40
+  - VIO 40-CR
+  - VIO 40-PC
+  - VIO 40-PR
+  - VIO 50
+  - VIO 50-CR
+  - VIO 50-PR
+  - WB 1000-1
+  - WB 1000-3
+  - WB 1000-3S
+  - XYD 710B
+  - Y 14B
+  - Y 22
+  - YB 191
+  - YB 20
+  - YB 201
+  - YB 221
+  - YB 231
+  - YB 241
+  - YB 241Z
+  - YB 251
+  - YB 27
+  - YB 271
+  - YB 271 (New)
+  - YB 271 (old)
+  - YB 271.30
+  - YB 281
+  - YB 281X
+  - YB 281X-2
+  - YB 281XR
+  - YB 301
+  - YB 301-2U
+  - YB 32
+  - YB 351
+  - YB 352
+  - YB 401
+  - YB 451
+  - YB 501
+  - YB 551
+  - YB 551X-B
+  - YFW 25
+  - YFW 25R
+  - YFW 40
+  - YFW 40R
+  - YFW 40R-R
+  - YFW 45
+  - YFW 45R
+  - YFW 5
+  - YFW 55R
+  - YFW 5D-1
+  - YSR 2600 (Carrier)
+  - YSR 3000 (Carrier)
+  - YSR 420 (Carrier)
+
+Ygry (2 missing models):
+  - SA 250
+  - Y 22
+
+Yuchai (5 missing models):
+  - YC 18-2
+  - YC 18-8
+  - YC 20-8
+  - YC 55
+  - YC 60SR
+
+Yutani (1 missing models):
+  - B 43
+
+Zeppelin (1 missing models):
+  - ZR 4 ('94)
+
+================================================================================
+📊 SUMMARY STATISTICS
+================================================================================
+
+Spreadsheet:
+  - Brands: 425
+  - Total Models: 6259
+
+Database:
+  - Brands: 350
+  - Total Models: 4632
+
+Gaps:
+  - Missing Brands: 75
+  - Brands with Missing Models: 131
+  - Total Missing Models: 1343
+
+================================================================================
+✅ VERIFICATION COMPLETE
+================================================================================
