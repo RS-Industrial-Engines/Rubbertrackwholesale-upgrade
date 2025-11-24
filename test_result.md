@@ -315,8 +315,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Rubber Track Compatibility Chart Search Functionality"
-    - "Brand Alias Mapping Feature"
     - "Universal Search Normalization Utility"
     - "Find Parts By Equipment Search Normalization"
   stuck_tasks: []
