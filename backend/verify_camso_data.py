@@ -12,7 +12,7 @@ from collections import defaultdict
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = AsyncIOMotorClient(MONGO_URL)
-db = client['parts_finder']
+db = client['test_database']
 
 async def get_database_brands_and_models():
     """Fetch all brands and models from the compatibility collection"""
