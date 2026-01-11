@@ -32,6 +32,7 @@ const AdminMachineModels = () => {
     description: '',
     product_image: ''
   });
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchBrands();
