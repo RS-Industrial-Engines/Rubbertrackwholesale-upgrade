@@ -428,11 +428,17 @@ const AdminMachineModels = () => {
         <CardContent className="pt-6">
           <h3 className="text-lg font-bold text-white mb-2">Quick Actions:</h3>
           <ul className="text-slate-300 space-y-1">
-            <li>• <strong>Import from Code:</strong> Bulk import all models from machineModels.js</li>
-            <li>• <strong>Export CSV:</strong> Download current models as CSV</li>
+            <li>• <strong>Import CSV:</strong> Bulk import models from CSV file (columns: Brand, Model Name, Full Name, Equipment Type)</li>
+            <li>• <strong>Export CSV:</strong> Download current models as CSV for backup or editing</li>
             <li>• <strong>Add Model:</strong> Manually add individual machine models</li>
             <li>• <strong>Filter:</strong> Use brand filter to view specific brand models</li>
           </ul>
+          <div className="mt-4 p-3 bg-slate-800/50 rounded-md">
+            <p className="text-sm text-slate-400">
+              <strong className="text-white">CSV Format:</strong> Brand, Model Name, Full Name, Equipment Type<br />
+              <em>Example: Bobcat,T190,Bobcat T190,Track Loader</em>
+            </p>
+          </div>
         </CardContent>
       </Card>
 
