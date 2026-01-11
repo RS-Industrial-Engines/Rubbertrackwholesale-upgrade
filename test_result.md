@@ -186,6 +186,18 @@ frontend:
         agent: "main"
         comment: "ProductsPage.jsx uses the enhanced brandMapping.js searchWithBrandAliases() which now includes normalization. Should handle searches like 'kubota svl75' finding 'Kubota SVL 75', and part numbers like '1273807' finding '127-3807'. Backend API endpoints also enhanced to support normalized searches."
 
+  - task: "Universal Search with Track Size Functionality"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/pages/ProductsPage.jsx"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: false
+        agent: "testing"
+        comment: "❌ CRITICAL ISSUE - Universal search with track size functionality NOT WORKING as expected: ✅ RUBBER TRACK COMPATIBILITY CHART WORKS PERFECTLY: Search for 'T180' finds track size 320x86x49, clicking opens modal showing 13 compatible machines (Bobcat T180, T180H, T190, T190H, T550, CAT 239D), SVL75 search finds 9 track size options. ❌ MAIN SEARCH BAR UNIVERSAL SEARCH BROKEN: 1) Search for '320x86x49' shows 'No products found' instead of expected 'Compatible Rubber Track Sizes' and 'Compatible Machines' sections, 2) Search for '400x86x60' also shows 'No products found', 3) Backend APIs working correctly (368 track sizes, 4632 compatibility entries, track size search finds 13 machines for 320x86x49), 4) The universal search logic in ProductsPage.jsx fetchTrackCompatibilityForSearch() function is not properly detecting track size patterns or displaying expected sections. ISSUE: The track size pattern regex /^\d{2,3}x\d{2,3}x\d{2}$/i should match '320x86x49' but the 'Compatible Rubber Track Sizes' and 'Compatible Machines' sections are not being displayed. The backend API calls are working but the frontend is not rendering the results properly."
+
   - task: "Find Parts By Equipment Dropdown Excavator Models"
     implemented: true
     working: true
