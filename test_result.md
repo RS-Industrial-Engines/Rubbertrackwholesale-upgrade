@@ -339,8 +339,10 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Universal Search with Track Size Functionality"
     - "Remove NO INFO Excavator Models from Site"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Universal Search with Track Size Functionality"
   test_all: false
   test_priority: "high_first"
 
