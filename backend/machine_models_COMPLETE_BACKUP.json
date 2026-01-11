@@ -1,0 +1,4554 @@
+[
+  {
+    "brand": "ASV",
+    "model_name": "2810",
+    "full_name": "ASV 2810",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "4810",
+    "full_name": "ASV 4810",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "HD4520",
+    "full_name": "ASV HD4520",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "MD70",
+    "full_name": "ASV MD70",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "MD70 Turbo",
+    "full_name": "ASV MD70 Turbo",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT50",
+    "full_name": "ASV PT50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT60",
+    "full_name": "ASV PT60",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT70",
+    "full_name": "ASV PT70",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT80",
+    "full_name": "ASV PT80",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT100",
+    "full_name": "ASV PT100",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "PT100 Forestry",
+    "full_name": "ASV PT100 Forestry",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RC30",
+    "full_name": "ASV RC30",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RC50",
+    "full_name": "ASV RC50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RC60",
+    "full_name": "ASV RC60",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RC85",
+    "full_name": "ASV RC85",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RC100",
+    "full_name": "ASV RC100",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT25",
+    "full_name": "ASV RT25",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT30",
+    "full_name": "ASV RT30",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT40",
+    "full_name": "ASV RT40",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT50",
+    "full_name": "ASV RT50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT60",
+    "full_name": "ASV RT60",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT65",
+    "full_name": "ASV RT65",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT65 MAX",
+    "full_name": "ASV RT65 MAX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT75",
+    "full_name": "ASV RT75",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT75 MAX",
+    "full_name": "ASV RT75 MAX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT75HD MAX",
+    "full_name": "ASV RT75HD MAX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT120",
+    "full_name": "ASV RT120",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT120 Forestry",
+    "full_name": "ASV RT120 Forestry",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT135",
+    "full_name": "ASV RT135",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "RT135 Forestry",
+    "full_name": "ASV RT135 Forestry",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "SR70",
+    "full_name": "ASV SR70",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "SR80",
+    "full_name": "ASV SR80",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "VT70",
+    "full_name": "ASV VT70",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "VT70 HO",
+    "full_name": "ASV VT70 HO",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "ASV",
+    "model_name": "VT70 HO MAX",
+    "full_name": "ASV VT70 HO MAX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "1324TK",
+    "full_name": "Barreto 1324TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "1624TK",
+    "full_name": "Barreto 1624TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "1824TK",
+    "full_name": "Barreto 1824TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "1836TK",
+    "full_name": "Barreto 1836TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "2024TK",
+    "full_name": "Barreto 2024TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "20RTK",
+    "full_name": "Barreto 20RTK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "2324TK",
+    "full_name": "Barreto 2324TK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "23RTK",
+    "full_name": "Barreto 23RTK",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "23TKD",
+    "full_name": "Barreto 23TKD",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Barreto",
+    "model_name": "825TKL",
+    "full_name": "Barreto 825TKL",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Baumalight",
+    "model_name": "TRL620D",
+    "full_name": "Baumalight TRL620D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Baumalight",
+    "model_name": "TRL620Y",
+    "full_name": "Baumalight TRL620Y",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "864",
+    "full_name": "Bobcat 864",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "MT52",
+    "full_name": "Bobcat MT52",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "MT55",
+    "full_name": "Bobcat MT55",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "MT85",
+    "full_name": "Bobcat MT85",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "MT100",
+    "full_name": "Bobcat MT100",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T62",
+    "full_name": "Bobcat T62",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T64",
+    "full_name": "Bobcat T64",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T66",
+    "full_name": "Bobcat T66",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T76",
+    "full_name": "Bobcat T76",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T86",
+    "full_name": "Bobcat T86",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T110",
+    "full_name": "Bobcat T110",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T140",
+    "full_name": "Bobcat T140",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T180",
+    "full_name": "Bobcat T180",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T190",
+    "full_name": "Bobcat T190",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T200",
+    "full_name": "Bobcat T200",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T250",
+    "full_name": "Bobcat T250",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T300",
+    "full_name": "Bobcat T300",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T320",
+    "full_name": "Bobcat T320",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T450",
+    "full_name": "Bobcat T450",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T550",
+    "full_name": "Bobcat T550",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T590",
+    "full_name": "Bobcat T590",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T595",
+    "full_name": "Bobcat T595",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T630",
+    "full_name": "Bobcat T630",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T650",
+    "full_name": "Bobcat T650",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T740",
+    "full_name": "Bobcat T740",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T750",
+    "full_name": "Bobcat T750",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T770",
+    "full_name": "Bobcat T770",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "T870",
+    "full_name": "Bobcat T870",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "118",
+    "full_name": "Boxer 118",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "320",
+    "full_name": "Boxer 320",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "322",
+    "full_name": "Boxer 322",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "322D",
+    "full_name": "Boxer 322D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "375D",
+    "full_name": "Boxer 375D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "385D",
+    "full_name": "Boxer 385D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "400",
+    "full_name": "Boxer 400",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "420",
+    "full_name": "Boxer 420",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "600HD",
+    "full_name": "Boxer 600HD",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "700HDX",
+    "full_name": "Boxer 700HDX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Boxer",
+    "model_name": "TD327",
+    "full_name": "Boxer TD327",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "420CT",
+    "full_name": "Case 420CT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "440CT",
+    "full_name": "Case 440CT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "445CT",
+    "full_name": "Case 445CT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "450CT",
+    "full_name": "Case 450CT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TL1000",
+    "full_name": "Case TL1000",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR270",
+    "full_name": "Case TR270",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR270B",
+    "full_name": "Case TR270B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR310",
+    "full_name": "Case TR310",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR310B",
+    "full_name": "Case TR310B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR320",
+    "full_name": "Case TR320",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR340",
+    "full_name": "Case TR340",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TR340B",
+    "full_name": "Case TR340B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV370",
+    "full_name": "Case TV370",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV370B",
+    "full_name": "Case TV370B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV380",
+    "full_name": "Case TV380",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV450",
+    "full_name": "Case TV450",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV450B",
+    "full_name": "Case TV450B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Case",
+    "model_name": "TV620B",
+    "full_name": "Case TV620B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "239D",
+    "full_name": "Caterpillar 239D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "239D3",
+    "full_name": "Caterpillar 239D3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "247",
+    "full_name": "Caterpillar 247",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "247B",
+    "full_name": "Caterpillar 247B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "247B2",
+    "full_name": "Caterpillar 247B2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "247B3",
+    "full_name": "Caterpillar 247B3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "249B",
+    "full_name": "Caterpillar 249B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "249D",
+    "full_name": "Caterpillar 249D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "249D3",
+    "full_name": "Caterpillar 249D3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "255",
+    "full_name": "Caterpillar 255",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "257",
+    "full_name": "Caterpillar 257",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "257B",
+    "full_name": "Caterpillar 257B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "257B2",
+    "full_name": "Caterpillar 257B2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "257B3",
+    "full_name": "Caterpillar 257B3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "257D",
+    "full_name": "Caterpillar 257D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "259B",
+    "full_name": "Caterpillar 259B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "259B3",
+    "full_name": "Caterpillar 259B3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "259D",
+    "full_name": "Caterpillar 259D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "259D3",
+    "full_name": "Caterpillar 259D3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "265",
+    "full_name": "Caterpillar 265",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "267",
+    "full_name": "Caterpillar 267",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "267B",
+    "full_name": "Caterpillar 267B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "267B2",
+    "full_name": "Caterpillar 267B2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "277",
+    "full_name": "Caterpillar 277",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "277B",
+    "full_name": "Caterpillar 277B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "277C",
+    "full_name": "Caterpillar 277C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "277D",
+    "full_name": "Caterpillar 277D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "277E",
+    "full_name": "Caterpillar 277E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "279C",
+    "full_name": "Caterpillar 279C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "279D",
+    "full_name": "Caterpillar 279D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "279D2",
+    "full_name": "Caterpillar 279D2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "287",
+    "full_name": "Caterpillar 287",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "287B",
+    "full_name": "Caterpillar 287B",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "287C",
+    "full_name": "Caterpillar 287C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "287D",
+    "full_name": "Caterpillar 287D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "289C",
+    "full_name": "Caterpillar 289C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "289C2",
+    "full_name": "Caterpillar 289C2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "289D",
+    "full_name": "Caterpillar 289D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "289D2",
+    "full_name": "Caterpillar 289D2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "289D3",
+    "full_name": "Caterpillar 289D3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "297C",
+    "full_name": "Caterpillar 297C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "297D",
+    "full_name": "Caterpillar 297D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "297D2",
+    "full_name": "Caterpillar 297D2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299C",
+    "full_name": "Caterpillar 299C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299D",
+    "full_name": "Caterpillar 299D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299D2",
+    "full_name": "Caterpillar 299D2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299D3",
+    "full_name": "Caterpillar 299D3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299D2XHP",
+    "full_name": "Caterpillar 299D2XHP",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "299D3XE",
+    "full_name": "Caterpillar 299D3XE",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "220",
+    "full_name": "Dingo 220",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "222",
+    "full_name": "Dingo 222",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "223",
+    "full_name": "Dingo 223",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "323",
+    "full_name": "Dingo 323",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "325",
+    "full_name": "Dingo 325",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "427",
+    "full_name": "Dingo 427",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "427XL",
+    "full_name": "Dingo 427XL",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "525",
+    "full_name": "Dingo 525",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "525XL",
+    "full_name": "Dingo 525XL",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "525R",
+    "full_name": "Dingo 525R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "527R",
+    "full_name": "Dingo 527R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "K92",
+    "full_name": "Dingo K92",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "K93",
+    "full_name": "Dingo K93",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "K94",
+    "full_name": "Dingo K94",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "K93-4",
+    "full_name": "Dingo K93-4",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Dingo",
+    "model_name": "K94-4",
+    "full_name": "Dingo K94-4",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK650",
+    "full_name": "Ditch Witch SK650",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK750",
+    "full_name": "Ditch Witch SK750",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK755",
+    "full_name": "Ditch Witch SK755",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK800",
+    "full_name": "Ditch Witch SK800",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK850",
+    "full_name": "Ditch Witch SK850",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK1050",
+    "full_name": "Ditch Witch SK1050",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Ditch Witch",
+    "model_name": "SK3000",
+    "full_name": "Ditch Witch SK3000",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT105",
+    "full_name": "GEHL RT105",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT125",
+    "full_name": "GEHL RT125",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT165",
+    "full_name": "GEHL RT165",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT175",
+    "full_name": "GEHL RT175",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT210",
+    "full_name": "GEHL RT210",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT250",
+    "full_name": "GEHL RT250",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT255",
+    "full_name": "GEHL RT255",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT257",
+    "full_name": "GEHL RT257",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT260",
+    "full_name": "GEHL RT260",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT265",
+    "full_name": "GEHL RT265",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "RT270",
+    "full_name": "GEHL RT270",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "V180",
+    "full_name": "GEHL V180",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "V270",
+    "full_name": "GEHL V270",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "GEHL",
+    "model_name": "V330",
+    "full_name": "GEHL V330",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG35",
+    "full_name": "Hitachi CG35",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG40",
+    "full_name": "Hitachi CG40",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG45",
+    "full_name": "Hitachi CG45",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG50",
+    "full_name": "Hitachi CG50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG55",
+    "full_name": "Hitachi CG55",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG60",
+    "full_name": "Hitachi CG60",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hitachi",
+    "model_name": "CG65",
+    "full_name": "Hitachi CG65",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hyundai",
+    "model_name": "HSL650-7",
+    "full_name": "Hyundai HSL650-7",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hyundai",
+    "model_name": "HSL810-7",
+    "full_name": "Hyundai HSL810-7",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hyundai",
+    "model_name": "HSL850-7A",
+    "full_name": "Hyundai HSL850-7A",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hyundai",
+    "model_name": "HSL1000T-7A",
+    "full_name": "Hyundai HSL1000T-7A",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Hyundai",
+    "model_name": "HSL1200T-7A",
+    "full_name": "Hyundai HSL1200T-7A",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL20",
+    "full_name": "IHI CL20",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL25",
+    "full_name": "IHI CL25",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL27",
+    "full_name": "IHI CL27",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL30",
+    "full_name": "IHI CL30",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL35",
+    "full_name": "IHI CL35",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL40",
+    "full_name": "IHI CL40",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL45",
+    "full_name": "IHI CL45",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "IHI",
+    "model_name": "CL50",
+    "full_name": "IHI CL50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "150T",
+    "full_name": "JCB 150T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "180T",
+    "full_name": "JCB 180T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "190T",
+    "full_name": "JCB 190T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "205T",
+    "full_name": "JCB 205T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "220T",
+    "full_name": "JCB 220T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "260T",
+    "full_name": "JCB 260T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "300T",
+    "full_name": "JCB 300T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "320T",
+    "full_name": "JCB 320T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "325T",
+    "full_name": "JCB 325T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "330T",
+    "full_name": "JCB 330T",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "JCB",
+    "model_name": "370",
+    "full_name": "JCB 370",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "315D",
+    "full_name": "John Deere 315D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "317",
+    "full_name": "John Deere 317",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "317G",
+    "full_name": "John Deere 317G",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "319D",
+    "full_name": "John Deere 319D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "319E",
+    "full_name": "John Deere 319E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "323D",
+    "full_name": "John Deere 323D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "323E",
+    "full_name": "John Deere 323E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "325G",
+    "full_name": "John Deere 325G",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "329D",
+    "full_name": "John Deere 329D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "329E",
+    "full_name": "John Deere 329E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "331D",
+    "full_name": "John Deere 331D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "331E",
+    "full_name": "John Deere 331E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "331G",
+    "full_name": "John Deere 331G",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "333D",
+    "full_name": "John Deere 333D",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "333E",
+    "full_name": "John Deere 333E",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "333G",
+    "full_name": "John Deere 333G",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "CT322",
+    "full_name": "John Deere CT322",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "CT332",
+    "full_name": "John Deere CT332",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK25SR",
+    "full_name": "Kobelco SK25SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK27SR",
+    "full_name": "Kobelco SK27SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK30SR",
+    "full_name": "Kobelco SK30SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK35SR",
+    "full_name": "Kobelco SK35SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK45SR",
+    "full_name": "Kobelco SK45SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kobelco",
+    "model_name": "SK55SR",
+    "full_name": "Kobelco SK55SR",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Komatsu",
+    "model_name": "CK20",
+    "full_name": "Komatsu CK20",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Komatsu",
+    "model_name": "CK25",
+    "full_name": "Komatsu CK25",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Komatsu",
+    "model_name": "CK30",
+    "full_name": "Komatsu CK30",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Komatsu",
+    "model_name": "CK35",
+    "full_name": "Komatsu CK35",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SCL1000",
+    "full_name": "Kubota SCL1000",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SCL1000R",
+    "full_name": "Kubota SCL1000R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL65",
+    "full_name": "Kubota SVL65",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL65-2",
+    "full_name": "Kubota SVL65-2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL75",
+    "full_name": "Kubota SVL75",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL75-2",
+    "full_name": "Kubota SVL75-2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL75-2C",
+    "full_name": "Kubota SVL75-2C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL75-3",
+    "full_name": "Kubota SVL75-3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL90",
+    "full_name": "Kubota SVL90",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL90-2",
+    "full_name": "Kubota SVL90-2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL95",
+    "full_name": "Kubota SVL95",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL95-2",
+    "full_name": "Kubota SVL95-2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL95-2S",
+    "full_name": "Kubota SVL95-2S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL95-3",
+    "full_name": "Kubota SVL95-3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL97",
+    "full_name": "Kubota SVL97",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL97-2",
+    "full_name": "Kubota SVL97-2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL97-2C",
+    "full_name": "Kubota SVL97-2C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "SVL97-3",
+    "full_name": "Kubota SVL97-3",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL16",
+    "full_name": "Mustang MTL16",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL20",
+    "full_name": "Mustang MTL20",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL25",
+    "full_name": "Mustang MTL25",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL316",
+    "full_name": "Mustang MTL316",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL320",
+    "full_name": "Mustang MTL320",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "MTL325",
+    "full_name": "Mustang MTL325",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "1500R",
+    "full_name": "Mustang 1500R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "1700RT",
+    "full_name": "Mustang 1700RT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "1750R",
+    "full_name": "Mustang 1750R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "1750RT",
+    "full_name": "Mustang 1750RT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "2050RT",
+    "full_name": "Mustang 2050RT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "2100RT",
+    "full_name": "Mustang 2100RT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Mustang",
+    "model_name": "2700RT",
+    "full_name": "Mustang 2700RT",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C175",
+    "full_name": "New Holland C175",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C185",
+    "full_name": "New Holland C185",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C190",
+    "full_name": "New Holland C190",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C227",
+    "full_name": "New Holland C227",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C232",
+    "full_name": "New Holland C232",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C238",
+    "full_name": "New Holland C238",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C245",
+    "full_name": "New Holland C245",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C262",
+    "full_name": "New Holland C262",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C280",
+    "full_name": "New Holland C280",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C296",
+    "full_name": "New Holland C296",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C314",
+    "full_name": "New Holland C314",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C334",
+    "full_name": "New Holland C334",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C337",
+    "full_name": "New Holland C337",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "C354",
+    "full_name": "New Holland C354",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL6",
+    "full_name": "Takeuchi TL6",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL6R",
+    "full_name": "Takeuchi TL6R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL8",
+    "full_name": "Takeuchi TL8",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL8R2",
+    "full_name": "Takeuchi TL8R2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL10",
+    "full_name": "Takeuchi TL10",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL10V2",
+    "full_name": "Takeuchi TL10V2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL12",
+    "full_name": "Takeuchi TL12",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL12R2",
+    "full_name": "Takeuchi TL12R2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TL12V2",
+    "full_name": "Takeuchi TL12V2",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT30",
+    "full_name": "Terex PT30",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT50",
+    "full_name": "Terex PT50",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT60",
+    "full_name": "Terex PT60",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT70",
+    "full_name": "Terex PT70",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT80",
+    "full_name": "Terex PT80",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT100",
+    "full_name": "Terex PT100",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "PT110",
+    "full_name": "Terex PT110",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "R160",
+    "full_name": "Terex R160",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "R165",
+    "full_name": "Terex R165",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "R190",
+    "full_name": "Terex R190",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terex",
+    "model_name": "R350",
+    "full_name": "Terex R350",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terramac",
+    "model_name": "RT6",
+    "full_name": "Terramac RT6",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terramac",
+    "model_name": "RT9",
+    "full_name": "Terramac RT9",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terramac",
+    "model_name": "RT14",
+    "full_name": "Terramac RT14",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Terramac",
+    "model_name": "RT14R",
+    "full_name": "Terramac RT14R",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "TX427",
+    "full_name": "Toro TX427",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "TX525",
+    "full_name": "Toro TX525",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "Dingo 220",
+    "full_name": "Toro Dingo 220",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "Dingo 323",
+    "full_name": "Toro Dingo 323",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "Dingo 427",
+    "full_name": "Toro Dingo 427",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Toro",
+    "model_name": "Dingo 525",
+    "full_name": "Toro Dingo 525",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Vermeer",
+    "model_name": "S450TX",
+    "full_name": "Vermeer S450TX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Vermeer",
+    "model_name": "S650TX",
+    "full_name": "Vermeer S650TX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Vermeer",
+    "model_name": "S750TX",
+    "full_name": "Vermeer S750TX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Vermeer",
+    "model_name": "S800TX",
+    "full_name": "Vermeer S800TX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Vermeer",
+    "model_name": "S925TX",
+    "full_name": "Vermeer S925TX",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "MCT85C",
+    "full_name": "Volvo MCT85C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "MCT110C",
+    "full_name": "Volvo MCT110C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "MCT125C",
+    "full_name": "Volvo MCT125C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "MCT135C",
+    "full_name": "Volvo MCT135C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "MCT145C",
+    "full_name": "Volvo MCT145C",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "ST20",
+    "full_name": "Wacker Neuson ST20",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "ST25",
+    "full_name": "Wacker Neuson ST25",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "ST28",
+    "full_name": "Wacker Neuson ST28",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "ST31",
+    "full_name": "Wacker Neuson ST31",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "ST35",
+    "full_name": "Wacker Neuson ST35",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "901S",
+    "full_name": "Wacker Neuson 901S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "1501S",
+    "full_name": "Wacker Neuson 1501S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "1701S",
+    "full_name": "Wacker Neuson 1701S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "1801S",
+    "full_name": "Wacker Neuson 1801S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "2001S",
+    "full_name": "Wacker Neuson 2001S",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "2503",
+    "full_name": "Wacker Neuson 2503",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "2703",
+    "full_name": "Wacker Neuson 2703",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "3503",
+    "full_name": "Wacker Neuson 3503",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "4503",
+    "full_name": "Wacker Neuson 4503",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "5503",
+    "full_name": "Wacker Neuson 5503",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Yanmar",
+    "model_name": "T174",
+    "full_name": "Yanmar T174",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Yanmar",
+    "model_name": "T210",
+    "full_name": "Yanmar T210",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Yanmar",
+    "model_name": "T320",
+    "full_name": "Yanmar T320",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Yanmar",
+    "model_name": "T475",
+    "full_name": "Yanmar T475",
+    "equipment_type": "Track Loader",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "320",
+    "full_name": "Bobcat 320",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "322G",
+    "full_name": "Bobcat 322G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "323",
+    "full_name": "Bobcat 323",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "324",
+    "full_name": "Bobcat 324",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "325",
+    "full_name": "Bobcat 325",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "325G",
+    "full_name": "Bobcat 325G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "331",
+    "full_name": "Bobcat 331",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "331D",
+    "full_name": "Bobcat 331D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "331E",
+    "full_name": "Bobcat 331E",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "331G",
+    "full_name": "Bobcat 331G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "334",
+    "full_name": "Bobcat 334",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "334D",
+    "full_name": "Bobcat 334D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "334G",
+    "full_name": "Bobcat 334G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "335",
+    "full_name": "Bobcat 335",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "337",
+    "full_name": "Bobcat 337",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "337G",
+    "full_name": "Bobcat 337G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "341",
+    "full_name": "Bobcat 341",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "418",
+    "full_name": "Bobcat 418",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "430",
+    "full_name": "Bobcat 430",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "442",
+    "full_name": "Bobcat 442",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E10",
+    "full_name": "Bobcat E10",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E10E",
+    "full_name": "Bobcat E10E",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E10Z",
+    "full_name": "Bobcat E10Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E17",
+    "full_name": "Bobcat E17",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E19",
+    "full_name": "Bobcat E19",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E20",
+    "full_name": "Bobcat E20",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E20Z",
+    "full_name": "Bobcat E20Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E26",
+    "full_name": "Bobcat E26",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E26R",
+    "full_name": "Bobcat E26R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E32",
+    "full_name": "Bobcat E32",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E32i",
+    "full_name": "Bobcat E32i",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E35",
+    "full_name": "Bobcat E35",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E35i",
+    "full_name": "Bobcat E35i",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E35R2",
+    "full_name": "Bobcat E35R2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E42",
+    "full_name": "Bobcat E42",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E42R2",
+    "full_name": "Bobcat E42R2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E45",
+    "full_name": "Bobcat E45",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E50",
+    "full_name": "Bobcat E50",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E50R2",
+    "full_name": "Bobcat E50R2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E55",
+    "full_name": "Bobcat E55",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E60",
+    "full_name": "Bobcat E60",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E60R2",
+    "full_name": "Bobcat E60R2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E63",
+    "full_name": "Bobcat E63",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E80",
+    "full_name": "Bobcat E80",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "E85",
+    "full_name": "Bobcat E85",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Bobcat",
+    "model_name": "X331",
+    "full_name": "Bobcat X331",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX14",
+    "full_name": "CASE CX14",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX17B",
+    "full_name": "CASE CX17B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX17C",
+    "full_name": "CASE CX17C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX25",
+    "full_name": "CASE CX25",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX27B",
+    "full_name": "CASE CX27B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX30C",
+    "full_name": "CASE CX30C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX31B",
+    "full_name": "CASE CX31B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX36B",
+    "full_name": "CASE CX36B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX50",
+    "full_name": "CASE CX50",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX55B",
+    "full_name": "CASE CX55B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX57C",
+    "full_name": "CASE CX57C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX60C",
+    "full_name": "CASE CX60C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX75CSR",
+    "full_name": "CASE CX75CSR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "CASE",
+    "model_name": "CX80C",
+    "full_name": "CASE CX80C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.4C",
+    "full_name": "Caterpillar 301.4C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.5",
+    "full_name": "Caterpillar 301.5",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.6",
+    "full_name": "Caterpillar 301.6",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.7CR",
+    "full_name": "Caterpillar 301.7CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.7D",
+    "full_name": "Caterpillar 301.7D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.8",
+    "full_name": "Caterpillar 301.8",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "301.8C",
+    "full_name": "Caterpillar 301.8C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "302.5",
+    "full_name": "Caterpillar 302.5",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "302.5CR",
+    "full_name": "Caterpillar 302.5CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "302.7D",
+    "full_name": "Caterpillar 302.7D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "302.7DCR",
+    "full_name": "Caterpillar 302.7DCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303.5CCR",
+    "full_name": "Caterpillar 303.5CCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303.5DCR",
+    "full_name": "Caterpillar 303.5DCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303.5E2CR",
+    "full_name": "Caterpillar 303.5E2CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303.5ECR",
+    "full_name": "Caterpillar 303.5ECR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303CCR",
+    "full_name": "Caterpillar 303CCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303CR",
+    "full_name": "Caterpillar 303CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "303ECR",
+    "full_name": "Caterpillar 303ECR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "304CCR",
+    "full_name": "Caterpillar 304CCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "304CR",
+    "full_name": "Caterpillar 304CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "304DCR",
+    "full_name": "Caterpillar 304DCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "304E2CR",
+    "full_name": "Caterpillar 304E2CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "304ECR",
+    "full_name": "Caterpillar 304ECR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305",
+    "full_name": "Caterpillar 305",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305.5DCR",
+    "full_name": "Caterpillar 305.5DCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305.5E",
+    "full_name": "Caterpillar 305.5E",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305.5E2",
+    "full_name": "Caterpillar 305.5E2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305.5E2CR",
+    "full_name": "Caterpillar 305.5E2CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305.5ECR",
+    "full_name": "Caterpillar 305.5ECR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305CCR",
+    "full_name": "Caterpillar 305CCR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305D CR",
+    "full_name": "Caterpillar 305D CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305E2",
+    "full_name": "Caterpillar 305E2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305E2CR",
+    "full_name": "Caterpillar 305E2CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "305ECR",
+    "full_name": "Caterpillar 305ECR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "306",
+    "full_name": "Caterpillar 306",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Caterpillar",
+    "model_name": "308E2CR",
+    "full_name": "Caterpillar 308E2CR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX19",
+    "full_name": "Doosan DX19",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX27",
+    "full_name": "Doosan DX27",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX27Z",
+    "full_name": "Doosan DX27Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX30",
+    "full_name": "Doosan DX30",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX30Z",
+    "full_name": "Doosan DX30Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX35",
+    "full_name": "Doosan DX35",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX35Z",
+    "full_name": "Doosan DX35Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX55",
+    "full_name": "Doosan DX55",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX60",
+    "full_name": "Doosan DX60",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX60R",
+    "full_name": "Doosan DX60R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX62R",
+    "full_name": "Doosan DX62R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX63R",
+    "full_name": "Doosan DX63R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX80",
+    "full_name": "Doosan DX80",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX80R",
+    "full_name": "Doosan DX80R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Doosan",
+    "model_name": "DX85R",
+    "full_name": "Doosan DX85R",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Gehl",
+    "model_name": "503Z",
+    "full_name": "Gehl 503Z",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Gehl",
+    "model_name": "Z35",
+    "full_name": "Gehl Z35",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "17D",
+    "full_name": "John Deere 17D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "17G",
+    "full_name": "John Deere 17G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "26G",
+    "full_name": "John Deere 26G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "27CZTS",
+    "full_name": "John Deere 27CZTS",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "27D",
+    "full_name": "John Deere 27D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "30G",
+    "full_name": "John Deere 30G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "35C",
+    "full_name": "John Deere 35C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "35D",
+    "full_name": "John Deere 35D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "35G",
+    "full_name": "John Deere 35G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "35ZTS",
+    "full_name": "John Deere 35ZTS",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "50D",
+    "full_name": "John Deere 50D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "50G",
+    "full_name": "John Deere 50G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "60D",
+    "full_name": "John Deere 60D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "John Deere",
+    "model_name": "60G",
+    "full_name": "John Deere 60G",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX018-4",
+    "full_name": "Kubota KX018-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX033",
+    "full_name": "Kubota KX033",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX033-4",
+    "full_name": "Kubota KX033-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX040",
+    "full_name": "Kubota KX040",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX040-4",
+    "full_name": "Kubota KX040-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX057-4",
+    "full_name": "Kubota KX057-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX057-5",
+    "full_name": "Kubota KX057-5",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX080-3",
+    "full_name": "Kubota KX080-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX080-4",
+    "full_name": "Kubota KX080-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX080-5",
+    "full_name": "Kubota KX080-5",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX121-2",
+    "full_name": "Kubota KX121-2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX121-3",
+    "full_name": "Kubota KX121-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX161-3",
+    "full_name": "Kubota KX161-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX21",
+    "full_name": "Kubota KX21",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX41-2",
+    "full_name": "Kubota KX41-2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX41-2V",
+    "full_name": "Kubota KX41-2V",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX61-2",
+    "full_name": "Kubota KX61-2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX71-3",
+    "full_name": "Kubota KX71-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX91",
+    "full_name": "Kubota KX91",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX91-2",
+    "full_name": "Kubota KX91-2",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "KX91-3",
+    "full_name": "Kubota KX91-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U15",
+    "full_name": "Kubota U15",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U17",
+    "full_name": "Kubota U17",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U25-3",
+    "full_name": "Kubota U25-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U35-4",
+    "full_name": "Kubota U35-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U35S",
+    "full_name": "Kubota U35S",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U45",
+    "full_name": "Kubota U45",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U45-3",
+    "full_name": "Kubota U45-3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U55",
+    "full_name": "Kubota U55",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Kubota",
+    "model_name": "U55-4",
+    "full_name": "Kubota U55-4",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "EC15",
+    "full_name": "New Holland EC15",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "New Holland",
+    "model_name": "EC35",
+    "full_name": "New Holland EC35",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "SANY",
+    "model_name": "SY35U",
+    "full_name": "SANY SY35U",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "SANY",
+    "model_name": "SY50",
+    "full_name": "SANY SY50",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "SANY",
+    "model_name": "SY60C",
+    "full_name": "SANY SY60C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "SANY",
+    "model_name": "SY75C",
+    "full_name": "SANY SY75C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "SANY",
+    "model_name": "SY80U",
+    "full_name": "SANY SY80U",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB008",
+    "full_name": "Takeuchi TB008",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB015",
+    "full_name": "Takeuchi TB015",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB016",
+    "full_name": "Takeuchi TB016",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB025",
+    "full_name": "Takeuchi TB025",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB035",
+    "full_name": "Takeuchi TB035",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB080",
+    "full_name": "Takeuchi TB080",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB125",
+    "full_name": "Takeuchi TB125",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB135",
+    "full_name": "Takeuchi TB135",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB138FR",
+    "full_name": "Takeuchi TB138FR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB145",
+    "full_name": "Takeuchi TB145",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB153FR",
+    "full_name": "Takeuchi TB153FR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB175",
+    "full_name": "Takeuchi TB175",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB180FR",
+    "full_name": "Takeuchi TB180FR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB230",
+    "full_name": "Takeuchi TB230",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB235",
+    "full_name": "Takeuchi TB235",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB240",
+    "full_name": "Takeuchi TB240",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB250A",
+    "full_name": "Takeuchi TB250A",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB260",
+    "full_name": "Takeuchi TB260",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB280FR",
+    "full_name": "Takeuchi TB280FR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB285",
+    "full_name": "Takeuchi TB285",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB370",
+    "full_name": "Takeuchi TB370",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Takeuchi",
+    "model_name": "TB53FR",
+    "full_name": "Takeuchi TB53FR",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC15B",
+    "full_name": "Volvo EC15B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC20",
+    "full_name": "Volvo EC20",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC25",
+    "full_name": "Volvo EC25",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC35",
+    "full_name": "Volvo EC35",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC45",
+    "full_name": "Volvo EC45",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC55",
+    "full_name": "Volvo EC55",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC55B",
+    "full_name": "Volvo EC55B",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "EC55C",
+    "full_name": "Volvo EC55C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR25D",
+    "full_name": "Volvo ECR25D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR38",
+    "full_name": "Volvo ECR38",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR40D",
+    "full_name": "Volvo ECR40D",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR48C",
+    "full_name": "Volvo ECR48C",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR58",
+    "full_name": "Volvo ECR58",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Volvo",
+    "model_name": "ECR88",
+    "full_name": "Volvo ECR88",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "28Z3",
+    "full_name": "Wacker Neuson 28Z3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "3503",
+    "full_name": "Wacker Neuson 3503",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Wacker Neuson",
+    "model_name": "38Z3",
+    "full_name": "Wacker Neuson 38Z3",
+    "equipment_type": "Mini Excavator",
+    "created_at": "2024-01-01T00:00:00Z",
+    "updated_at": "2024-01-01T00:00:00Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-1000VD",
+    "full_name": "Marooka MST-1000VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.922622Z",
+    "updated_at": "2026-01-11T23:55:35.922629Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-1500VD",
+    "full_name": "Marooka MST-1500VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.928944Z",
+    "updated_at": "2026-01-11T23:55:35.928948Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-300VD",
+    "full_name": "Marooka MST-300VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.929383Z",
+    "updated_at": "2026-01-11T23:55:35.929387Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-500VD",
+    "full_name": "Marooka MST-500VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.929735Z",
+    "updated_at": "2026-01-11T23:55:35.929739Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-600VD",
+    "full_name": "Marooka MST-600VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.930081Z",
+    "updated_at": "2026-01-11T23:55:35.930085Z"
+  },
+  {
+    "brand": "Marooka",
+    "model_name": "MST-800VD",
+    "full_name": "Marooka MST-800VD",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.930391Z",
+    "updated_at": "2026-01-11T23:55:35.930395Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY16C",
+    "full_name": "Sany SY16C",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.930721Z",
+    "updated_at": "2026-01-11T23:55:35.930724Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY35U",
+    "full_name": "Sany SY35U",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.931025Z",
+    "updated_at": "2026-01-11T23:55:35.931028Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY50U",
+    "full_name": "Sany SY50U",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.931311Z",
+    "updated_at": "2026-01-11T23:55:35.931314Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY55U",
+    "full_name": "Sany SY55U",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.931586Z",
+    "updated_at": "2026-01-11T23:55:35.931590Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY60C",
+    "full_name": "Sany SY60C",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.931884Z",
+    "updated_at": "2026-01-11T23:55:35.931887Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY75C",
+    "full_name": "Sany SY75C",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.932182Z",
+    "updated_at": "2026-01-11T23:55:35.932185Z"
+  },
+  {
+    "brand": "Sany",
+    "model_name": "SY80U",
+    "full_name": "Sany SY80U",
+    "equipment_type": "Track Loader",
+    "created_at": "2026-01-11T23:55:35.932580Z",
+    "updated_at": "2026-01-11T23:55:35.932583Z"
+  }
+]
