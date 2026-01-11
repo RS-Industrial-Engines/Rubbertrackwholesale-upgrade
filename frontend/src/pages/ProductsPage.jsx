@@ -153,7 +153,7 @@ const ProductsPage = () => {
           // Also fetch the track size details
           const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
           const allTrackSizesData = trackSizesResponse.data;
-          const thisTrack = allTrackSizesData.find(ts => ts.size.toUpperCase() === trackSize);
+          const thisTrack = allTrackSizesData.find(ts => ts.size === trackSize);
           
           if (thisTrack) {
             setTrackCompatibility([thisTrack]);
