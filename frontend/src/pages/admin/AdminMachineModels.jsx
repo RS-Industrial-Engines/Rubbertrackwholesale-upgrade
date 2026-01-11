@@ -160,74 +160,90 @@ const AdminMachineModels = () => {
     });
   };
 
-  const handleBulkImport = async () => {
-    console.log("Import button clicked!");
-    alert("Import starting - this will take 5-10 minutes. Please be patient!");
-    if (!window.confirm('This will import ALL machine models from machineModels.js. This may take 5-10 minutes. Continue?')) return;
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
 
     setLoading(true);
     toast({
       title: "Import Started",
-      description: "Importing models... This may take several minutes. Please wait."
+      description: "Processing CSV file..."
     });
 
     try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      
+      // Skip header row
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
       const token = localStorage.getItem('admin_token');
       let imported = 0;
       let skipped = 0;
-      let totalModels = 0;
-      
-      // Count total models
-      for (const modelList of Object.values(machineModels)) {
-        totalModels += modelList.length;
-      }
+      let errors = 0;
 
-      let processed = 0;
+      for (const line of dataLines) {
+        // Parse CSV line (handle quoted fields)
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        
+        if (values.length < 2) continue;
+        
+        const [brand, model_name, full_name, equipment_type] = values;
+        
+        if (!brand || !model_name) {
+          errors++;
+          continue;
+        }
 
-      // Import models for each brand
-      for (const [brand, modelList] of Object.entries(machineModels)) {
-        // Process in batches of 10
-        for (let i = 0; i < modelList.length; i++) {
-          const modelName = modelList[i];
-          try {
-            await axios.post(`${API}/api/admin/machine-models`, {
-              brand: brand,
-              model_name: modelName,
-              full_name: `${brand} ${modelName}`
-            }, {
-              headers: { Authorization: `Bearer ${token}` }
-            });
-            imported++;
-          } catch (error) {
-            if (error.response?.status === 400 && error.response?.data?.detail?.includes('already exists')) {
-              skipped++;
-            }
-          }
-          
-          processed++;
-          
-          // Show progress every 50 models
-          if (processed % 50 === 0) {
-            toast({
-              title: "Import Progress",
-              description: `Processed ${processed} of ${totalModels} models...`
-            });
+        try {
+          await axios.post(`${API}/api/admin/machine-models`, {
+            brand: brand,
+            model_name: model_name,
+            full_name: full_name || `${brand} ${model_name}`,
+            equipment_type: equipment_type || 'Track Loader'
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400 && error.response?.data?.detail?.includes('already exists')) {
+            skipped++;
+          } else {
+            errors++;
           }
         }
       }
 
       toast({
-        title: "Bulk Import Complete!",
-        description: `Imported ${imported} models, skipped ${skipped} existing models`
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped} | Errors: ${errors}`
       });
 
       fetchModels();
+      
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to import machine models",
+        description: "Failed to process CSV file",
         variant: "destructive"
       });
+    } finally {
+      setLoading(false);
+    }
+  };
     } finally {
       setLoading(false);
     }
