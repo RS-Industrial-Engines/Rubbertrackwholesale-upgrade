@@ -228,8 +228,8 @@ const AdminBrands = () => {
       {/* Note about Machine Models */}
       <div className="mb-4 p-4 bg-blue-900/20 border border-blue-800 rounded-lg">
         <p className="text-sm text-blue-300">
-          <strong>Note:</strong> Machine models for each brand are managed in the code file <code className="bg-slate-800 px-2 py-1 rounded">frontend/src/data/machineModels.js</code>. 
-          To add or edit machine models, please update that file and restart the frontend.
+          <strong>Note:</strong> Machine models for each brand are managed in the <strong>Machine Models</strong> admin section. 
+          Use the Machine Models page to add, edit, or bulk import models via CSV.
         </p>
       </div>
 
