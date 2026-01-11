@@ -29,19 +29,29 @@ const ProductsPage = () => {
     // Universal search: when user types in main search bar (searchTerm without specific category)
     if (searchTerm && selectedCategory === 'all' && selectedBrand === 'all' && !selectedModel) {
       // This is a universal search from main search bar
-      // Fetch ALL parts (rollers, idlers, sprockets) matching the search term
-      fetchPartNumbers(searchTerm, null, null, null);
       
-      // Also try to fetch track compatibility if search term looks like a model
-      // Extract potential brand and model from search term
-      const searchWords = searchTerm.trim().split(/\s+/);
-      if (searchWords.length > 0) {
-        // Try to find brand in first word
-        const potentialBrand = normalizeBrandName(searchWords[0]);
-        const potentialModel = searchWords.length > 1 ? searchWords.slice(1).join(' ') : searchWords[0];
+      // Check if search term looks like a track size first
+      const trackSizePattern = /^\d{2,3}x\d{2,3}x\d{2}$/i;
+      if (trackSizePattern.test(searchTerm.trim())) {
+        // This is a track size search - fetch compatible machines directly
+        fetchTrackCompatibilityForSearch(null, searchTerm.trim());
+        // Don't fetch part numbers for track size searches
+        setPartNumbers([]);
+      } else {
+        // Fetch ALL parts (rollers, idlers, sprockets) matching the search term
+        fetchPartNumbers(searchTerm, null, null, null);
         
-        // Fetch track compatibility for potential model
-        fetchTrackCompatibilityForSearch(potentialBrand, potentialModel);
+        // Also try to fetch track compatibility if search term looks like a model
+        // Extract potential brand and model from search term
+        const searchWords = searchTerm.trim().split(/\s+/);
+        if (searchWords.length > 0) {
+          // Try to find brand in first word
+          const potentialBrand = normalizeBrandName(searchWords[0]);
+          const potentialModel = searchWords.length > 1 ? searchWords.slice(1).join(' ') : searchWords[0];
+          
+          // Fetch track compatibility for potential model
+          fetchTrackCompatibilityForSearch(potentialBrand, potentialModel);
+        }
       }
     }
     // Specific equipment search: when user uses "Find Parts By Equipment" section
@@ -65,6 +75,7 @@ const ProductsPage = () => {
     } else {
       setPartNumbers([]);
       setTrackCompatibility([]);
+      setCompatibleMachines([]);
     }
   }, [searchTerm, selectedCategory, selectedBrand, selectedModel]);
 
