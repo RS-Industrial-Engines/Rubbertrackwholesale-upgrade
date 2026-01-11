@@ -21,6 +21,7 @@ const ProductsPage = () => {
   const [sortBy, setSortBy] = useState('featured');
   const [partNumbers, setPartNumbers] = useState([]);
   const [trackCompatibility, setTrackCompatibility] = useState([]);
+  const [compatibleMachines, setCompatibleMachines] = useState([]);
   const [loadingParts, setLoadingParts] = useState(false);
 
   // Fetch part numbers when search term OR category changes OR brand changes OR model changes
