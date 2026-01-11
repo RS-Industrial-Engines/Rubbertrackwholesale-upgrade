@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Plus, Edit, Trash2, Upload, Download } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -14,7 +14,6 @@ import {
 import { Label } from '../../components/ui/label';
 import { toast } from '../../hooks/use-toast';
 import axios from 'axios';
-import { machineModels } from '../../data/machineModels';
 
 const API = process.env.REACT_APP_BACKEND_URL || '';
 
