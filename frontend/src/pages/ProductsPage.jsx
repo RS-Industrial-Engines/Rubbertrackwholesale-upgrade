@@ -140,7 +140,7 @@ const ProductsPage = () => {
       const trackSizePattern = /^\d{2,3}x\d{2,3}x\d{2}$/i;
       if (trackSizePattern.test(model.trim())) {
         // This is a track size search
-        const trackSize = model.trim().toUpperCase();
+        const trackSize = model.trim();
         
         // Fetch all machines compatible with this track size
         const response = await axios.get(`${API}/api/compatibility/search`, {
