@@ -167,6 +167,9 @@ const ProductsPage = () => {
         return;
       }
       
+      // Not a track size search - clear compatible machines
+      setCompatibleMachines([]);
+      
       // Try to find compatibility by model only (for universal search)
       const response = await axios.get(`${API}/api/compatibility/search`, {
         params: { model: model }
