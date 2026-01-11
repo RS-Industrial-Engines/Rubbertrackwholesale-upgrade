@@ -280,10 +280,21 @@ const AdminMachineModels = () => {
             <Download className="h-4 w-4 mr-2" />
             Export CSV
           </Button>
-          <Button variant="outline" onClick={handleBulkImport} disabled={loading}>
+          <Button 
+            variant="outline" 
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={loading}
+          >
             <Upload className="h-4 w-4 mr-2" />
-            {loading ? 'Importing... Please Wait' : 'Import from Code'}
+            {loading ? 'Importing...' : 'Import CSV'}
           </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            onChange={handleCSVImport}
+            style={{ display: 'none' }}
+          />
           <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) resetForm(); }}>
             <DialogTrigger asChild>
               <Button className="bg-orange-500 hover:bg-orange-600">
