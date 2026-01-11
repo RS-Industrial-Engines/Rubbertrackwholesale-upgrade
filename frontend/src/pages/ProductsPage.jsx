@@ -452,6 +452,44 @@ const ProductsPage = () => {
               </div>
             )}
 
+            {/* Compatible Machines Section (when searching by track size) */}
+            {compatibleMachines.length > 0 && (
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold text-white mb-4">
+                  Compatible Machines ({compatibleMachines.length})
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {compatibleMachines.map((machine, idx) => (
+                    <Card key={idx} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all">
+                      <CardContent className="p-4">
+                        <div className="mb-2">
+                          <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                            Machine Model
+                          </span>
+                        </div>
+                        <h3 className="text-white font-semibold text-lg mb-2">
+                          {machine.make} {machine.model}
+                        </h3>
+                        <p className="text-slate-400 text-sm mb-3">
+                          Compatible Track Sizes:
+                        </p>
+                        <div className="flex flex-wrap gap-1">
+                          {machine.track_sizes.slice(0, 3).map((size, sizeIdx) => (
+                            <span key={sizeIdx} className="px-2 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">
+                              {size}
+                            </span>
+                          ))}
+                          {machine.track_sizes.length > 3 && (
+                            <span className="text-xs text-slate-500">+{machine.track_sizes.length - 3} more</span>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Part Numbers Section (if any found) */}
             {partNumbers.length > 0 && (
               <div className="mb-8">
