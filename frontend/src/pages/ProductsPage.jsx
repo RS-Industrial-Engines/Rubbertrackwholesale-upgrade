@@ -318,7 +318,7 @@ const ProductsPage = () => {
                 </Button>
               )}
               <span className="text-slate-400 text-sm">
-                {filteredProducts.length} {filteredProducts.length === 1 ? 'product' : 'products'} found
+                {filteredProducts.length + partNumbers.length + trackCompatibility.length} {(filteredProducts.length + partNumbers.length + trackCompatibility.length) === 1 ? 'product' : 'products'} found
               </span>
             </div>
 
