@@ -125,6 +125,37 @@ const ProductsPage = () => {
 
   const fetchTrackCompatibilityForSearch = async (brand, model) => {
     try {
+      // Check if search term looks like a track size (e.g., "320x86x49" or "400x86x52")
+      const trackSizePattern = /^\d{2,3}x\d{2,3}x\d{2}$/i;
+      if (trackSizePattern.test(model.trim())) {
+        // This is a track size search
+        const trackSize = model.trim().toUpperCase();
+        
+        // Fetch all machines compatible with this track size
+        const response = await axios.get(`${API}/api/compatibility/search`, {
+          params: { track_size: trackSize }
+        });
+        
+        if (response.data && response.data.length > 0) {
+          setCompatibleMachines(response.data);
+          
+          // Also fetch the track size details
+          const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
+          const allTrackSizesData = trackSizesResponse.data;
+          const thisTrack = allTrackSizesData.find(ts => ts.size.toUpperCase() === trackSize);
+          
+          if (thisTrack) {
+            setTrackCompatibility([thisTrack]);
+          } else {
+            setTrackCompatibility([]);
+          }
+        } else {
+          setCompatibleMachines([]);
+          setTrackCompatibility([]);
+        }
+        return;
+      }
+      
       // Try to find compatibility by model only (for universal search)
       const response = await axios.get(`${API}/api/compatibility/search`, {
         params: { model: model }
@@ -158,6 +189,7 @@ const ProductsPage = () => {
     } catch (error) {
       console.error('Error fetching track compatibility for search:', error);
       setTrackCompatibility([]);
+      setCompatibleMachines([]);
     }
   };
 
