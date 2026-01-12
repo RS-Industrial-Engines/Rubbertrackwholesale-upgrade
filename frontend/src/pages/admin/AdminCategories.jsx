@@ -349,6 +349,7 @@ const AdminCategories = () => {
             </form>
           </DialogContent>
         </Dialog>
+        </div>
       </div>
 
       {/* Categories List */}
