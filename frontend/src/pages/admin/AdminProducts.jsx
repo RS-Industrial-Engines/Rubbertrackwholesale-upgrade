@@ -190,6 +190,128 @@ const AdminProducts = () => {
     });
   };
 
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
+      const token = localStorage.getItem('admin_token');
+      let imported = 0;
+      let skipped = 0;
+
+      for (const line of dataLines) {
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 3) continue;
+        
+        const [sku, title, description, price, brand, category, size, part_number, in_stock, stock_quantity] = values;
+        
+        try {
+          await axios.post(`${API}/admin/products`, {
+            sku,
+            title,
+            description: description || '',
+            price: price ? parseFloat(price) : 0,
+            brand: brand || '',
+            category: category || '',
+            size: size || '',
+            part_number: part_number || '',
+            in_stock: in_stock === 'true' || in_stock === '1',
+            stock_quantity: stock_quantity ? parseInt(stock_quantity) : 0,
+            images: [],
+            specifications: {},
+            machine_models: []
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400) {
+            skipped++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped}`
+      });
+
+      fetchProducts();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const exportToCSV = () => {
+    if (products.length === 0) {
+      toast({
+        title: "No Data",
+        description: "There are no products to export",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const headers = ['SKU', 'Title', 'Description', 'Price', 'Brand', 'Category', 'Size', 'Part Number', 'In Stock', 'Stock Quantity'];
+    const rows = products.map(p => [
+      p.sku || '',
+      p.title || '',
+      p.description || '',
+      p.price || 0,
+      p.brand || '',
+      p.category || '',
+      p.size || '',
+      p.part_number || '',
+      p.in_stock ? 'true' : 'false',
+      p.stock_quantity || 0
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `products_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${products.length} products`
+    });
+  };
+      in_stock: true,
+      stock_quantity: 0,
+      specifications: {},
+      machine_models: [],
+      seo_title: '',
+      seo_description: '',
+      seo_keywords: [],
+      alt_tags: [''],
+      canonical_url: ''
+    });
+  };
+
   // Bulk Import Functions
   const handleDownloadTemplate = async () => {
     try {
