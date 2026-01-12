@@ -246,11 +246,13 @@ const AdminMachineModels = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['Brand', 'Model Name', 'Full Name', 'Description', 'Image URL'];
+    const headers = ['ID', 'Brand', 'Model Name', 'Full Name', 'Equipment Type', 'Description', 'Image URL'];
     const rows = models.map(m => [
+      m.id || '',
       m.brand,
       m.model_name,
       m.full_name || '',
+      m.equipment_type || '',
       m.description || '',
       m.product_image || ''
     ]);
@@ -262,6 +264,29 @@ const AdminMachineModels = () => {
     a.href = url;
     a.download = `machine_models_${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${models.length} machine models with IDs`
+    });
+  };
+
+  const downloadTemplate = () => {
+    const headers = ['ID', 'Brand', 'Model Name', 'Full Name', 'Equipment Type', 'Description', 'Image URL'];
+    const exampleRow = ['', 'Bobcat', 'T190', 'Bobcat T190', 'Track Loader', 'Compact track loader', ''];
+    const csv = [headers, exampleRow].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'machine_models_template.csv';
+    a.click();
+    
+    toast({
+      title: "Template Downloaded",
+      description: "Use this template to add or update machine models"
+    });
   };
 
   return (
