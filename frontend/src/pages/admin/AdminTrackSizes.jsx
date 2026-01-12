@@ -247,41 +247,90 @@ const AdminTrackSizes = () => {
       const dataLines = lines.slice(1).filter(line => line.trim());
       
       const token = localStorage.getItem('admin_token');
-      let imported = 0;
+      let created = 0;
+      let updated = 0;
       let skipped = 0;
+      let errors = 0;
+
+      // Helper function to normalize size for matching
+      const normalizeSize = (size) => {
+        return size.toUpperCase().replace(/\s+/g, '');
+      };
 
       for (const line of dataLines) {
         const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        if (values.length < 1) continue;
+        if (values.length < 2) continue;
         
-        const [size, price, width_variant, inventory_count, description] = values;
+        const [id, size, price, width_variant, inventory_count, is_in_stock, description] = values;
         
+        if (!size) {
+          errors++;
+          continue;
+        }
+
+        const payload = {
+          size: size.trim(),
+          price: price ? parseFloat(price) : null,
+          width_variant: width_variant || '',
+          inventory_count: inventory_count ? parseInt(inventory_count) : 0,
+          is_in_stock: is_in_stock === 'true' || is_in_stock === '1',
+          description: description || '',
+          is_active: true
+        };
+
         try {
-          await axios.post(`${API}/api/admin/track-sizes`, {
-            size,
-            price: price ? parseFloat(price) : null,
-            width_variant: width_variant || '',
-            inventory_count: inventory_count ? parseInt(inventory_count) : 0,
-            description: description || '',
-            is_active: true
-          }, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          imported++;
+          if (id && id.trim()) {
+            // Update by ID
+            await axios.put(`${API}/api/admin/track-sizes/${id}`, payload, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            updated++;
+          } else {
+            // Check if exists by normalized size (unique key)
+            const normalizedSize = normalizeSize(size);
+            const existingResponse = await axios.get(`${API}/api/track-sizes`);
+            const existing = existingResponse.data.find(ts => 
+              normalizeSize(ts.size) === normalizedSize
+            );
+            
+            if (existing) {
+              await axios.put(`${API}/api/admin/track-sizes/${existing.id}`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              updated++;
+            } else {
+              await axios.post(`${API}/api/admin/track-sizes`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              created++;
+            }
+          }
         } catch (error) {
           if (error.response?.status === 400) {
             skipped++;
+          } else {
+            errors++;
           }
         }
       }
 
       toast({
         title: "CSV Import Complete!",
-        description: `Imported: ${imported} | Skipped: ${skipped}`
+        description: `Created: ${created} | Updated: ${updated} | Skipped: ${skipped} | Errors: ${errors}`
       });
 
       fetchTrackSizes();
       if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
     } catch (error) {
       toast({
         title: "Error",
