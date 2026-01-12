@@ -327,10 +327,37 @@ const AdminTrackSizes = () => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-white">Track Sizes Management</h1>
-        <Button onClick={() => setShowForm(true)} className="bg-orange-500 hover:bg-orange-600">
-          <Plus className="h-4 w-4 mr-2" />
-          Add Track Size
-        </Button>
+        <div className="flex gap-3">
+          <Button 
+            onClick={exportToCSV} 
+            disabled={trackSizes.length === 0}
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Export CSV
+          </Button>
+          <Button 
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={loading}
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            {loading ? 'Importing...' : 'Import CSV'}
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            onChange={handleCSVImport}
+            style={{ display: 'none' }}
+          />
+          <Button onClick={() => setShowForm(true)} className="bg-orange-500 hover:bg-orange-600">
+            <Plus className="h-4 w-4 mr-2" />
+            Add Track Size
+          </Button>
+        </div>
       </div>
 
       {/* Stats */}
