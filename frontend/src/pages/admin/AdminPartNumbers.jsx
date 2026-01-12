@@ -252,6 +252,41 @@ Kubota,69191-21300,idler,front,Fits: Kubota K008-3 U10-3 Tension Idler,K008-3;U1
     URL.revokeObjectURL(url);
   };
 
+  const exportToCSV = () => {
+    if (partNumbers.length === 0) {
+      toast({
+        title: "No Data",
+        description: "There are no part numbers to export",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const headers = ['Brand', 'Part Number', 'Part Type', 'Part Subtype', 'Product Name', 'Compatible Models', 'Price'];
+    const rows = partNumbers.map(part => [
+      part.brand,
+      part.part_number,
+      part.part_type,
+      part.part_subtype || '',
+      part.product_name || '',
+      part.compatible_models ? part.compatible_models.join(';') : '',
+      part.price || ''
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `part_numbers_${selectedBrand || 'all'}_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${partNumbers.length} part numbers`
+    });
+  };
+
   const getPartTypeColor = (partType) => {
     switch (partType) {
       case 'roller': return 'bg-blue-100 text-blue-800';
