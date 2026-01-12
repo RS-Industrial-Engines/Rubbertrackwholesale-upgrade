@@ -291,6 +291,14 @@ const AdminBrands = () => {
         <div className="flex gap-3">
           <Button 
             variant="outline" 
+            onClick={downloadTemplate} 
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download Template
+          </Button>
+          <Button 
+            variant="outline" 
             onClick={exportToCSV} 
             disabled={brands.length === 0}
             className="text-white border-slate-600 hover:bg-slate-800"
