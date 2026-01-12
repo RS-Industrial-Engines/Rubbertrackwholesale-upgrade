@@ -227,6 +227,96 @@ const AdminTrackSizes = () => {
     setShowForm(false);
   };
 
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
+      const token = localStorage.getItem('admin_token');
+      let imported = 0;
+      let skipped = 0;
+
+      for (const line of dataLines) {
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 1) continue;
+        
+        const [size, price, width_variant, inventory_count, description] = values;
+        
+        try {
+          await axios.post(`${API}/api/admin/track-sizes`, {
+            size,
+            price: price ? parseFloat(price) : null,
+            width_variant: width_variant || '',
+            inventory_count: inventory_count ? parseInt(inventory_count) : 0,
+            description: description || '',
+            is_active: true
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400) {
+            skipped++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped}`
+      });
+
+      fetchTrackSizes();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const exportToCSV = () => {
+    const headers = ['Size', 'Price', 'Width Variant', 'Inventory Count', 'Description'];
+    const rows = trackSizes.map(ts => [
+      ts.size,
+      ts.price || '',
+      ts.width_variant || '',
+      ts.inventory_count || 0,
+      ts.description || ''
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `track_sizes_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${trackSizes.length} track sizes`
+    });
+  };
+
   if (loading) {
     return <div className="flex items-center justify-center h-64">
       <div className="text-white">Loading track sizes...</div>
