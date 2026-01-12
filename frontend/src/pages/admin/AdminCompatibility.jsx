@@ -21,6 +21,7 @@ const AdminCompatibility = () => {
     is_active: true
   });
   const { toast } = useToast();
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchCompatibilityData();
