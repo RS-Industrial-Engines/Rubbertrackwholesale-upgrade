@@ -30,6 +30,7 @@ const AdminPartNumbers = () => {
     compatible_models: '',
     price: ''
   });
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchBrands();
