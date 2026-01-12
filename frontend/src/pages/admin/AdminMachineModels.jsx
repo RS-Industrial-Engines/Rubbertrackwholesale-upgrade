@@ -244,10 +244,6 @@ const AdminMachineModels = () => {
       setLoading(false);
     }
   };
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const exportToCSV = () => {
     const headers = ['Brand', 'Model Name', 'Full Name', 'Description', 'Image URL'];
