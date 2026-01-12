@@ -320,15 +320,32 @@ Kubota,69191-21300,idler,front,Fits: Kubota K008-3 U10-3 Tension Idler,K008-3;U1
           <p className="text-gray-600 mt-2">Manage rollers, sprockets & idlers by brand</p>
         </div>
         <div className="flex gap-2">
-          <Button onClick={downloadCSVTemplate} variant="outline">
+          <Button 
+            onClick={exportToCSV} 
+            variant="outline"
+            disabled={partNumbers.length === 0}
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Export CSV
+          </Button>
+          <Button 
+            onClick={downloadCSVTemplate} 
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
             <Download className="h-4 w-4 mr-2" />
             Download CSV Template
           </Button>
-          <Button onClick={() => setShowCSVUpload(true)} variant="outline">
+          <Button 
+            onClick={() => setShowCSVUpload(true)} 
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
             <Upload className="h-4 w-4 mr-2" />
             Import CSV
           </Button>
-          <Button onClick={() => setShowAddForm(true)}>
+          <Button onClick={() => setShowAddForm(true)} className="bg-orange-500 hover:bg-orange-600">
             <Plus className="h-4 w-4 mr-2" />
             Add Part Manually
           </Button>
