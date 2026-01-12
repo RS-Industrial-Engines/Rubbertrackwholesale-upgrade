@@ -187,7 +187,8 @@ const AdminMachineModels = () => {
       const dataLines = lines.slice(1).filter(line => line.trim());
       
       const token = localStorage.getItem('admin_token');
-      let imported = 0;
+      let created = 0;
+      let updated = 0;
       let skipped = 0;
       let errors = 0;
 
@@ -197,26 +198,80 @@ const AdminMachineModels = () => {
         
         if (values.length < 2) continue;
         
-        const [brand, model_name, full_name, equipment_type] = values;
+        const [id, brand, model_name, full_name, equipment_type, description, product_image] = values;
         
         if (!brand || !model_name) {
           errors++;
           continue;
         }
 
+        const payload = {
+          brand: brand,
+          model_name: model_name,
+          full_name: full_name || `${brand} ${model_name}`,
+          equipment_type: equipment_type || 'Track Loader',
+          description: description || '',
+          product_image: product_image || ''
+        };
+
         try {
-          await axios.post(`${API}/api/admin/machine-models`, {
-            brand: brand,
-            model_name: model_name,
-            full_name: full_name || `${brand} ${model_name}`,
-            equipment_type: equipment_type || 'Track Loader'
-          }, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          imported++;
+          // If ID exists, try to update
+          if (id && id.trim()) {
+            await axios.put(`${API}/api/admin/machine-models/${id}`, payload, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            updated++;
+          } else {
+            // Check if exists by brand + model_name (unique key)
+            const existingResponse = await axios.get(`${API}/api/machine-models`, {
+              params: { brand, model: model_name }
+            });
+            
+            if (existingResponse.data && existingResponse.data.length > 0) {
+              // Update existing
+              const existingId = existingResponse.data[0].id;
+              await axios.put(`${API}/api/admin/machine-models/${existingId}`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              updated++;
+            } else {
+              // Create new
+              await axios.post(`${API}/api/admin/machine-models`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              created++;
+            }
+          }
         } catch (error) {
           if (error.response?.status === 400 && error.response?.data?.detail?.includes('already exists')) {
             skipped++;
+          } else {
+            errors++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Created: ${created} | Updated: ${updated} | Skipped: ${skipped} | Errors: ${errors}`
+      });
+
+      fetchModels();
+      
+      // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
           } else {
             errors++;
           }
