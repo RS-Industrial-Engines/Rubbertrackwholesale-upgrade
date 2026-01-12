@@ -272,33 +272,6 @@ const AdminMachineModels = () => {
       setLoading(false);
     }
   };
-          } else {
-            errors++;
-          }
-        }
-      }
-
-      toast({
-        title: "CSV Import Complete!",
-        description: `Imported: ${imported} | Skipped: ${skipped} | Errors: ${errors}`
-      });
-
-      fetchModels();
-      
-      // Reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to process CSV file",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const exportToCSV = () => {
     const headers = ['ID', 'Brand', 'Model Name', 'Full Name', 'Equipment Type', 'Description', 'Image URL'];
