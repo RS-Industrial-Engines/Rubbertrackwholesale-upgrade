@@ -374,6 +374,14 @@ const AdminPartNumbers = () => {
         </div>
         <div className="flex gap-2">
           <Button 
+            onClick={downloadImportTemplate} 
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Download Import Template
+          </Button>
+          <Button 
             onClick={exportToCSV} 
             variant="outline"
             disabled={partNumbers.length === 0}
