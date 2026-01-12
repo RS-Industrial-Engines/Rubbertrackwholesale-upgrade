@@ -201,6 +201,18 @@ frontend:
         agent: "testing"
         comment: "❌ CRITICAL ISSUE - Universal search with track size functionality NOT WORKING as expected: ✅ RUBBER TRACK COMPATIBILITY CHART WORKS PERFECTLY: Search for 'T180' finds track size 320x86x49, clicking opens modal showing 13 compatible machines (Bobcat T180, T180H, T190, T190H, T550, CAT 239D), SVL75 search finds 9 track size options. ❌ MAIN SEARCH BAR UNIVERSAL SEARCH BROKEN: 1) Search for '320x86x49' shows 'No products found' instead of expected 'Compatible Rubber Track Sizes' and 'Compatible Machines' sections, 2) Search for '400x86x60' also shows 'No products found', 3) Backend APIs working correctly (368 track sizes, 4632 compatibility entries, track size search finds 13 machines for 320x86x49), 4) The universal search logic in ProductsPage.jsx fetchTrackCompatibilityForSearch() function is not properly detecting track size patterns or displaying expected sections. ISSUE: The track size pattern regex /^\d{2,3}x\d{2,3}x\d{2}$/i should match '320x86x49' but the 'Compatible Rubber Track Sizes' and 'Compatible Machines' sections are not being displayed. The backend API calls are working but the frontend is not rendering the results properly."
 
+  - task: "MachineModels.js Dependency Removal"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/pages/admin/AdminMachineModels.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "testing"
+        comment: "✅ PASSED - Frontend works perfectly after removing machineModels.js dependency! Comprehensive testing results: 1) ADMIN PANEL: Machine Models page loads 569 models from database, 'Import CSV' button exists, 'Export CSV' works, 'Import from Code' button correctly removed, brand filter works (74 Bobcat models when filtered). 2) FIND PARTS BY EQUIPMENT: Brand dropdown loads 35 brands, Bobcat loads 75 models, Caterpillar loads 86 models - all from database API calls. 3) GENERAL FUNCTIONALITY: Search bar works, navigation works, no console errors related to machineModels, no import errors. 4) SYNTAX FIX: Resolved duplicate 'finally' block and updated text references. All machine model data now properly sourced from database via API calls instead of hardcoded file."
+
   - task: "Find Parts By Equipment Dropdown Excavator Models"
     implemented: true
     working: true
