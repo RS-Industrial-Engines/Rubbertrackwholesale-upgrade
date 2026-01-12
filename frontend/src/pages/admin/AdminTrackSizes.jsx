@@ -331,16 +331,6 @@ const AdminTrackSizes = () => {
       setLoading(false);
     }
   };
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to process CSV file",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const exportToCSV = () => {
     const headers = ['ID', 'Size', 'Price', 'Width Variant', 'Inventory Count', 'Is In Stock', 'Description'];
