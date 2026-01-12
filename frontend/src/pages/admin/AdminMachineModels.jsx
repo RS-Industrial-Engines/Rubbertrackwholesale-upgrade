@@ -272,7 +272,12 @@ const AdminMachineModels = () => {
           <p className="text-slate-400 mt-2">Manage machine models for all brands</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" onClick={exportToCSV} disabled={models.length === 0}>
+          <Button 
+            variant="outline" 
+            onClick={exportToCSV} 
+            disabled={models.length === 0}
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
             <Download className="h-4 w-4 mr-2" />
             Export CSV
           </Button>
@@ -280,6 +285,7 @@ const AdminMachineModels = () => {
             variant="outline" 
             onClick={() => fileInputRef.current?.click()} 
             disabled={loading}
+            className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Upload className="h-4 w-4 mr-2" />
             {loading ? 'Importing...' : 'Import CSV'}
