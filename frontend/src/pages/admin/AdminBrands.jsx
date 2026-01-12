@@ -122,8 +122,9 @@ const AdminBrands = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
+    const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
     const rows = brands.map(b => [
+      b.id || '',
       b.name,
       b.logo || '',
       b.description || '',
@@ -138,6 +139,29 @@ const AdminBrands = () => {
     a.href = url;
     a.download = `brands_${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${brands.length} brands with IDs`
+    });
+  };
+
+  const downloadTemplate = () => {
+    const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
+    const exampleRow = ['', 'Bobcat', 'https://example.com/logo.png', 'Premium equipment manufacturer', 'Bobcat Parts & Equipment', 'Shop genuine Bobcat parts'];
+    const csv = [headers, exampleRow].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'brands_template.csv';
+    a.click();
+    
+    toast({
+      title: "Template Downloaded",
+      description: "Use this template to add or update brands"
+    });
   };
 
   const handleSubmit = async (e) => {
