@@ -300,17 +300,6 @@ const AdminProducts = () => {
       description: `Exported ${products.length} products`
     });
   };
-      in_stock: true,
-      stock_quantity: 0,
-      specifications: {},
-      machine_models: [],
-      seo_title: '',
-      seo_description: '',
-      seo_keywords: [],
-      alt_tags: [''],
-      canonical_url: ''
-    });
-  };
 
   // Bulk Import Functions
   const handleDownloadTemplate = async () => {
