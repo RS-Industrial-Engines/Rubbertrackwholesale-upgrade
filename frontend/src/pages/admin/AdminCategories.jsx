@@ -136,6 +136,104 @@ const AdminCategories = () => {
     });
   };
 
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
+      const token = localStorage.getItem('admin_token');
+      let imported = 0;
+      let skipped = 0;
+
+      for (const line of dataLines) {
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 2) continue;
+        
+        const [name, description, image, seo_title, seo_description] = values;
+        
+        try {
+          await axios.post(`${API}/api/admin/categories`, {
+            name,
+            description: description || '',
+            image: image || '',
+            seo_title: seo_title || '',
+            seo_description: seo_description || ''
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400) {
+            skipped++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped}`
+      });
+
+      fetchCategories();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const exportToCSV = () => {
+    if (categories.length === 0) {
+      toast({
+        title: "No Data",
+        description: "There are no categories to export",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const headers = ['Name', 'Description', 'Image', 'SEO Title', 'SEO Description'];
+    const rows = categories.map(c => [
+      c.name,
+      c.description || '',
+      c.image || '',
+      c.seo_title || '',
+      c.seo_description || ''
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `categories_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${categories.length} categories`
+    });
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
