@@ -55,6 +55,7 @@ const AdminProducts = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [importType, setImportType] = useState('rubber_tracks');
   const [importing, setImporting] = useState(false);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
