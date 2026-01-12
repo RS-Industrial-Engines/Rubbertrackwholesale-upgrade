@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Plus, Edit, Trash2, Upload, Download } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent } from '../../components/ui/card';
@@ -31,6 +31,7 @@ const AdminBrands = () => {
     seo_description: '',
     seo_keywords: []
   });
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchBrands();
@@ -55,26 +56,108 @@ const AdminBrands = () => {
     }
   };
 
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
+      const token = localStorage.getItem('admin_token');
+      let imported = 0;
+      let skipped = 0;
+
+      for (const line of dataLines) {
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 2) continue;
+        
+        const [name, logo, description, seo_title, seo_description] = values;
+        
+        try {
+          await axios.post(`${API}/api/admin/brands`, {
+            name,
+            logo: logo || '',
+            description: description || '',
+            seo_title: seo_title || '',
+            seo_description: seo_description || ''
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400) {
+            skipped++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped}`
+      });
+
+      fetchBrands();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const exportToCSV = () => {
+    const headers = ['Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
+    const rows = brands.map(b => [
+      b.name,
+      b.logo || '',
+      b.description || '',
+      b.seo_title || '',
+      b.seo_description || ''
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `brands_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
       const token = localStorage.getItem('admin_token');
-      const url = editingBrand 
-        ? `${API}/api/admin/brands/${editingBrand._id}`
-        : `${API}/api/admin/brands`;
       
-      const method = editingBrand ? 'put' : 'post';
-
-      await axios[method](url, formData, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      toast({
-        title: "Success",
-        description: `Brand ${editingBrand ? 'updated' : 'created'} successfully`
-      });
+      if (editingBrand) {
+        await axios.put(`${API}/api/admin/brands/${editingBrand.id}`, formData, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        toast({ title: "Success", description: "Brand updated successfully" });
+      } else {
+        await axios.post(`${API}/api/admin/brands`, formData, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        toast({ title: "Success", description: "Brand created successfully" });
+      }
 
       setDialogOpen(false);
       resetForm();
@@ -90,15 +173,14 @@ const AdminBrands = () => {
     }
   };
 
-  const handleDelete = async (brandId) => {
+  const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this brand?')) return;
 
     try {
       const token = localStorage.getItem('admin_token');
-      await axios.delete(`${API}/api/admin/brands/${brandId}`, {
+      await axios.delete(`${API}/api/admin/brands/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-
       toast({ title: "Success", description: "Brand deleted successfully" });
       fetchBrands();
     } catch (error) {
@@ -110,10 +192,22 @@ const AdminBrands = () => {
     }
   };
 
-  const handleEdit = (brand) => {
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      logo: '',
+      description: '',
+      seo_title: '',
+      seo_description: '',
+      seo_keywords: []
+    });
+    setEditingBrand(null);
+  };
+
+  const startEdit = (brand) => {
     setEditingBrand(brand);
     setFormData({
-      name: brand.name || '',
+      name: brand.name,
       logo: brand.logo || '',
       description: brand.description || '',
       seo_title: brand.seo_title || '',
@@ -123,106 +217,116 @@ const AdminBrands = () => {
     setDialogOpen(true);
   };
 
-  const resetForm = () => {
-    setEditingBrand(null);
-    setFormData({
-      name: '',
-      logo: '',
-      description: '',
-      seo_title: '',
-      seo_description: '',
-      seo_keywords: []
-    });
-  };
-
   return (
     <div>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-white">Brands Management</h1>
-        <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) resetForm(); }}>
-          <DialogTrigger asChild>
-            <Button className="bg-orange-500 hover:bg-orange-600">
-              <Plus className="h-4 w-4 mr-2" />
-              Add Brand
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="bg-slate-900 border-slate-800 text-white max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>{editingBrand ? 'Edit Brand' : 'Add New Brand'}</DialogTitle>
-              <DialogDescription className="text-slate-400">
-                {editingBrand ? 'Update brand information' : 'Create a new brand'}
-              </DialogDescription>
-            </DialogHeader>
+        <div>
+          <h1 className="text-3xl font-bold text-white">Brands Management</h1>
+          <p className="text-slate-400 mt-2">Manage equipment brands and manufacturers</p>
+        </div>
+        <div className="flex gap-3">
+          <Button 
+            variant="outline" 
+            onClick={exportToCSV} 
+            disabled={brands.length === 0}
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Export CSV
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={loading}
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            {loading ? 'Importing...' : 'Import CSV'}
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            onChange={handleCSVImport}
+            style={{ display: 'none' }}
+          />
+          <Dialog open={dialogOpen} onOpenChange={(open) => { setDialogOpen(open); if (!open) resetForm(); }}>
+            <DialogTrigger asChild>
+              <Button className="bg-orange-500 hover:bg-orange-600">
+                <Plus className="h-4 w-4 mr-2" />
+                Add Brand
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-slate-900 border-slate-800 text-white max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>{editingBrand ? 'Edit Brand' : 'Add New Brand'}</DialogTitle>
+                <DialogDescription className="text-slate-400">
+                  {editingBrand ? 'Update brand details' : 'Add a new equipment brand'}
+                </DialogDescription>
+              </DialogHeader>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Label>Brand Name *</Label>
-                <Input
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                  className="bg-slate-800 border-slate-700"
-                />
-              </div>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Label>Brand Name *</Label>
+                  <Input
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="bg-slate-800 border-slate-700"
+                    required
+                  />
+                </div>
 
-              <div>
-                <Label>Logo URL</Label>
-                <Input
-                  value={formData.logo}
-                  onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-                  className="bg-slate-800 border-slate-700"
-                  placeholder="https://example.com/logo.png"
-                />
-              </div>
+                <div>
+                  <Label>Logo URL</Label>
+                  <Input
+                    value={formData.logo}
+                    onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
+                    className="bg-slate-800 border-slate-700"
+                    placeholder="https://example.com/logo.png"
+                  />
+                </div>
 
-              <div>
-                <Label>Description</Label>
-                <Textarea
-                  value={formData.description}
-                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="bg-slate-800 border-slate-700"
-                  rows={3}
-                />
-              </div>
+                <div>
+                  <Label>Description</Label>
+                  <Textarea
+                    value={formData.description}
+                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                    className="bg-slate-800 border-slate-700"
+                    rows={3}
+                  />
+                </div>
 
-              <div>
-                <Label>SEO Title</Label>
-                <Input
-                  value={formData.seo_title}
-                  onChange={(e) => setFormData({ ...formData, seo_title: e.target.value })}
-                  className="bg-slate-800 border-slate-700"
-                />
-              </div>
+                <div>
+                  <Label>SEO Title</Label>
+                  <Input
+                    value={formData.seo_title}
+                    onChange={(e) => setFormData({ ...formData, seo_title: e.target.value })}
+                    className="bg-slate-800 border-slate-700"
+                  />
+                </div>
 
-              <div>
-                <Label>SEO Description</Label>
-                <Textarea
-                  value={formData.seo_description}
-                  onChange={(e) => setFormData({ ...formData, seo_description: e.target.value })}
-                  className="bg-slate-800 border-slate-700"
-                  rows={2}
-                />
-              </div>
+                <div>
+                  <Label>SEO Description</Label>
+                  <Textarea
+                    value={formData.seo_description}
+                    onChange={(e) => setFormData({ ...formData, seo_description: e.target.value })}
+                    className="bg-slate-800 border-slate-700"
+                    rows={2}
+                  />
+                </div>
 
-              <div className="flex gap-3 pt-4">
-                <Button
-                  type="button"
-                  onClick={() => { setDialogOpen(false); resetForm(); }}
-                  className="flex-1 bg-slate-700 hover:bg-slate-600"
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-orange-500 hover:bg-orange-600"
-                >
-                  {loading ? 'Saving...' : (editingBrand ? 'Update' : 'Create')}
-                </Button>
-              </div>
-            </form>
-          </DialogContent>
-        </Dialog>
+                <div className="flex justify-end gap-3 pt-4">
+                  <Button type="button" variant="outline" onClick={() => setDialogOpen(false)}>
+                    Cancel
+                  </Button>
+                  <Button type="submit" className="bg-orange-500 hover:bg-orange-600" disabled={loading}>
+                    {loading ? 'Saving...' : (editingBrand ? 'Update Brand' : 'Create Brand')}
+                  </Button>
+                </div>
+              </form>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       {/* Note about Machine Models */}
@@ -233,70 +337,68 @@ const AdminBrands = () => {
         </p>
       </div>
 
-      {/* Brands List */}
-      <Card className="bg-slate-900 border-slate-800">
-        <CardContent className="p-6">
-          {loading && brands.length === 0 ? (
-            <p className="text-slate-400 text-center py-8">Loading brands...</p>
-          ) : brands.length === 0 ? (
-            <p className="text-slate-400 text-center py-8">No brands found. Create your first brand!</p>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-slate-800">
-                    <th className="text-left p-4 text-slate-300">Logo</th>
-                    <th className="text-left p-4 text-slate-300">Name</th>
-                    <th className="text-left p-4 text-slate-300">Description</th>
-                    <th className="text-left p-4 text-slate-300">SEO Title</th>
-                    <th className="text-right p-4 text-slate-300">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {brands.map((brand) => (
-                    <tr key={brand._id} className="border-b border-slate-800 hover:bg-slate-800/50">
-                      <td className="p-4">
-                        {brand.logo ? (
-                          <img src={brand.logo} alt={brand.name} className="h-10 w-auto" />
-                        ) : (
-                          <div className="h-10 w-10 bg-slate-700 rounded flex items-center justify-center text-xs">
-                            {brand.name?.charAt(0)}
-                          </div>
-                        )}
-                      </td>
-                      <td className="p-4 text-white font-medium">{brand.name}</td>
-                      <td className="p-4 text-slate-400 max-w-xs truncate">
-                        {brand.description || '—'}
-                      </td>
-                      <td className="p-4 text-slate-400 max-w-xs truncate">
-                        {brand.seo_title || '—'}
-                      </td>
-                      <td className="p-4">
-                        <div className="flex gap-2 justify-end">
-                          <Button
-                            size="sm"
-                            onClick={() => handleEdit(brand)}
-                            className="bg-blue-600 hover:bg-blue-700"
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            onClick={() => handleDelete(brand._id)}
-                            className="bg-red-600 hover:bg-red-700"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+      {/* CSV Format Info */}
+      <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-800 mb-6">
+        <CardContent className="pt-6">
+          <h3 className="text-lg font-bold text-white mb-2">CSV Import Format:</h3>
+          <p className="text-sm text-slate-400 font-mono">
+            Name, Logo, Description, SEO Title, SEO Description
+          </p>
+          <p className="text-xs text-slate-500 mt-2">
+            Example: Bobcat,https://example.com/logo.png,Premium equipment,Bobcat Parts,Shop Bobcat parts
+          </p>
         </CardContent>
       </Card>
+
+      {loading && brands.length === 0 ? (
+        <div className="text-center py-12 text-slate-400">Loading brands...</div>
+      ) : brands.length === 0 ? (
+        <Card className="bg-slate-900 border-slate-800">
+          <CardContent className="py-12 text-center text-slate-400">
+            <p>No brands found. Click "Add Brand" or "Import CSV" to get started!</p>
+          </CardContent>
+        </Card>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {brands.map((brand) => (
+            <Card key={brand.id} className="bg-slate-900 border-slate-800 hover:border-orange-500 transition-all">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl font-bold text-white mb-2">{brand.name}</h3>
+                    {brand.description && (
+                      <p className="text-slate-400 text-sm">{brand.description}</p>
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => startEdit(brand)}
+                      className="text-blue-400 hover:text-blue-300"
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => handleDelete(brand.id)}
+                      className="text-red-400 hover:text-red-300"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+                {brand.logo && (
+                  <div className="mt-4">
+                    <img src={brand.logo} alt={brand.name} className="h-12 object-contain" />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
