@@ -398,6 +398,31 @@ const AdminProducts = () => {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-white">Products Management</h1>
         <div className="flex gap-3">
+          <Button 
+            onClick={exportToCSV} 
+            disabled={products.length === 0}
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Download className="h-4 w-4 mr-2" />
+            Export CSV
+          </Button>
+          <Button 
+            onClick={() => fileInputRef.current?.click()} 
+            disabled={loading}
+            variant="outline"
+            className="text-white border-slate-600 hover:bg-slate-800"
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            {loading ? 'Importing...' : 'Import CSV'}
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".csv"
+            onChange={handleCSVImport}
+            style={{ display: 'none' }}
+          />
           <Dialog open={bulkImportDialog} onOpenChange={setBulkImportDialog}>
             <DialogTrigger asChild>
               <Button className="bg-blue-600 hover:bg-blue-700">
