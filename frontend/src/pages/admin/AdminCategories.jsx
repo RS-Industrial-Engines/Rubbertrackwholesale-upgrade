@@ -31,6 +31,7 @@ const AdminCategories = () => {
     seo_description: '',
     seo_keywords: []
   });
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchCategories();
