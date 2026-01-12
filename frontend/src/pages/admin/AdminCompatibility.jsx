@@ -145,6 +145,93 @@ const AdminCompatibility = () => {
     setShowForm(false);
   };
 
+  const handleCSVImport = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.csv')) {
+      toast({
+        title: "Error",
+        description: "Please upload a CSV file",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const text = await file.text();
+      const lines = text.split('\n');
+      const dataLines = lines.slice(1).filter(line => line.trim());
+      
+      const token = localStorage.getItem('admin_token');
+      let imported = 0;
+      let skipped = 0;
+
+      for (const line of dataLines) {
+        const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 3) continue;
+        
+        const [make, model, track_sizes] = values;
+        const sizesArray = track_sizes.split(';').map(s => s.trim()).filter(s => s);
+        
+        try {
+          await axios.post(`${API}/api/admin/compatibility`, {
+            make,
+            model,
+            track_sizes: sizesArray,
+            is_active: true
+          }, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          imported++;
+        } catch (error) {
+          if (error.response?.status === 400) {
+            skipped++;
+          }
+        }
+      }
+
+      toast({
+        title: "CSV Import Complete!",
+        description: `Imported: ${imported} | Skipped: ${skipped}`
+      });
+
+      fetchCompatibilityData();
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const exportToCSV = () => {
+    const headers = ['Make', 'Model', 'Track Sizes'];
+    const rows = compatibilityData.map(item => [
+      item.make,
+      item.model,
+      item.track_sizes.join(';')
+    ]);
+
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `compatibility_${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    
+    toast({
+      title: "Export Successful",
+      description: `Exported ${compatibilityData.length} entries`
+    });
+  };
+
   // Get unique makes for statistics
   const uniqueMakes = [...new Set(compatibilityData.map(item => item.make))];
   const totalMachines = compatibilityData.length;
