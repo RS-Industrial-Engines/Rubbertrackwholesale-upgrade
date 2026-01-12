@@ -294,12 +294,14 @@ const AdminTrackSizes = () => {
   };
 
   const exportToCSV = () => {
-    const headers = ['Size', 'Price', 'Width Variant', 'Inventory Count', 'Description'];
+    const headers = ['ID', 'Size', 'Price', 'Width Variant', 'Inventory Count', 'Is In Stock', 'Description'];
     const rows = trackSizes.map(ts => [
+      ts.id || '',
       ts.size,
       ts.price || '',
       ts.width_variant || '',
       ts.inventory_count || 0,
+      ts.is_in_stock ? 'true' : 'false',
       ts.description || ''
     ]);
 
@@ -313,7 +315,25 @@ const AdminTrackSizes = () => {
     
     toast({
       title: "Export Successful",
-      description: `Exported ${trackSizes.length} track sizes`
+      description: `Exported ${trackSizes.length} track sizes with IDs`
+    });
+  };
+
+  const downloadTemplate = () => {
+    const headers = ['ID', 'Size', 'Price', 'Width Variant', 'Inventory Count', 'Is In Stock', 'Description'];
+    const exampleRow = ['', '300x55x82', '2500.00', '', '10', 'true', 'Premium rubber track'];
+    const csv = [headers, exampleRow].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'track_sizes_template.csv';
+    a.click();
+    
+    toast({
+      title: "Template Downloaded",
+      description: "Use this template to add or update track sizes"
     });
   };
 
