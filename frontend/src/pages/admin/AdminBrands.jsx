@@ -150,16 +150,6 @@ const AdminBrands = () => {
       setLoading(false);
     }
   };
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to process CSV file",
-        variant: "destructive"
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const exportToCSV = () => {
     const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
