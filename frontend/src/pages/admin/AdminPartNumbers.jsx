@@ -262,8 +262,9 @@ Kubota,69191-21300,idler,front,Fits: Kubota K008-3 U10-3 Tension Idler,K008-3;U1
       return;
     }
 
-    const headers = ['Brand', 'Part Number', 'Part Type', 'Part Subtype', 'Product Name', 'Compatible Models', 'Price'];
+    const headers = ['ID', 'Brand', 'Part Number', 'Part Type', 'Part Subtype', 'Product Name', 'Compatible Models', 'Price'];
     const rows = partNumbers.map(part => [
+      part.id || '',
       part.brand,
       part.part_number,
       part.part_type,
@@ -283,7 +284,25 @@ Kubota,69191-21300,idler,front,Fits: Kubota K008-3 U10-3 Tension Idler,K008-3;U1
     
     toast({
       title: "Export Successful",
-      description: `Exported ${partNumbers.length} part numbers`
+      description: `Exported ${partNumbers.length} part numbers with IDs`
+    });
+  };
+
+  const downloadImportTemplate = () => {
+    const headers = ['ID', 'Brand', 'Part Number', 'Part Type', 'Part Subtype', 'Product Name', 'Compatible Models', 'Price'];
+    const exampleRow = ['', 'Kubota', '68493-21700', 'roller', 'bottom', 'Kubota KH151 Bottom Roller', 'KH151;KX151', '125.00'];
+    const csv = [headers, exampleRow].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'part_numbers_template.csv';
+    a.click();
+    
+    toast({
+      title: "Template Downloaded",
+      description: "Use this template to add or update part numbers"
     });
   };
 
