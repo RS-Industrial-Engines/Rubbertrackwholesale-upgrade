@@ -76,40 +76,80 @@ const AdminBrands = () => {
       const dataLines = lines.slice(1).filter(line => line.trim());
       
       const token = localStorage.getItem('admin_token');
-      let imported = 0;
+      let created = 0;
+      let updated = 0;
       let skipped = 0;
+      let errors = 0;
 
       for (const line of dataLines) {
         const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
         if (values.length < 2) continue;
         
-        const [name, logo, description, seo_title, seo_description] = values;
+        const [id, name, logo, description, seo_title, seo_description] = values;
+        
+        if (!name) {
+          errors++;
+          continue;
+        }
+
+        const payload = {
+          name,
+          logo: logo || '',
+          description: description || '',
+          seo_title: seo_title || '',
+          seo_description: seo_description || ''
+        };
         
         try {
-          await axios.post(`${API}/api/admin/brands`, {
-            name,
-            logo: logo || '',
-            description: description || '',
-            seo_title: seo_title || '',
-            seo_description: seo_description || ''
-          }, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          imported++;
+          if (id && id.trim()) {
+            // Update by ID
+            await axios.put(`${API}/api/admin/brands/${id}`, payload, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            updated++;
+          } else {
+            // Check if exists by name (unique key)
+            const existingResponse = await axios.get(`${API}/api/admin/brands`);
+            const existing = existingResponse.data.find(b => b.name.toLowerCase() === name.toLowerCase());
+            
+            if (existing) {
+              await axios.put(`${API}/api/admin/brands/${existing.id}`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              updated++;
+            } else {
+              await axios.post(`${API}/api/admin/brands`, payload, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              created++;
+            }
+          }
         } catch (error) {
           if (error.response?.status === 400) {
             skipped++;
+          } else {
+            errors++;
           }
         }
       }
 
       toast({
         title: "CSV Import Complete!",
-        description: `Imported: ${imported} | Skipped: ${skipped}`
+        description: `Created: ${created} | Updated: ${updated} | Skipped: ${skipped} | Errors: ${errors}`
       });
 
       fetchBrands();
       if (fileInputRef.current) fileInputRef.current.value = '';
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to process CSV file",
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
     } catch (error) {
       toast({
         title: "Error",
