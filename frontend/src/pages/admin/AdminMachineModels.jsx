@@ -444,10 +444,10 @@ const AdminMachineModels = () => {
       ) : models.length === 0 ? (
         <Card className="bg-slate-900 border-slate-800">
           <CardContent className="py-12 text-center text-slate-400">
-            <p className="mb-4">No machine models found. Click "Import from Code" to get started!</p>
-            <Button onClick={handleBulkImport} className="bg-orange-500 hover:bg-orange-600">
+            <p className="mb-4">No machine models found. Use "Import CSV" to upload models from a CSV file!</p>
+            <Button onClick={() => fileInputRef.current?.click()} className="bg-orange-500 hover:bg-orange-600">
               <Upload className="h-4 w-4 mr-2" />
-              Import All Models
+              Import CSV
             </Button>
           </CardContent>
         </Card>
