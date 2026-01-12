@@ -272,10 +272,10 @@ const AdminPartNumbers = () => {
   };
 
   const downloadCSVTemplate = () => {
-    const template = `brand,part_number,part_type,part_subtype,product_name,compatible_models,price
-Kubota,68493-21700,roller,bottom,Fits: Kubota KH151 KH191 KX151 Roller,KH151;KH191;KX151,
-Kubota,68621-14430,sprocket,,Fits: Kubota KX 91-2 Sprocket,KX 91-2,
-Kubota,69191-21300,idler,front,Fits: Kubota K008-3 U10-3 Tension Idler,K008-3;U10-3,`;
+    const template = `ID,Brand,Part Number,Part Type,Part Subtype,Product Name,Compatible Models,Price
+,Kubota,68493-21700,roller,bottom,Kubota KH151 Bottom Roller,KH151;KX151,125.00
+,Kubota,68621-14430,sprocket,,Kubota KX 91-2 Sprocket,KX 91-2,85.50
+,Kubota,69191-21300,idler,front,Kubota K008-3 Tension Idler,K008-3;U10-3,95.00`;
     
     const blob = new Blob([template], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
