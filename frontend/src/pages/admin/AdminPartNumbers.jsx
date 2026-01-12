@@ -198,35 +198,69 @@ const AdminPartNumbers = () => {
       const headers = lines[0].split(',').map(h => h.trim());
       
       const token = localStorage.getItem('admin_token');
-      let successCount = 0;
-      let errorCount = 0;
+      let created = 0;
+      let updated = 0;
+      let skipped = 0;
+      let errors = 0;
       
       for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim());
-        if (values.length < 4) continue;
+        const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+        if (values.length < 3) continue;
+        
+        const [id, brand, part_number, part_type, part_subtype, product_name, compatible_models_str, price] = values;
+        
+        if (!part_number) {
+          errors++;
+          continue;
+        }
         
         const part = {
-          brand: values[0] || '',
-          part_number: values[1] || '',
-          part_type: values[2]?.toLowerCase() || 'roller',
-          part_subtype: values[3] || null,
-          product_name: values[4] || '',
-          compatible_models: values[5] ? values[5].split(';').map(m => m.trim()) : [],
-          price: values[6] ? parseFloat(values[6]) : null
+          brand: brand || '',
+          part_number: part_number,
+          part_type: part_type?.toLowerCase() || 'roller',
+          part_subtype: part_subtype || null,
+          product_name: product_name || '',
+          compatible_models: compatible_models_str ? compatible_models_str.split(';').map(m => m.trim()) : [],
+          price: price ? parseFloat(price) : null
         };
         
         try {
-          await axios.post(`${API}/api/admin/part-numbers`, part, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          successCount++;
+          if (id && id.trim()) {
+            // Update by ID
+            await axios.put(`${API}/api/admin/part-numbers/${id}`, part, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            updated++;
+          } else {
+            // Check if exists by part_number (unique key)
+            const existingResponse = await axios.get(`${API}/api/admin/part-numbers`, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            const existing = existingResponse.data.find(p => p.part_number === part_number);
+            
+            if (existing) {
+              await axios.put(`${API}/api/admin/part-numbers/${existing.id}`, part, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              updated++;
+            } else {
+              await axios.post(`${API}/api/admin/part-numbers`, part, {
+                headers: { Authorization: `Bearer ${token}` }
+              });
+              created++;
+            }
+          }
         } catch (error) {
           console.error(`Failed to import row ${i}:`, error);
-          errorCount++;
+          if (error.response?.status === 400) {
+            skipped++;
+          } else {
+            errors++;
+          }
         }
       }
       
-      alert(`CSV Import Complete!\nSuccess: ${successCount}\nErrors: ${errorCount}`);
+      alert(`CSV Import Complete!\nCreated: ${created}\nUpdated: ${updated}\nSkipped: ${skipped}\nErrors: ${errors}`);
       setShowCSVUpload(false);
       setCsvFile(null);
       fetchBrands();
