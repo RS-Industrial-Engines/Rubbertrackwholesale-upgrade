@@ -1,0 +1,4 @@
+ID,SKU,Title,Description,Price,Brand,Category,Size,Part Number,In Stock,Stock Quantity,Unique Key
+,RT-450-86-56,Bobcat T190 Rubber Track 450x86x56,"Premium rubber track for Bobcat T190 compact track loader. Heavy-duty construction with reinforced steel cords for maximum durability. Fits Bobcat T190, T200, T550, T590, T630, T650, T750 and more.",1299.99,Bobcat,Rubber Tracks,450x86x56,6813500,TRUE,25,rt-450-86-56
+,RT-400-72-74,Kubota SVL95 Rubber Track 400x72x74,High-performance rubber track designed for Kubota SVL95. Exceptional traction and durability in all conditions. OEM quality construction.,1580,Kubota,Rubber Tracks,400x72x74,V0611-28111,TRUE,18,rt-400-72-74
+,RT-320-86-52,Cat 247B MTL Rubber Track 320x86x52,"OEM quality rubber track for Caterpillar 247B Multi Terrain Loader. Superior performance and longevity. Fits Cat 247, 257, 277 series.",1340,Caterpillar,Rubber Tracks,320x86x52,420-9876,TRUE,15,rt-320-86-52
