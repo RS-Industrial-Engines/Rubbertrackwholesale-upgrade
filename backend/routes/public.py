@@ -719,6 +719,13 @@ async def search_public_compatibility(
     
     if make:
         # Make-only search - return all models for this brand
+        # First check if brand is U.S. supported (unless include_all)
+        if not include_all:
+            # Check if the requested make is in U.S. supported brands
+            make_lower = make.lower()
+            if not any(b.lower() == make_lower for b in us_brands):
+                return []  # Brand not U.S. supported
+        
         query = {"is_active": True, "make": {"$regex": f"^{re.escape(make)}$", "$options": "i"}}
         results = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         return [serialize_doc(entry) for entry in results]
