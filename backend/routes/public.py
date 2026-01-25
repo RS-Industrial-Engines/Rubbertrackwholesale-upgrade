@@ -630,9 +630,22 @@ async def get_grouped_track_sizes():
 # ============= COMPATIBILITY ROUTES (PUBLIC) =============
 
 @router.get("/compatibility")
-async def get_all_public_compatibility():
-    """Get all active compatibility entries (public endpoint)"""
-    compatibility_entries = await compatibility_collection.find({"is_active": True}).sort([("make", 1), ("model", 1)]).to_list(length=None)
+async def get_all_public_compatibility(include_all: bool = False):
+    """Get all active compatibility entries for U.S. supported brands only
+    
+    Args:
+        include_all: If True, return all compatibility entries regardless of brand US support
+    """
+    if include_all:
+        compatibility_entries = await compatibility_collection.find({"is_active": True}).sort([("make", 1), ("model", 1)]).to_list(length=None)
+    else:
+        # Filter by U.S. supported brands
+        us_brands = await get_us_supported_brands()
+        compatibility_entries = await compatibility_collection.find({
+            "is_active": True,
+            "make": {"$in": list(us_brands)}
+        }).sort([("make", 1), ("model", 1)]).to_list(length=None)
+    
     return [serialize_doc(entry) for entry in compatibility_entries]
 
 
@@ -640,9 +653,12 @@ async def get_all_public_compatibility():
 async def search_public_compatibility(
     make: Optional[str] = None,
     model: Optional[str] = None,
-    track_size: Optional[str] = None
+    track_size: Optional[str] = None,
+    include_all: bool = False
 ):
     """Search compatibility entries by make, model, or track size (public endpoint)
+    
+    IMPORTANT: Results are filtered to U.S. supported brands only unless include_all=True
     
     SEARCH BEHAVIOR:
     - Make/Brand: EXACT case-insensitive matching (CAT ≠ Bobcat)
@@ -657,11 +673,22 @@ async def search_public_compatibility(
         - "259" matches all 259 variants (259, 259B, 259D, 259D3, etc.)
     """
     
+    # Get U.S. supported brands for filtering
+    us_brands = await get_us_supported_brands() if not include_all else None
+    
+    def add_us_filter(query: dict) -> dict:
+        """Add U.S. brand filter to query if not include_all"""
+        if not include_all and us_brands:
+            query["make"] = {"$in": list(us_brands)} if "make" not in query else query["make"]
+        return query
+    
     if track_size:
         # Track size search - exact match
         query = {"is_active": True, "track_sizes": track_size}
         if make:
             query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
+        elif not include_all:
+            query["make"] = {"$in": list(us_brands)}
         
         results = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         return [serialize_doc(entry) for entry in results]
@@ -674,17 +701,17 @@ async def search_public_compatibility(
         base_query = {"is_active": True}
         if make:
             base_query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
+        elif not include_all:
+            base_query["make"] = {"$in": list(us_brands)}
         
         # Priority 1: Prefix match on normalized field
-        # This returns exact matches + all variants that start with the query
-        # e.g., "259" returns 259, 259B, 259D, 259D3, etc.
         prefix_query = {**base_query, "model_normalized": {"$regex": f"^{re.escape(normalized_query)}", "$options": "i"}}
         prefix_results = await compatibility_collection.find(prefix_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         
         if prefix_results:
             return [serialize_doc(entry) for entry in prefix_results]
         
-        # Priority 2: Contains match (fallback for when query is in middle of model name)
+        # Priority 2: Contains match (fallback)
         contains_query = {**base_query, "model_normalized": {"$regex": re.escape(normalized_query), "$options": "i"}}
         contains_results = await compatibility_collection.find(contains_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         
