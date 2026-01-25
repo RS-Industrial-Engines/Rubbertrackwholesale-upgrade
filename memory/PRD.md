@@ -56,6 +56,29 @@ Location: `/app/backend/import_authoritative_data.py`
 - **Compatibility**: 4,631 created, 0 rejected
 - **Products**: 3 created, 0 rejected
 
+### Data Validation (2025-01-25) ✅
+- **Report**: `/app/backend/DATA_VALIDATION_REPORT.md`
+- **Status**: 100% DATA ALIGNMENT CONFIRMED
+- All brands, models, track sizes, compatibility, and products match source CSVs exactly
+
+## Search Behavior (Updated 2025-01-25)
+
+### Brand/Make Search Rules
+- **EXACT matching** for make/brand field (case-insensitive)
+- `CAT` returns only CAT entries (185 records)
+- `Bobcat` returns only Bobcat entries (161 records)
+- Partial matches like `Bob` return 0 results
+- Prevents cross-contamination between distinct brands
+
+### Model Search Rules
+- **FLEXIBLE matching** for model field
+- Handles space/hyphen variations: `svl75` matches `SVL 75`, `SVL-75`
+- Useful for user convenience with model numbers
+
+### Track Size Search
+- **EXACT matching** for track size strings
+- Example: `200x72x39` returns 24 compatible machines
+
 ## API Endpoints
 
 ### Public API
