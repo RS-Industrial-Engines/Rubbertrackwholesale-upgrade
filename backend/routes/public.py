@@ -595,39 +595,34 @@ async def search_public_compatibility(
     track_size: Optional[str] = None
 ):
     """Search compatibility entries by make, model, or track size (public endpoint)
-    Handles space/hyphen normalization for flexible matching (e.g., "svl75" matches "SVL 75")
-    Uses flexible regex patterns to match terms with optional spaces/hyphens between characters.
+    
+    IMPORTANT: Make/Brand uses EXACT case-insensitive matching to prevent cross-contamination
+    (e.g., "CAT" should NOT match "Bobcat"). Model search uses flexible pattern matching
+    for user convenience (e.g., "svl75" matches "SVL 75").
     """
     query = {"is_active": True}
     
     if make:
-        # Create flexible pattern that matches with optional spaces/hyphens
-        make_pattern = create_flexible_search_pattern(make)
-        query["$or"] = [
-            {"make": {"$regex": make, "$options": "i"}},  # Original
-            {"make": {"$regex": make_pattern, "$options": "i"}}  # Flexible
-        ]
+        # EXACT match for make/brand (case-insensitive)
+        # This prevents "CAT" from matching "Bobcat", "Scattrack", etc.
+        query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
     
     if model:
-        # Create flexible pattern for model
+        # Flexible pattern for model (allows space/hyphen variations)
+        # e.g., "svl75" matches "SVL 75", "SVL-75", etc.
         model_pattern = create_flexible_search_pattern(model)
         
-        # If make query exists, extend the $or with model conditions
-        if "$or" in query:
-            # Combine make and model searches
-            existing_or = query["$or"]
-            new_or = []
-            for make_condition in existing_or:
-                # Original model
-                new_or.append({**make_condition, "model": {"$regex": model, "$options": "i"}})
-                # Flexible model pattern
-                new_or.append({**make_condition, "model": {"$regex": model_pattern, "$options": "i"}})
-            query["$or"] = new_or
+        if make:
+            # Add model condition alongside existing make condition
+            query["$or"] = [
+                {"model": {"$regex": model, "$options": "i"}},
+                {"model": {"$regex": model_pattern, "$options": "i"}}
+            ]
         else:
             # Model search only
             query["$or"] = [
-                {"model": {"$regex": model, "$options": "i"}},  # Original
-                {"model": {"$regex": model_pattern, "$options": "i"}}  # Flexible
+                {"model": {"$regex": model, "$options": "i"}},
+                {"model": {"$regex": model_pattern, "$options": "i"}}
             ]
     
     if track_size:
