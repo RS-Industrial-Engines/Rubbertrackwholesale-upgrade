@@ -29,6 +29,20 @@ def generate_slug(text):
     slug = slug.strip('-')
     return slug or None
 
+
+def normalize_model_name(model_name: str) -> str:
+    """
+    Normalize a model name for flexible search matching.
+    Removes all non-alphanumeric characters and converts to lowercase.
+    
+    Examples:
+        "PC 50FR-2" -> "pc50fr2"
+        "SVL 75-2" -> "svl752"
+    """
+    if not model_name:
+        return ""
+    return re.sub(r'[^a-zA-Z0-9]', '', model_name).lower()
+
 # Configuration
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
 DB_NAME = os.environ.get("DB_NAME", "test_database")
