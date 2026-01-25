@@ -338,6 +338,7 @@ def import_compatibility(db):
             compat_doc = {
                 "make": make,
                 "model": model,
+                "model_normalized": normalize_model_name(model),
                 "track_sizes": track_sizes,
                 "track_sizes_display": row.get("Track Sizes (Display)", "").strip() or track_sizes_str,
                 "track_sizes_canonical": row.get("Track Sizes (Canonical w/ N/W)", "").strip() or track_sizes_str,
