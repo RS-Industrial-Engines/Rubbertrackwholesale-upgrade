@@ -9,6 +9,21 @@ import re
 router = APIRouter()
 
 
+def normalize_for_search(text: str) -> str:
+    """
+    Normalize text for flexible search matching.
+    Removes all non-alphanumeric characters and converts to lowercase.
+    
+    Examples:
+        "PC 50FR-2" -> "pc50fr2"
+        "SVL 75-2" -> "svl752"
+        "T190" -> "t190"
+    """
+    if not text:
+        return ""
+    return re.sub(r'[^a-zA-Z0-9]', '', text).lower()
+
+
 def create_flexible_search_pattern(search_term: str) -> str:
     """
     Create a regex pattern that matches the search term with optional spaces, hyphens, or underscores.
