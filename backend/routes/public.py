@@ -173,16 +173,21 @@ async def advanced_search(
 
 # Brands Endpoints
 @router.get("/brands")
-async def get_brands():
-    """Get all brands"""
-    brands = await brands_collection.find().sort("name", 1).to_list(length=None)
+async def get_brands(include_all: bool = False):
+    """Get all U.S. supported brands (is_us_supported=True)
+    
+    Args:
+        include_all: If True, return all brands regardless of US support status (for admin use)
+    """
+    query = {} if include_all else {"is_us_supported": True}
+    brands = await brands_collection.find(query).sort("name", 1).to_list(length=None)
     return [serialize_doc(b) for b in brands]
 
 
 @router.get("/brands/{slug}")
 async def get_brand_by_slug(slug: str):
-    """Get brand by slug with SEO data"""
-    brand = await brands_collection.find_one({"slug": slug})
+    """Get brand by slug with SEO data (U.S. supported only)"""
+    brand = await brands_collection.find_one({"slug": slug, "is_us_supported": True})
     if not brand:
         raise HTTPException(status_code=404, detail="Brand not found")
     
