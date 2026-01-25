@@ -373,9 +373,9 @@ const AdminProducts = () => {
   };
 
   const filteredProducts = products.filter(product =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.part_number.toLowerCase().includes(searchTerm.toLowerCase())
+    (product.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (product.sku || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (product.part_number || '').toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (loading) {
