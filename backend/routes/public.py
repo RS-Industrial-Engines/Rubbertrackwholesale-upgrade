@@ -611,40 +611,65 @@ async def search_public_compatibility(
 ):
     """Search compatibility entries by make, model, or track size (public endpoint)
     
-    IMPORTANT: Make/Brand uses EXACT case-insensitive matching to prevent cross-contamination
-    (e.g., "CAT" should NOT match "Bobcat"). Model search uses flexible pattern matching
-    for user convenience (e.g., "svl75" matches "SVL 75").
+    SEARCH BEHAVIOR:
+    - Make/Brand: EXACT case-insensitive matching (CAT ≠ Bobcat)
+    - Model: Normalized flexible matching with priority order:
+        1. Exact normalized match
+        2. Prefix match on normalized field
+        3. Contains match (fallback)
+    - Model search is scoped by brand when make is provided
+    
+    Examples:
+        - "pc50fr", "pc50 fr2", "pc 50 fr 2" all match "PC 50FR-2"
+        - "svl" matches all SVL models (SVL65, SVL75, SVL75-2, etc.)
     """
-    query = {"is_active": True}
-    
-    if make:
-        # EXACT match for make/brand (case-insensitive)
-        # This prevents "CAT" from matching "Bobcat", "Scattrack", etc.
-        query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
-    
-    if model:
-        # Flexible pattern for model (allows space/hyphen variations)
-        # e.g., "svl75" matches "SVL 75", "SVL-75", etc.
-        model_pattern = create_flexible_search_pattern(model)
-        
-        if make:
-            # Add model condition alongside existing make condition
-            query["$or"] = [
-                {"model": {"$regex": model, "$options": "i"}},
-                {"model": {"$regex": model_pattern, "$options": "i"}}
-            ]
-        else:
-            # Model search only
-            query["$or"] = [
-                {"model": {"$regex": model, "$options": "i"}},
-                {"model": {"$regex": model_pattern, "$options": "i"}}
-            ]
     
     if track_size:
-        query["track_sizes"] = track_size
+        # Track size search - exact match
+        query = {"is_active": True, "track_sizes": track_size}
+        if make:
+            query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
+        
+        results = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
+        return [serialize_doc(entry) for entry in results]
     
-    compatibility_entries = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
-    return [serialize_doc(entry) for entry in compatibility_entries]
+    if model:
+        # Normalize the search query
+        normalized_query = normalize_for_search(model)
+        
+        # Build base query with make filter if provided
+        base_query = {"is_active": True}
+        if make:
+            base_query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
+        
+        # Priority 1: Exact normalized match
+        exact_query = {**base_query, "model_normalized": normalized_query}
+        exact_results = await compatibility_collection.find(exact_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
+        
+        if exact_results:
+            return [serialize_doc(entry) for entry in exact_results]
+        
+        # Priority 2: Prefix match on normalized field
+        prefix_query = {**base_query, "model_normalized": {"$regex": f"^{re.escape(normalized_query)}", "$options": "i"}}
+        prefix_results = await compatibility_collection.find(prefix_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
+        
+        if prefix_results:
+            return [serialize_doc(entry) for entry in prefix_results]
+        
+        # Priority 3: Contains match (fallback)
+        contains_query = {**base_query, "model_normalized": {"$regex": re.escape(normalized_query), "$options": "i"}}
+        contains_results = await compatibility_collection.find(contains_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
+        
+        return [serialize_doc(entry) for entry in contains_results]
+    
+    if make:
+        # Make-only search - return all models for this brand
+        query = {"is_active": True, "make": {"$regex": f"^{re.escape(make)}$", "$options": "i"}}
+        results = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
+        return [serialize_doc(entry) for entry in results]
+    
+    # No filters - return empty (don't return all 4600+ entries)
+    return []
 
 
 # ==================== Part Numbers (Public) ====================
