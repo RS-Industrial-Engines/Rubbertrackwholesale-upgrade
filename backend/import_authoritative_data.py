@@ -326,6 +326,7 @@ def import_compatibility(db):
                 "track_sizes": track_sizes,
                 "track_sizes_display": row.get("Track Sizes (Display)", "").strip() or track_sizes_str,
                 "track_sizes_canonical": row.get("Track Sizes (Canonical w/ N/W)", "").strip() or track_sizes_str,
+                "is_active": True,
                 "created_at": datetime.now(timezone.utc),
                 "updated_at": datetime.now(timezone.utc),
             }
