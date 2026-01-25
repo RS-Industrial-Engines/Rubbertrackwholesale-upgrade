@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Query
-from typing import List, Optional
+from typing import List, Optional, Set
 from models import Product, Brand, Category, ContactMessage, Review, FAQ, Blog, BlogCategory, Section, MachineModel, TrackSize, Compatibility
 from database import products_collection, brands_collection, categories_collection, contact_messages_collection, sections_collection, machine_models_collection, track_sizes_collection, compatibility_collection
 from bson import ObjectId
@@ -7,6 +7,26 @@ from datetime import datetime
 import re
 
 router = APIRouter()
+
+# Cache for U.S. supported brands (refreshed on demand)
+_us_supported_brands_cache: Set[str] = set()
+_cache_timestamp = None
+
+
+async def get_us_supported_brands() -> Set[str]:
+    """Get set of U.S. supported brand names for filtering compatibility results."""
+    global _us_supported_brands_cache, _cache_timestamp
+    
+    # Refresh cache every 5 minutes or if empty
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    
+    if not _us_supported_brands_cache or _cache_timestamp is None or (now - _cache_timestamp).seconds > 300:
+        brands = await brands_collection.find({"is_us_supported": True}, {"name": 1}).to_list(length=None)
+        _us_supported_brands_cache = {b["name"] for b in brands}
+        _cache_timestamp = now
+    
+    return _us_supported_brands_cache
 
 
 def normalize_for_search(text: str) -> str:
