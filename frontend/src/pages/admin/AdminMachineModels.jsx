@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Plus, Edit, Trash2, Upload, Download } from 'lucide-react';
+import { Plus, Edit, Trash2, Upload, Download, Globe, Building2 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent } from '../../components/ui/card';
@@ -20,11 +20,12 @@ const API = process.env.REACT_APP_BACKEND_URL || '';
 const AdminMachineModels = () => {
   const [models, setModels] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [brandCounts, setBrandCounts] = useState({});
   const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingModel, setEditingModel] = useState(null);
   const [selectedBrand, setSelectedBrand] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('us'); // 'us' or 'non-us'
   const [formData, setFormData] = useState({
     brand: '',
     model_name: '',
@@ -37,7 +38,7 @@ const AdminMachineModels = () => {
   useEffect(() => {
     fetchBrands();
     fetchModels();
-  }, [selectedBrand]);
+  }, []);
 
   const fetchBrands = async () => {
     try {
@@ -55,22 +56,10 @@ const AdminMachineModels = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('admin_token');
-      const url = selectedBrand 
-        ? `${API}/api/admin/machine-models?brand=${selectedBrand}`
-        : `${API}/api/admin/machine-models`;
-      const response = await axios.get(url, {
+      const response = await axios.get(`${API}/api/admin/machine-models`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setModels(response.data);
-      
-      // Calculate brand counts
-      if (!selectedBrand) {
-        const counts = {};
-        response.data.forEach(model => {
-          counts[model.brand] = (counts[model.brand] || 0) + 1;
-        });
-        setBrandCounts(counts);
-      }
     } catch (error) {
       toast({
         title: "Error",
@@ -81,6 +70,40 @@ const AdminMachineModels = () => {
       setLoading(false);
     }
   };
+
+  // Filter models by U.S. support status, brand, and search term
+  const usModels = models.filter(m => m.is_us_supported === true);
+  const nonUsModels = models.filter(m => m.is_us_supported !== true);
+  
+  const getFilteredModels = () => {
+    let filtered = activeTab === 'us' ? usModels : nonUsModels;
+    
+    if (selectedBrand) {
+      filtered = filtered.filter(m => m.brand === selectedBrand);
+    }
+    
+    if (searchTerm) {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(m => 
+        (m.brand || '').toLowerCase().includes(term) ||
+        (m.model_name || '').toLowerCase().includes(term) ||
+        (m.full_name || '').toLowerCase().includes(term)
+      );
+    }
+    
+    return filtered;
+  };
+  
+  const filteredModels = getFilteredModels();
+
+  // Get unique brands for the current tab
+  const tabBrands = [...new Set((activeTab === 'us' ? usModels : nonUsModels).map(m => m.brand))].sort();
+
+  // Brand counts for current tab
+  const brandCounts = {};
+  (activeTab === 'us' ? usModels : nonUsModels).forEach(model => {
+    brandCounts[model.brand] = (brandCounts[model.brand] || 0) + 1;
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -182,86 +205,64 @@ const AdminMachineModels = () => {
     try {
       const text = await file.text();
       const lines = text.split('\n');
-      
-      // Skip header row
+      const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
       const dataLines = lines.slice(1).filter(line => line.trim());
-      
+
       const token = localStorage.getItem('admin_token');
       let created = 0;
       let updated = 0;
-      let skipped = 0;
       let errors = 0;
-
+      
       for (const line of dataLines) {
-        // Parse CSV line (handle quoted fields)
         const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
         
-        if (values.length < 2) continue;
-        
-        const [id, brand, model_name, full_name, equipment_type, description, product_image] = values;
-        
-        if (!brand || !model_name) {
-          errors++;
-          continue;
-        }
+        const rowData = {};
+        headers.forEach((header, index) => {
+          rowData[header] = values[index] || '';
+        });
 
-        const payload = {
-          brand: brand,
-          model_name: model_name,
-          full_name: full_name || `${brand} ${model_name}`,
-          equipment_type: equipment_type || 'Track Loader',
-          description: description || '',
-          product_image: product_image || ''
+        const id = rowData['id'] || '';
+        const brand = rowData['brand'] || '';
+        const modelName = rowData['model name'] || rowData['model_name'] || '';
+        
+        if (!brand || !modelName) continue;
+
+        const modelData = {
+          brand,
+          model_name: modelName,
+          full_name: rowData['full name'] || rowData['full_name'] || `${brand} ${modelName}`,
+          equipment_type: rowData['equipment type'] || rowData['equipment_type'] || '',
+          description: rowData['description'] || '',
+          product_image: rowData['image url'] || rowData['product_image'] || ''
         };
 
         try {
-          // If ID exists, try to update
-          if (id && id.trim()) {
-            await axios.put(`${API}/api/admin/machine-models/${id}`, payload, {
+          const existingModel = models.find(m => 
+            (id && m.id === id) || 
+            (m.brand.toLowerCase() === brand.toLowerCase() && m.model_name.toLowerCase() === modelName.toLowerCase())
+          );
+          
+          if (existingModel) {
+            await axios.put(`${API}/api/admin/machine-models/${existingModel.id}`, modelData, {
               headers: { Authorization: `Bearer ${token}` }
             });
             updated++;
           } else {
-            // Check if exists by brand + model_name (unique key)
-            const existingResponse = await axios.get(`${API}/api/machine-models`, {
-              params: { brand, model: model_name }
+            await axios.post(`${API}/api/admin/machine-models`, modelData, {
+              headers: { Authorization: `Bearer ${token}` }
             });
-            
-            if (existingResponse.data && existingResponse.data.length > 0) {
-              // Update existing
-              const existingId = existingResponse.data[0].id;
-              await axios.put(`${API}/api/admin/machine-models/${existingId}`, payload, {
-                headers: { Authorization: `Bearer ${token}` }
-              });
-              updated++;
-            } else {
-              // Create new
-              await axios.post(`${API}/api/admin/machine-models`, payload, {
-                headers: { Authorization: `Bearer ${token}` }
-              });
-              created++;
-            }
+            created++;
           }
-        } catch (error) {
-          if (error.response?.status === 400 && error.response?.data?.detail?.includes('already exists')) {
-            skipped++;
-          } else {
-            errors++;
-          }
+        } catch (err) {
+          errors++;
         }
       }
 
       toast({
-        title: "CSV Import Complete!",
-        description: `Created: ${created} | Updated: ${updated} | Skipped: ${skipped} | Errors: ${errors}`
+        title: "Import Complete",
+        description: `Created: ${created}, Updated: ${updated}, Errors: ${errors}`
       });
-
       fetchModels();
-      
-      // Reset file input
-      if (fileInputRef.current) {
-        fileInputRef.current.value = '';
-      }
     } catch (error) {
       toast({
         title: "Error",
@@ -270,32 +271,36 @@ const AdminMachineModels = () => {
       });
     } finally {
       setLoading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Brand', 'Model Name', 'Full Name', 'Equipment Type', 'Description', 'Image URL'];
-    const rows = models.map(m => [
-      m.id || '',
+    const headers = ['ID', 'Brand', 'Model Name', 'Full Name', 'Equipment Type', 'Description', 'Image URL', 'Is US Supported'];
+    const rows = filteredModels.map(m => [
+      m.id,
       m.brand,
       m.model_name,
       m.full_name || '',
       m.equipment_type || '',
       m.description || '',
-      m.product_image || ''
+      m.product_image || '',
+      m.is_us_supported ? 'TRUE' : 'FALSE'
     ]);
 
-    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const csv = [headers, ...rows].map(row => row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(',')).join('\n');
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `machine_models_${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `machine_models_${activeTab}_${new Date().toISOString().split('T')[0]}.csv`;
     a.click();
     
     toast({
       title: "Export Successful",
-      description: `Exported ${models.length} machine models with IDs`
+      description: `Exported ${filteredModels.length} machine models`
     });
   };
 
@@ -319,7 +324,7 @@ const AdminMachineModels = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold text-white">Machine Models Management</h1>
           <p className="text-slate-400 mt-2">Manage machine models for all brands</p>
@@ -331,16 +336,16 @@ const AdminMachineModels = () => {
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Download className="h-4 w-4 mr-2" />
-            Download Template
+            Template
           </Button>
           <Button 
             variant="outline" 
             onClick={exportToCSV} 
-            disabled={models.length === 0}
+            disabled={filteredModels.length === 0}
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Download className="h-4 w-4 mr-2" />
-            Export CSV
+            Export
           </Button>
           <Button 
             variant="outline" 
@@ -349,7 +354,7 @@ const AdminMachineModels = () => {
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Upload className="h-4 w-4 mr-2" />
-            {loading ? 'Importing...' : 'Import CSV'}
+            Import
           </Button>
           <input
             ref={fileInputRef}
@@ -408,9 +413,8 @@ const AdminMachineModels = () => {
                     value={formData.full_name}
                     onChange={(e) => setFormData({ ...formData, full_name: e.target.value })}
                     className="bg-slate-800 border-slate-700"
-                    placeholder="Auto-generated if empty (e.g., Bobcat T190)"
+                    placeholder="e.g., Bobcat T190 Compact Track Loader"
                   />
-                  <p className="text-xs text-slate-500 mt-1">Leave empty to auto-generate</p>
                 </div>
 
                 <div>
@@ -419,7 +423,6 @@ const AdminMachineModels = () => {
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     className="bg-slate-800 border-slate-700"
-                    placeholder="Optional description"
                   />
                 </div>
 
@@ -429,7 +432,7 @@ const AdminMachineModels = () => {
                     value={formData.product_image}
                     onChange={(e) => setFormData({ ...formData, product_image: e.target.value })}
                     className="bg-slate-800 border-slate-700"
-                    placeholder="https://example.com/image.jpg"
+                    placeholder="https://..."
                   />
                 </div>
 
@@ -447,38 +450,93 @@ const AdminMachineModels = () => {
         </div>
       </div>
 
-      {/* Filter by Brand */}
+      {/* U.S. vs Non-U.S. Tabs */}
+      <div className="mb-6">
+        <div className="flex gap-2 p-1 bg-slate-800 rounded-lg w-fit">
+          <button
+            onClick={() => { setActiveTab('us'); setSelectedBrand(''); }}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all ${
+              activeTab === 'us'
+                ? 'bg-green-600 text-white'
+                : 'text-slate-400 hover:text-white hover:bg-slate-700'
+            }`}
+          >
+            <Globe className="h-4 w-4" />
+            U.S. Supported ({usModels.length})
+          </button>
+          <button
+            onClick={() => { setActiveTab('non-us'); setSelectedBrand(''); }}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all ${
+              activeTab === 'non-us'
+                ? 'bg-slate-600 text-white'
+                : 'text-slate-400 hover:text-white hover:bg-slate-700'
+            }`}
+          >
+            <Building2 className="h-4 w-4" />
+            Non-U.S. / Internal ({nonUsModels.length})
+          </button>
+        </div>
+        
+        {/* Info banner based on tab */}
+        <div className={`mt-4 p-3 rounded-lg ${activeTab === 'us' ? 'bg-green-900/30 border border-green-800' : 'bg-slate-800/50 border border-slate-700'}`}>
+          {activeTab === 'us' ? (
+            <p className="text-sm text-green-300">
+              <strong>U.S. Supported Models:</strong> These models are visible to customers on the public website and in compatibility search results.
+            </p>
+          ) : (
+            <p className="text-sm text-slate-400">
+              <strong>Non-U.S. / Internal Models:</strong> These models are hidden from the public website. They remain in the database for reference and compatibility records.
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Filters */}
       <Card className="bg-slate-900 border-slate-800 mb-6">
         <CardContent className="pt-6">
-          <div className="flex items-center gap-4 mb-4">
-            <Label className="text-white">Filter by Brand:</Label>
-            <select
-              value={selectedBrand}
-              onChange={(e) => setSelectedBrand(e.target.value)}
-              className="bg-slate-800 border border-slate-700 rounded-md px-4 py-2 text-white"
-            >
-              <option value="">All Brands</option>
-              {brands.map(brand => (
-                <option key={brand.id} value={brand.name}>{brand.name}</option>
-              ))}
-            </select>
+          <div className="flex flex-wrap items-center gap-4 mb-4">
+            <div className="flex items-center gap-2">
+              <Label className="text-white whitespace-nowrap">Filter by Brand:</Label>
+              <select
+                value={selectedBrand}
+                onChange={(e) => setSelectedBrand(e.target.value)}
+                className="bg-slate-800 border border-slate-700 rounded-md px-4 py-2 text-white min-w-[200px]"
+              >
+                <option value="">All Brands ({tabBrands.length})</option>
+                {tabBrands.map(brand => (
+                  <option key={brand} value={brand}>{brand} ({brandCounts[brand] || 0})</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center gap-2 flex-1">
+              <Input
+                placeholder="Search models..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="bg-slate-800 border-slate-700 max-w-xs"
+              />
+            </div>
             <span className="text-slate-400">
-              Showing {models.length} models
+              Showing {filteredModels.length} models
             </span>
           </div>
           
           {/* Brand Counts - Only show when viewing all brands */}
           {!selectedBrand && Object.keys(brandCounts).length > 0 && (
             <div className="border-t border-slate-700 pt-4">
-              <h4 className="text-sm font-semibold text-white mb-3">Models per Brand:</h4>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 text-sm">
+              <h4 className="text-sm font-semibold text-white mb-3">Models per Brand ({activeTab === 'us' ? 'U.S. Supported' : 'Non-U.S.'}):</h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 text-sm max-h-48 overflow-y-auto">
                 {Object.entries(brandCounts)
                   .sort((a, b) => b[1] - a[1])
                   .map(([brand, count]) => (
-                    <div key={brand} className="flex justify-between items-center bg-slate-800/50 px-3 py-1.5 rounded">
-                      <span className="text-slate-300">{brand}</span>
+                    <button
+                      key={brand}
+                      onClick={() => setSelectedBrand(brand)}
+                      className="flex justify-between items-center bg-slate-800/50 px-3 py-1.5 rounded hover:bg-slate-700 transition-colors text-left"
+                    >
+                      <span className="text-slate-300 truncate">{brand}</span>
                       <span className="text-orange-400 font-semibold ml-2">{count}</span>
-                    </div>
+                    </button>
                   ))}
               </div>
             </div>
@@ -486,52 +544,40 @@ const AdminMachineModels = () => {
         </CardContent>
       </Card>
 
-      {/* Instructions */}
-      <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-800 mb-6">
-        <CardContent className="pt-6">
-          <h3 className="text-lg font-bold text-white mb-2">Quick Actions:</h3>
-          <ul className="text-slate-300 space-y-1">
-            <li>• <strong>Import CSV:</strong> Bulk import models from CSV file (columns: Brand, Model Name, Full Name, Equipment Type)</li>
-            <li>• <strong>Export CSV:</strong> Download current models as CSV for backup or editing</li>
-            <li>• <strong>Add Model:</strong> Manually add individual machine models</li>
-            <li>• <strong>Filter:</strong> Use brand filter to view specific brand models</li>
-          </ul>
-          <div className="mt-4 p-3 bg-slate-800/50 rounded-md">
-            <p className="text-sm text-slate-400">
-              <strong className="text-white">CSV Format:</strong> Brand, Model Name, Full Name, Equipment Type<br />
-              <em>Example: Bobcat,T190,Bobcat T190,Track Loader</em>
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-
       {/* Models List */}
       {loading && models.length === 0 ? (
         <div className="text-center py-12 text-slate-400">Loading machine models...</div>
-      ) : models.length === 0 ? (
+      ) : filteredModels.length === 0 ? (
         <Card className="bg-slate-900 border-slate-800">
           <CardContent className="py-12 text-center text-slate-400">
-            <p className="mb-4">No machine models found. Use "Import CSV" to upload models from a CSV file!</p>
-            <Button onClick={() => fileInputRef.current?.click()} className="bg-orange-500 hover:bg-orange-600">
-              <Upload className="h-4 w-4 mr-2" />
-              Import CSV
-            </Button>
+            <p>
+              {searchTerm || selectedBrand
+                ? `No models found matching your filters`
+                : `No ${activeTab === 'us' ? 'U.S. supported' : 'non-U.S.'} models found.`}
+            </p>
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {models.map((model) => (
-            <Card key={model.id} className="bg-slate-900 border-slate-800 hover:border-orange-500/50 transition-colors">
+          {filteredModels.map((model) => (
+            <Card key={model.id} className={`bg-slate-900 border-slate-800 hover:border-orange-500/50 transition-colors ${model.is_us_supported ? '' : 'opacity-75'}`}>
               <CardContent className="pt-6">
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex-1">
-                    <span className="text-xs text-orange-400 font-semibold">{model.brand}</span>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs text-orange-400 font-semibold">{model.brand}</span>
+                      {model.is_us_supported ? (
+                        <span className="px-1.5 py-0.5 text-[10px] font-medium bg-green-900/50 text-green-400 rounded">U.S.</span>
+                      ) : (
+                        <span className="px-1.5 py-0.5 text-[10px] font-medium bg-slate-700 text-slate-400 rounded">Non-U.S.</span>
+                      )}
+                    </div>
                     <h3 className="text-lg font-bold text-white">{model.model_name}</h3>
                     {model.full_name && model.full_name !== `${model.brand} ${model.model_name}` && (
                       <p className="text-sm text-slate-400">{model.full_name}</p>
                     )}
                     {model.description && (
-                      <p className="text-sm text-slate-500 mt-1">{model.description}</p>
+                      <p className="text-sm text-slate-500 mt-1 line-clamp-2">{model.description}</p>
                     )}
                   </div>
                   <div className="flex gap-2">
@@ -552,6 +598,12 @@ const AdminMachineModels = () => {
           ))}
         </div>
       )}
+
+      {/* Summary Footer */}
+      <div className="mt-6 text-sm text-slate-500 text-center">
+        Showing {filteredModels.length} of {activeTab === 'us' ? usModels.length : nonUsModels.length} {activeTab === 'us' ? 'U.S. supported' : 'non-U.S.'} models 
+        • Total in database: {models.length}
+      </div>
     </div>
   );
 };
