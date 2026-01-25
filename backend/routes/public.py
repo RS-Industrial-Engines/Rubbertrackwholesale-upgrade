@@ -614,14 +614,14 @@ async def search_public_compatibility(
     SEARCH BEHAVIOR:
     - Make/Brand: EXACT case-insensitive matching (CAT ≠ Bobcat)
     - Model: Normalized flexible matching with priority order:
-        1. Exact normalized match
-        2. Prefix match on normalized field
-        3. Contains match (fallback)
+        1. Prefix match on normalized field (includes exact matches + variants)
+        2. Contains match (fallback for partial matches)
     - Model search is scoped by brand when make is provided
     
     Examples:
         - "pc50fr", "pc50 fr2", "pc 50 fr 2" all match "PC 50FR-2"
         - "svl" matches all SVL models (SVL65, SVL75, SVL75-2, etc.)
+        - "259" matches all 259 variants (259, 259B, 259D, 259D3, etc.)
     """
     
     if track_size:
@@ -642,21 +642,16 @@ async def search_public_compatibility(
         if make:
             base_query["make"] = {"$regex": f"^{re.escape(make)}$", "$options": "i"}
         
-        # Priority 1: Exact normalized match
-        exact_query = {**base_query, "model_normalized": normalized_query}
-        exact_results = await compatibility_collection.find(exact_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
-        
-        if exact_results:
-            return [serialize_doc(entry) for entry in exact_results]
-        
-        # Priority 2: Prefix match on normalized field
+        # Priority 1: Prefix match on normalized field
+        # This returns exact matches + all variants that start with the query
+        # e.g., "259" returns 259, 259B, 259D, 259D3, etc.
         prefix_query = {**base_query, "model_normalized": {"$regex": f"^{re.escape(normalized_query)}", "$options": "i"}}
         prefix_results = await compatibility_collection.find(prefix_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         
         if prefix_results:
             return [serialize_doc(entry) for entry in prefix_results]
         
-        # Priority 3: Contains match (fallback)
+        # Priority 2: Contains match (fallback for when query is in middle of model name)
         contains_query = {**base_query, "model_normalized": {"$regex": re.escape(normalized_query), "$options": "i"}}
         contains_results = await compatibility_collection.find(contains_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         
