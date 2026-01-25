@@ -114,6 +114,7 @@ def import_brands(db):
             
             brand_doc = {
                 "name": name,
+                "slug": generate_slug(name),
                 "logo": row.get("Logo", "").strip() or None,
                 "description": row.get("Description", "").strip() or None,
                 "seo_title": row.get("SEO Title", "").strip() or None,
