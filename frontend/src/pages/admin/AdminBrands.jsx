@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Plus, Edit, Trash2, Upload, Download } from 'lucide-react';
+import { Plus, Edit, Trash2, Upload, Download, Globe, Building2 } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Card, CardContent } from '../../components/ui/card';
@@ -23,6 +23,8 @@ const AdminBrands = () => {
   const [loading, setLoading] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingBrand, setEditingBrand] = useState(null);
+  const [activeTab, setActiveTab] = useState('us'); // 'us' or 'non-us'
+  const [searchTerm, setSearchTerm] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     logo: '',
@@ -56,6 +58,14 @@ const AdminBrands = () => {
     }
   };
 
+  // Filter brands by U.S. support status and search term
+  const usBrands = brands.filter(b => b.is_us_supported === true);
+  const nonUsBrands = brands.filter(b => b.is_us_supported !== true);
+  
+  const filteredBrands = (activeTab === 'us' ? usBrands : nonUsBrands).filter(brand =>
+    (brand.name || '').toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const handleCSVImport = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -78,120 +88,107 @@ const AdminBrands = () => {
       const token = localStorage.getItem('admin_token');
       let created = 0;
       let updated = 0;
-      let skipped = 0;
       let errors = 0;
-
+      
       for (const line of dataLines) {
         const values = line.split(',').map(v => v.trim().replace(/^"|"$/g, ''));
-        if (values.length < 2) continue;
+        const [id, name, logo, description, seoTitle, seoDescription] = values;
         
-        const [id, name, logo, description, seo_title, seo_description] = values;
+        if (!name) continue;
         
-        if (!name) {
-          errors++;
-          continue;
-        }
-
-        const payload = {
+        const brandData = {
           name,
-          logo: logo || '',
-          description: description || '',
-          seo_title: seo_title || '',
-          seo_description: seo_description || ''
+          logo: logo || null,
+          description: description || null,
+          seo_title: seoTitle || null,
+          seo_description: seoDescription || null
         };
         
         try {
-          if (id && id.trim()) {
-            // Update by ID
-            await axios.put(`${API}/api/admin/brands/${id}`, payload, {
+          // Try to find existing brand by ID or name (unique key)
+          const existingBrand = brands.find(b => 
+            (id && b.id === id) || b.name.toLowerCase() === name.toLowerCase()
+          );
+          
+          if (existingBrand) {
+            await axios.put(`${API}/api/admin/brands/${existingBrand.id}`, brandData, {
               headers: { Authorization: `Bearer ${token}` }
             });
             updated++;
           } else {
-            // Check if exists by name (unique key)
-            const existingResponse = await axios.get(`${API}/api/admin/brands`);
-            const existing = existingResponse.data.find(b => b.name.toLowerCase() === name.toLowerCase());
-            
-            if (existing) {
-              await axios.put(`${API}/api/admin/brands/${existing.id}`, payload, {
-                headers: { Authorization: `Bearer ${token}` }
-              });
-              updated++;
-            } else {
-              await axios.post(`${API}/api/admin/brands`, payload, {
-                headers: { Authorization: `Bearer ${token}` }
-              });
-              created++;
-            }
+            await axios.post(`${API}/api/admin/brands`, brandData, {
+              headers: { Authorization: `Bearer ${token}` }
+            });
+            created++;
           }
-        } catch (error) {
-          if (error.response?.status === 400) {
-            skipped++;
-          } else {
-            errors++;
-          }
+        } catch (err) {
+          console.error(`Error importing brand ${name}:`, err);
+          errors++;
         }
       }
-
+      
       toast({
-        title: "CSV Import Complete!",
-        description: `Created: ${created} | Updated: ${updated} | Skipped: ${skipped} | Errors: ${errors}`
+        title: "Import Complete",
+        description: `Created: ${created}, Updated: ${updated}, Errors: ${errors}`
       });
-
       fetchBrands();
-      if (fileInputRef.current) fileInputRef.current.value = '';
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to process CSV file",
+        description: "Failed to parse CSV file",
         variant: "destructive"
       });
     } finally {
       setLoading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
   const exportToCSV = () => {
-    const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
-    const rows = brands.map(b => [
-      b.id || '',
-      b.name,
-      b.logo || '',
-      b.description || '',
-      b.seo_title || '',
-      b.seo_description || ''
+    const displayBrands = activeTab === 'us' ? usBrands : nonUsBrands;
+    const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description', 'Is US Supported'];
+    const rows = displayBrands.map(brand => [
+      brand.id || '',
+      brand.name || '',
+      brand.logo || '',
+      brand.description || '',
+      brand.seo_title || '',
+      brand.seo_description || '',
+      brand.is_us_supported ? 'TRUE' : 'FALSE'
     ]);
-
-    const csv = [headers, ...rows].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
+    
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${(cell || '').toString().replace(/"/g, '""')}"`).join(','))
+    ].join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `brands_${new Date().toISOString().split('T')[0]}.csv`;
+    a.download = `brands_${activeTab}_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
     a.click();
-    
-    toast({
-      title: "Export Successful",
-      description: `Exported ${brands.length} brands with IDs`
-    });
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const downloadTemplate = () => {
     const headers = ['ID', 'Name', 'Logo', 'Description', 'SEO Title', 'SEO Description'];
-    const exampleRow = ['', 'Bobcat', 'https://example.com/logo.png', 'Premium equipment manufacturer', 'Bobcat Parts & Equipment', 'Shop genuine Bobcat parts'];
-    const csv = [headers, exampleRow].map(row => row.map(cell => `"${cell}"`).join(',')).join('\n');
+    const example = ['', 'Example Brand', 'https://example.com/logo.png', 'Brand description', 'SEO Title', 'SEO Description'];
+    const csvContent = [headers.join(','), example.join(',')].join('\n');
     
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = 'brands_template.csv';
+    document.body.appendChild(a);
     a.click();
-    
-    toast({
-      title: "Template Downloaded",
-      description: "Use this template to add or update brands"
-    });
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const handleSubmit = async (e) => {
@@ -273,7 +270,7 @@ const AdminBrands = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-8">
+      <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold text-white">Brands Management</h1>
           <p className="text-slate-400 mt-2">Manage equipment brands and manufacturers</p>
@@ -285,16 +282,16 @@ const AdminBrands = () => {
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Download className="h-4 w-4 mr-2" />
-            Download Template
+            Template
           </Button>
           <Button 
             variant="outline" 
             onClick={exportToCSV} 
-            disabled={brands.length === 0}
+            disabled={filteredBrands.length === 0}
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Download className="h-4 w-4 mr-2" />
-            Export CSV
+            Export
           </Button>
           <Button 
             variant="outline" 
@@ -303,7 +300,7 @@ const AdminBrands = () => {
             className="text-white border-slate-600 hover:bg-slate-800"
           >
             <Upload className="h-4 w-4 mr-2" />
-            {loading ? 'Importing...' : 'Import CSV'}
+            Import
           </Button>
           <input
             ref={fileInputRef}
@@ -391,45 +388,87 @@ const AdminBrands = () => {
         </div>
       </div>
 
-      {/* Note about Machine Models */}
-      <div className="mb-4 p-4 bg-blue-900/20 border border-blue-800 rounded-lg">
-        <p className="text-sm text-blue-300">
-          <strong>Note:</strong> Machine models for each brand are managed in the <strong>Machine Models</strong> admin section. 
-          Use the Machine Models page to add, edit, or bulk import models via CSV.
-        </p>
+      {/* U.S. vs Non-U.S. Tabs */}
+      <div className="mb-6">
+        <div className="flex gap-2 p-1 bg-slate-800 rounded-lg w-fit">
+          <button
+            onClick={() => setActiveTab('us')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all ${
+              activeTab === 'us'
+                ? 'bg-green-600 text-white'
+                : 'text-slate-400 hover:text-white hover:bg-slate-700'
+            }`}
+          >
+            <Globe className="h-4 w-4" />
+            U.S. Supported ({usBrands.length})
+          </button>
+          <button
+            onClick={() => setActiveTab('non-us')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all ${
+              activeTab === 'non-us'
+                ? 'bg-slate-600 text-white'
+                : 'text-slate-400 hover:text-white hover:bg-slate-700'
+            }`}
+          >
+            <Building2 className="h-4 w-4" />
+            Non-U.S. / Internal ({nonUsBrands.length})
+          </button>
+        </div>
+        
+        {/* Info banner based on tab */}
+        <div className={`mt-4 p-3 rounded-lg ${activeTab === 'us' ? 'bg-green-900/30 border border-green-800' : 'bg-slate-800/50 border border-slate-700'}`}>
+          {activeTab === 'us' ? (
+            <p className="text-sm text-green-300">
+              <strong>U.S. Supported Brands:</strong> These brands are visible to customers on the public website and in search results.
+            </p>
+          ) : (
+            <p className="text-sm text-slate-400">
+              <strong>Non-U.S. / Internal Brands:</strong> These brands are hidden from the public website. They remain in the database for reference and compatibility records.
+            </p>
+          )}
+        </div>
       </div>
 
-      {/* CSV Format Info */}
-      <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-800 mb-6">
-        <CardContent className="pt-6">
-          <h3 className="text-lg font-bold text-white mb-2">CSV Import Format:</h3>
-          <p className="text-sm text-slate-400 font-mono">
-            Name, Logo, Description, SEO Title, SEO Description
-          </p>
-          <p className="text-xs text-slate-500 mt-2">
-            Example: Bobcat,https://example.com/logo.png,Premium equipment,Bobcat Parts,Shop Bobcat parts
-          </p>
-        </CardContent>
-      </Card>
+      {/* Search */}
+      <div className="mb-6">
+        <Input
+          placeholder={`Search ${activeTab === 'us' ? 'U.S. supported' : 'non-U.S.'} brands...`}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="bg-slate-800 border-slate-700 max-w-md"
+        />
+      </div>
 
+      {/* Brand Grid */}
       {loading && brands.length === 0 ? (
         <div className="text-center py-12 text-slate-400">Loading brands...</div>
-      ) : brands.length === 0 ? (
+      ) : filteredBrands.length === 0 ? (
         <Card className="bg-slate-900 border-slate-800">
           <CardContent className="py-12 text-center text-slate-400">
-            <p>No brands found. Click "Add Brand" or "Import CSV" to get started!</p>
+            <p>
+              {searchTerm 
+                ? `No brands found matching "${searchTerm}"` 
+                : `No ${activeTab === 'us' ? 'U.S. supported' : 'non-U.S.'} brands found.`}
+            </p>
           </CardContent>
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {brands.map((brand) => (
-            <Card key={brand.id} className="bg-slate-900 border-slate-800 hover:border-orange-500 transition-all">
+          {filteredBrands.map((brand) => (
+            <Card key={brand.id} className={`bg-slate-900 border-slate-800 hover:border-orange-500 transition-all ${brand.is_us_supported ? '' : 'opacity-75'}`}>
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-2">{brand.name}</h3>
+                    <div className="flex items-center gap-2 mb-2">
+                      <h3 className="text-xl font-bold text-white">{brand.name}</h3>
+                      {brand.is_us_supported ? (
+                        <span className="px-2 py-0.5 text-xs font-medium bg-green-900/50 text-green-400 rounded-full">U.S.</span>
+                      ) : (
+                        <span className="px-2 py-0.5 text-xs font-medium bg-slate-700 text-slate-400 rounded-full">Non-U.S.</span>
+                      )}
+                    </div>
                     {brand.description && (
-                      <p className="text-slate-400 text-sm">{brand.description}</p>
+                      <p className="text-slate-400 text-sm line-clamp-2">{brand.description}</p>
                     )}
                   </div>
                   <div className="flex gap-2">
@@ -461,6 +500,12 @@ const AdminBrands = () => {
           ))}
         </div>
       )}
+
+      {/* Summary Footer */}
+      <div className="mt-6 text-sm text-slate-500 text-center">
+        Showing {filteredBrands.length} of {activeTab === 'us' ? usBrands.length : nonUsBrands.length} {activeTab === 'us' ? 'U.S. supported' : 'non-U.S.'} brands 
+        • Total in database: {brands.length}
+      </div>
     </div>
   );
 };
