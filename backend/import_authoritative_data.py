@@ -10,10 +10,24 @@ Usage: python import_authoritative_data.py
 
 import csv
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pymongo import MongoClient
 from bson import ObjectId
+
+
+def generate_slug(text):
+    """Generate a URL-friendly slug from text."""
+    if not text:
+        return None
+    # Convert to lowercase, replace spaces and special chars with hyphens
+    slug = text.lower().strip()
+    slug = re.sub(r'[^\w\s-]', '', slug)
+    slug = re.sub(r'[\s_]+', '-', slug)
+    slug = re.sub(r'-+', '-', slug)
+    slug = slug.strip('-')
+    return slug or None
 
 # Configuration
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb://localhost:27017")
