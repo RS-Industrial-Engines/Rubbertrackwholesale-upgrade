@@ -543,10 +543,17 @@ async def get_public_sections(page: Optional[str] = "home"):
 @router.get("/machine-models")
 async def get_all_machine_models(
     brand: Optional[str] = None,
-    equipment_type: Optional[str] = None
+    equipment_type: Optional[str] = None,
+    include_all: bool = False
 ):
-    """Get all machine models (public endpoint) - optionally filtered by brand or equipment_type"""
-    query = {}
+    """Get all U.S. supported machine models (is_us_supported=True)
+    
+    Args:
+        brand: Filter by brand name
+        equipment_type: Filter by equipment type
+        include_all: If True, return all models regardless of US support status (for admin use)
+    """
+    query = {} if include_all else {"is_us_supported": True}
     if brand:
         query["brand"] = brand
     if equipment_type:
@@ -557,9 +564,10 @@ async def get_all_machine_models(
 
 
 @router.get("/machine-models/brands")
-async def get_machine_model_brands():
-    """Get all unique brands that have machine models"""
-    brands = await machine_models_collection.distinct("brand")
+async def get_machine_model_brands(include_all: bool = False):
+    """Get all unique brands that have U.S. supported machine models"""
+    query = {} if include_all else {"is_us_supported": True}
+    brands = await machine_models_collection.distinct("brand", query)
     return sorted(brands)
 
 
