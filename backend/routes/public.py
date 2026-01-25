@@ -193,7 +193,7 @@ async def get_brand_by_slug(slug: str):
 @router.get("/categories")
 async def get_categories():
     """Get all categories"""
-    categories = await categories_collection.find().sort("name", 1).to_list(100)
+    categories = await categories_collection.find().sort("name", 1).to_list(length=None)
     return [serialize_doc(c) for c in categories]
 
 
