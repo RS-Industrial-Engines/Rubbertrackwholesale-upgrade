@@ -86,9 +86,9 @@ const AdminPartNumbers = () => {
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
       filtered = filtered.filter(part =>
-        part.part_number.toLowerCase().includes(searchLower) ||
-        part.product_name.toLowerCase().includes(searchLower) ||
-        part.compatible_models.some(model => model.toLowerCase().includes(searchLower))
+        (part.part_number || '').toLowerCase().includes(searchLower) ||
+        (part.product_name || '').toLowerCase().includes(searchLower) ||
+        (part.compatible_models || []).some(model => (model || '').toLowerCase().includes(searchLower))
       );
     }
 

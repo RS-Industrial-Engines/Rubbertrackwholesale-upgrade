@@ -31,9 +31,9 @@ const AdminCompatibility = () => {
     // Filter data based on search query
     if (searchQuery) {
       const filtered = compatibilityData.filter(item =>
-        item.make.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.track_sizes.some(size => size.toLowerCase().includes(searchQuery.toLowerCase()))
+        (item.make || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.model || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (item.track_sizes || []).some(size => (size || '').toLowerCase().includes(searchQuery.toLowerCase()))
       );
       setFilteredData(filtered);
     } else {

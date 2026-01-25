@@ -41,7 +41,7 @@ const AdminTrackSizes = () => {
     // Filter track sizes based on search query
     if (searchQuery) {
       const filtered = trackSizes.filter(ts =>
-        ts.size.toLowerCase().includes(searchQuery.toLowerCase())
+        (ts.size || '').toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredTrackSizes(filtered);
     } else {
