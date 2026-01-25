@@ -191,6 +191,7 @@ def import_machine_models(db):
             model_doc = {
                 "brand": brand,
                 "model_name": model_name,
+                "model_name_normalized": normalize_model_name(model_name),
                 "full_name": full_name or f"{brand} {model_name}",
                 "equipment_type": equipment_type or None,
                 "description": row.get("Description", "").strip() or None,
