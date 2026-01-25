@@ -175,7 +175,7 @@ async def advanced_search(
 @router.get("/brands")
 async def get_brands():
     """Get all brands"""
-    brands = await brands_collection.find().sort("name", 1).to_list(100)
+    brands = await brands_collection.find().sort("name", 1).to_list(length=None)
     return [serialize_doc(b) for b in brands]
 
 
