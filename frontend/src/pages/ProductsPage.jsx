@@ -61,7 +61,21 @@ const ProductsPage = () => {
         }
       }
     }
-    // Specific equipment search: when user uses "Find Parts By Equipment" section
+    // Category-only selection (e.g., clicking "Rubber Tracks" card without filters)
+    else if (selectedCategory === 'Rubber Tracks' && selectedBrand === 'all' && !selectedModel && !searchTerm) {
+      // Show ALL track sizes with their compatible machines
+      fetchAllTrackSizes();
+      setPartNumbers([]);
+    }
+    // Category selection for parts (Sprockets, Rollers, Idlers)
+    else if ((selectedCategory === 'Sprockets' || selectedCategory === 'Rollers' || selectedCategory === 'Idlers') && selectedBrand === 'all' && !selectedModel && !searchTerm) {
+      // Show ALL parts of this type
+      const partType = selectedCategory.toLowerCase().slice(0, -1); // Remove 's' from end
+      fetchPartNumbers(null, partType, null, null);
+      setTrackCompatibility([]);
+      setCompatibleMachines([]);
+    }
+    // Specific equipment search: when user uses "Find Parts By Equipment" section with filters
     else if (searchTerm || selectedCategory !== 'all' || selectedBrand !== 'all' || selectedModel) {
       let partType = null;
       if (selectedCategory === 'Rollers' || selectedCategory === 'Sprockets' || selectedCategory === 'Idlers') {
@@ -76,6 +90,9 @@ const ProductsPage = () => {
         // Normalize brand name for compatibility API (e.g., "Caterpillar" -> "CAT")
         const normalizedBrand = normalizeBrandName(brand);
         fetchTrackCompatibility(normalizedBrand, selectedModel);
+      } else if (selectedCategory === 'Rubber Tracks' && (brand || selectedModel)) {
+        // Partial filter - show track sizes for brand/model search
+        fetchTrackSizesFiltered(brand, selectedModel);
       } else {
         setTrackCompatibility([]);
       }
