@@ -41,16 +41,23 @@ const ProductsPage = () => {
         // Fetch ALL parts (rollers, idlers, sprockets) matching the search term
         fetchPartNumbers(searchTerm, null, null, null);
         
-        // Also try to fetch track compatibility if search term looks like a model
-        // Extract potential brand and model from search term
+        // Parse search term to extract brand and model
         const searchWords = searchTerm.trim().split(/\s+/);
-        if (searchWords.length > 0) {
-          // Try to find brand in first word
+        const firstWord = searchWords[0].toLowerCase();
+        
+        // Check if first word is a known brand
+        const knownBrands = ['kubota', 'bobcat', 'cat', 'caterpillar', 'komatsu', 'takeuchi', 'hitachi', 'asv', 'case', 'john deere', 'jcb', 'volvo', 'hyundai', 'doosan', 'kobelco', 'yanmar', 'gehl', 'mustang', 'terex', 'vermeer', 'ihi', 'new holland', 'ditch witch', 'wacker neuson', 'toro'];
+        const isFirstWordBrand = knownBrands.some(brand => firstWord === brand || firstWord.startsWith(brand));
+        
+        if (isFirstWordBrand && searchWords.length > 1) {
+          // User typed "Kubota SVL75" - use brand + model
           const potentialBrand = normalizeBrandName(searchWords[0]);
-          const potentialModel = searchWords.length > 1 ? searchWords.slice(1).join(' ') : searchWords[0];
-          
-          // Fetch track compatibility for potential model
+          const potentialModel = searchWords.slice(1).join(' ');
           fetchTrackCompatibilityForSearch(potentialBrand, potentialModel);
+        } else {
+          // User typed just "SVL75" or "259D" - search by model only
+          // The API will use normalized matching to find it
+          fetchTrackCompatibilityForSearch(null, searchTerm.trim());
         }
       }
     }
