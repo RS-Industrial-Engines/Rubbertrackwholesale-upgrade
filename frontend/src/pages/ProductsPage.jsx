@@ -103,6 +103,65 @@ const ProductsPage = () => {
     }
   }, [searchTerm, selectedCategory, selectedBrand, selectedModel]);
 
+  // Fetch ALL track sizes for "Rubber Tracks" category view
+  const fetchAllTrackSizes = async () => {
+    try {
+      setLoadingParts(true);
+      // Get all track sizes
+      const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
+      setTrackCompatibility(trackSizesResponse.data);
+      
+      // Get compatibility data to show which machines use each track
+      const compatResponse = await axios.get(`${API}/api/compatibility`);
+      setCompatibleMachines(compatResponse.data);
+    } catch (error) {
+      console.error('Failed to fetch all track sizes:', error);
+      setTrackCompatibility([]);
+      setCompatibleMachines([]);
+    } finally {
+      setLoadingParts(false);
+    }
+  };
+
+  // Fetch track sizes filtered by brand/model
+  const fetchTrackSizesFiltered = async (brand, model) => {
+    try {
+      setLoadingParts(true);
+      const params = {};
+      if (brand) params.make = brand;
+      if (model) params.model = model;
+      
+      const response = await axios.get(`${API}/api/compatibility/search`, { params });
+      
+      if (response.data && response.data.length > 0) {
+        setCompatibleMachines(response.data);
+        
+        // Collect all unique track sizes from matching machines
+        const allTrackSizes = [];
+        for (const compat of response.data) {
+          allTrackSizes.push(...(compat.track_sizes || []));
+        }
+        const uniqueSizes = [...new Set(allTrackSizes)];
+        
+        // Fetch full track size details
+        const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
+        const compatibleTracks = trackSizesResponse.data.filter(ts => 
+          uniqueSizes.includes(ts.size)
+        );
+        setTrackCompatibility(compatibleTracks);
+      } else {
+        setCompatibleMachines([]);
+        setTrackCompatibility([]);
+      }
+    } catch (error) {
+      console.error('Failed to fetch filtered track sizes:', error);
+      setTrackCompatibility([]);
+      setCompatibleMachines([]);
+    } finally {
+      setLoadingParts(false);
+    }
+  };
+
   const fetchPartNumbers = async (query, partType, brand, model) => {
     try {
       setLoadingParts(true);
