@@ -174,15 +174,21 @@ const ProductsPage = () => {
         return;
       }
       
-      // Not a track size search - clear compatible machines
-      setCompatibleMachines([]);
+      // Model search (e.g., "svl75", "259d", "t190")
+      // Build params - include brand if provided
+      const searchParams = { model: model };
+      if (brand) {
+        searchParams.make = brand;
+      }
       
-      // Try to find compatibility by model only (for universal search)
       const response = await axios.get(`${API}/api/compatibility/search`, {
-        params: { model: model }
+        params: searchParams
       });
       
       if (response.data && response.data.length > 0) {
+        // Show the matching machines
+        setCompatibleMachines(response.data);
+        
         // Get track sizes from all matching compatibility entries
         const allTrackSizes = [];
         for (const compatibility of response.data) {
@@ -205,6 +211,7 @@ const ProductsPage = () => {
           setTrackCompatibility([]);
         }
       } else {
+        setCompatibleMachines([]);
         setTrackCompatibility([]);
       }
     } catch (error) {
