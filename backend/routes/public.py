@@ -436,7 +436,7 @@ async def generate_sitemap():
     from fastapi.responses import Response
     
     # Base URL - get from environment or use default
-    base_url = "https://undercarriage-db.preview.emergentagent.com"
+    base_url = "https://parts-tracker-92.preview.emergentagent.com"
     
     xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -513,7 +513,7 @@ async def get_robots():
     """Generate robots.txt"""
     from fastapi.responses import Response
     
-    base_url = "https://undercarriage-db.preview.emergentagent.com"
+    base_url = "https://parts-tracker-92.preview.emergentagent.com"
     
     robots_content = f"""User-agent: *
 Allow: /

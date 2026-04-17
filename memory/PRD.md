@@ -3,7 +3,7 @@
 ## Project Overview
 Full-stack e-commerce platform for undercarriage parts (rubber tracks, rollers, sprockets, idlers) with comprehensive compatibility search functionality.
 
-**Live Preview URL**: https://undercarriage-db.preview.emergentagent.com
+**Live Preview URL**: https://parts-tracker-92.preview.emergentagent.com
 
 ## Tech Stack
 - **Frontend**: React (Vite), Tailwind CSS, Shadcn/UI
