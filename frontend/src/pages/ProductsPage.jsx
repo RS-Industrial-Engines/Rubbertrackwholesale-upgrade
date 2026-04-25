@@ -1,15 +1,21 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Search, Filter, X } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../components/ui/select';
-import { products, brands, categories } from '../mockData';
 import { normalizeBrandName } from '../utils/brandMapping';
 import axios from 'axios';
 
-const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+const API = process.env.REACT_APP_BACKEND_URL;
+
+const CATEGORIES = [
+  { id: 'rubber-tracks', name: 'Rubber Tracks' },
+  { id: 'sprockets', name: 'Sprockets' },
+  { id: 'rollers', name: 'Rollers' },
+  { id: 'idlers', name: 'Idlers' },
+];
 
 const ProductsPage = () => {
   const [searchParams] = useSearchParams();
@@ -19,79 +25,96 @@ const ProductsPage = () => {
   const [selectedModel, setSelectedModel] = useState(searchParams.get('model') || '');
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'all');
   const [sortBy, setSortBy] = useState('featured');
+  
+  // DB-driven state
+  const [dbBrands, setDbBrands] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]);
   const [partNumbers, setPartNumbers] = useState([]);
   const [trackCompatibility, setTrackCompatibility] = useState([]);
   const [compatibleMachines, setCompatibleMachines] = useState([]);
   const [loadingParts, setLoadingParts] = useState(false);
 
-  // Fetch part numbers when search term OR category changes OR brand changes OR model changes
+  // Fetch brands from DB on mount
   useEffect(() => {
-    // Universal search: when user types in main search bar (searchTerm without specific category)
+    const fetchBrands = async () => {
+      try {
+        const res = await axios.get(`${API}/api/brands`);
+        setDbBrands(res.data);
+      } catch (err) {
+        console.error('Failed to fetch brands:', err);
+      }
+    };
+    fetchBrands();
+  }, []);
+
+  // Fetch products from DB when filters change
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const params = {};
+        if (searchTerm) params.search = searchTerm;
+        if (selectedBrand !== 'all') params.brand = selectedBrand;
+        if (selectedCategory !== 'all') params.category = selectedCategory;
+        params.sort = sortBy;
+        params.limit = 50;
+        const res = await axios.get(`${API}/api/products`, { params });
+        setDbProducts(res.data);
+      } catch (err) {
+        console.error('Failed to fetch products:', err);
+        setDbProducts([]);
+      }
+    };
+    fetchProducts();
+  }, [searchTerm, selectedBrand, selectedCategory, sortBy]);
+
+  // Fetch part numbers and compatibility when search/category changes
+  useEffect(() => {
+    // Universal search
     if (searchTerm && selectedCategory === 'all' && selectedBrand === 'all' && !selectedModel) {
-      // This is a universal search from main search bar
-      
-      // Check if search term looks like a track size first
-      const trackSizePattern = /^\d{2,3}x\d{2,3}x\d{2}$/i;
+      const trackSizePattern = /^\d{2,3}x\d{2,3}(?:\.\d+)?x\d{2,3}$/i;
       if (trackSizePattern.test(searchTerm.trim())) {
-        // This is a track size search - fetch compatible machines directly
         fetchTrackCompatibilityForSearch(null, searchTerm.trim());
-        // Don't fetch part numbers for track size searches
         setPartNumbers([]);
       } else {
-        // Fetch ALL parts (rollers, idlers, sprockets) matching the search term
         fetchPartNumbers(searchTerm, null, null, null);
-        
-        // Parse search term to extract brand and model
         const searchWords = searchTerm.trim().split(/\s+/);
         const firstWord = searchWords[0].toLowerCase();
-        
-        // Check if first word is a known brand
         const knownBrands = ['kubota', 'bobcat', 'cat', 'caterpillar', 'komatsu', 'takeuchi', 'hitachi', 'asv', 'case', 'john deere', 'jcb', 'volvo', 'hyundai', 'doosan', 'kobelco', 'yanmar', 'gehl', 'mustang', 'terex', 'vermeer', 'ihi', 'new holland', 'ditch witch', 'wacker neuson', 'toro'];
         const isFirstWordBrand = knownBrands.some(brand => firstWord === brand || firstWord.startsWith(brand));
-        
         if (isFirstWordBrand && searchWords.length > 1) {
-          // User typed "Kubota SVL75" - use brand + model
           const potentialBrand = normalizeBrandName(searchWords[0]);
           const potentialModel = searchWords.slice(1).join(' ');
           fetchTrackCompatibilityForSearch(potentialBrand, potentialModel);
         } else {
-          // User typed just "SVL75" or "259D" - search by model only
-          // The API will use normalized matching to find it
           fetchTrackCompatibilityForSearch(null, searchTerm.trim());
         }
       }
     }
-    // Category-only selection (e.g., clicking "Rubber Tracks" card without filters)
+    // Category only: Rubber Tracks
     else if (selectedCategory === 'Rubber Tracks' && selectedBrand === 'all' && !selectedModel && !searchTerm) {
-      // Show ALL track sizes with their compatible machines
       fetchAllTrackSizes();
       setPartNumbers([]);
     }
-    // Category selection for parts (Sprockets, Rollers, Idlers)
-    else if ((selectedCategory === 'Sprockets' || selectedCategory === 'Rollers' || selectedCategory === 'Idlers') && selectedBrand === 'all' && !selectedModel && !searchTerm) {
-      // Show ALL parts of this type
-      const partType = selectedCategory.toLowerCase().slice(0, -1); // Remove 's' from end
+    // Category: Sprockets, Rollers, Idlers
+    else if (['Sprockets', 'Rollers', 'Idlers'].includes(selectedCategory) && selectedBrand === 'all' && !selectedModel && !searchTerm) {
+      const partType = selectedCategory.toLowerCase().slice(0, -1);
       fetchPartNumbers(null, partType, null, null);
       setTrackCompatibility([]);
       setCompatibleMachines([]);
     }
-    // Specific equipment search: when user uses "Find Parts By Equipment" section with filters
+    // Specific filters
     else if (searchTerm || selectedCategory !== 'all' || selectedBrand !== 'all' || selectedModel) {
       let partType = null;
-      if (selectedCategory === 'Rollers' || selectedCategory === 'Sprockets' || selectedCategory === 'Idlers') {
-        partType = selectedCategory.toLowerCase().slice(0, -1); // Remove 's' from end
+      if (['Rollers', 'Sprockets', 'Idlers'].includes(selectedCategory)) {
+        partType = selectedCategory.toLowerCase().slice(0, -1);
       }
-      
       let brand = selectedBrand !== 'all' ? selectedBrand : null;
       fetchPartNumbers(searchTerm || null, partType, brand, selectedModel || null);
       
-      // If searching for Rubber Tracks with brand and model, also fetch compatibility data
       if (selectedCategory === 'Rubber Tracks' && brand && selectedModel) {
-        // Normalize brand name for compatibility API (e.g., "Caterpillar" -> "CAT")
         const normalizedBrand = normalizeBrandName(brand);
         fetchTrackCompatibility(normalizedBrand, selectedModel);
       } else if (selectedCategory === 'Rubber Tracks' && (brand || selectedModel)) {
-        // Partial filter - show track sizes for brand/model search
         fetchTrackSizesFiltered(brand, selectedModel);
       } else {
         setTrackCompatibility([]);
@@ -103,19 +126,22 @@ const ProductsPage = () => {
     }
   }, [searchTerm, selectedCategory, selectedBrand, selectedModel]);
 
-  // Fetch ALL track sizes for "Rubber Tracks" category view
+  // Update searchTerm when URL changes
+  useEffect(() => {
+    setSearchTerm(urlSearch);
+  }, [urlSearch]);
+
   const fetchAllTrackSizes = async () => {
     try {
       setLoadingParts(true);
-      // Get all track sizes
-      const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
-      setTrackCompatibility(trackSizesResponse.data);
-      
-      // Get compatibility data to show which machines use each track
-      const compatResponse = await axios.get(`${API}/api/compatibility`);
-      setCompatibleMachines(compatResponse.data);
+      const [trackRes, compatRes] = await Promise.all([
+        axios.get(`${API}/api/track-sizes`),
+        axios.get(`${API}/api/compatibility`)
+      ]);
+      setTrackCompatibility(trackRes.data);
+      setCompatibleMachines(compatRes.data);
     } catch (error) {
-      console.error('Failed to fetch all track sizes:', error);
+      console.error('Failed to fetch track sizes:', error);
       setTrackCompatibility([]);
       setCompatibleMachines([]);
     } finally {
@@ -123,31 +149,22 @@ const ProductsPage = () => {
     }
   };
 
-  // Fetch track sizes filtered by brand/model
   const fetchTrackSizesFiltered = async (brand, model) => {
     try {
       setLoadingParts(true);
       const params = {};
       if (brand) params.make = brand;
       if (model) params.model = model;
-      
       const response = await axios.get(`${API}/api/compatibility/search`, { params });
-      
       if (response.data && response.data.length > 0) {
         setCompatibleMachines(response.data);
-        
-        // Collect all unique track sizes from matching machines
         const allTrackSizes = [];
         for (const compat of response.data) {
           allTrackSizes.push(...(compat.track_sizes || []));
         }
         const uniqueSizes = [...new Set(allTrackSizes)];
-        
-        // Fetch full track size details
         const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
-        const compatibleTracks = trackSizesResponse.data.filter(ts => 
-          uniqueSizes.includes(ts.size)
-        );
+        const compatibleTracks = trackSizesResponse.data.filter(ts => uniqueSizes.includes(ts.size));
         setTrackCompatibility(compatibleTracks);
       } else {
         setCompatibleMachines([]);
@@ -165,15 +182,12 @@ const ProductsPage = () => {
   const fetchPartNumbers = async (query, partType, brand, model) => {
     try {
       setLoadingParts(true);
-      let url = `${API}/api/part-numbers/search?`;
-      const params = [];
-      if (query) params.push(`query=${encodeURIComponent(query)}`);
-      if (partType) params.push(`part_type=${partType}`);
-      if (brand) params.push(`brand=${encodeURIComponent(brand)}`);
-      if (model) params.push(`model=${encodeURIComponent(model)}`);
-      
-      url += params.join('&');
-      const response = await axios.get(url);
+      const params = new URLSearchParams();
+      if (query) params.append('query', query);
+      if (partType) params.append('part_type', partType);
+      if (brand) params.append('brand', brand);
+      if (model) params.append('model', model);
+      const response = await axios.get(`${API}/api/part-numbers/search?${params.toString()}`);
       setPartNumbers(response.data);
     } catch (error) {
       console.error('Failed to fetch part numbers:', error);
@@ -185,25 +199,15 @@ const ProductsPage = () => {
 
   const fetchTrackCompatibility = async (brand, model) => {
     try {
-      // Use the correct compatibility search endpoint
       const response = await axios.get(`${API}/api/compatibility/search`, {
         params: { make: brand, model: model }
       });
-      
       if (response.data && response.data.length > 0) {
-        // Get track sizes from the first matching compatibility entry
         const compatibility = response.data[0];
         const trackSizes = compatibility.track_sizes || [];
-        
         if (trackSizes.length > 0) {
-          // Fetch full track size details
           const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
-          const allTrackSizes = trackSizesResponse.data;
-          
-          // Filter to only the compatible ones
-          const compatibleTracks = allTrackSizes.filter(ts => 
-            trackSizes.includes(ts.size)
-          );
+          const compatibleTracks = trackSizesResponse.data.filter(ts => trackSizes.includes(ts.size));
           setTrackCompatibility(compatibleTracks);
         } else {
           setTrackCompatibility([]);
@@ -219,69 +223,34 @@ const ProductsPage = () => {
 
   const fetchTrackCompatibilityForSearch = async (brand, model) => {
     try {
-      // Check if search term looks like a track size (e.g., "320x86x49" or "400x86x52")
-      const trackSizePattern = /^\d{2,3}x\d{2,3}x\d{2}$/i;
+      const trackSizePattern = /^\d{2,3}x\d{2,3}(?:\.\d+)?x\d{2,3}$/i;
       if (trackSizePattern.test(model.trim())) {
-        // This is a track size search
         const trackSize = model.trim();
-        
-        // Fetch all machines compatible with this track size
-        const response = await axios.get(`${API}/api/compatibility/search`, {
-          params: { track_size: trackSize }
-        });
-        
+        const response = await axios.get(`${API}/api/compatibility/search`, { params: { track_size: trackSize } });
         if (response.data && response.data.length > 0) {
           setCompatibleMachines(response.data);
-          
-          // Also fetch the track size details
           const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
-          const allTrackSizesData = trackSizesResponse.data;
-          const thisTrack = allTrackSizesData.find(ts => ts.size === trackSize);
-          
-          if (thisTrack) {
-            setTrackCompatibility([thisTrack]);
-          } else {
-            setTrackCompatibility([]);
-          }
+          const thisTrack = trackSizesResponse.data.find(ts => ts.size === trackSize);
+          setTrackCompatibility(thisTrack ? [thisTrack] : []);
         } else {
           setCompatibleMachines([]);
           setTrackCompatibility([]);
         }
         return;
       }
-      
-      // Model search (e.g., "svl75", "259d", "t190")
-      // Build params - include brand if provided
       const searchParams = { model: model };
-      if (brand) {
-        searchParams.make = brand;
-      }
-      
-      const response = await axios.get(`${API}/api/compatibility/search`, {
-        params: searchParams
-      });
-      
+      if (brand) searchParams.make = brand;
+      const response = await axios.get(`${API}/api/compatibility/search`, { params: searchParams });
       if (response.data && response.data.length > 0) {
-        // Show the matching machines
         setCompatibleMachines(response.data);
-        
-        // Get track sizes from all matching compatibility entries
         const allTrackSizes = [];
-        for (const compatibility of response.data) {
-          const trackSizes = compatibility.track_sizes || [];
-          allTrackSizes.push(...trackSizes);
+        for (const compat of response.data) {
+          allTrackSizes.push(...(compat.track_sizes || []));
         }
-        
         if (allTrackSizes.length > 0) {
-          // Fetch full track size details
           const trackSizesResponse = await axios.get(`${API}/api/track-sizes`);
-          const allTrackSizesData = trackSizesResponse.data;
-          
-          // Filter to only the compatible ones (remove duplicates)
           const uniqueTrackSizes = [...new Set(allTrackSizes)];
-          const compatibleTracks = allTrackSizesData.filter(ts => 
-            uniqueTrackSizes.includes(ts.size)
-          );
+          const compatibleTracks = trackSizesResponse.data.filter(ts => uniqueTrackSizes.includes(ts.size));
           setTrackCompatibility(compatibleTracks);
         } else {
           setTrackCompatibility([]);
@@ -297,93 +266,18 @@ const ProductsPage = () => {
     }
   };
 
-  // Update searchTerm when URL changes
-  React.useEffect(() => {
-    setSearchTerm(urlSearch);
-  }, [urlSearch]);
-
-  const filteredProducts = useMemo(() => {
-    let filtered = [...products];
-
-    // Search filter - enhanced for machine models with brand aliases
-    if (searchTerm) {
-      const searchLower = searchTerm.toLowerCase().trim();
-      const searchWords = searchLower.split(/\s+/);
-      
-      // Try to normalize first word as a brand (e.g., "caterpillar" -> "CAT")
-      const normalizedFirstWord = normalizeBrandName(searchWords[0]);
-      
-      filtered = filtered.filter(
-        (product) => {
-          // Search in title, SKU, part number, size
-          const titleLower = product.title.toLowerCase();
-          const skuMatch = product.sku.toLowerCase().includes(searchLower);
-          const partNumberMatch = product.partNumber.toLowerCase().includes(searchLower);
-          const sizeMatch = product.size.toLowerCase().includes(searchLower);
-          
-          // Direct title match
-          if (titleLower.includes(searchLower)) return true;
-          
-          // Also search in compatibleWith field if it exists (for machine models)
-          const compatibleMatch = product.compatibleWith ? 
-            product.compatibleWith.toLowerCase().includes(searchLower) : false;
-          if (compatibleMatch) return true;
-          
-          // Multi-word search with brand normalization (e.g., "caterpillar 299d" finds "CAT 299D")
-          if (searchWords.length > 1) {
-            // Check if normalized brand + remaining words match
-            const remainingWords = searchWords.slice(1).join(' ');
-            const normalizedSearch = `${normalizedFirstWord} ${remainingWords}`.toLowerCase();
-            if (titleLower.includes(normalizedSearch)) return true;
-            
-            // Also try all words in title
-            const allWordsMatch = searchWords.every(word => titleLower.includes(word));
-            if (allWordsMatch) return true;
-          }
-          
-          return skuMatch || partNumberMatch || sizeMatch;
-        }
-      );
-    }
-
-    // Brand filter
-    if (selectedBrand !== 'all') {
-      filtered = filtered.filter((product) => product.brand === selectedBrand);
-    }
-
-    // Category filter
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter((product) => product.category === selectedCategory);
-    }
-
-    // Sort
-    switch (sortBy) {
-      case 'price-low':
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case 'price-high':
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case 'name':
-        filtered.sort((a, b) => a.title.localeCompare(b.title));
-        break;
-      default:
-        break;
-    }
-
-    return filtered;
-  }, [searchTerm, selectedBrand, selectedCategory, sortBy]);
+  const totalResults = dbProducts.length + partNumbers.length + trackCompatibility.length + compatibleMachines.length;
 
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedBrand('all');
     setSelectedCategory('all');
+    setSelectedModel('');
     setSortBy('featured');
   };
 
   return (
     <div className="min-h-screen bg-slate-950">
-      {/* Header */}
       <section className="bg-slate-900 py-12 border-b border-slate-800">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold text-white mb-4">All Products</h1>
@@ -395,12 +289,12 @@ const ProductsPage = () => {
         {/* Search and Filters */}
         <div className="bg-slate-900 rounded-lg p-6 mb-8 border border-slate-800">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Search */}
             <div className="md:col-span-2">
               <div className="relative">
                 <Input
+                  data-testid="products-search-input"
                   type="text"
-                  placeholder="Search by size, part number, or SKU..."
+                  placeholder="Search by size, part number, or machine model..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 pr-10"
@@ -409,14 +303,14 @@ const ProductsPage = () => {
               </div>
             </div>
 
-            {/* Brand Filter */}
+            {/* Brand Filter - from DB */}
             <Select value={selectedBrand} onValueChange={setSelectedBrand}>
-              <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+              <SelectTrigger data-testid="brand-filter" className="bg-slate-800 border-slate-700 text-slate-200">
                 <SelectValue placeholder="All Brands" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Brands</SelectItem>
-                {brands.map((brand) => (
+                {dbBrands.map((brand) => (
                   <SelectItem key={brand.id} value={brand.name}>
                     {brand.name}
                   </SelectItem>
@@ -426,12 +320,12 @@ const ProductsPage = () => {
 
             {/* Category Filter */}
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="bg-slate-800 border-slate-700 text-slate-200">
+              <SelectTrigger data-testid="category-filter" className="bg-slate-800 border-slate-700 text-slate-200">
                 <SelectValue placeholder="All Categories" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Categories</SelectItem>
-                {categories.map((category) => (
+                {CATEGORIES.map((category) => (
                   <SelectItem key={category.id} value={category.name}>
                     {category.name}
                   </SelectItem>
@@ -440,7 +334,6 @@ const ProductsPage = () => {
             </Select>
           </div>
 
-          {/* Active Filters and Sort */}
           <div className="flex flex-wrap items-center justify-between mt-4 gap-4">
             <div className="flex items-center gap-2">
               {(searchTerm || selectedBrand !== 'all' || selectedCategory !== 'all') && (
@@ -449,17 +342,17 @@ const ProductsPage = () => {
                   size="sm"
                   onClick={clearFilters}
                   className="text-orange-500 hover:text-orange-400"
+                  data-testid="clear-filters-btn"
                 >
                   <X className="h-4 w-4 mr-2" />
                   Clear Filters
                 </Button>
               )}
               <span className="text-slate-400 text-sm">
-                {filteredProducts.length + partNumbers.length + trackCompatibility.length + compatibleMachines.length} {(filteredProducts.length + partNumbers.length + trackCompatibility.length + compatibleMachines.length) === 1 ? 'product' : 'products'} found
+                {totalResults} {totalResults === 1 ? 'product' : 'products'} found
               </span>
             </div>
 
-            {/* Sort */}
             <div className="flex items-center gap-2">
               <span className="text-slate-400 text-sm">Sort by:</span>
               <Select value={sortBy} onValueChange={setSortBy}>
@@ -477,8 +370,8 @@ const ProductsPage = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
-        {filteredProducts.length === 0 && partNumbers.length === 0 && trackCompatibility.length === 0 && compatibleMachines.length === 0 ? (
+        {/* Results */}
+        {totalResults === 0 && !loadingParts ? (
           <div className="text-center py-16">
             <Filter className="h-16 w-16 text-slate-600 mx-auto mb-4" />
             <h3 className="text-2xl font-semibold text-slate-400 mb-2">
@@ -487,9 +380,8 @@ const ProductsPage = () => {
             <p className="text-slate-500 mb-4">
               {searchTerm ? (
                 <>
-                  Products for <span className="text-orange-500 font-semibold">"{searchTerm}"</span> are not listed on this site yet.
-                  <br />
-                  Try searching for a different machine model or contact us for availability.
+                  Products for <span className="text-orange-500 font-semibold">"{searchTerm}"</span> are not listed yet.
+                  <br />Try a different machine model or contact us for availability.
                 </>
               ) : (
                 'Try adjusting your search or filters'
@@ -508,55 +400,54 @@ const ProductsPage = () => {
           </div>
         ) : (
           <>
-            {/* Track Compatibility Section (Rubber Tracks for specific machine) */}
+            {/* Track Compatibility Section */}
             {trackCompatibility.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-4">
                   Compatible Rubber Track Sizes ({trackCompatibility.length})
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {trackCompatibility.map((track) => (
-                    <Card key={track.id} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all">
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <span className="px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-800">
-                              Rubber Track
-                            </span>
-                            {track.is_in_stock && (
-                              <span className="ml-2 px-2 py-1 rounded text-xs bg-green-600 text-white">
-                                In Stock
+                  {trackCompatibility.map((track) => {
+                    const w = track.width || parseFloat(track.size?.split('x')[0]) || 0;
+                    const p = track.pitch || parseFloat(track.size?.split('x')[1]) || 0;
+                    const l = track.links || track.size?.split('x')[2] || 0;
+                    return (
+                      <Card key={track.id} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all">
+                        <CardContent className="p-4">
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <span className="px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-800">
+                                Rubber Track
                               </span>
+                              {track.is_in_stock && (
+                                <span className="ml-2 px-2 py-1 rounded text-xs bg-green-600 text-white">In Stock</span>
+                              )}
+                            </div>
+                            {track.is_in_stock && track.price && (
+                              <span className="text-orange-500 font-bold text-lg">${parseFloat(track.price).toFixed(2)}</span>
                             )}
                           </div>
-                          {track.is_in_stock && track.price && (
-                            <span className="text-orange-500 font-bold text-lg">
-                              ${track.price.toFixed(2)}
-                            </span>
-                          )}
-                        </div>
-                        <h3 className="text-white font-semibold text-xl mb-2">
-                          {track.size}
-                        </h3>
-                        <p className="text-slate-400 text-sm mb-2">
-                          Width: {track.width || track.size?.split('x')[0]}mm | Pitch: {track.pitch || track.size?.split('x')[1]}mm | Links: {track.links || track.size?.split('x')[2]}
-                        </p>
-                        <p className="text-slate-400 text-sm mb-3">
-                          {((track.width || parseFloat(track.size?.split('x')[0])) / 25.4).toFixed(1)}" x {((track.pitch || parseFloat(track.size?.split('x')[1])) / 25.4).toFixed(2)}" x {track.links || track.size?.split('x')[2]}
-                        </p>
-                        <Link to="/contact">
-                          <Button className="w-full bg-orange-500 hover:bg-orange-600">
-                            {track.is_in_stock && track.price ? 'Request Quote' : 'Contact for Price'}
-                          </Button>
-                        </Link>
-                      </CardContent>
-                    </Card>
-                  ))}
+                          <h3 className="text-white font-semibold text-xl mb-2">{track.size}</h3>
+                          <p className="text-slate-400 text-sm mb-2">
+                            Width: {w}mm | Pitch: {p}mm | Links: {l}
+                          </p>
+                          <p className="text-slate-400 text-sm mb-3">
+                            {(w / 25.4).toFixed(1)}" x {(p / 25.4).toFixed(2)}" x {l}
+                          </p>
+                          <Link to="/contact">
+                            <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                              {track.is_in_stock && track.price ? 'Request Quote' : 'Contact for Price'}
+                            </Button>
+                          </Link>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </div>
             )}
 
-            {/* Compatible Machines Section (when searching by track size) */}
+            {/* Compatible Machines */}
             {compatibleMachines.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-4">
@@ -567,21 +458,13 @@ const ProductsPage = () => {
                     <Card key={idx} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all">
                       <CardContent className="p-4">
                         <div className="mb-2">
-                          <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">
-                            Machine Model
-                          </span>
+                          <span className="px-2 py-1 rounded text-xs font-medium bg-blue-100 text-blue-800">Machine Model</span>
                         </div>
-                        <h3 className="text-white font-semibold text-lg mb-2">
-                          {machine.make} {machine.model}
-                        </h3>
-                        <p className="text-slate-400 text-sm mb-3">
-                          Compatible Track Sizes:
-                        </p>
+                        <h3 className="text-white font-semibold text-lg mb-2">{machine.make} {machine.model}</h3>
+                        <p className="text-slate-400 text-sm mb-3">Compatible Track Sizes:</p>
                         <div className="flex flex-wrap gap-1">
                           {machine.track_sizes.slice(0, 3).map((size, sizeIdx) => (
-                            <span key={sizeIdx} className="px-2 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">
-                              {size}
-                            </span>
+                            <span key={sizeIdx} className="px-2 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">{size}</span>
                           ))}
                           {machine.track_sizes.length > 3 && (
                             <span className="text-xs text-slate-500">+{machine.track_sizes.length - 3} more</span>
@@ -594,7 +477,7 @@ const ProductsPage = () => {
               </div>
             )}
 
-            {/* Part Numbers Section (if any found) */}
+            {/* Part Numbers */}
             {partNumbers.length > 0 && (
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-4">
@@ -614,34 +497,19 @@ const ProductsPage = () => {
                               {part.part_type}
                             </span>
                             {part.part_subtype && (
-                              <span className="ml-2 px-2 py-1 rounded text-xs bg-gray-200 text-gray-700">
-                                {part.part_subtype}
-                              </span>
-                            )}
-                            {part.is_in_stock && (
-                              <span className="ml-2 px-2 py-1 rounded text-xs bg-green-600 text-white">
-                                In Stock
-                              </span>
+                              <span className="ml-2 px-2 py-1 rounded text-xs bg-gray-200 text-gray-700">{part.part_subtype}</span>
                             )}
                           </div>
-                          {part.is_in_stock && part.price && (
-                            <span className="text-orange-500 font-bold text-lg">
-                              ${part.price.toFixed(2)}
-                            </span>
+                          {part.price && (
+                            <span className="text-orange-500 font-bold text-lg">${parseFloat(part.price).toFixed(2)}</span>
                           )}
                         </div>
-                        <h3 className="text-white font-semibold mb-2">
-                          Part # {part.part_number}
-                        </h3>
-                        <p className="text-slate-400 text-sm mb-3">
-                          {part.brand} - {part.product_name}
-                        </p>
-                        {part.compatible_models.length > 0 && (
+                        <h3 className="text-white font-semibold mb-2">Part # {part.part_number}</h3>
+                        <p className="text-slate-400 text-sm mb-3">{part.brand} - {part.product_name}</p>
+                        {part.compatible_models && part.compatible_models.length > 0 && (
                           <div className="flex flex-wrap gap-1 mb-3">
                             {part.compatible_models.slice(0, 4).map((model, idx) => (
-                              <span key={idx} className="px-2 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">
-                                {model}
-                              </span>
+                              <span key={idx} className="px-2 py-0.5 bg-slate-700 text-slate-300 rounded text-xs">{model}</span>
                             ))}
                             {part.compatible_models.length > 4 && (
                               <span className="text-xs text-slate-500">+{part.compatible_models.length - 4} more</span>
@@ -650,7 +518,7 @@ const ProductsPage = () => {
                         )}
                         <Link to="/contact">
                           <Button className="w-full bg-orange-500 hover:bg-orange-600">
-                            {part.is_in_stock && part.price ? 'Request Quote' : 'Contact for Price'}
+                            {part.price ? 'Request Quote' : 'Contact for Price'}
                           </Button>
                         </Link>
                       </CardContent>
@@ -660,48 +528,52 @@ const ProductsPage = () => {
               </div>
             )}
 
-            {/* Regular Products - Only show when NOT doing specific equipment search */}
-            {filteredProducts.length > 0 && !selectedModel && (
+            {/* DB Products */}
+            {dbProducts.length > 0 && !selectedModel && (
               <>
-                {partNumbers.length > 0 && (
+                {(partNumbers.length > 0 || trackCompatibility.length > 0) && (
                   <h2 className="text-2xl font-bold text-white mb-4 mt-8">
-                    Rubber Tracks & Other Products ({filteredProducts.length})
+                    Products ({dbProducts.length})
                   </h2>
                 )}
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <Card key={product.id} className="bg-slate-900 border-slate-800 hover:border-orange-500 transition-all duration-300 group">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={product.images[0]}
-                      alt={product.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    {product.inStock && (
-                      <div className="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
-                        In Stock
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <p className="text-orange-500 text-xs font-semibold mb-1">{product.brand}</p>
-                    <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2">{product.title}</h3>
-                    <p className="text-slate-400 text-xs mb-1">SKU: {product.sku}</p>
-                    <p className="text-slate-400 text-xs mb-3">{product.size}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xl font-bold text-white">${product.price.toFixed(2)}</span>
-                      <Link to={`/product/${product.id}`}>
-                        <Button size="sm" className="bg-orange-500 hover:bg-orange-600">
-                          Details
-                        </Button>
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  {dbProducts.map((product) => (
+                    <Card key={product.id} className="bg-slate-900 border-slate-800 hover:border-orange-500 transition-all duration-300 group">
+                      <CardContent className="p-0">
+                        {product.images && product.images.length > 0 && (
+                          <div className="relative overflow-hidden">
+                            <img
+                              src={product.images[0]}
+                              alt={product.title || product.name}
+                              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                            />
+                            {product.in_stock && (
+                              <div className="absolute top-3 right-3 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-semibold">
+                                In Stock
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        <div className="p-4">
+                          <p className="text-orange-500 text-xs font-semibold mb-1">{product.brand}</p>
+                          <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2">{product.title || product.name}</h3>
+                          <p className="text-slate-400 text-xs mb-1">SKU: {product.sku || 'N/A'}</p>
+                          <p className="text-slate-400 text-xs mb-3">{product.size}</p>
+                          <div className="flex justify-between items-center">
+                            {product.price ? (
+                              <span className="text-xl font-bold text-white">${parseFloat(product.price).toFixed(2)}</span>
+                            ) : (
+                              <span className="text-sm text-slate-400">Contact for Price</span>
+                            )}
+                            <Link to={`/product/${product.id}`}>
+                              <Button size="sm" className="bg-orange-500 hover:bg-orange-600">Details</Button>
+                            </Link>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </>
             )}
           </>

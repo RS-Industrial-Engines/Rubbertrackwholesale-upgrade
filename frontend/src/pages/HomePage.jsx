@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, Truck, Award, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
-import { brands, products, testimonials } from '../mockData';
+import { testimonials } from '../mockData';
 import CategoryNav from '../components/CategoryNav';
 import RubberTrackCompatibility from '../components/RubberTrackCompatibility';
+import axios from 'axios';
+
+const API = process.env.REACT_APP_BACKEND_URL;
 
 const HomePage = () => {
-  const featuredProducts = products.slice(0, 3);
   const [searchQuery, setSearchQuery] = useState('');
+  const [featuredProducts, setFeaturedProducts] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchFeatured = async () => {
+      try {
+        const res = await axios.get(`${API}/api/products?limit=3&sort=featured`);
+        setFeaturedProducts(res.data);
+      } catch (err) {
+        console.error('Failed to fetch featured products:', err);
+      }
+    };
+    fetchFeatured();
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -31,32 +46,29 @@ const HomePage = () => {
               Wholesale prices on top-quality rubber tracks and undercarriage parts for all major brands. Fast shipping from 7 warehouses nationwide.
             </p>
             
-            {/* Temporary Admin Access Button */}
-            <div className="mb-6">
-              <Link to="/admin/login">
-                <Button className="bg-red-600 hover:bg-red-700 text-white">
-                  🔒 Admin Access
-                </Button>
-              </Link>
-            </div>
-            
             {/* Search Bar */}
             <div className="bg-white rounded-lg p-2 flex gap-2 shadow-2xl">
               <Input
+                data-testid="home-search-input"
                 type="text"
                 placeholder="Search by track size, part number, or machine model..."
                 className="flex-1 border-0 text-lg focus-visible:ring-0"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    navigate(`/products?search=${encodeURIComponent(searchQuery)}`);
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && searchQuery.trim()) {
+                    navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
                   }
                 }}
               />
               <Button 
+                data-testid="home-search-button"
                 className="bg-orange-500 hover:bg-orange-600 px-8"
-                onClick={() => navigate(`/products?search=${encodeURIComponent(searchQuery)}`)}
+                onClick={() => {
+                  if (searchQuery.trim()) {
+                    navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+                  }
+                }}
               >
                 <Search className="h-5 w-5 mr-2" />
                 Search
@@ -115,57 +127,65 @@ const HomePage = () => {
       {/* Rubber Track Compatibility Chart */}
       <RubberTrackCompatibility />
 
-      {/* Featured Products */}
-      <section className="py-16 bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h2 className="text-4xl font-bold text-white mb-2">Featured Products</h2>
-              <p className="text-slate-400 text-lg">Best-selling rubber tracks and parts</p>
+      {/* Featured Products - Only show if DB has products */}
+      {featuredProducts.length > 0 && (
+        <section className="py-16 bg-slate-900">
+          <div className="container mx-auto px-4">
+            <div className="flex justify-between items-center mb-12">
+              <div>
+                <h2 className="text-4xl font-bold text-white mb-2">Featured Products</h2>
+                <p className="text-slate-400 text-lg">Best-selling rubber tracks and parts</p>
+              </div>
+              <Link to="/products">
+                <Button variant="outline" className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
+                  View All Products
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
             </div>
-            <Link to="/products">
-              <Button variant="outline" className="border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
-                View All Products
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <Card key={product.id} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all duration-300 group">
-                <CardContent className="p-0">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={product.images[0]}
-                      alt={product.title}
-                      className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
-                    {product.inStock && (
-                      <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        In Stock
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {featuredProducts.map((product) => (
+                <Card key={product.id} className="bg-slate-800 border-slate-700 hover:border-orange-500 transition-all duration-300 group">
+                  <CardContent className="p-0">
+                    {product.images && product.images.length > 0 && (
+                      <div className="relative overflow-hidden">
+                        <img
+                          src={product.images[0]}
+                          alt={product.title || product.name}
+                          className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                        {product.in_stock && (
+                          <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            In Stock
+                          </div>
+                        )}
                       </div>
                     )}
-                  </div>
-                  <div className="p-6">
-                    <p className="text-orange-500 text-sm font-semibold mb-2">{product.brand}</p>
-                    <h3 className="text-white font-semibold text-lg mb-2">{product.title}</h3>
-                    <p className="text-slate-400 text-sm mb-4">{product.size}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-2xl font-bold text-white">${product.price.toFixed(2)}</span>
-                      <Link to={`/product/${product.id}`}>
-                        <Button className="bg-orange-500 hover:bg-orange-600">
-                          View Details
-                        </Button>
-                      </Link>
+                    <div className="p-6">
+                      <p className="text-orange-500 text-sm font-semibold mb-2">{product.brand}</p>
+                      <h3 className="text-white font-semibold text-lg mb-2">{product.title || product.name}</h3>
+                      <p className="text-slate-400 text-sm mb-4">{product.size}</p>
+                      <div className="flex justify-between items-center">
+                        {product.price ? (
+                          <span className="text-2xl font-bold text-white">${parseFloat(product.price).toFixed(2)}</span>
+                        ) : (
+                          <span className="text-lg text-slate-400">Contact for Price</span>
+                        )}
+                        <Link to={`/product/${product.id}`}>
+                          <Button className="bg-orange-500 hover:bg-orange-600">
+                            View Details
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Testimonials */}
       <section className="py-16 bg-slate-950">

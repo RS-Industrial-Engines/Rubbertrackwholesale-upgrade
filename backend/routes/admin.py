@@ -898,6 +898,84 @@ async def get_part_number_brands(current_user: dict = Depends(get_current_user))
     return sorted(brands)
 
 
+@router.get("/part-numbers/export-csv")
+async def export_part_numbers_csv(current_user: dict = Depends(get_current_user)):
+    """Export all part numbers as CSV"""
+    from database import part_numbers_collection
+    parts = await part_numbers_collection.find().sort([("brand", 1), ("part_number", 1)]).to_list(length=None)
+    df = pd.DataFrame([{
+        "brand": p.get("brand", ""),
+        "part_number": p.get("part_number", ""),
+        "part_type": p.get("part_type", ""),
+        "part_subtype": p.get("part_subtype", ""),
+        "product_name": p.get("product_name", ""),
+        "compatible_models": "|".join(p.get("compatible_models", [])),
+        "price": p.get("price", ""),
+    } for p in parts])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"part_numbers_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/part-numbers/csv-template")
+async def part_numbers_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for part numbers"""
+    df = pd.DataFrame(columns=["brand", "part_number", "part_type", "part_subtype", "product_name", "compatible_models", "price"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "part_numbers_template.csv")
+
+
+@router.post("/part-numbers/import-csv")
+async def import_part_numbers_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import part numbers from CSV. Upserts based on brand + part_number."""
+    from database import part_numbers_collection
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        brand = str(row.get("brand", "")).strip()
+        part_number = str(row.get("part_number", "")).strip()
+        if not brand or not part_number:
+            errors.append(f"Missing brand or part_number: {brand}/{part_number}")
+            continue
+        part_type = str(row.get("part_type", "")).strip().lower()
+        compatible_raw = str(row.get("compatible_models", "")).strip()
+        compatible_models = [s.strip() for s in compatible_raw.split("|") if s.strip()] if compatible_raw and compatible_raw != "nan" else []
+        price_val = row.get("price")
+        price = float(price_val) if pd.notna(price_val) and str(price_val).strip() else None
+
+        existing = await part_numbers_collection.find_one({"brand": brand, "part_number": part_number})
+        data = {
+            "brand": brand,
+            "part_number": part_number,
+            "part_type": part_type,
+            "part_subtype": str(row.get("part_subtype", "")).strip(),
+            "product_name": str(row.get("product_name", "")).strip(),
+            "compatible_models": compatible_models,
+            "price": price,
+            "is_active": True,
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await part_numbers_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["id"] = f"{brand.lower().replace(' ','_')}_{part_number.lower().replace(' ','_')}"
+            data["created_at"] = datetime.utcnow()
+            await part_numbers_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
 @router.get("/part-numbers/{part_id}")
 async def get_part_number(part_id: str, current_user: dict = Depends(get_current_user)):
     """Get a single part number by ID"""
@@ -1338,6 +1416,69 @@ async def create_machine_model(model: MachineModel):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@router.get("/machine-models/export-csv")
+async def export_machine_models_csv(current_user: dict = Depends(get_current_user)):
+    """Export all machine models as CSV"""
+    models = await machine_models_collection.find().sort([("brand", 1), ("model_name", 1)]).to_list(length=None)
+    df = pd.DataFrame([{
+        "brand": m.get("brand", ""),
+        "model_name": m.get("model_name", ""),
+        "model_name_normalized": m.get("model_name_normalized", ""),
+        "is_us_supported": m.get("is_us_supported", False),
+    } for m in models])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"machine_models_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/machine-models/csv-template")
+async def machine_models_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for machine models"""
+    df = pd.DataFrame(columns=["brand", "model_name", "is_us_supported"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "machine_models_template.csv")
+
+
+@router.post("/machine-models/import-csv")
+async def import_machine_models_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import machine models from CSV. Upserts based on brand + model_name."""
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        brand = str(row.get("brand", "")).strip()
+        model_name = str(row.get("model_name", "")).strip()
+        if not brand or not model_name:
+            errors.append(f"Missing brand or model_name: {brand}/{model_name}")
+            continue
+        normalized = re.sub(r'[^a-zA-Z0-9]', '', model_name).lower()
+        existing = await machine_models_collection.find_one({"brand": brand, "model_name": model_name})
+        data = {
+            "brand": brand,
+            "model_name": model_name,
+            "model_name_normalized": normalized,
+            "is_us_supported": str(row.get("is_us_supported", "")).lower() in ("true", "1", "yes"),
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await machine_models_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["created_at"] = datetime.utcnow()
+            await machine_models_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
 @router.get("/machine-models/{model_id}", dependencies=[Depends(get_current_user)])
 async def get_machine_model(model_id: str):
     """Get machine model by ID"""
@@ -1653,4 +1794,326 @@ async def search_compatibility(
     
     compatibility_entries = await compatibility_collection.find(query).sort([("make", 1), ("model", 1)]).to_list(length=500)
     return [serialize_doc(entry) for entry in compatibility_entries]
+
+
+
+# =================================================================
+# CSV EXPORT / IMPORT / TEMPLATE ENDPOINTS FOR ALL ENTITIES
+# =================================================================
+
+from fastapi.responses import StreamingResponse
+
+
+def _csv_response(csv_content: str, filename: str):
+    """Return a CSV file as a streaming response."""
+    return StreamingResponse(
+        iter([csv_content]),
+        media_type="text/csv",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+
+# ======================== BRANDS ========================
+
+@router.get("/brands/export-csv")
+async def export_brands_csv(current_user: dict = Depends(get_current_user)):
+    """Export all brands as CSV"""
+    brands = await brands_collection.find().sort("name", 1).to_list(length=None)
+    df = pd.DataFrame([{
+        "name": b.get("name", ""),
+        "logo": b.get("logo", ""),
+        "is_us_supported": b.get("is_us_supported", False),
+        "is_active": b.get("is_active", True),
+    } for b in brands])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"brands_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/brands/csv-template")
+async def brands_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for brands"""
+    df = pd.DataFrame(columns=["name", "logo", "is_us_supported"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "brands_template.csv")
+
+
+@router.post("/brands/import-csv")
+async def import_brands_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import brands from CSV. Upserts based on name."""
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        name = str(row.get("name", "")).strip()
+        if not name:
+            errors.append("Missing name")
+            continue
+        existing = await brands_collection.find_one({"name": {"$regex": f"^{re.escape(name)}$", "$options": "i"}})
+        data = {
+            "name": name,
+            "logo": str(row.get("logo", "")).strip() if pd.notna(row.get("logo")) else "",
+            "is_us_supported": str(row.get("is_us_supported", "")).lower() in ("true", "1", "yes"),
+            "is_active": True,
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await brands_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["created_at"] = datetime.utcnow()
+            await brands_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
+# (Machine Models CSV endpoints moved above {model_id} routes)
+
+
+# ======================== TRACK SIZES ========================
+
+@router.get("/track-sizes/export-csv")
+async def export_track_sizes_csv(current_user: dict = Depends(get_current_user)):
+    """Export all track sizes as CSV"""
+    track_sizes = await track_sizes_collection.find().sort("size", 1).to_list(length=None)
+    df = pd.DataFrame([{
+        "size": ts.get("size", ""),
+        "width": ts.get("width", ""),
+        "pitch": ts.get("pitch", ""),
+        "links": ts.get("links", ""),
+        "price": ts.get("price", ""),
+        "is_in_stock": ts.get("is_in_stock", False),
+        "is_active": ts.get("is_active", True),
+    } for ts in track_sizes])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"track_sizes_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/track-sizes/csv-template")
+async def track_sizes_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for track sizes"""
+    df = pd.DataFrame(columns=["size", "price", "is_in_stock"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "track_sizes_template.csv")
+
+
+@router.post("/track-sizes/import-csv")
+async def import_track_sizes_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import track sizes from CSV. Upserts based on size string."""
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        size = str(row.get("size", "")).strip()
+        if not size:
+            errors.append("Missing size")
+            continue
+        # Parse width/pitch/links from size string
+        match = re.match(r'^(\d+(?:\.\d+)?)x(\d+(?:\.\d+)?)x(\d+(?:\.\d+)?)$', size)
+        width, pitch, links = None, None, None
+        if match:
+            width = float(match.group(1))
+            pitch = float(match.group(2))
+            links = int(float(match.group(3)))
+
+        existing = await track_sizes_collection.find_one({"size": size})
+        price_val = row.get("price")
+        price = float(price_val) if pd.notna(price_val) and str(price_val).strip() else None
+        data = {
+            "size": size,
+            "width": width,
+            "pitch": pitch,
+            "links": links,
+            "price": price,
+            "is_in_stock": str(row.get("is_in_stock", "")).lower() in ("true", "1", "yes"),
+            "is_active": True,
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await track_sizes_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["created_at"] = datetime.utcnow()
+            await track_sizes_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
+# ======================== COMPATIBILITY ========================
+
+@router.get("/compatibility/export-csv")
+async def export_compatibility_csv(current_user: dict = Depends(get_current_user)):
+    """Export all compatibility entries as CSV"""
+    entries = await compatibility_collection.find().sort([("make", 1), ("model", 1)]).to_list(length=None)
+    df = pd.DataFrame([{
+        "make": e.get("make", ""),
+        "model": e.get("model", ""),
+        "model_name_normalized": e.get("model_name_normalized", ""),
+        "track_sizes": "|".join(e.get("track_sizes", [])),
+        "is_active": e.get("is_active", True),
+    } for e in entries])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"compatibility_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/compatibility/csv-template")
+async def compatibility_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for compatibility"""
+    df = pd.DataFrame(columns=["make", "model", "track_sizes"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "compatibility_template.csv")
+
+
+@router.post("/compatibility/import-csv")
+async def import_compatibility_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import compatibility from CSV. Upserts based on make + model. track_sizes column uses pipe separator."""
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        make = str(row.get("make", "")).strip()
+        model = str(row.get("model", "")).strip()
+        if not make or not model:
+            errors.append(f"Missing make or model: {make}/{model}")
+            continue
+        track_sizes_raw = str(row.get("track_sizes", "")).strip()
+        track_sizes = [s.strip() for s in track_sizes_raw.split("|") if s.strip()] if track_sizes_raw else []
+        normalized = re.sub(r'[^a-zA-Z0-9]', '', model).lower()
+
+        existing = await compatibility_collection.find_one({"make": make, "model": model})
+        data = {
+            "make": make,
+            "model": model,
+            "model_name_normalized": normalized,
+            "track_sizes": track_sizes,
+            "is_active": True,
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await compatibility_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["created_at"] = datetime.utcnow()
+            await compatibility_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
+# ======================== PRODUCTS ========================
+
+@router.get("/products/export-csv")
+async def export_products_csv(current_user: dict = Depends(get_current_user)):
+    """Export all products as CSV"""
+    products = await products_collection.find().sort("title", 1).to_list(length=None)
+    df = pd.DataFrame([{
+        "title": p.get("title", ""),
+        "sku": p.get("sku", ""),
+        "part_number": p.get("part_number", ""),
+        "brand": p.get("brand", ""),
+        "category": p.get("category", ""),
+        "size": p.get("size", ""),
+        "price": p.get("price", ""),
+        "description": p.get("description", ""),
+        "in_stock": p.get("in_stock", False),
+        "images": "|".join(p.get("images", [])),
+    } for p in products])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), f"products_export_{datetime.utcnow().strftime('%Y%m%d')}.csv")
+
+
+@router.get("/products/csv-template")
+async def products_csv_template(current_user: dict = Depends(get_current_user)):
+    """Download empty CSV template for products"""
+    df = pd.DataFrame(columns=["title", "sku", "part_number", "brand", "category", "size", "price", "description", "in_stock", "images"])
+    buf = io.StringIO()
+    df.to_csv(buf, index=False)
+    return _csv_response(buf.getvalue(), "products_template.csv")
+
+
+@router.post("/products/import-csv")
+async def import_products_csv(file: UploadFile = File(...), current_user: dict = Depends(get_current_user)):
+    """Import products from CSV. Upserts based on sku or title."""
+    contents = await file.read()
+    try:
+        if file.filename.endswith('.csv'):
+            df = pd.read_csv(io.BytesIO(contents))
+        else:
+            df = pd.read_excel(io.BytesIO(contents))
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Failed to parse file: {str(e)}")
+
+    created, updated, errors = 0, 0, []
+    for _, row in df.iterrows():
+        title = str(row.get("title", "")).strip()
+        sku = str(row.get("sku", "")).strip()
+        if not title and not sku:
+            errors.append("Missing title and sku")
+            continue
+        existing = None
+        if sku:
+            existing = await products_collection.find_one({"sku": sku})
+        if not existing and title:
+            existing = await products_collection.find_one({"title": title})
+
+        price_val = row.get("price")
+        price = float(price_val) if pd.notna(price_val) and str(price_val).strip() else None
+        images_raw = str(row.get("images", "")).strip()
+        images = [s.strip() for s in images_raw.split("|") if s.strip()] if images_raw and images_raw != "nan" else []
+
+        data = {
+            "title": title,
+            "sku": sku,
+            "part_number": str(row.get("part_number", "")).strip(),
+            "brand": str(row.get("brand", "")).strip(),
+            "category": str(row.get("category", "")).strip(),
+            "size": str(row.get("size", "")).strip(),
+            "price": price,
+            "description": str(row.get("description", "")).strip() if pd.notna(row.get("description")) else "",
+            "in_stock": str(row.get("in_stock", "")).lower() in ("true", "1", "yes"),
+            "images": images,
+            "updated_at": datetime.utcnow(),
+        }
+        if existing:
+            await products_collection.update_one({"_id": existing["_id"]}, {"$set": data})
+            updated += 1
+        else:
+            data["created_at"] = datetime.utcnow()
+            data["slug"] = re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')
+            await products_collection.insert_one(data)
+            created += 1
+
+    return {"success": True, "created": created, "updated": updated, "errors": errors[:10]}
+
+
+
 
