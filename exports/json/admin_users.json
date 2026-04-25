@@ -1,0 +1,1 @@
+[{"_id":{"$oid":"68fac58d5d5d9c3615f4b181"},"username":"admin","email":"admin@rubbertrackwholesale.com","hashed_password":"$2b$12$UshVKfXY1iNrofSg0HGemuAWlx/i5hdR7yP1BZwWiOdqExf.Xqj0i","full_name":"Admin User","is_active":true,"is_superuser":true,"created_at":{"$date":"2025-10-24T00:17:17.75Z"},"updated_at":{"$date":"2025-10-24T00:17:17.75Z"}}]

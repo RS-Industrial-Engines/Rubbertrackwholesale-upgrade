@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"size":{"$numberInt":"1"}},"name":"size_1","unique":true}],"uuid":"16496721b1614ee497f78d267eaf41fc","collectionName":"track_sizes","type":"collection"}
