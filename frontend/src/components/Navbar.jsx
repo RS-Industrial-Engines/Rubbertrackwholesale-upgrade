@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Search, ShoppingCart, Menu, X, Phone, Mail } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -7,6 +7,16 @@ import { Input } from './ui/input';
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <>
@@ -107,11 +117,24 @@ const Navbar = () => {
             <div className="pb-4">
               <div className="relative">
                 <Input
+                  data-testid="navbar-search-input"
                   type="text"
-                  placeholder="Search by track size, part number, or brand..."
+                  placeholder="Search by track size, part number, or machine model..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') handleSearch();
+                  }}
                   className="w-full bg-slate-800 border-slate-700 text-slate-200 placeholder:text-slate-400 pr-10"
+                  autoFocus
                 />
-                <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
+                <button
+                  data-testid="navbar-search-submit"
+                  onClick={handleSearch}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                >
+                  <Search className="h-5 w-5 text-slate-400 hover:text-orange-500 transition-colors" />
+                </button>
               </div>
             </div>
           )}

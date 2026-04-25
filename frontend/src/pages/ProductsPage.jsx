@@ -539,10 +539,10 @@ const ProductsPage = () => {
                           {track.size}
                         </h3>
                         <p className="text-slate-400 text-sm mb-2">
-                          Width: {track.width}mm | Pitch: {track.pitch}mm | Links: {track.links}
+                          Width: {track.width || track.size?.split('x')[0]}mm | Pitch: {track.pitch || track.size?.split('x')[1]}mm | Links: {track.links || track.size?.split('x')[2]}
                         </p>
                         <p className="text-slate-400 text-sm mb-3">
-                          {(track.width / 25.4).toFixed(1)}" x {(track.pitch / 25.4).toFixed(2)}" x {track.links}
+                          {((track.width || parseFloat(track.size?.split('x')[0])) / 25.4).toFixed(1)}" x {((track.pitch || parseFloat(track.size?.split('x')[1])) / 25.4).toFixed(2)}" x {track.links || track.size?.split('x')[2]}
                         </p>
                         <Link to="/contact">
                           <Button className="w-full bg-orange-500 hover:bg-orange-600">
