@@ -16,209 +16,141 @@ Full-stack e-commerce platform for undercarriage parts (rubber tracks, rollers, 
 - Universal search bar for machine make/model lookup
 - Track size to compatible machines lookup
 - Flexible regex matching (handles "SVL75", "SVL 75", "SVL-75")
+- Navbar search bar with navigation to products page
 
 ### 2. Admin Panel (`/admin`)
 - **Credentials**: admin / admin123
 - Full CRUD for all entities
 - CSV Import/Export functionality
 - Dashboard with statistics
+- U.S. vs Non-U.S. market segmentation tabs
 
 ### 3. Data Entities
 | Entity | Count | Description |
 |--------|-------|-------------|
-| Brands | 350 | Equipment manufacturers (CAT, Bobcat, Kubota, etc.) |
+| Brands | 350 (51 U.S. supported) | Equipment manufacturers |
 | Machine Models | 4,632 | Specific equipment models |
-| Track Sizes | 381 | Track dimensions (e.g., 300x55x82) |
+| Track Sizes | 381 | Track dimensions with width/pitch/links fields |
 | Compatibility | 4,631 | Machine-to-track-size relationships |
-| Products | 3 | Purchasable items (sample data) |
+| Part Numbers | 76 (35 rollers, 21 idlers, 20 sprockets) | Undercarriage parts |
+| Products | 3 | Sample products (mock data) |
 
 ## Data Import (Completed 2025-01-25)
 
 ### Source Files (Authoritative)
 - `compatibility_cleaned_UPDATED.csv` - Primary compatibility mapping
-- `brands_FROM_compatibility.csv` - Brand entities  
+- `brands_FROM_compatibility.csv` - Brand entities
 - `machine_models_FROM_compatibility.csv` - Machine model entities
 - `track_sizes_FROM_compatibility.csv` - Track size entities
-- `products_with_ID_column.csv` - Product catalog (3 sample items)
 
 ### Import Script
 Location: `/app/backend/import_authoritative_data.py`
-- Performs clean slate import (clears existing data)
-- Generates internal IDs
-- Creates database indexes
-- Sets `is_active=True` for compatibility entries
 
-### Import Results
-- **Total Records**: 9,997
-- **Brands**: 350 created, 0 rejected
-- **Machine Models**: 4,632 created, 0 rejected
-- **Track Sizes**: 381 created, 32 rejected (duplicates in source)
-- **Compatibility**: 4,631 created, 0 rejected
-- **Products**: 3 created, 0 rejected
+### Data Enrichment (Completed 2025-04-25)
+- `track_sizes` collection enriched with `width`, `pitch`, `links` fields parsed from `size` string
+- Script: `/app/backend/enrich_track_sizes.py`
+- All 381 records successfully enriched
 
-### Data Validation (2025-01-25) ✅
-- **Report**: `/app/backend/DATA_VALIDATION_REPORT.md`
-- **Status**: 100% DATA ALIGNMENT CONFIRMED
-- All brands, models, track sizes, compatibility, and products match source CSVs exactly
-
-## Search Behavior (Updated 2025-01-25)
+## Search Behavior
 
 ### Brand/Make Search Rules
 - **EXACT matching** for make/brand field (case-insensitive)
-- `CAT` returns only CAT entries (185 records)
-- `Bobcat` returns only Bobcat entries (161 records)
-- Partial matches like `Bob` return 0 results
-- Prevents cross-contamination between distinct brands
+- `CAT` returns only CAT entries (not Bobcat)
 
 ### Model Search Rules
-- **FLEXIBLE matching** for model field
+- **FLEXIBLE matching** using normalized field
 - Handles space/hyphen variations: `svl75` matches `SVL 75`, `SVL-75`
-- Useful for user convenience with model numbers
 
 ### Track Size Search
 - **EXACT matching** for track size strings
-- Example: `200x72x39` returns 24 compatible machines
 
 ## API Endpoints
 
 ### Public API
 - `GET /api/products` - Product listing with filters
-- `GET /api/brands` - All brands
+- `GET /api/brands` - U.S. supported brands (use `include_all=true` for all)
 - `GET /api/categories` - All categories
+- `GET /api/machine-models` - U.S. supported machine models
+- `GET /api/track-sizes` - Active track sizes (with width/pitch/links)
+- `GET /api/compatibility` - Active compatibility entries
 - `GET /api/compatibility/search?make=&model=&track_size=` - Compatibility search
-- `GET /api/compatibility/by-machine/{make}/{model}` - Machine lookup
-- `GET /api/compatibility/by-track-size/{track_size}` - Track size lookup
-- `GET /api/part-numbers/search` - Part number search
+- `GET /api/part-numbers/search?query=&part_type=&brand=&model=` - Part number search
 
 ### Admin API (Requires Auth)
 - `POST /api/admin/login` - Admin authentication
-- `GET/POST/PUT/DELETE /api/admin/brands`
-- `GET/POST/PUT/DELETE /api/admin/machine-models`
-- `GET/POST/PUT/DELETE /api/admin/track-sizes`
-- `GET/POST/PUT/DELETE /api/admin/compatibility`
-- `GET/POST/PUT/DELETE /api/admin/products`
-- `GET/POST/PUT/DELETE /api/admin/categories`
+- CRUD endpoints for all entities under `/api/admin/`
 
 ## Completed Tasks
 
 ### Phase 1: Data Import ✅
 - [x] Clean slate import from authoritative CSV files
-- [x] Create brands, machine models, track sizes entities
-- [x] Create compatibility relationships (text-based)
-- [x] Import sample products
-- [x] Set up database indexes
+- [x] Create database indexes
 - [x] Verify data integrity
+- [x] Normalized model search (model_name_normalized field)
 
-### Previous Work
-- [x] Database-driven machine models (migrated from hardcoded JS)
-- [x] Enhanced CSV import/export for admin sections
-- [x] Universal search enhancements
-- [x] Admin panel CRUD operations
+### Phase 2: U.S. Market Segmentation ✅
+- [x] `is_us_supported` boolean flag on brands and machine models
+- [x] API filtering by U.S. supported brands
+- [x] Admin UI tabs for U.S. vs Non-U.S. records
+
+### Phase 3: Bug Fixes (2025-04-25) ✅
+- [x] Fix NaN track properties (enriched track_sizes with width/pitch/links)
+- [x] Fix Navbar search bar (wired up with state, navigation)
+- [x] Fix category pages showing no data (DB enrichment fixed compatibility chart)
+- [x] All frontend tests passing (11/11)
 
 ## Pending Tasks
 
 ### P0 (High Priority)
-- [ ] Category data import (user to provide `categories_with_ID_column.csv`)
-- [ ] Verify admin panel loads data correctly
+- [ ] Complete Grizzly Rubber Tracks web scraping for sprocket data
+- [ ] Data enrichment for additional part_numbers (sprockets, rollers from more brands)
 
-### P1 (Medium Priority)  
-- [ ] Complete "Enhanced Basic CSV" for remaining admin sections (Products, Categories)
-- [ ] Add validation/reconciliation workflow for compatibility data
+### P1 (Medium Priority)
+- [ ] Product catalog expansion (only 3 mock products currently)
 
 ### P2 (Future/Backlog)
-- [ ] SEO & Architecture Major Upgrade (SSR with Next.js, clean URLs) - **DEFERRED**
-- [ ] Enterprise-grade CSV features (relationship resolution, dry-run)
-- [ ] Product catalog expansion
-- [ ] User authentication for frontend
+- [ ] SEO & Architecture Upgrade (SSR with Next.js, clean URLs) - **BLOCKED: Needs user approval**
+- [ ] Replace hash routing with browser routing
+- [ ] Abstract duplicated CSV import/export logic in admin components
 
 ## Database Schema
 
-### brands
+### track_sizes (Updated 2025-04-25)
 ```javascript
 {
   _id: ObjectId,
-  name: String (unique),
-  slug: String,
-  logo: String,
-  description: String,
-  seo_title: String,
-  seo_description: String,
-  created_at: DateTime,
-  updated_at: DateTime
-}
-```
-
-### machine_models
-```javascript
-{
-  _id: ObjectId,
-  brand: String,
-  model_name: String,
-  full_name: String,
-  equipment_type: String,
-  description: String,
-  image_url: String,
-  created_at: DateTime,
-  updated_at: DateTime
-}
-// Unique index: brand + model_name
-```
-
-### track_sizes
-```javascript
-{
-  _id: ObjectId,
-  size: String (unique, e.g., "300x55x82"),
+  size: String (e.g., "320x86x52"),
+  width: Number,    // Extracted from size
+  pitch: Number,    // Extracted from size
+  links: Number,    // Extracted from size
   price: Number,
   width_variant: String,
-  inventory_count: Number,
   is_in_stock: Boolean,
-  description: String,
-  created_at: DateTime,
-  updated_at: DateTime
-}
-```
-
-### compatibility
-```javascript
-{
-  _id: ObjectId,
-  make: String,
-  model: String,
-  track_sizes: [String],  // Array of size strings
-  track_sizes_display: String,
-  track_sizes_canonical: String,
   is_active: Boolean,
   created_at: DateTime,
   updated_at: DateTime
 }
-// Unique index: make + model
 ```
 
-### products
+### part_numbers
 ```javascript
 {
   _id: ObjectId,
-  sku: String (unique),
-  name: String,
-  slug: String,
-  description: String,
-  price: Number,
   brand: String,
-  category: String,
-  size: String,
   part_number: String,
-  in_stock: Boolean,
-  stock_quantity: Number,
-  images: [String],
-  created_at: DateTime,
-  updated_at: DateTime
+  part_type: String (roller|sprocket|idler),
+  part_subtype: String,
+  product_name: String,
+  compatible_models: [String],
+  price: Number,
+  is_active: Boolean
 }
 ```
 
 ## Files of Reference
-- `/app/backend/import_authoritative_data.py` - Main import script
-- `/app/backend/routes/admin.py` - Admin API routes
+- `/app/backend/enrich_track_sizes.py` - Track size enrichment script
 - `/app/backend/routes/public.py` - Public API routes
-- `/app/frontend/src/pages/admin/*.jsx` - Admin panel components
-- `/app/frontend/src/pages/ProductsPage.jsx` - Product search page
+- `/app/frontend/src/components/Navbar.jsx` - Navigation with search
+- `/app/frontend/src/components/CategoryNav.jsx` - Category navigation with dropdowns
+- `/app/frontend/src/components/RubberTrackCompatibility.jsx` - Compatibility chart
+- `/app/frontend/src/pages/ProductsPage.jsx` - Product search/category page
