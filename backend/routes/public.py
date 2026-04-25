@@ -715,7 +715,49 @@ async def search_public_compatibility(
         contains_query = {**base_query, "model_normalized": {"$regex": re.escape(normalized_query), "$options": "i"}}
         contains_results = await compatibility_collection.find(contains_query).sort([("make", 1), ("model", 1)]).to_list(length=500)
         
-        return [serialize_doc(entry) for entry in contains_results]
+        if contains_results:
+            return [serialize_doc(entry) for entry in contains_results]
+        
+        # Priority 3: If no make was provided, try to detect brand in the search term
+        # e.g. "john deere 35d" -> make="John Deere", model="35D"
+        if not make:
+            known_makes = await compatibility_collection.distinct("make")
+            search_lower = model.strip().lower()
+            
+            best_match_make = None
+            best_match_model = None
+            best_make_len = 0
+            
+            for known_make in known_makes:
+                make_lower = known_make.lower()
+                if search_lower.startswith(make_lower):
+                    remainder = search_lower[len(make_lower):].strip()
+                    if remainder and len(make_lower) > best_make_len:
+                        best_match_make = known_make
+                        best_match_model = remainder
+                        best_make_len = len(make_lower)
+            
+            if best_match_make and best_match_model:
+                split_normalized = normalize_for_search(best_match_model)
+                split_query = {"is_active": True, "make": {"$regex": f"^{re.escape(best_match_make)}$", "$options": "i"}}
+                if not include_all and us_brands:
+                    make_lower_check = best_match_make.lower()
+                    if not any(b.lower() == make_lower_check for b in us_brands):
+                        return []
+                
+                # Try prefix match
+                split_prefix = {**split_query, "model_normalized": {"$regex": f"^{re.escape(split_normalized)}", "$options": "i"}}
+                split_results = await compatibility_collection.find(split_prefix).sort([("make", 1), ("model", 1)]).to_list(length=500)
+                if split_results:
+                    return [serialize_doc(entry) for entry in split_results]
+                
+                # Try contains match
+                split_contains = {**split_query, "model_normalized": {"$regex": re.escape(split_normalized), "$options": "i"}}
+                split_results = await compatibility_collection.find(split_contains).sort([("make", 1), ("model", 1)]).to_list(length=500)
+                if split_results:
+                    return [serialize_doc(entry) for entry in split_results]
+        
+        return []
     
     if make:
         # Make-only search - return all models for this brand
