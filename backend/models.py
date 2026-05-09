@@ -13,7 +13,7 @@ class Brand(BaseModel):
     name: str
     logo: Optional[str] = None
     description: Optional[str] = None
-    slug: str
+    slug: Optional[str] = None
     seo_title: Optional[str] = None
     seo_description: Optional[str] = None
     seo_keywords: Optional[List[str]] = []
@@ -87,11 +87,12 @@ class Compatibility(BaseModel):
 class Category(BaseModel):
     id: Optional[PyObjectId] = Field(alias="_id", default=None)
     name: str
-    slug: str
+    slug: Optional[str] = None
+    image: Optional[str] = None
     description: Optional[str] = None
     seo_title: Optional[str] = None
     seo_description: Optional[str] = None
-    seo_keywords: Optional[List[str]] = []
+    seo_keywords: Optional[Any] = []
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
 
