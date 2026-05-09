@@ -252,12 +252,17 @@ async def get_all_categories(current_user = Depends(get_current_user)):
 @router.post("/categories")
 async def create_category(category: Category, current_user = Depends(get_current_user)):
     """Create new category"""
+    print(f"DEBUG: Creating category: {category.name}")
     category.slug = create_slug(category.name)
     
     # Check if slug already exists
     existing = await categories_collection.find_one({"slug": category.slug})
     if existing:
         raise HTTPException(status_code=400, detail="Category with this name already exists")
+    
+    # Handle seo_keywords if it's a string
+    if isinstance(category.seo_keywords, str):
+        category.seo_keywords = [k.strip() for k in category.seo_keywords.split(",") if k.strip()]
     
     if not category.seo_title:
         category.seo_title = f"{category.name} | Rubber Track Wholesale"

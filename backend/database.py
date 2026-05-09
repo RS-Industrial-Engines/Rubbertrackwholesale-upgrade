@@ -65,4 +65,4 @@ async def init_db():
     await blogs_collection.create_index("slug", unique=True)
     await blogs_collection.create_index("category_id")
     
-    print("✅ Database indexes created successfully")
+    print("Database indexes created successfully")
