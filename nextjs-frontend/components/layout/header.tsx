@@ -9,12 +9,20 @@ import { Input } from "@/components/ui/input";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/products", label: "Products" },
+  { href: "/rubber-tracks", label: "Rubber Tracks" },
+  { href: "/machines", label: "By Machine" },
+  { href: "/track-size", label: "By Track Size" },
   { href: "/brands", label: "Brands" },
-  { href: "/blog", label: "Blog" },
   { href: "/faqs", label: "FAQs" },
-  { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+];
+
+const productDropdown = [
+  { href: "/rubber-tracks", label: "Rubber Tracks" },
+  { href: "/bottom-rollers", label: "Bottom Rollers" },
+  { href: "/sprockets", label: "Sprockets" },
+  { href: "/idlers", label: "Idlers" },
+  { href: "/final-drives", label: "Final Drives" },
 ];
 
 export function Header() {

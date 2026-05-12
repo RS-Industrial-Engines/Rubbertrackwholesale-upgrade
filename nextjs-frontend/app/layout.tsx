@@ -11,31 +11,75 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rubbertrackwholesale.com"),
   title: {
-    default: "Rubber Track Wholesale | Premium Rubber Tracks & Undercarriage Parts",
+    default: "Rubber Tracks Houston | Wholesale Rubber Tracks & Undercarriage Parts | Rubber Track Wholesale",
     template: "%s | Rubber Track Wholesale",
   },
   description:
-    "Wholesale prices on top-quality rubber tracks and undercarriage parts for all major brands. Fast shipping from 7 warehouses nationwide.",
+    "Houston's #1 source for wholesale rubber tracks and undercarriage parts. Same-day shipping on Bobcat, Kubota, Caterpillar, and 50+ brands. 7 warehouses, lowest prices guaranteed.",
   keywords: [
+    "rubber tracks Houston",
     "rubber tracks",
     "undercarriage parts",
     "sprockets",
     "idlers",
-    "rollers",
-    "Bobcat tracks",
-    "Kubota tracks",
-    "Caterpillar tracks",
+    "bottom rollers",
+    "final drives",
+    "Bobcat rubber tracks",
+    "Kubota rubber tracks",
+    "Caterpillar rubber tracks",
+    "CAT rubber tracks",
+    "John Deere rubber tracks",
+    "Takeuchi rubber tracks",
     "skid steer tracks",
     "excavator tracks",
+    "mini excavator tracks",
+    "compact track loader tracks",
+    "CTL tracks",
+    "wholesale rubber tracks",
   ],
+  authors: [{ name: "Rubber Track Wholesale" }],
+  creator: "Rubber Track Wholesale",
+  publisher: "Rubber Track Wholesale",
+  formatDetection: {
+    email: true,
+    address: true,
+    telephone: true,
+  },
   openGraph: {
-    title: "Rubber Track Wholesale | Premium Rubber Tracks & Undercarriage Parts",
+    title: "Rubber Tracks Houston | Wholesale Rubber Tracks & Undercarriage Parts",
     description:
-      "Wholesale prices on top-quality rubber tracks and undercarriage parts for all major brands.",
+      "Houston's #1 source for wholesale rubber tracks and undercarriage parts. Same-day shipping, 50+ brands, lowest prices guaranteed.",
     type: "website",
     locale: "en_US",
     siteName: "Rubber Track Wholesale",
+    url: "https://rubbertrackwholesale.com",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rubber Tracks Houston | Rubber Track Wholesale",
+    description:
+      "Wholesale rubber tracks and undercarriage parts. Same-day shipping from 7 warehouses nationwide.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    // Add these when available
+    // google: 'your-google-verification-code',
+    // yandex: 'your-yandex-verification-code',
+  },
+  alternates: {
+    canonical: "https://rubbertrackwholesale.com",
   },
 };
 

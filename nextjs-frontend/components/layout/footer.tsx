@@ -2,18 +2,20 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
 
 const quickLinks = [
-  { href: "/products", label: "All Products" },
+  { href: "/rubber-tracks", label: "Rubber Tracks" },
+  { href: "/machines", label: "Shop by Machine" },
+  { href: "/track-size", label: "Shop by Track Size" },
   { href: "/brands", label: "Brands" },
-  { href: "/about", label: "About Us" },
+  { href: "/faqs", label: "FAQs" },
   { href: "/contact", label: "Contact" },
 ];
 
 const categories = [
-  { href: "/products?category=rubber-tracks", label: "Rubber Tracks" },
-  { href: "/products?category=undercarriage-parts", label: "Undercarriage Parts" },
-  { href: "/products?category=rollers", label: "Rollers" },
-  { href: "/products?category=sprockets", label: "Sprockets" },
-  { href: "/products?category=idlers", label: "Idlers" },
+  { href: "/rubber-tracks", label: "Rubber Tracks" },
+  { href: "/bottom-rollers", label: "Bottom Rollers" },
+  { href: "/sprockets", label: "Sprockets" },
+  { href: "/idlers", label: "Idlers" },
+  { href: "/final-drives", label: "Final Drives" },
 ];
 
 export function Footer() {
