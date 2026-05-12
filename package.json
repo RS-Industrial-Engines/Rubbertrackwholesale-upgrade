@@ -8,5 +8,8 @@
     "build": "pnpm --filter nextjs-frontend build",
     "start": "pnpm --filter nextjs-frontend start",
     "lint": "pnpm --filter nextjs-frontend lint"
+  },
+  "dependencies": {
+    "next": "^15.5.18"
   }
 }
