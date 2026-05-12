@@ -127,7 +127,7 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
       <TrackSizeDetailContent
         size={displaySize}
         slug={size}
-        trackSizeData={trackSizeData}
+        trackSizeData={trackSizeData ?? null}
         dimensions={dimensions}
         compatibleMachines={compatibleMachines}
         products={products}
