@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getTrackSizes, getTrackSizesGrouped } from "@/lib/api";
+import { getTrackSizes, getTrackSizesGrouped, TrackSize, TrackSizeGrouped } from "@/lib/api";
 import { TrackSizesContent } from "@/components/track-sizes/track-sizes-content";
 import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema";
 
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default async function TrackSizesPage() {
-  let trackSizes = [];
-  let trackSizesGrouped = [];
+  let trackSizes: TrackSize[] = [];
+  let trackSizesGrouped: TrackSizeGrouped[] = [];
 
   try {
     [trackSizes, trackSizesGrouped] = await Promise.all([

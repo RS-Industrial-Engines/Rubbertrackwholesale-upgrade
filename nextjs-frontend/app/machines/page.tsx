@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getMachineModels, getMachineModelBrands } from "@/lib/api";
+import { getMachineModels, getMachineModelBrands, MachineModel } from "@/lib/api";
 import { MachinesContent } from "@/components/machines/machines-content";
 import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema";
 
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MachinesPage() {
-  let machines = [];
+  let machines: MachineModel[] = [];
   let brands: string[] = [];
 
   try {
