@@ -1,0 +1,16 @@
+{
+  "name": "rubbertrackwholesale-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix nextjs-frontend",
+    "build": "npm run build --prefix nextjs-frontend",
+    "start": "npm run start --prefix nextjs-frontend",
+    "lint": "npm run lint --prefix nextjs-frontend"
+  },
+  "dependencies": {
+    "lucide-react": "^1.14.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6"
+  }
+}
