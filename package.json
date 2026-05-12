@@ -2,11 +2,11 @@
   "name": "rubbertrackwholesale-monorepo",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.33.0",
   "scripts": {
-    "dev": "cd nextjs-frontend && npm run dev",
-    "build": "cd nextjs-frontend && npm run build",
-    "start": "cd nextjs-frontend && npm run start",
-    "lint": "cd nextjs-frontend && npm run lint",
-    "postinstall": "cd nextjs-frontend && npm install"
+    "dev": "pnpm --filter nextjs-frontend dev",
+    "build": "pnpm --filter nextjs-frontend build",
+    "start": "pnpm --filter nextjs-frontend start",
+    "lint": "pnpm --filter nextjs-frontend lint"
   }
 }
