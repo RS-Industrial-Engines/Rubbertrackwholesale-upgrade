@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getProducts, getCategories, getMachineModelBrands } from "@/lib/api";
+import { getProducts, getCategories, getMachineModelBrands, Product } from "@/lib/api";
 import { CategoryPageContent } from "@/components/categories/category-page-content";
 import {
   generateBreadcrumbSchema,
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RubberTracksPage() {
-  let products = [];
+  let products: Product[] = [];
   let brands: string[] = [];
 
   try {

@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getProducts, getMachineModelBrands } from "@/lib/api";
+import { getProducts, getMachineModelBrands, Product } from "@/lib/api";
 import { CategoryPageContent } from "@/components/categories/category-page-content";
 import {
   generateBreadcrumbSchema,
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 export default async function IdlersPage() {
-  let products = [];
+  let products: Product[] = [];
   let brands: string[] = [];
 
   try {
