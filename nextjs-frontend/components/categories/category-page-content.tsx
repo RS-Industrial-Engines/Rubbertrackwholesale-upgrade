@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Search, Package, Phone, Filter, ChevronRight } from "lucide-react";
+import { Search, Package, Phone, Filter, ChevronRight, Wrench } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,6 +13,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { Product } from "@/lib/api";
+import {
+  type FallbackProduct,
+  getFallbackProducts,
+  searchFallbackProducts,
+  filterFallbackProductsByBrand,
+} from "@/lib/data/products";
+
+// Popular brands for filtering
+const POPULAR_BRANDS = [
+  "Kubota",
+  "Bobcat",
+  "CAT",
+  "John Deere",
+  "Takeuchi",
+  "Case",
+  "New Holland",
+  "Yanmar",
+  "Hitachi",
+  "Ditch Witch",
+  "Vermeer",
+  "Toro",
+];
 
 interface CategoryPageContentProps {
   title: string;
@@ -45,30 +67,59 @@ export function CategoryPageContent({
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
 
+  // Get fallback products for this category
+  const fallbackProducts = useMemo(() => {
+    return getFallbackProducts(categorySlug);
+  }, [categorySlug]);
+
+  // Use API products if available, otherwise use fallback
+  const hasApiProducts = products.length > 0;
+
+  // Filter and search products
   const filteredProducts = useMemo(() => {
-    let filtered = products;
+    if (hasApiProducts) {
+      // Use API products
+      let filtered = products;
 
-    if (selectedBrand) {
-      filtered = filtered.filter(
-        (p) =>
-          p.brand_name?.toLowerCase() === selectedBrand.toLowerCase() ||
-          p.brand?.name?.toLowerCase() === selectedBrand.toLowerCase()
-      );
+      if (selectedBrand) {
+        filtered = filtered.filter(
+          (p) =>
+            p.brand_name?.toLowerCase() === selectedBrand.toLowerCase() ||
+            p.brand?.name?.toLowerCase() === selectedBrand.toLowerCase()
+        );
+      }
+
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        filtered = filtered.filter(
+          (p) =>
+            p.title?.toLowerCase().includes(query) ||
+            p.name?.toLowerCase().includes(query) ||
+            p.sku?.toLowerCase().includes(query) ||
+            p.part_number?.toLowerCase().includes(query) ||
+            p.size?.toLowerCase().includes(query)
+        );
+      }
+
+      return filtered;
+    } else {
+      // Use fallback products
+      let filtered = fallbackProducts;
+
+      if (selectedBrand) {
+        filtered = filterFallbackProductsByBrand(filtered, selectedBrand);
+      }
+
+      if (searchQuery) {
+        filtered = searchFallbackProducts(filtered, searchQuery);
+      }
+
+      return filtered;
     }
+  }, [products, fallbackProducts, selectedBrand, searchQuery, hasApiProducts]);
 
-    if (searchQuery) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (p) =>
-          p.title?.toLowerCase().includes(query) ||
-          p.name?.toLowerCase().includes(query) ||
-          p.sku?.toLowerCase().includes(query) ||
-          p.part_number?.toLowerCase().includes(query)
-      );
-    }
-
-    return filtered;
-  }, [products, selectedBrand, searchQuery]);
+  // Get display brands (use POPULAR_BRANDS if no API brands)
+  const displayBrands = brands.length > 0 ? brands.slice(0, 12) : POPULAR_BRANDS;
 
   return (
     <div className="min-h-screen bg-background">
@@ -102,12 +153,15 @@ export function CategoryPageContent({
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder={`Search ${title.toLowerCase()}...`}
+                placeholder="Search by machine, track size, or part number..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 h-14 text-lg bg-card border-border"
               />
             </div>
+            <p className="text-sm text-muted-foreground mt-2">
+              Try: &quot;Kubota SVL75&quot;, &quot;400x86x52&quot;, &quot;Bobcat&quot;
+            </p>
           </div>
         </div>
       </section>
@@ -139,7 +193,7 @@ export function CategoryPageContent({
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center gap-2 mb-4">
             <Filter className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium text-foreground">Filter by Brand:</span>
+            <span className="text-sm font-medium text-foreground">Filter by Machine Brand:</span>
           </div>
           <div className="flex flex-wrap gap-2">
             <Button
@@ -149,7 +203,7 @@ export function CategoryPageContent({
             >
               All Brands
             </Button>
-            {brands.slice(0, 12).map((brand) => (
+            {displayBrands.map((brand) => (
               <Button
                 key={brand}
                 variant={selectedBrand === brand ? "default" : "outline"}
@@ -170,6 +224,11 @@ export function CategoryPageContent({
             <h2 className="text-2xl font-bold text-foreground">
               {filteredProducts.length} {title} Available
             </h2>
+            {!hasApiProducts && (
+              <span className="text-sm text-muted-foreground">
+                Showing popular options
+              </span>
+            )}
           </div>
 
           {filteredProducts.length === 0 ? (
@@ -180,16 +239,21 @@ export function CategoryPageContent({
                   No products found
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Try adjusting your search or filter criteria.
+                  Try adjusting your search or filter criteria, or contact us for help finding what you need.
                 </p>
-                <Button onClick={() => { setSearchQuery(""); setSelectedBrand(null); }}>
-                  Clear Filters
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button onClick={() => { setSearchQuery(""); setSelectedBrand(null); }}>
+                    Clear Filters
+                  </Button>
+                  <Button variant="outline" asChild>
+                    <Link href="/contact">Request a Quote</Link>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => (
+              {(hasApiProducts ? filteredProducts as Product[] : []).map((product: Product) => (
                 <Link
                   key={product.id}
                   href={`/products/${product.id}`}
@@ -237,6 +301,59 @@ export function CategoryPageContent({
                               In Stock
                             </span>
                           )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+              {/* Render fallback products */}
+              {(!hasApiProducts ? filteredProducts as FallbackProduct[] : []).map((product: FallbackProduct) => (
+                <Link
+                  key={product.id}
+                  href={product.track_size ? `/track-size/${product.track_size.toLowerCase()}` : `/listing/${product.id}`}
+                  className="group"
+                >
+                  <Card className="h-full hover:border-primary transition-colors">
+                    <CardContent className="p-4">
+                      {/* Compact specs card instead of empty image */}
+                      <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-muted rounded-lg mb-4 p-4 flex flex-col justify-between">
+                        <div className="flex items-start justify-between">
+                          <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">
+                            {product.brand_name}
+                          </span>
+                          {product.in_stock && (
+                            <span className="text-xs font-medium bg-green-500/10 text-green-500 px-2 py-1 rounded">
+                              In Stock
+                            </span>
+                          )}
+                        </div>
+                        {product.track_size ? (
+                          <div className="text-center">
+                            <p className="text-3xl font-bold text-foreground">{product.track_size}</p>
+                            <p className="text-sm text-muted-foreground mt-1">Track Size</p>
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center">
+                            <Wrench className="h-12 w-12 text-muted-foreground" />
+                          </div>
+                        )}
+                        <p className="text-xs text-muted-foreground text-center truncate">
+                          {product.compatible_machines.slice(0, 3).join(", ")}
+                          {product.compatible_machines.length > 3 && " +more"}
+                        </p>
+                      </div>
+                      <div className="space-y-2">
+                        <h3 className="font-semibold text-foreground group-hover:text-primary line-clamp-2 min-h-[3rem]">
+                          {product.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-2">
+                          {product.description.substring(0, 100)}...
+                        </p>
+                        <div className="flex items-center justify-between pt-2">
+                          <p className="text-sm font-medium text-primary">
+                            Request Quote
+                          </p>
                         </div>
                       </div>
                     </CardContent>
