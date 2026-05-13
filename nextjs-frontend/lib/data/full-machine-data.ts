@@ -5443,11 +5443,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|PT 50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|PT 60": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|PT 80": [
     "18x4x201",
@@ -5459,11 +5459,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|RC 50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|RC 60": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|RC 85": [
     "18x4x200",
@@ -5475,11 +5475,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|RT 50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|RT 65": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|RT 75": [
     "18x4x201",
@@ -5487,7 +5487,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|SC-50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|SR-80": [
     "18x4x201",
@@ -5495,11 +5495,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|ST-50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ASV|VT-70": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "ATN|ATN | PIAF450 (Platform - non-marking tracks)": [
     "230x96x32",
@@ -19451,11 +19451,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Terex|PT-50": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "Terex|PT-60": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "Terex|PT-75": [
     "18x4x201",
@@ -19467,11 +19467,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Terex|R160T": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "Terex|R190T": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "Terex|R350T": [
     "18x4x201",
@@ -19853,7 +19853,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Vermeer|RTX 450": [
     "15x4x166",
-    "381x101.6x4216"
+    "381x101.6x42"
   ],
   "Vermeer|S400TX (Mini Compact Track Loader)": [
     "180x72x39"
@@ -22000,7 +22000,7 @@ export const fullTrackSizes: string[] = [
   "375x86x56",
   "380x86x52",
   "381x100x42",
-  "381x101.6x4216",
+  "381x101.6x42",
   "400x132x37",
   "400x135x38",
   "400x135x39",
@@ -22605,22 +22605,51 @@ export function searchMachines(query: string): { brand: string; model: string; t
 /**
  * Get machines compatible with a track size
  */
+/**
+ * Get all machines compatible with a specific track size.
+ * This performs a complete reverse lookup across ALL machines in fullMachineCompatibility.
+ * 
+ * Handles:
+ * - Multi-size strings separated by ; , | /
+ * - Inch-equivalent formats (18x4x56)
+ * - Decimal formats (381x101.6x42)
+ * - Whitespace variations
+ */
 export function getMachinesForTrackSize(trackSize: string): { brand: string; model: string }[] {
-  const normalizedSize = normalizeForMatching(trackSize);
+  // Normalize the input track size for comparison
+  const normalizedInput = normalizeForMatching(trackSize);
   const results: { brand: string; model: string }[] = [];
   
+  // Iterate through every machine in the compatibility map
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
     const [brand, model] = key.split('|');
     
-    for (const size of sizes) {
-      if (normalizeForMatching(size) === normalizedSize) {
-        results.push({ brand, model });
+    // Check each size in the machine's compatible sizes array
+    for (const sizeEntry of sizes) {
+      // Split multi-size strings by common delimiters: ; , | /
+      const individualSizes = sizeEntry.split(/[;,|/]/).map(s => s.trim()).filter(Boolean);
+      
+      // Check each individual size
+      for (const individualSize of individualSizes) {
+        if (normalizeForMatching(individualSize) === normalizedInput) {
+          results.push({ brand, model });
+          break; // Found a match for this machine, no need to check other sizes
+        }
+      }
+      
+      // If we already found this machine, don't check more sizes
+      if (results.length > 0 && results[results.length - 1].brand === brand && results[results.length - 1].model === model) {
         break;
       }
     }
   }
   
-  return results;
+  // Sort results alphabetically by brand, then by model
+  return results.sort((a, b) => {
+    const brandCompare = a.brand.localeCompare(b.brand);
+    if (brandCompare !== 0) return brandCompare;
+    return a.model.localeCompare(b.model);
+  });
 }
 
 /**

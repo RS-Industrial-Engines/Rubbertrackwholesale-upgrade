@@ -12,8 +12,8 @@ import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-deta
 import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
 import {
   trackSizes as fallbackTrackSizesData,
-  getMachinesByTrackSize,
 } from "@/lib/data/machine-models";
+import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -40,12 +40,13 @@ function getFallbackTrackSizeData(size: string): TrackSize | null {
   };
 }
 
-// Get fallback compatible machines
-function getFallbackCompatibleMachines(size: string): MachineModel[] {
-  const machines = getMachinesByTrackSize(size);
+// Get compatible machines using full-machine-data with complete reverse lookup
+// This is the PRIMARY source - it has the complete compatibility data
+function getCompatibleMachinesFromData(size: string): MachineModel[] {
+  const machines = getMachinesForTrackSize(size);
   return machines.map((m, i) => ({
     id: i + 1,
-    make: m.make,
+    make: m.brand,
     model: m.model,
     equipment_type: "Compact Track Loader",
   }));
@@ -122,14 +123,26 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
       getProducts({ track_size: formattedSize }).catch(() => []),
     ]);
     
-    compatibleMachines = apiCompatibleMachines && apiCompatibleMachines.length > 0
-      ? apiCompatibleMachines
-      : getFallbackCompatibleMachines(formattedSize);
+    // ALWAYS use full-machine-data as primary source - it has complete compatibility data
+    // API results are supplementary and may be incomplete
+    compatibleMachines = getCompatibleMachinesFromData(formattedSize);
+    
+    // If API returns results that aren't in our data, merge them
+    if (apiCompatibleMachines && apiCompatibleMachines.length > 0) {
+      const existingKeys = new Set(compatibleMachines.map(m => `${m.make}|${m.model}`.toLowerCase()));
+      for (const apiMachine of apiCompatibleMachines) {
+        const key = `${apiMachine.make}|${apiMachine.model}`.toLowerCase();
+        if (!existingKeys.has(key)) {
+          compatibleMachines.push(apiMachine);
+        }
+      }
+    }
+    
     products = apiProducts || [];
   } catch (error) {
-    console.error("Failed to fetch track size data, using fallback:", error);
+    console.error("Failed to fetch track size data, using local data:", error);
     trackSizeData = getFallbackTrackSizeData(formattedSize);
-    compatibleMachines = getFallbackCompatibleMachines(formattedSize);
+    compatibleMachines = getCompatibleMachinesFromData(formattedSize);
   }
 
   // Allow page to render even without exact track size data if dimensions can be parsed
