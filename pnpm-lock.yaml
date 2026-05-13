@@ -11,6 +11,9 @@ importers:
       next:
         specifier: ^15.5.18
         version: 15.5.18(react-dom@19.2.6(react@19.2.6))(react@19.2.6)
+      swr:
+        specifier: ^2.4.1
+        version: 2.4.1(react@19.2.6)
 
   nextjs-frontend:
     dependencies:

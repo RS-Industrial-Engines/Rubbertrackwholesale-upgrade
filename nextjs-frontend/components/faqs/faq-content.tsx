@@ -14,42 +14,42 @@ import { API, fetcher, type FAQ } from "@/lib/api";
 // Fallback FAQs if API is not available
 const fallbackFAQs: FAQ[] = [
   {
-    id: "1",
+    id: 1,
     question: "What brands do you carry rubber tracks for?",
     answer:
       "We carry rubber tracks for all major brands including Bobcat, Kubota, Caterpillar, Case, Gehl, ASV, JCB, Yanmar, Takeuchi, Hitachi, Komatsu, and many more. If you don't see your brand listed, contact us and we'll help you find what you need.",
     category: "Products",
   },
   {
-    id: "2",
+    id: 2,
     question: "How do I know which rubber track size fits my machine?",
     answer:
       "You can search by your machine's brand and model number on our website. Alternatively, you can measure your existing tracks (width x pitch x number of links) or check your machine's manual. Our team is also available to help you find the right fit.",
     category: "Products",
   },
   {
-    id: "3",
+    id: 3,
     question: "What is your shipping policy?",
     answer:
       "We offer free shipping on orders over $500 to commercial addresses in the contiguous United States. Orders typically ship the same day if placed before 2PM EST. We ship from 7 strategically located warehouses for fast delivery.",
     category: "Shipping",
   },
   {
-    id: "4",
+    id: 4,
     question: "What warranty do you offer?",
     answer:
       "All our rubber tracks come with a 1-year warranty against manufacturing defects. Undercarriage parts like rollers, idlers, and sprockets carry a 6-month warranty. Contact us for warranty claims and we'll take care of you.",
     category: "Warranty",
   },
   {
-    id: "5",
+    id: 5,
     question: "How do I request a quote?",
     answer:
       "You can request a quote by calling us at 1-800-RUBBER-TRACK, emailing quotes@rubbertrackwholesale.com, or using our contact form. Please include your machine's brand, model, and the parts you need for the fastest response.",
     category: "Orders",
   },
   {
-    id: "6",
+    id: 6,
     question: "Do you offer bulk discounts?",
     answer:
       "Yes! We offer volume discounts for fleet purchases and regular customers. Contact our sales team to discuss pricing for larger orders or ongoing supply agreements.",
@@ -85,7 +85,7 @@ export function FAQContent() {
             {faqs.map((faq) => (
               <AccordionItem
                 key={faq.id}
-                value={faq.id}
+                value={String(faq.id)}
                 className="border-border"
               >
                 <AccordionTrigger className="text-foreground hover:text-primary text-left">

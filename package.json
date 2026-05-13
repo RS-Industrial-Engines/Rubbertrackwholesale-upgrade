@@ -10,6 +10,7 @@
     "lint": "pnpm --filter nextjs-frontend lint"
   },
   "dependencies": {
-    "next": "^15.5.18"
+    "next": "^15.5.18",
+    "swr": "^2.4.1"
   }
 }
