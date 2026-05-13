@@ -35,28 +35,28 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Parse a machine from the slug with normalized matching
+// Parse a machine from the slug with EXACT matching
+// CRITICAL: john-deere-325g MUST match only "John Deere 325G", NOT "John Deere 325"
 function findMachineFromSlug(slug: string): { make: string; model: string; equipmentType?: string } | null {
-  // Try to parse the slug to extract make/model
-  const parsed = parseMachineSlugClean(slug);
-  if (!parsed) return null;
-  
-  // Find the actual machine in our data
   const slugNormalized = normalizeForMatching(slug);
   
+  // First pass: find EXACT match by checking clean slugs
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
-      // Generate what the clean slug would be
       const cleanSlug = createMachineSlug(brand, model);
+      
+      // Exact slug match
+      if (cleanSlug === slug) {
+        return { 
+          make: brand, 
+          model,
+          equipmentType: getEquipmentType(model),
+        };
+      }
+      
+      // Normalized exact match (handles case differences)
       const cleanNormalized = normalizeForMatching(cleanSlug);
-      
-      // Also check against the original messy slug (for redirect detection)
-      const messyPattern = `${brand}-${model}`.toLowerCase().replace(/\s+/g, "-");
-      
-      if (cleanSlug === slug || 
-          cleanNormalized === slugNormalized ||
-          messyPattern.includes(slugNormalized) ||
-          slugNormalized.includes(normalizeForMatching(`${brand}${model}`))) {
+      if (cleanNormalized === slugNormalized) {
         return { 
           make: brand, 
           model,
@@ -66,12 +66,36 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
     }
   }
   
-  // Fall back to parsed data if no exact match found
-  return {
-    make: parsed.make,
-    model: parsed.model,
-    equipmentType: getEquipmentType(parsed.model),
-  };
+  // Second pass: try parsing the slug directly
+  const parsed = parseMachineSlugClean(slug);
+  if (parsed) {
+    // Verify the parsed result exists in our data with EXACT match
+    const parsedMakeNorm = normalizeForMatching(parsed.make);
+    const parsedModelNorm = normalizeForMatching(parsed.model);
+    
+    for (const [brand, models] of Object.entries(fullMachineModels)) {
+      if (normalizeForMatching(brand) === parsedMakeNorm) {
+        for (const model of models) {
+          if (normalizeForMatching(model) === parsedModelNorm) {
+            return {
+              make: brand,
+              model,
+              equipmentType: getEquipmentType(model),
+            };
+          }
+        }
+      }
+    }
+    
+    // Return parsed data even if not in our database (might be a valid machine we don't have)
+    return {
+      make: parsed.make,
+      model: parsed.model,
+      equipmentType: getEquipmentType(parsed.model),
+    };
+  }
+  
+  return null;
 }
 
 // Determine equipment type from model name patterns
@@ -97,36 +121,38 @@ function getEquipmentType(model: string): string {
 }
 
 // Get fallback compatibility data for a machine
+// CRITICAL: Must use EXACT matching - "325" must NOT return "325G" data
 function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
   const trackSizes = getTrackSizesForMachine(make, model);
   
   if (trackSizes.length === 0) {
-    // Try variations of the model name
+    // Try EXACT match only - no fuzzy matching allowed
+    const normalizedMake = normalizeForMatching(make);
     const normalizedModel = normalizeForMatching(model);
     
     for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
       const [keyBrand, keyModel] = key.split("|");
-      if (normalizeForMatching(keyBrand) === normalizeForMatching(make)) {
-        if (normalizeForMatching(keyModel) === normalizedModel ||
-            normalizeForMatching(keyModel).includes(normalizedModel) ||
-            normalizedModel.includes(normalizeForMatching(keyModel))) {
-          return {
-            machine: {
-              id: 1,
-              make: keyBrand,
-              model: keyModel,
-              equipment_type: getEquipmentType(keyModel),
-            },
-            track_sizes: sizes.map((size, i) => ({
-              id: i + 1,
-              size,
-              width: parseInt(size.split("x")[0]) || 0,
-              pitch: parseFloat(size.split("x")[1]) || 0,
-              links: parseInt(size.split("x")[2]) || 0,
-            })),
-            products: [],
-          };
-        }
+      const keyBrandNorm = normalizeForMatching(keyBrand);
+      const keyModelNorm = normalizeForMatching(keyModel);
+      
+      // EXACT match only - brand must match AND model must match exactly
+      if (keyBrandNorm === normalizedMake && keyModelNorm === normalizedModel) {
+        return {
+          machine: {
+            id: 1,
+            make: keyBrand,
+            model: keyModel,
+            equipment_type: getEquipmentType(keyModel),
+          },
+          track_sizes: sizes.map((size, i) => ({
+            id: i + 1,
+            size,
+            width: parseInt(size.split("x")[0]) || 0,
+            pitch: parseFloat(size.split("x")[1]) || 0,
+            links: parseInt(size.split("x")[2]) || 0,
+          })),
+          products: [],
+        };
       }
     }
     return null;
