@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 const quickLinks = [
   { href: "/rubber-tracks", label: "Rubber Tracks" },
@@ -26,12 +27,12 @@ export function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold text-foreground mb-4">
-              <span className="text-foreground">Rubber Track</span>
-              <span className="text-primary">Wholesale</span>
+              {BUSINESS_INFO.name}
             </h3>
             <p className="text-sm mb-4">
               Your trusted source for premium rubber tracks and undercarriage
-              parts for all major heavy machinery brands.
+              parts for all major heavy machinery brands. Wholesale pricing with
+              fast shipping from Houston, TX.
             </p>
             <div className="flex gap-4">
               <a
@@ -105,22 +106,27 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <Phone className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium">1-800-RUBBER-TRACK</p>
-                  <p className="text-muted-foreground">Mon-Fri: 8AM - 6PM EST</p>
+                  <Link href={BUSINESS_INFO.phoneTel} className="font-medium hover:text-primary transition-colors">
+                    {BUSINESS_INFO.phone}
+                  </Link>
+                  <p className="text-muted-foreground">Mon-Fri: 8AM - 6PM CST</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <a
-                  href="mailto:quotes@rubbertrackwholesale.com"
+                  href={`mailto:${BUSINESS_INFO.email}`}
                   className="hover:text-primary transition-colors"
                 >
-                  quotes@rubbertrackwholesale.com
+                  {BUSINESS_INFO.email}
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <p>Nationwide Shipping from 7 Warehouses</p>
+                <div>
+                  <p>{BUSINESS_INFO.address}</p>
+                  <p className="text-muted-foreground">Nationwide Shipping Available</p>
+                </div>
               </li>
             </ul>
           </div>
@@ -129,7 +135,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-border mt-8 pt-8 text-sm text-center text-muted-foreground">
           <p>
-            &copy; {new Date().getFullYear()} Rubber Track Wholesale. All rights
+            &copy; {new Date().getFullYear()} {BUSINESS_INFO.name}. All rights
             reserved.
           </p>
         </div>

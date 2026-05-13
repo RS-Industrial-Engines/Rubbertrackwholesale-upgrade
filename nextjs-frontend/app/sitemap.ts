@@ -13,6 +13,7 @@ import {
   machineCompatibility,
 } from "@/lib/data/machine-models";
 import { fallbackRubberTracks, fallbackBottomRollers, fallbackSprockets, fallbackIdlers, fallbackFinalDrives } from "@/lib/data/products";
+import { createMachineSlug } from "@/lib/url-utils";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
 
@@ -124,7 +125,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const machines = await getMachineModels();
     if (machines && machines.length > 0) {
       machinePages = machines.map((machine) => ({
-        url: `${BASE_URL}/machines/${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
+        url: `${BASE_URL}/machines/${createMachineSlug(machine.make || "", machine.model || "")}`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,
@@ -137,7 +138,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const [brand, models] of Object.entries(fallbackMachineModels)) {
       for (const model of models) {
         machinePages.push({
-          url: `${BASE_URL}/machines/${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`,
+          url: `${BASE_URL}/machines/${createMachineSlug(brand, model)}`,
           lastModified: new Date(),
           changeFrequency: "weekly" as const,
           priority: 0.8,

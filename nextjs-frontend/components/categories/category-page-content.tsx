@@ -19,6 +19,7 @@ import {
   searchFallbackProducts,
   filterFallbackProductsByBrand,
 } from "@/lib/data/products";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 // Popular brands for filtering
 const POPULAR_BRANDS = [
@@ -450,9 +451,9 @@ export function CategoryPageContent({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="tel:+18001234567">
+              <Link href={BUSINESS_INFO.phoneTel}>
                 <Phone className="h-4 w-4 mr-2" />
-                Call: 1-800-XXX-XXXX
+                Call: {BUSINESS_INFO.phone}
               </Link>
             </Button>
             <Button

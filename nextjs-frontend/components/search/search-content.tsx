@@ -10,10 +10,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   parseSearchQuery,
   buildCompatibilitySearchUrl,
-  createMachineSlug,
   formatTrackSizeDisplay,
   ParsedQuery,
 } from "@/lib/search-utils";
+import { createMachineSlug } from "@/lib/url-utils";
 import {
   searchMachines,
   getModelsForBrand,

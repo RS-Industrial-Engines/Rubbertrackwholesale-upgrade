@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Search, ShoppingCart, Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -45,14 +46,14 @@ export function Header() {
       <div className="bg-secondary/80 text-muted-foreground py-2">
         <div className="container mx-auto px-4 flex justify-between items-center text-sm">
           <div className="hidden sm:flex items-center gap-6">
-            <div className="flex items-center gap-2">
+            <Link href={BUSINESS_INFO.phoneTel} className="flex items-center gap-2 hover:text-primary transition-colors">
               <Phone className="h-4 w-4 text-primary" />
-              <span>Call: 1-800-RUBBER-TRACK</span>
-            </div>
-            <div className="flex items-center gap-2">
+              <span>Call: {BUSINESS_INFO.phone}</span>
+            </Link>
+            <Link href={`mailto:${BUSINESS_INFO.email}`} className="flex items-center gap-2 hover:text-primary transition-colors">
               <Mail className="h-4 w-4 text-primary" />
-              <span>quotes@rubbertrackwholesale.com</span>
-            </div>
+              <span>{BUSINESS_INFO.email}</span>
+            </Link>
           </div>
           <div className="text-primary font-semibold mx-auto sm:mx-0">
             Free Shipping on Orders Over $500

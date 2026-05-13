@@ -3,6 +3,7 @@
 import useSWR from "swr";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Phone } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -10,6 +11,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { API, fetcher, type FAQ } from "@/lib/api";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 // Fallback FAQs with relevant rubber track questions
 const fallbackFAQs: FAQ[] = [
@@ -66,7 +68,7 @@ const fallbackFAQs: FAQ[] = [
     id: 8,
     question: "What information should I provide for a quote?",
     answer:
-      "To get the fastest and most accurate quote, please provide: 1) Machine make (brand), 2) Machine model number, 3) Machine serial number (helpful but not required), 4) Current track size if known (e.g., 400x86x52), and 5) Quantity needed. You can call us at 1-800-XXX-XXXX, email us, or use our online contact form.",
+      "To get the fastest and most accurate quote, please provide: 1) Machine make (brand), 2) Machine model number, 3) Machine serial number (helpful but not required), 4) Current track size if known (e.g., 400x86x52), and 5) Quantity needed. You can call us at " + BUSINESS_INFO.phone + ", email us, or use our online contact form.",
     category: "Orders",
   },
   {
@@ -182,11 +184,12 @@ export function FAQContent() {
               <Link href="/contact">
                 <Button size="lg">Contact Us</Button>
               </Link>
-              <a href="tel:1-800-XXX-XXXX">
+              <Link href={BUSINESS_INFO.phoneTel}>
                 <Button variant="outline" size="lg">
-                  Call 1-800-XXX-XXXX
+                  <Phone className="h-4 w-4 mr-2" />
+                  Call {BUSINESS_INFO.phone}
                 </Button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

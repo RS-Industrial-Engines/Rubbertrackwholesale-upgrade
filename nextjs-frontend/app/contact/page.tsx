@@ -2,38 +2,39 @@ import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact/contact-form";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: `Contact Us | ${BUSINESS_INFO.name}`,
   description:
-    "Get in touch with Rubber Track Wholesale. Our expert team is ready to help you find the right parts for your equipment.",
+    `Get in touch with ${BUSINESS_INFO.name}. Our expert team is ready to help you find the right rubber tracks and undercarriage parts for your equipment. Call ${BUSINESS_INFO.phone}.`,
 };
 
 const contactInfo = [
   {
     title: "Phone",
-    value: "1-800-RUBBER-TRACK",
-    description: "Mon-Fri: 8AM - 6PM EST",
+    value: BUSINESS_INFO.phone,
+    description: "Mon-Fri: 8AM - 6PM CST",
     icon: Phone,
-    href: "tel:1-800-RUBBER-TRACK",
+    href: BUSINESS_INFO.phoneTel,
   },
   {
     title: "Email",
-    value: "quotes@rubbertrackwholesale.com",
+    value: BUSINESS_INFO.email,
     description: "We respond within 24 hours",
     icon: Mail,
-    href: "mailto:quotes@rubbertrackwholesale.com",
+    href: `mailto:${BUSINESS_INFO.email}`,
   },
   {
-    title: "Locations",
-    value: "7 Warehouses Nationwide",
-    description: "Fast shipping from any location",
+    title: "Location",
+    value: BUSINESS_INFO.address,
+    description: "Local pickup available",
     icon: MapPin,
   },
   {
     title: "Hours",
-    value: "Mon - Fri: 8AM - 6PM EST",
-    description: "Sat: 9AM - 2PM EST",
+    value: "Mon - Fri: 8AM - 6PM CST",
+    description: "Sat: 9AM - 2PM CST",
     icon: Clock,
   },
 ];
@@ -49,7 +50,11 @@ export default function ContactPage() {
           </h1>
           <p className="text-muted-foreground text-lg max-w-2xl">
             Have questions about our products or need help finding the right
-            parts? Our team of experts is here to help.
+            parts? Our team of experts is here to help. Call us at{" "}
+            <a href={BUSINESS_INFO.phoneTel} className="text-primary hover:underline font-medium">
+              {BUSINESS_INFO.phone}
+            </a>
+            {" "}or fill out the form below.
           </p>
         </div>
       </section>

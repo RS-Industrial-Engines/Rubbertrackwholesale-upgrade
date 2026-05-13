@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   getMachineModels,
   parseMachineSlug,
@@ -22,6 +22,12 @@ import {
   getTrackSizesForMachine,
   normalizeForMatching,
 } from "@/lib/data/full-machine-data";
+import {
+  createMachineSlug,
+  isMessySlug,
+  parseMachineSlugClean,
+  BUSINESS_INFO,
+} from "@/lib/url-utils";
 
 const SITE_URL = getSiteUrl();
 
@@ -30,33 +36,68 @@ interface PageProps {
 }
 
 // Parse a machine from the slug with normalized matching
-function findMachineFromSlug(slug: string): { make: string; model: string } | null {
-  // Try standard slug parsing first
-  const parts = slug.split("-");
-  if (parts.length < 2) return null;
+function findMachineFromSlug(slug: string): { make: string; model: string; equipmentType?: string } | null {
+  // Try to parse the slug to extract make/model
+  const parsed = parseMachineSlugClean(slug);
+  if (!parsed) return null;
   
-  // Try to find a matching brand/model combo
+  // Find the actual machine in our data
   const slugNormalized = normalizeForMatching(slug);
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
-      const testSlug = `${brand}-${model}`.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
-      const testNormalized = normalizeForMatching(`${brand}${model}`);
+      // Generate what the clean slug would be
+      const cleanSlug = createMachineSlug(brand, model);
+      const cleanNormalized = normalizeForMatching(cleanSlug);
       
-      if (testSlug === slug || testNormalized === slugNormalized) {
-        return { make: brand, model };
+      // Also check against the original messy slug (for redirect detection)
+      const messyPattern = `${brand}-${model}`.toLowerCase().replace(/\s+/g, "-");
+      
+      if (cleanSlug === slug || 
+          cleanNormalized === slugNormalized ||
+          messyPattern.includes(slugNormalized) ||
+          slugNormalized.includes(normalizeForMatching(`${brand}${model}`))) {
+        return { 
+          make: brand, 
+          model,
+          equipmentType: getEquipmentType(model),
+        };
       }
     }
   }
   
-  // Fall back to standard parsing
-  const parsed = parseMachineSlug(slug);
-  return parsed;
+  // Fall back to parsed data if no exact match found
+  return {
+    make: parsed.make,
+    model: parsed.model,
+    equipmentType: getEquipmentType(parsed.model),
+  };
 }
 
-// Get fallback compatibility data for a machine using normalized matching
+// Determine equipment type from model name patterns
+function getEquipmentType(model: string): string {
+  const modelLower = model.toLowerCase();
+  
+  // Compact Track Loaders (CTL)
+  if (/^svl|^ctl|^pt-|^tl\d/i.test(modelLower)) return "Compact Track Loader";
+  if (/^t\d{3}|^t\d{2}$/i.test(modelLower)) return "Compact Track Loader";
+  if (/track.*loader|skid.*steer/i.test(modelLower)) return "Compact Track Loader";
+  
+  // Mini Excavators
+  if (/^kx|^u-?\d|^kx\d|^zx\d{2}|^ex\d{2}|^pc\d{2}|^sk\d{2}/i.test(modelLower)) return "Mini Excavator";
+  if (/mini.*excav|compact.*excav/i.test(modelLower)) return "Mini Excavator";
+  
+  // Standard Excavators
+  if (/^zx\d{3}|^ex\d{3}|^pc\d{3}|^sk\d{3}/i.test(modelLower)) return "Excavator";
+  
+  // Crawler Carriers
+  if (/carrier|mst|crawler/i.test(modelLower)) return "Crawler Carrier";
+  
+  return "Compact Equipment";
+}
+
+// Get fallback compatibility data for a machine
 function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
-  // Try to find track sizes using normalized matching
   const trackSizes = getTrackSizesForMachine(make, model);
   
   if (trackSizes.length === 0) {
@@ -74,7 +115,7 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
               id: 1,
               make: keyBrand,
               model: keyModel,
-              equipment_type: "Compact Track Loader",
+              equipment_type: getEquipmentType(keyModel),
             },
             track_sizes: sizes.map((size, i) => ({
               id: i + 1,
@@ -88,7 +129,6 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
         }
       }
     }
-    
     return null;
   }
 
@@ -97,7 +137,7 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
       id: 1,
       make: make,
       model: model,
-      equipment_type: "Compact Track Loader",
+      equipment_type: getEquipmentType(model),
     },
     track_sizes: trackSizes.map((size, i) => ({
       id: i + 1,
@@ -110,37 +150,42 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
   };
 }
 
-// Get fallback related machines
-function getFallbackRelatedMachines(make: string, model: string): MachineModel[] {
-  const models = getModelsForBrand(make);
-  return models
-    .filter(m => m !== model)
-    .slice(0, 8)
-    .map((m, i) => {
-      const trackSizes = getTrackSizesForMachine(make, m);
-      return {
-        id: i + 1,
-        make: make,
-        model: m,
-        equipment_type: "Compact Track Loader",
-        track_sizes: trackSizes,
-      };
-    });
+// Generate static params for all machines using clean URLs
+export async function generateStaticParams() {
+  const params: { slug: string }[] = [];
+  const seenSlugs = new Set<string>();
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      if (!seenSlugs.has(slug)) {
+        seenSlugs.add(slug);
+        params.push({ slug });
+      }
+    }
+  }
+  
+  return params;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const parsed = findMachineFromSlug(slug) || parseMachineSlug(slug);
-
-  if (!parsed) {
+  
+  // Find the machine from slug
+  const machineInfo = findMachineFromSlug(slug);
+  if (!machineInfo) {
     return {
-      title: "Machine Not Found",
+      title: "Machine Not Found | Rubber Track Wholesale",
     };
   }
-
-  const { make, model } = parsed;
+  
+  const { make, model, equipmentType } = machineInfo;
+  const cleanSlug = createMachineSlug(make, model);
+  const trackSizes = getTrackSizesForMachine(make, model);
+  const primaryTrackSize = trackSizes[0] || "";
+  
   const title = `${make} ${model} Rubber Tracks & Undercarriage Parts | Houston TX`;
-  const description = `Find compatible rubber tracks, bottom rollers, sprockets, and idlers for ${make} ${model}. Wholesale prices with fast shipping from Houston. In stock & ready to ship.`;
+  const description = `Buy ${make} ${model} ${equipmentType || "equipment"} rubber tracks${primaryTrackSize ? ` (${primaryTrackSize})` : ""}, sprockets, rollers & idlers. Wholesale prices. Houston warehouse. Nationwide shipping. Call ${BUSINESS_INFO.phone}.`;
 
   return {
     title,
@@ -149,113 +194,122 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       `${make} ${model} rubber tracks`,
       `${make} ${model} tracks`,
       `${make} ${model} undercarriage`,
-      `${make} ${model} bottom rollers`,
-      `${make} ${model} sprockets`,
-      `${make} ${model} idlers`,
-      `rubber tracks for ${make} ${model}`,
-      `${model} rubber tracks`,
-    ],
+      primaryTrackSize ? `${primaryTrackSize} rubber tracks` : "",
+      `${make} rubber tracks`,
+      `${equipmentType} rubber tracks`,
+      "rubber track wholesale",
+      "Houston TX",
+    ].filter(Boolean),
+    alternates: {
+      canonical: `${SITE_URL}/machines/${cleanSlug}`,
+    },
     openGraph: {
       title,
       description,
+      url: `${SITE_URL}/machines/${cleanSlug}`,
       type: "website",
-    },
-    alternates: {
-      canonical: `${SITE_URL}/machines/${slug}`,
     },
   };
 }
 
-export async function generateStaticParams() {
-  try {
-    const machines = await getMachineModels();
-    if (machines && machines.length > 0) {
-      return machines.slice(0, 200).map((machine) => ({
-        slug: `${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
-      }));
-    }
-  } catch {
-    // Fall back to comprehensive data
-  }
-  
-  // Generate from comprehensive fallback data - include more machines
-  const params: { slug: string }[] = [];
-  for (const [brand, models] of Object.entries(fullMachineModels)) {
-    models.forEach(model => {
-      params.push({
-        slug: `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`,
-      });
-    });
-  }
-  // Return up to 500 for static generation, the rest will be generated on-demand
-  return params.slice(0, 500);
-}
-
 export default async function MachineDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const parsed = findMachineFromSlug(slug) || parseMachineSlug(slug);
+  
+  // Check if this is a messy URL that needs redirect
+  if (isMessySlug(slug)) {
+    const machineInfo = findMachineFromSlug(slug);
+    if (machineInfo) {
+      const cleanSlug = createMachineSlug(machineInfo.make, machineInfo.model);
+      if (cleanSlug !== slug) {
+        redirect(`/machines/${cleanSlug}`);
+      }
+    }
+  }
+  
+  // Find the machine from slug
+  const machineInfo = findMachineFromSlug(slug);
+  if (!machineInfo) {
+    notFound();
+  }
+  
+  const { make, model, equipmentType } = machineInfo;
+  const cleanSlug = createMachineSlug(make, model);
+  
+  // Also redirect if the current slug doesn't match the clean slug
+  if (cleanSlug !== slug) {
+    redirect(`/machines/${cleanSlug}`);
+  }
 
-  if (!parsed) {
+  // Try API first, then fallback
+  let compatibility: CompatibilitySearchResult | null = null;
+  try {
+    const apiResult = await getCompatibilityByMachine(make, model);
+    if (apiResult && apiResult.track_sizes?.length > 0) {
+      compatibility = apiResult;
+    }
+  } catch {
+    // API failed, will use fallback
+  }
+
+  if (!compatibility) {
+    compatibility = getFallbackCompatibility(make, model);
+  }
+
+  if (!compatibility) {
     notFound();
   }
 
-  const { make, model } = parsed;
+  // Get related machines from same brand
+  const relatedModels = getModelsForBrand(make)
+    .filter((m) => m !== model)
+    .slice(0, 8);
 
-  let compatibility: CompatibilitySearchResult | null = null;
-  let products: Awaited<ReturnType<typeof getProducts>> = [];
-  let relatedMachines: MachineModel[] = [];
+  const relatedMachines = relatedModels.map((relModel) => ({
+    make,
+    model: relModel,
+    slug: createMachineSlug(make, relModel),
+    trackSizes: getTrackSizesForMachine(make, relModel),
+    equipmentType: getEquipmentType(relModel),
+  }));
 
-  try {
-    const [apiCompatibility, apiProducts, apiRelatedMachines] = await Promise.all([
-      getCompatibilityByMachine(make, model).catch(() => null),
-      getProducts({ brand: make, q: model }).catch(() => []),
-      getMachineModels().catch(() => []),
-    ]);
-    
-    // Use API data if available and has track sizes, otherwise use comprehensive fallback
-    compatibility = (apiCompatibility && apiCompatibility.track_sizes?.length > 0)
-      ? apiCompatibility
-      : getFallbackCompatibility(make, model);
-    
-    products = apiProducts || [];
-    
-    relatedMachines = apiRelatedMachines && apiRelatedMachines.length > 0
-      ? apiRelatedMachines.filter((m) => m.make?.toLowerCase() === make.toLowerCase() && m.model !== model).slice(0, 8)
-      : getFallbackRelatedMachines(make, model);
-  } catch (error) {
-    console.error("Failed to fetch machine data, using comprehensive fallback:", error);
-    compatibility = getFallbackCompatibility(make, model);
-    relatedMachines = getFallbackRelatedMachines(make, model);
-  }
+  // Generate FAQs
+  const trackSizes = compatibility.track_sizes?.map((t) => t.size) || [];
+  const primaryTrackSize = trackSizes[0] || "";
+  
+  const faqs = [
+    {
+      question: `What size rubber tracks fit ${make} ${model}?`,
+      answer: trackSizes.length > 0
+        ? `The ${make} ${model} uses ${trackSizes.join(", ")} rubber tracks. The most common size is ${primaryTrackSize}. We stock all sizes at our Houston warehouse with nationwide shipping.`
+        : `Contact us for ${make} ${model} rubber track sizing. Call ${BUSINESS_INFO.phone} for expert assistance.`,
+    },
+    {
+      question: `Do you stock ${make} ${model} rubber tracks in Houston?`,
+      answer: `Yes, we stock ${make} ${model} rubber tracks at our Houston warehouse (${BUSINESS_INFO.address}). Same-day pickup available for in-stock items, or we ship nationwide.`,
+    },
+    {
+      question: `Can you ship ${make} ${model} tracks nationwide?`,
+      answer: `Absolutely! We ship ${make} ${model} rubber tracks and undercarriage parts to all 50 states. Most orders ship within 1-2 business days from our Houston facility.`,
+    },
+    {
+      question: `How do I confirm the right track size for my ${make} ${model}?`,
+      answer: `Measure your existing track: Width (mm) x Pitch (mm) x Number of Links. For ${make} ${model}, the typical size is ${primaryTrackSize || "varies by model year"}. Call ${BUSINESS_INFO.phone} if you need help confirming.`,
+    },
+    {
+      question: `Do you also sell sprockets, rollers, and idlers for ${make} ${model}?`,
+      answer: `Yes! We carry complete undercarriage parts for ${make} ${model}: rubber tracks, bottom rollers, top rollers, drive sprockets, front idlers, and final drives. Call ${BUSINESS_INFO.phone} for a complete parts quote.`,
+    },
+    {
+      question: `What is the warranty on ${make} ${model} rubber tracks?`,
+      answer: `All our rubber tracks come with a manufacturer warranty against defects. Warranty terms vary by product. Contact us at ${BUSINESS_INFO.phone} for specific warranty information.`,
+    },
+  ];
 
-  const trackSizes = compatibility?.track_sizes?.map((t) => t.size) || [];
-  const equipmentType = compatibility?.machine?.equipment_type || "Construction Equipment";
-
+  // Schema data
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
     { name: "Machines", url: `${SITE_URL}/machines` },
-    { name: `${make} ${model}`, url: `${SITE_URL}/machines/${slug}` },
-  ];
-
-  const faqs = [
-    {
-      question: `What size rubber tracks fit a ${make} ${model}?`,
-      answer: trackSizes.length > 0
-        ? `The ${make} ${model} uses ${trackSizes.join(", ")} rubber tracks. We stock all compatible sizes at wholesale prices.`
-        : `Contact us for compatible track sizes for your ${make} ${model}. Our experts can help you find the right fit.`,
-    },
-    {
-      question: `How much do ${make} ${model} rubber tracks cost?`,
-      answer: `${make} ${model} rubber track prices vary based on quality and supplier. We offer premium aftermarket tracks at 30-50% below OEM prices. Request a quote for current pricing.`,
-    },
-    {
-      question: `How long do rubber tracks last on a ${make} ${model}?`,
-      answer: `With proper use and maintenance, rubber tracks on a ${make} ${model} typically last 1,200-2,000 hours. Terrain, operating conditions, and maintenance affect track life.`,
-    },
-    {
-      question: `Do you ship ${make} ${model} tracks to my location?`,
-      answer: `Yes! We ship ${make} ${model} rubber tracks nationwide from our Houston warehouse. Most orders ship same-day with delivery in 2-5 business days.`,
-    },
+    { name: `${make} ${model}`, url: `${SITE_URL}/machines/${cleanSlug}` },
   ];
 
   return (
@@ -269,9 +323,7 @@ export default async function MachineDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            generateMachineSchema(make, model, equipmentType, trackSizes)
-          ),
+          __html: JSON.stringify(generateMachineSchema(make, model, equipmentType || "Compact Equipment", trackSizes)),
         }}
       />
       <script
@@ -283,11 +335,11 @@ export default async function MachineDetailPage({ params }: PageProps) {
       <MachineDetailContent
         make={make}
         model={model}
-        slug={slug}
+        equipmentType={equipmentType || "Compact Equipment"}
         compatibility={compatibility}
-        products={products}
         relatedMachines={relatedMachines}
         faqs={faqs}
+        businessInfo={BUSINESS_INFO}
       />
     </>
   );

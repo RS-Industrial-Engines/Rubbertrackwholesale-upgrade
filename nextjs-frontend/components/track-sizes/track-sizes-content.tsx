@@ -2,11 +2,12 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Search, ChevronRight, Ruler } from "lucide-react";
+import { Search, ChevronRight, Ruler, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import type { TrackSize, TrackSizeGrouped } from "@/lib/api";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 interface TrackSizesContentProps {
   trackSizes: TrackSize[];
@@ -265,7 +266,10 @@ export function TrackSizesContent({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="tel:+18001234567">Call: 1-800-XXX-XXXX</Link>
+              <Link href={BUSINESS_INFO.phoneTel}>
+                <Phone className="h-4 w-4 mr-2" />
+                Call: {BUSINESS_INFO.phone}
+              </Link>
             </Button>
             <Button
               size="lg"

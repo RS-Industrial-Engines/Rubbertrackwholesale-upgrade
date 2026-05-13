@@ -15,6 +15,7 @@ import {
   fullTrackSizes,
   normalizeForMatching,
 } from "@/lib/data/full-machine-data";
+import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 
 interface SearchResult {
   type: "machine" | "track-size" | "product";
@@ -192,7 +193,7 @@ export function HeroSection() {
     if (searchResults.length > 0) {
       const firstResult = searchResults[0];
       if (firstResult.type === "machine" && firstResult.make && firstResult.model) {
-        const slug = `${firstResult.make.toLowerCase().replace(/\s+/g, "-")}-${firstResult.model.toLowerCase().replace(/\s+/g, "-")}`;
+        const slug = createMachineSlug(firstResult.make, firstResult.model);
         router.push(`/machines/${slug}`);
         return;
       } else if (firstResult.type === "track-size" && firstResult.size) {
@@ -215,15 +216,11 @@ export function HeroSection() {
     setShowDropdown(false);
     
     if (result.type === "machine" && result.make && result.model) {
-      const slug = `${result.make.toLowerCase().replace(/\s+/g, "-")}-${result.model.toLowerCase().replace(/\s+/g, "-")}`;
+      const slug = createMachineSlug(result.make, result.model);
       router.push(`/machines/${slug}`);
     } else if (result.type === "track-size" && result.size) {
       router.push(`/track-size/${result.size}`);
     }
-  };
-
-  const createSlug = (make: string, model: string) => {
-    return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
   };
 
   return (
@@ -372,9 +369,9 @@ export function HeroSection() {
               className="text-lg h-14 px-8 border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               asChild
             >
-              <Link href="tel:+18001234567">
+              <Link href={BUSINESS_INFO.phoneTel}>
                 <Phone className="h-5 w-5 mr-2" />
-                Call Now: 1-800-XXX-XXXX
+                Call Now: {BUSINESS_INFO.phone}
               </Link>
             </Button>
           </div>

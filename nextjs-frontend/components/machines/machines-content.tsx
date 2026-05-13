@@ -2,11 +2,12 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Search, ChevronRight, Wrench } from "lucide-react";
+import { Search, ChevronRight, Wrench, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { MachineModel } from "@/lib/api";
 import { normalizeForMatching } from "@/lib/data/full-machine-data";
+import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 
 interface MachinesContentProps {
   machines: MachineModel[];
@@ -106,9 +107,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
   }, [filteredMachines]);
 
   const createMachineUrl = (machine: MachineModel) => {
-    const makeSlug = machine.make?.toLowerCase().replace(/\s+/g, "-") || "";
-    const modelSlug = machine.model?.toLowerCase().replace(/\s+/g, "-") || "";
-    return `/machines/${makeSlug}-${modelSlug}`;
+    return `/machines/${createMachineSlug(machine.make || "", machine.model || "")}`;
   };
 
   return (
@@ -295,7 +294,10 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="tel:+18001234567">Call Now: 1-800-XXX-XXXX</Link>
+              <Link href={BUSINESS_INFO.phoneTel}>
+                <Phone className="h-4 w-4 mr-2" />
+                Call: {BUSINESS_INFO.phone}
+              </Link>
             </Button>
             <Button
               size="lg"

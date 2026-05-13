@@ -17,6 +17,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { Product, MachineModel, TrackSize } from "@/lib/api";
+import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 
 interface TrackSizeDetailContentProps {
   size: string;
@@ -106,9 +107,9 @@ export function TrackSizeDetailContent({
                 <Link href="/contact">Get a Quote</Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="tel:+18001234567">
+                <Link href={BUSINESS_INFO.phoneTel}>
                   <Phone className="h-4 w-4 mr-2" />
-                  Call: 1-800-XXX-XXXX
+                  Call: {BUSINESS_INFO.phone}
                 </Link>
               </Button>
             </div>
@@ -140,7 +141,7 @@ export function TrackSizeDetailContent({
               {compatibleMachines.map((machine) => (
                 <Link
                   key={`${machine.make}-${machine.model}`}
-                  href={`/machines/${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`}
+                  href={`/machines/${createMachineSlug(machine.make || "", machine.model || "")}`}
                   className="group flex items-center justify-between p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors"
                 >
                   <div>
@@ -352,9 +353,9 @@ export function TrackSizeDetailContent({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
-              <Link href="tel:+18001234567">
+              <Link href={BUSINESS_INFO.phoneTel}>
                 <Phone className="h-4 w-4 mr-2" />
-                Call: 1-800-XXX-XXXX
+                Call: {BUSINESS_INFO.phone}
               </Link>
             </Button>
             <Button

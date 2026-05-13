@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 export function CTASection() {
   return (
@@ -26,15 +28,16 @@ export function CTASection() {
               Contact Us
             </Button>
           </Link>
-          <a href="tel:1-800-RUBBER-TRACK">
+          <Link href={BUSINESS_INFO.phoneTel}>
             <Button
               size="lg"
               variant="outline"
               className="border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary text-lg px-8"
             >
-              Call Now
+              <Phone className="h-4 w-4 mr-2" />
+              {BUSINESS_INFO.phone}
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
