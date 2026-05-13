@@ -111,7 +111,7 @@ export function MachineDetailContent({
             {/* Location badge */}
             <div className="flex items-center gap-2 text-muted-foreground mb-8">
               <MapPin className="h-4 w-4 text-primary" />
-              <span>{businessInfo.name} - {businessInfo.address}</span>
+              <span>{businessInfo.name} - {businessInfo.address.full}</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -419,7 +419,7 @@ export function MachineDetailContent({
               {
                 icon: MapPin,
                 title: "Houston Warehouse",
-                description: "Local pickup available. Visit us at " + businessInfo.address,
+                description: "Local pickup available. Visit us at " + businessInfo.address.full,
               },
               {
                 icon: Shield,
@@ -549,7 +549,7 @@ export function MachineDetailContent({
             </Button>
           </div>
           <p className="text-primary-foreground/60 text-sm mt-6">
-            {businessInfo.name} • {businessInfo.address}
+            {businessInfo.name} • {businessInfo.address.full}
           </p>
         </div>
       </section>

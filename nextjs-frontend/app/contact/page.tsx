@@ -27,7 +27,7 @@ const contactInfo = [
   },
   {
     title: "Location",
-    value: BUSINESS_INFO.address,
+    value: BUSINESS_INFO.address.full,
     description: "Local pickup available",
     icon: MapPin,
   },

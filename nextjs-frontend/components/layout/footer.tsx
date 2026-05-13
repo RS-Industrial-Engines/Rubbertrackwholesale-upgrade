@@ -124,7 +124,7 @@ export function Footer() {
               <li className="flex items-start gap-2">
                 <MapPin className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <div>
-                  <p>{BUSINESS_INFO.address}</p>
+                  <p>{BUSINESS_INFO.address.full}</p>
                   <p className="text-muted-foreground">Nationwide Shipping Available</p>
                 </div>
               </li>
