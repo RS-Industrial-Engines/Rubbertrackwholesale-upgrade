@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/accordion";
 import type { CompatibilitySearchResult } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import RequestQuoteForm from "@/components/forms/request-quote-form";
 
 interface RelatedMachine {
   make: string;
@@ -489,15 +490,31 @@ export function MachineDetailContent({
                   value={`faq-${index}`}
                   className="border border-border rounded-lg px-4"
                 >
-                  <AccordionTrigger className="text-left font-semibold">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* H. Request Quote Form */}
+      <section className="py-12 lg:py-16 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <RequestQuoteForm
+              machineBrand={make}
+              machineModel={model}
+              trackSize={primaryTrackSize}
+              sourcePage={`/machines/${slug}`}
+              title={`Get a Quote for ${make} ${model}`}
+              subtitle={`Request wholesale pricing on rubber tracks and undercarriage parts for your ${make} ${model}. We respond within 2 business hours.`}
+            />
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@
 
 @theme {
   /* Colors - Industrial/Construction theme with Orange accent */
+  /* Improved contrast ratios for WCAG accessibility */
   --color-background: oklch(0.145 0.01 260);
   --color-foreground: oklch(0.985 0.002 260);
   
@@ -15,7 +16,8 @@
   --color-secondary-foreground: oklch(0.985 0.002 260);
   
   --color-muted: oklch(0.22 0.02 260);
-  --color-muted-foreground: oklch(0.65 0.02 260);
+  /* Increased lightness from 0.65 to 0.75 for better contrast */
+  --color-muted-foreground: oklch(0.75 0.02 260);
   
   --color-accent: oklch(0.70 0.18 45);
   --color-accent-foreground: oklch(0.145 0.01 260);
@@ -23,8 +25,8 @@
   --color-destructive: oklch(0.55 0.22 25);
   --color-destructive-foreground: oklch(0.985 0.002 260);
   
-  --color-border: oklch(0.25 0.02 260);
-  --color-input: oklch(0.25 0.02 260);
+  --color-border: oklch(0.28 0.02 260);
+  --color-input: oklch(0.28 0.02 260);
   --color-ring: oklch(0.70 0.18 45);
   
   /* Radius */
@@ -40,8 +42,47 @@
     @apply border-border;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    line-height: 1.6;
+  }
+  
+  /* Improved heading hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+    line-height: 1.2;
+  }
+  
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl;
+  }
+  
+  /* Improved paragraph readability */
+  p {
+    @apply leading-relaxed;
+  }
+  
+  /* Better link styling */
+  a {
+    @apply transition-colors duration-200;
+  }
+  
+  /* Improved focus states for accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
   }
 }
 
@@ -52,5 +93,30 @@
   
   .text-pretty {
     text-wrap: pretty;
+  }
+  
+  /* Improved readable prose */
+  .prose-readable {
+    @apply leading-relaxed text-muted-foreground;
+    max-width: 65ch;
+  }
+  
+  .prose-readable p {
+    @apply mb-4;
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:border-primary/50;
+  }
+  
+  /* Section spacing */
+  .section-padding {
+    @apply py-12 lg:py-16;
+  }
+  
+  /* Container with consistent padding */
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
   }
 }

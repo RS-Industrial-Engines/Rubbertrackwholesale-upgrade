@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/accordion";
 import type { Product, MachineModel, TrackSize } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import RequestQuoteForm from "@/components/forms/request-quote-form";
 
 interface TrackSizeDetailContentProps {
   size: string;
@@ -306,15 +307,29 @@ export function TrackSizeDetailContent({
                   value={`faq-${index}`}
                   className="border border-border rounded-lg px-4"
                 >
-                  <AccordionTrigger className="text-left font-semibold">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
+                  <AccordionContent className="text-muted-foreground leading-relaxed">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
+          </div>
+        </div>
+      </section>
+
+      {/* Request Quote Form */}
+      <section className="py-12 lg:py-16 bg-secondary">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto">
+            <RequestQuoteForm
+              trackSize={size}
+              sourcePage={`/track-size/${slug}`}
+              title={`Get a Quote for ${size} Tracks`}
+              subtitle={`Request wholesale pricing on ${size} rubber tracks. We respond within 2 business hours.`}
+            />
           </div>
         </div>
       </section>

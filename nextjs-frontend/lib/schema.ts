@@ -1,6 +1,7 @@
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
+import { BUSINESS_INFO } from "./url-utils";
+import type { Product } from "./api";
 
-import type { Product, FAQ } from "./api";
+const SITE_URL = BUSINESS_INFO.url;
 
 // ============================================================================
 // SITE URL HELPER
@@ -18,39 +19,34 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Rubber Track Wholesale",
-    alternateName: "RTW",
+    name: BUSINESS_INFO.name,
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     description:
       "Premier wholesale supplier of rubber tracks and undercarriage parts for construction equipment. Houston-based with nationwide shipping.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Houston",
-      addressLocality: "Houston",
-      addressRegion: "TX",
-      postalCode: "77001",
-      addressCountry: "US",
+      streetAddress: BUSINESS_INFO.address.street,
+      addressLocality: BUSINESS_INFO.address.city,
+      addressRegion: BUSINESS_INFO.address.state,
+      postalCode: BUSINESS_INFO.address.zipCode,
+      addressCountry: BUSINESS_INFO.address.country,
     },
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+1-800-XXX-XXXX",
+        telephone: BUSINESS_INFO.phoneSchema,
         contactType: "sales",
         areaServed: "US",
         availableLanguage: ["English", "Spanish"],
       },
       {
         "@type": "ContactPoint",
-        telephone: "+1-800-XXX-XXXX",
+        telephone: BUSINESS_INFO.phoneSchema,
         contactType: "customer service",
         areaServed: "US",
         availableLanguage: ["English", "Spanish"],
       },
-    ],
-    sameAs: [
-      "https://www.facebook.com/rubbertrackwholesale",
-      "https://www.linkedin.com/company/rubbertrackwholesale",
     ],
     areaServed: {
       "@type": "Country",
@@ -61,7 +57,7 @@ export function generateOrganizationSchema() {
 }
 
 // ============================================================================
-// LOCAL BUSINESS SCHEMA
+// LOCAL BUSINESS SCHEMA - Matches Google Business Profile
 // ============================================================================
 
 export function generateLocalBusinessSchema() {
@@ -69,40 +65,45 @@ export function generateLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}/#localbusiness`,
-    name: "Rubber Track Wholesale Houston",
+    name: BUSINESS_INFO.name,
     image: `${SITE_URL}/warehouse.jpg`,
     description:
       "Houston's largest rubber track and undercarriage parts warehouse. Same-day pickup available. Serving contractors, rental companies, and equipment dealers nationwide.",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Houston",
-      addressLocality: "Houston",
-      addressRegion: "TX",
-      postalCode: "77001",
-      addressCountry: "US",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 29.7604,
-      longitude: -95.3698,
+      streetAddress: BUSINESS_INFO.address.street,
+      addressLocality: BUSINESS_INFO.address.city,
+      addressRegion: BUSINESS_INFO.address.state,
+      postalCode: BUSINESS_INFO.address.zipCode,
+      addressCountry: BUSINESS_INFO.address.country,
     },
     url: SITE_URL,
-    telephone: "+1-800-XXX-XXXX",
+    telephone: BUSINESS_INFO.phoneSchema,
+    email: BUSINESS_INFO.email,
     priceRange: "$$",
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "08:00",
-        closes: "17:00",
+        opens: BUSINESS_INFO.hours.weekdays.opens,
+        closes: BUSINESS_INFO.hours.weekdays.closes,
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "13:00",
+        opens: BUSINESS_INFO.hours.saturday.opens,
+        closes: BUSINESS_INFO.hours.saturday.closes,
       },
     ],
+    areaServed: {
+      "@type": "Country",
+      name: "United States",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
+      reviewCount: BUSINESS_INFO.aggregateRating.reviewCount,
+    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Rubber Tracks & Undercarriage Parts",
@@ -204,7 +205,7 @@ export function generateProductSchema(product: Product) {
         : "https://schema.org/OutOfStock",
       seller: {
         "@type": "Organization",
-        name: "Rubber Track Wholesale",
+        name: BUSINESS_INFO.name,
       },
     },
     aggregateRating: {
@@ -309,6 +310,45 @@ export function generateMachineSchema(
 }
 
 // ============================================================================
+// BRAND PAGE SCHEMA
+// ============================================================================
+
+export function generateBrandPageSchema(
+  brand: string,
+  models: { model: string; trackSizes: string[] }[],
+  slug: string
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${brand} Rubber Tracks & Undercarriage Parts`,
+    description: `Find compatible rubber tracks and undercarriage parts for ${brand} machines. ${models.length} models supported.`,
+    url: `${SITE_URL}/brands/${slug}`,
+    breadcrumb: generateBreadcrumbSchema([
+      { name: "Home", url: SITE_URL },
+      { name: "Brands", url: `${SITE_URL}/brands` },
+      { name: brand, url: `${SITE_URL}/brands/${slug}` },
+    ]),
+    mainEntity: {
+      "@type": "ItemList",
+      name: `${brand} Machine Models`,
+      numberOfItems: models.length,
+      itemListElement: models.slice(0, 50).map((m, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Vehicle",
+          name: `${brand} ${m.model}`,
+          manufacturer: { "@type": "Organization", name: brand },
+          model: m.model,
+          url: `${SITE_URL}/machines/${brand.toLowerCase().replace(/\s+/g, "-")}-${m.model.toLowerCase().replace(/[^a-z0-9]/g, "")}`,
+        },
+      })),
+    },
+  };
+}
+
+// ============================================================================
 // TRACK SIZE SCHEMA (Product category)
 // ============================================================================
 
@@ -329,7 +369,7 @@ export function generateTrackSizeSchema(
       availability: "https://schema.org/InStock",
       seller: {
         "@type": "Organization",
-        name: "Rubber Track Wholesale",
+        name: BUSINESS_INFO.name,
       },
     },
     additionalProperty: compatibleMachines.slice(0, 10).map((m) => ({
@@ -348,7 +388,7 @@ export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "Rubber Track Wholesale",
+    name: BUSINESS_INFO.name,
     url: SITE_URL,
     description: "Premier wholesale supplier of rubber tracks and undercarriage parts for construction equipment.",
     potentialAction: {
@@ -373,12 +413,14 @@ export function generateServiceSchema() {
     name: "Rubber Track Supply & Distribution",
     provider: {
       "@type": "LocalBusiness",
-      name: "Rubber Track Wholesale",
+      name: BUSINESS_INFO.name,
       address: {
         "@type": "PostalAddress",
-        addressLocality: "Houston",
-        addressRegion: "TX",
-        addressCountry: "US",
+        streetAddress: BUSINESS_INFO.address.street,
+        addressLocality: BUSINESS_INFO.address.city,
+        addressRegion: BUSINESS_INFO.address.state,
+        postalCode: BUSINESS_INFO.address.zipCode,
+        addressCountry: BUSINESS_INFO.address.country,
       },
     },
     areaServed: {

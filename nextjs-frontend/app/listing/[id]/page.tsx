@@ -13,6 +13,7 @@ import {
   fallbackFinalDrives,
 } from "@/lib/data/products";
 import { generateBreadcrumbSchema, getSiteUrl } from "@/lib/schema";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 
 const SITE_URL = getSiteUrl();
 
@@ -262,7 +263,7 @@ function ListingDetailContent({ listing }: { listing: FallbackProduct }) {
                   Request Quote
                 </Button>
               </Link>
-              <a href="tel:1-800-123-4567" className="flex-1">
+              <a href={BUSINESS_INFO.phoneTel} className="flex-1">
                 <Button size="lg" variant="outline" className="w-full">
                   <Phone className="h-4 w-4 mr-2" />
                   Call to Order
@@ -346,18 +347,18 @@ function ListingDetailContent({ listing }: { listing: FallbackProduct }) {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a
-                href="tel:1-800-123-4567"
+                href={BUSINESS_INFO.phoneTel}
                 className="flex items-center gap-2 text-primary hover:text-primary/80"
               >
                 <Phone className="h-5 w-5" />
-                1-800-XXX-XXXX
+                {BUSINESS_INFO.phone}
               </a>
               <a
-                href="mailto:quotes@rubbertrackwholesale.com"
+                href={`mailto:${BUSINESS_INFO.email}`}
                 className="flex items-center gap-2 text-primary hover:text-primary/80"
               >
                 <Mail className="h-5 w-5" />
-                quotes@rubbertrackwholesale.com
+                {BUSINESS_INFO.email}
               </a>
             </div>
           </CardContent>

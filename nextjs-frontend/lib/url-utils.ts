@@ -173,17 +173,35 @@ export function getMachineUrl(make: string, model: string): string {
 
 /**
  * Business contact information - centralized for consistency.
+ * Must match Google Business Profile exactly.
  */
 export const BUSINESS_INFO = {
+  name: "Rubber Track Wholesale Houston",
   phone: "346-438-6252",
   phoneFormatted: "(346) 438-6252",
   phoneTel: "tel:+13464386252",
   phoneInternational: "+1 346-438-6252",
-  name: "Rubber Track Wholesale Houston",
-  address: "7520 Eagle Pass St Suite-C, Houston, TX",
-  city: "Houston",
-  state: "TX",
-  zipCode: "77012",
-  country: "US",
+  phoneSchema: "+13464386252",
+  address: {
+    street: "7520 Eagle Pass St Suite-C",
+    city: "Houston",
+    state: "TX",
+    zipCode: "77020",
+    country: "US",
+    full: "7520 Eagle Pass St Suite-C, Houston, TX 77020",
+  },
   email: "info@rubbertrackwholesale.com",
+  category: "Rubber products supplier",
+  url: "https://www.rubbertrackwholesale.com",
+  // Google Business Profile data
+  aggregateRating: {
+    ratingValue: "4.9",
+    reviewCount: "31",
+  },
+  // Opening hours
+  hours: {
+    weekdays: { opens: "08:00", closes: "17:00" },
+    saturday: { opens: "09:00", closes: "13:00" },
+    sunday: null, // closed
+  },
 };
