@@ -439,6 +439,48 @@ export function generateServiceSchema() {
 }
 
 // ============================================================================
+// ARTICLE SCHEMA (for blog posts)
+// ============================================================================
+
+export interface ArticleSchemaInput {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified?: string;
+  image?: string;
+}
+
+export function generateArticleSchema(article: ArticleSchemaInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    url: article.url,
+    datePublished: article.datePublished,
+    dateModified: article.dateModified || article.datePublished,
+    image: article.image || `${SITE_URL}/og-image.jpg`,
+    author: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": article.url,
+    },
+  };
+}
+
+// ============================================================================
 // HELPER: Combine multiple schemas for page
 // ============================================================================
 
