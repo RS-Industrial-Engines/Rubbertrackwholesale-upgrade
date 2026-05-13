@@ -275,7 +275,45 @@ export function getFallbackProducts(category: string): FallbackProduct[] {
   }
 }
 
-// Search fallback products
+// Brand aliases for search
+const BRAND_ALIASES: Record<string, string[]> = {
+  cat: ["caterpillar", "cat"],
+  caterpillar: ["caterpillar", "cat"],
+  deere: ["john deere", "deere"],
+  "john deere": ["john deere", "deere"],
+  nh: ["new holland", "nh"],
+  "new holland": ["new holland", "nh"],
+  dw: ["ditch witch", "dw"],
+  "ditch witch": ["ditch witch", "dw"],
+};
+
+// Normalize a search term (remove spaces, lowercase)
+function normalizeSearchTerm(term: string): string {
+  return term.toLowerCase().replace(/\s+/g, "").replace(/-/g, "");
+}
+
+// Check if a machine name matches a query (partial match)
+function machineMatchesQuery(machine: string, queryWords: string[]): boolean {
+  const machineLower = machine.toLowerCase();
+  const machineNormalized = normalizeSearchTerm(machine);
+  
+  // Check if ALL query words are found in the machine name
+  return queryWords.every((word) => {
+    const wordNormalized = normalizeSearchTerm(word);
+    // Direct match
+    if (machineLower.includes(word) || machineNormalized.includes(wordNormalized)) {
+      return true;
+    }
+    // Check brand aliases
+    const aliases = BRAND_ALIASES[word];
+    if (aliases) {
+      return aliases.some((alias) => machineLower.includes(alias));
+    }
+    return false;
+  });
+}
+
+// Search fallback products with improved partial matching
 export function searchFallbackProducts(
   products: FallbackProduct[],
   query: string
@@ -283,36 +321,58 @@ export function searchFallbackProducts(
   if (!query) return products;
   
   const q = query.toLowerCase().trim();
+  const queryWords = q.split(/\s+/).filter(Boolean);
+  const queryNormalized = normalizeSearchTerm(q);
   
   return products.filter((p) => {
     // Search in title
     if (p.title.toLowerCase().includes(q)) return true;
+    if (normalizeSearchTerm(p.title).includes(queryNormalized)) return true;
+    
     // Search in brand
     if (p.brand_name.toLowerCase().includes(q)) return true;
+    
     // Search in description
     if (p.description.toLowerCase().includes(q)) return true;
-    // Search in size/track_size
-    if (p.size?.toLowerCase().includes(q)) return true;
-    if (p.track_size?.toLowerCase().replace(/\s+/g, "").includes(q.replace(/\s+/g, ""))) return true;
-    // Search in compatible machines
-    if (p.compatible_machines.some((m) => m.toLowerCase().includes(q))) return true;
+    
+    // Search in size/track_size (normalized for formats like "400x86x52" vs "400 x 86 x 52")
+    if (p.size && normalizeSearchTerm(p.size).includes(queryNormalized)) return true;
+    if (p.track_size && normalizeSearchTerm(p.track_size).includes(queryNormalized)) return true;
+    
+    // Search in compatible machines with partial matching
+    // e.g., "kubota svl" should match "Kubota SVL75"
+    if (p.compatible_machines.some((m) => machineMatchesQuery(m, queryWords))) return true;
+    
+    // Check for individual word matches in description
+    if (queryWords.length > 1) {
+      const descLower = p.description.toLowerCase();
+      if (queryWords.every((word) => descLower.includes(word))) return true;
+    }
     
     return false;
   });
 }
 
-// Filter fallback products by brand
+// Filter fallback products by brand (checks compatible machines)
 export function filterFallbackProductsByBrand(
   products: FallbackProduct[],
   brand: string
 ): FallbackProduct[] {
   const b = brand.toLowerCase().trim();
+  const bNormalized = normalizeSearchTerm(brand);
+  
+  // Get brand aliases
+  const aliases = BRAND_ALIASES[b] || [b];
   
   return products.filter((p) => {
     // Check brand name
     if (p.brand_name.toLowerCase().includes(b)) return true;
-    // Check compatible machines for brand
-    if (p.compatible_machines.some((m) => m.toLowerCase().startsWith(b))) return true;
+    
+    // Check compatible machines for brand (any of the aliases)
+    if (p.compatible_machines.some((m) => {
+      const mLower = m.toLowerCase();
+      return aliases.some((alias) => mLower.startsWith(alias) || mLower.includes(alias));
+    })) return true;
     
     return false;
   });

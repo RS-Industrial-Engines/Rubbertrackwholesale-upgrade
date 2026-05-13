@@ -6,25 +6,25 @@ const categories = [
     name: "Rubber Tracks",
     description: "Premium quality tracks for all brands",
     icon: CircleDot,
-    href: "/products?category=rubber-tracks",
+    href: "/rubber-tracks",
   },
   {
     name: "Sprockets",
     description: "Drive sprockets and components",
     icon: Cog,
-    href: "/products?category=sprockets",
+    href: "/sprockets",
   },
   {
     name: "Rollers",
     description: "Top and bottom rollers",
     icon: Disc3,
-    href: "/products?category=rollers",
+    href: "/bottom-rollers",
   },
   {
     name: "Idlers",
     description: "Front idlers and components",
     icon: Target,
-    href: "/products?category=idlers",
+    href: "/idlers",
   },
 ];
 
