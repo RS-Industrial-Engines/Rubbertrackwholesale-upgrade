@@ -5,6 +5,7 @@
 
 import { API } from "./api";
 import { fullBrands, normalizeForMatching, BRAND_ALIASES, resolveBrandAlias } from "./data/full-machine-data";
+import { normalizeTrackSize as centralNormalizeTrackSize } from "./url-utils";
 
 // Extended brand aliases for detection
 export const SEARCH_BRAND_ALIASES: Record<string, string> = {
@@ -90,12 +91,10 @@ export function isTrackSizeQuery(query: string): boolean {
 
 /**
  * Normalize a track size to standard format: 400x86x52
+ * Re-exports from url-utils for backward compatibility
  */
 export function normalizeTrackSize(size: string): string {
-  return size
-    .replace(/\s+/g, "")
-    .toLowerCase()
-    .replace(/x/gi, "x");
+  return centralNormalizeTrackSize(size);
 }
 
 /**
