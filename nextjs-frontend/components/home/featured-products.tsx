@@ -62,7 +62,7 @@ export function FeaturedProducts() {
                 )}
                 <div className="p-6">
                   <p className="text-primary text-sm font-semibold mb-2">
-                    {product.brand}
+                    {product.brand?.name || product.brand_name || ""}
                   </p>
                   <h3 className="text-foreground font-semibold text-lg mb-2">
                     {product.title || product.name}

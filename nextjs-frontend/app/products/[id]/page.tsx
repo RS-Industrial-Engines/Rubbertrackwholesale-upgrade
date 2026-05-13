@@ -35,7 +35,7 @@ export async function generateMetadata({
     title: product.title || product.name,
     description:
       product.description ||
-      `${product.brand} ${product.title || product.name} - Premium quality rubber track`,
+      `${product.brand?.name || product.brand_name || ""} ${product.title || product.name} - Premium quality rubber track`,
   };
 }
 

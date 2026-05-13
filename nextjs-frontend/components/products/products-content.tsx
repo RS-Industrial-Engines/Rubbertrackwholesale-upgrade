@@ -243,7 +243,7 @@ export function ProductsContent() {
                   <div className="p-4">
                     {product.brand && (
                       <p className="text-primary text-sm font-semibold mb-1">
-                        {product.brand}
+                        {product.brand?.name || product.brand_name || ""}
                       </p>
                     )}
                     <h3 className="text-foreground font-semibold text-base mb-1 line-clamp-2">

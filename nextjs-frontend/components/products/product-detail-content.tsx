@@ -85,7 +85,7 @@ export function ProductDetailContent({ product }: ProductDetailContentProps) {
           <div>
             {product.brand && (
               <p className="text-primary text-sm font-semibold mb-2">
-                {product.brand}
+                {product.brand?.name || product.brand_name || ""}
               </p>
             )}
             <h1 className="text-3xl font-bold text-foreground mb-4">
