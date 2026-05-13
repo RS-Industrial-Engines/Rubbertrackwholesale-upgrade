@@ -130,7 +130,7 @@ export function parseMachineSlugClean(slug: string): { make: string; model: stri
     { prefix: "mustang", canonical: "Mustang" },
     { prefix: "terex", canonical: "Terex" },
     { prefix: "vermeer", canonical: "Vermeer" },
-    { prefix: "hyundai", categorical: "Hyundai" },
+    { prefix: "hyundai", canonical: "Hyundai" },
     { prefix: "volvo", canonical: "Volvo" },
     { prefix: "sumitomo", canonical: "Sumitomo" },
     { prefix: "morooka", canonical: "Morooka" },
