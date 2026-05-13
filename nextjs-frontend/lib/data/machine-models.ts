@@ -407,18 +407,46 @@ export function isTrackSizeQuery(query: string): boolean {
   return trackSizePattern.test(normalizedQuery);
 }
 
+// Helper function to get all machines by brand
+export function getMachinesByBrand(brand: string): { make: string; model: string; trackSizes: string[] }[] {
+  const normalizedBrand = brand.toLowerCase().trim();
+  const results: { make: string; model: string; trackSizes: string[] }[] = [];
+  
+  for (const [brandName, models] of Object.entries(machineModels)) {
+    if (brandName.toLowerCase() === normalizedBrand) {
+      for (const model of models) {
+        const key = `${brandName} ${model}`;
+        const trackSizesForMachine = machineCompatibility[key] || [];
+        results.push({
+          make: brandName,
+          model: model,
+          trackSizes: trackSizesForMachine
+        });
+      }
+      break;
+    }
+  }
+  
+  return results;
+}
+
 // Helper function to get machines by track size
-export function getMachinesByTrackSize(trackSize: string): { make: string; model: string }[] {
+export function getMachinesByTrackSize(trackSize: string): { make: string; model: string; trackSizes: string[] }[] {
   const normalizedSize = trackSize.toLowerCase().replace(/\s+/g, '');
-  const results: { make: string; model: string }[] = [];
+  const results: { make: string; model: string; trackSizes: string[] }[] = [];
   
   for (const [machineKey, sizes] of Object.entries(machineCompatibility)) {
-    const normalizedSizes = sizes.map(s => s.toLowerCase().replace(/\s+/g, ''));
-    if (normalizedSizes.includes(normalizedSize)) {
+    const hasSize = sizes.some(s => s.toLowerCase().replace(/\s+/g, '') === normalizedSize);
+    if (hasSize) {
+      // Parse the machine key (e.g., "Kubota SVL75")
       const parts = machineKey.split(' ');
       const make = parts[0];
       const model = parts.slice(1).join(' ');
-      results.push({ make, model });
+      results.push({
+        make,
+        model,
+        trackSizes: sizes
+      });
     }
   }
   

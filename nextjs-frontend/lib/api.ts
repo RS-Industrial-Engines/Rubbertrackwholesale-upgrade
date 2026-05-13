@@ -387,10 +387,23 @@ export async function getCompatibility(): Promise<Compatibility[]> {
   return serverFetch<Compatibility[]>(API.compatibility, { tags: ["compatibility"] });
 }
 
+export interface CompatibilitySearchParams {
+  make?: string;
+  model?: string;
+  track_size?: string;
+  include_all?: boolean;
+}
+
 export async function searchCompatibility(
-  query: string
+  params: CompatibilitySearchParams
 ): Promise<CompatibilitySearchResult[]> {
-  const url = `${API.compatibilitySearch}?q=${encodeURIComponent(query)}`;
+  const searchParams = new URLSearchParams();
+  if (params.make) searchParams.set("make", params.make);
+  if (params.model) searchParams.set("model", params.model);
+  if (params.track_size) searchParams.set("track_size", params.track_size);
+  if (params.include_all) searchParams.set("include_all", "true");
+  
+  const url = `${API.compatibilitySearch}?${searchParams.toString()}`;
   return serverFetch<CompatibilitySearchResult[]>(url, { tags: ["compatibility"] });
 }
 

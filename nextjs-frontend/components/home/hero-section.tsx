@@ -197,7 +197,7 @@ export function HeroSection() {
     }
 
     // Otherwise, go to general search results
-    router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+    router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
   };
 
   const handleResultClick = (result: SearchResult) => {
@@ -318,7 +318,7 @@ export function HeroSection() {
                 
                 {/* View all results link */}
                 <Link
-                  href={`/products?search=${encodeURIComponent(searchQuery)}`}
+                  href={`/search?q=${encodeURIComponent(searchQuery)}`}
                   className="block w-full px-4 py-3 text-center text-primary hover:bg-secondary/50 transition-colors font-medium"
                   onClick={() => setShowDropdown(false)}
                 >
