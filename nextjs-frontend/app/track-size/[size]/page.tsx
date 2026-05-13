@@ -12,8 +12,9 @@ import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-deta
 import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
 import {
   trackSizes as fallbackTrackSizesData,
-  getMachinesByTrackSize,
 } from "@/lib/data/machine-models";
+import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
+import { normalizeTrackSize } from "@/lib/url-utils";
 
 const SITE_URL = getSiteUrl();
 
@@ -40,12 +41,13 @@ function getFallbackTrackSizeData(size: string): TrackSize | null {
   };
 }
 
-// Get fallback compatible machines
+// Get fallback compatible machines using full-machine-data with normalized comparison
 function getFallbackCompatibleMachines(size: string): MachineModel[] {
-  const machines = getMachinesByTrackSize(size);
+  const normalizedSize = normalizeTrackSize(size);
+  const machines = getMachinesForTrackSize(normalizedSize);
   return machines.map((m, i) => ({
     id: i + 1,
-    make: m.make,
+    make: m.brand,
     model: m.model,
     equipment_type: "Compact Track Loader",
   }));

@@ -5411,35 +5411,35 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|MD-70": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC 2800": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC 2810": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC 4800": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC 4810": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC HD4500": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|POSI-TRAC HD4520": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|PT 100": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x5588"
   ],
   "ASV|PT 50": [
     "15x4x166",
@@ -5451,11 +5451,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|PT 80": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "ASV|RC 100": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "ASV|RC 50": [
     "15x4x166",
@@ -5467,11 +5467,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|RC 85": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "ASV|RCV": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "ASV|RT 50": [
     "15x4x166",
@@ -5483,7 +5483,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|RT 75": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "ASV|SC-50": [
     "15x4x166",
@@ -5491,7 +5491,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|SR-80": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "ASV|ST-50": [
     "15x4x166",
@@ -15581,7 +15581,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Kubota|KH 91": [
-    "300x100x39",
+    "300x1009x39",
     "300x52.5x80"
   ],
   "Kubota|KN 36": [
@@ -17937,7 +17937,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Positrack|RCV 85": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "Powerfab|100 X": [
     "200x72x40"
@@ -19431,23 +19431,23 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Terex|PT-100": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "Terex|PT-100F": [
     "18x4x200",
-    "457x101.6x50"
+    "457x101.6x5080"
   ],
   "Terex|PT-100G": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|PT-110": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|PT-110G": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|PT-50": [
     "15x4x166",
@@ -19459,11 +19459,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Terex|PT-75": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|PT-80": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|R160T": [
     "15x4x166",
@@ -19475,7 +19475,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Terex|R350T": [
     "18x4x201",
-    "457x101.6x51"
+    "457x101.6x5105"
   ],
   "Terex|TC 125": [
     "500x92x78"
@@ -21890,7 +21890,7 @@ export const fullTrackSizes: string[] = [
   "280x72x47",
   "280x72x48",
   "280x72x52",
-  "300x100x39",
+  "300x1009x39",
   "300x100x43",
   "300x101.6x39",
   "300x101.6x40",
@@ -22086,9 +22086,9 @@ export const fullTrackSizes: string[] = [
   "457x100.6x51",
   "457x100.6x56",
   "457x100x51",
-  "457x101.6x50",
-  "457x101.6x51",
-  "457x101.6x55",
+  "457x101.6x5080",
+  "457x101.6x5105",
+  "457x101.6x5588",
   "485x92x72",
   "500x100x65",
   "500x90x78",
