@@ -1,20 +1,218 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Search, Phone, MapPin, Truck, Clock } from "lucide-react";
+import { Search, Phone, MapPin, Truck, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { API } from "@/lib/api";
+import {
+  searchMachines,
+  searchTrackSizes,
+  isTrackSizeQuery,
+  brands as fallbackBrands,
+} from "@/lib/data/machine-models";
+
+interface SearchResult {
+  type: "machine" | "track-size" | "product";
+  make?: string;
+  model?: string;
+  size?: string;
+  trackSizes?: string[];
+  title?: string;
+}
 
 export function HeroSection() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node) &&
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Debounced search function
+  const performSearch = useCallback(async (query: string) => {
+    if (!query.trim() || query.length < 2) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    setIsSearching(true);
+    const results: SearchResult[] = [];
+
+    try {
+      // Check if it's a track size query
+      if (isTrackSizeQuery(query)) {
+        // Search for track sizes
+        const trackSizeResults = searchTrackSizes(query);
+        trackSizeResults.forEach((ts) => {
+          results.push({
+            type: "track-size",
+            size: ts.size,
+          });
+        });
+      } else {
+        // Search for machines using the API first
+        try {
+          const params = new URLSearchParams();
+          // Try to extract brand and model from query
+          const queryLower = query.toLowerCase().trim();
+          
+          // Check if query starts with a known brand
+          const brandMatch = fallbackBrands.find(b => 
+            queryLower.startsWith(b.toLowerCase()) || 
+            queryLower.startsWith(b.toLowerCase().replace(' ', ''))
+          );
+          
+          if (brandMatch) {
+            params.set("make", brandMatch);
+            const modelPart = query.slice(brandMatch.length).trim();
+            if (modelPart) {
+              params.set("model", modelPart);
+            }
+          } else {
+            // Search model only
+            params.set("model", query);
+          }
+
+          const apiUrl = `${API.compatibilitySearch}?${params.toString()}`;
+          const response = await fetch(apiUrl);
+          
+          if (response.ok) {
+            const apiResults = await response.json();
+            if (Array.isArray(apiResults) && apiResults.length > 0) {
+              apiResults.slice(0, 10).forEach((item: { make?: string; model?: string; track_sizes?: string[] }) => {
+                results.push({
+                  type: "machine",
+                  make: item.make,
+                  model: item.model,
+                  trackSizes: item.track_sizes || [],
+                });
+              });
+            }
+          }
+        } catch {
+          // API failed, continue to fallback
+        }
+
+        // If no API results, use fallback data
+        if (results.length === 0) {
+          const machineResults = searchMachines(query);
+          machineResults.slice(0, 10).forEach((m) => {
+            results.push({
+              type: "machine",
+              make: m.make,
+              model: m.model,
+              trackSizes: m.trackSizes,
+            });
+          });
+        }
+
+        // Also check for track size matches in the query
+        const trackSizeResults = searchTrackSizes(query);
+        trackSizeResults.slice(0, 3).forEach((ts) => {
+          results.push({
+            type: "track-size",
+            size: ts.size,
+          });
+        });
+      }
+    } catch {
+      // Fall back to local search on any error
+      if (isTrackSizeQuery(query)) {
+        const trackSizeResults = searchTrackSizes(query);
+        trackSizeResults.forEach((ts) => {
+          results.push({
+            type: "track-size",
+            size: ts.size,
+          });
+        });
+      } else {
+        const machineResults = searchMachines(query);
+        machineResults.slice(0, 10).forEach((m) => {
+          results.push({
+            type: "machine",
+            make: m.make,
+            model: m.model,
+            trackSizes: m.trackSizes,
+          });
+        });
+      }
+    }
+
+    setSearchResults(results);
+    setShowDropdown(results.length > 0);
+    setIsSearching(false);
+  }, []);
+
+  // Debounce effect
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      performSearch(searchQuery);
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [searchQuery, performSearch]);
 
   const handleSearch = () => {
-    if (searchQuery.trim()) {
-      router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+    if (!searchQuery.trim()) return;
+
+    // If we have results and the user presses enter, navigate based on the first result
+    if (searchResults.length > 0) {
+      const firstResult = searchResults[0];
+      if (firstResult.type === "machine" && firstResult.make && firstResult.model) {
+        const slug = `${firstResult.make.toLowerCase().replace(/\s+/g, "-")}-${firstResult.model.toLowerCase().replace(/\s+/g, "-")}`;
+        router.push(`/machines/${slug}`);
+        return;
+      } else if (firstResult.type === "track-size" && firstResult.size) {
+        router.push(`/track-size/${firstResult.size}`);
+        return;
+      }
     }
+
+    // If it looks like a track size, go to track size page
+    if (isTrackSizeQuery(searchQuery)) {
+      router.push(`/track-size/${searchQuery.replace(/\s+/g, "")}`);
+      return;
+    }
+
+    // Otherwise, go to general search results
+    router.push(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+  };
+
+  const handleResultClick = (result: SearchResult) => {
+    setShowDropdown(false);
+    
+    if (result.type === "machine" && result.make && result.model) {
+      const slug = `${result.make.toLowerCase().replace(/\s+/g, "-")}-${result.model.toLowerCase().replace(/\s+/g, "-")}`;
+      router.push(`/machines/${slug}`);
+    } else if (result.type === "track-size" && result.size) {
+      router.push(`/track-size/${result.size}`);
+    }
+  };
+
+  const createSlug = (make: string, model: string) => {
+    return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
   };
 
   return (
@@ -48,22 +246,86 @@ export function HeroSection() {
             pricing with same-day shipping available.
           </p>
 
-          {/* Search Bar */}
-          <div className="bg-card rounded-xl p-2 flex flex-col sm:flex-row gap-2 shadow-2xl border border-border mb-6">
-            <Input
-              type="text"
-              placeholder="Search by machine model, track size, or part number..."
-              className="flex-1 border-0 text-lg focus-visible:ring-0 bg-transparent h-14"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") handleSearch();
-              }}
-            />
-            <Button className="h-14 px-8 text-lg" onClick={handleSearch}>
-              <Search className="h-5 w-5 mr-2" />
-              Find My Track
-            </Button>
+          {/* Search Bar with Dropdown */}
+          <div className="relative mb-6">
+            <div className="bg-card rounded-xl p-2 flex flex-col sm:flex-row gap-2 shadow-2xl border border-border">
+              <div className="relative flex-1">
+                <Input
+                  ref={inputRef}
+                  type="text"
+                  placeholder="Search by machine model (Kubota SVL75), track size (400x86x52), or part number..."
+                  className="flex-1 border-0 text-lg focus-visible:ring-0 bg-transparent h-14 pr-10"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onFocus={() => searchResults.length > 0 && setShowDropdown(true)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      setShowDropdown(false);
+                      handleSearch();
+                    }
+                    if (e.key === "Escape") {
+                      setShowDropdown(false);
+                    }
+                  }}
+                />
+                {isSearching && (
+                  <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 animate-spin text-muted-foreground" />
+                )}
+              </div>
+              <Button className="h-14 px-8 text-lg" onClick={handleSearch}>
+                <Search className="h-5 w-5 mr-2" />
+                Find My Track
+              </Button>
+            </div>
+
+            {/* Search Results Dropdown */}
+            {showDropdown && searchResults.length > 0 && (
+              <div
+                ref={dropdownRef}
+                className="absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-2xl z-50 overflow-hidden max-h-96 overflow-y-auto"
+              >
+                {searchResults.map((result, index) => (
+                  <button
+                    key={`${result.type}-${result.make}-${result.model}-${result.size}-${index}`}
+                    className="w-full px-4 py-3 text-left hover:bg-secondary/50 transition-colors border-b border-border last:border-b-0"
+                    onClick={() => handleResultClick(result)}
+                  >
+                    {result.type === "machine" ? (
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <span className="text-primary font-medium">{result.make}</span>
+                          <span className="text-foreground ml-2 font-semibold">{result.model}</span>
+                        </div>
+                        {result.trackSizes && result.trackSizes.length > 0 && (
+                          <span className="text-sm text-muted-foreground">
+                            {result.trackSizes.slice(0, 2).join(", ")}
+                            {result.trackSizes.length > 2 && ` +${result.trackSizes.length - 2}`}
+                          </span>
+                        )}
+                      </div>
+                    ) : result.type === "track-size" ? (
+                      <div className="flex items-center gap-2">
+                        <span className="bg-primary/20 text-primary px-2 py-1 rounded text-sm font-medium">
+                          Track Size
+                        </span>
+                        <span className="text-foreground font-semibold">{result.size}</span>
+                      </div>
+                    ) : (
+                      <span className="text-foreground">{result.title}</span>
+                    )}
+                  </button>
+                ))}
+                
+                {/* View all results link */}
+                <Link
+                  href={`/products?search=${encodeURIComponent(searchQuery)}`}
+                  className="block w-full px-4 py-3 text-center text-primary hover:bg-secondary/50 transition-colors font-medium"
+                  onClick={() => setShowDropdown(false)}
+                >
+                  View all results for &quot;{searchQuery}&quot;
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Quick Links */}

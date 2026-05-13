@@ -5,12 +5,48 @@ import {
   getCompatibilityByTrackSize,
   getProducts,
   parseTrackSize,
+  TrackSize,
+  MachineModel,
 } from "@/lib/api";
 import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-detail-content";
 import { generateBreadcrumbSchema, generateFAQPageSchema } from "@/lib/schema";
+import {
+  trackSizes as fallbackTrackSizesData,
+  getMachinesByTrackSize,
+} from "@/lib/data/machine-models";
 
 interface PageProps {
   params: Promise<{ size: string }>;
+}
+
+// Get fallback track size data
+function getFallbackTrackSizeData(size: string): TrackSize | null {
+  const normalizedSize = size.toLowerCase().replace(/\s+/g, "").replace(/-/g, "x");
+  const found = fallbackTrackSizesData.find(
+    (ts) => ts.size.toLowerCase().replace(/\s+/g, "") === normalizedSize
+  );
+  
+  if (!found) return null;
+  
+  return {
+    id: 1,
+    size: found.size,
+    width: found.width,
+    pitch: found.pitch,
+    links: found.links,
+    is_in_stock: true,
+  };
+}
+
+// Get fallback compatible machines
+function getFallbackCompatibleMachines(size: string): MachineModel[] {
+  const machines = getMachinesByTrackSize(size);
+  return machines.map((m, i) => ({
+    id: i + 1,
+    make: m.make,
+    model: m.model,
+    equipment_type: "Compact Track Loader",
+  }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -44,12 +80,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export async function generateStaticParams() {
   try {
     const trackSizes = await getTrackSizes();
-    return trackSizes.slice(0, 50).map((track) => ({
-      size: track.size.toLowerCase().replace(/\s+/g, "-"),
-    }));
+    if (trackSizes && trackSizes.length > 0) {
+      return trackSizes.slice(0, 50).map((track) => ({
+        size: track.size.toLowerCase().replace(/\s+/g, "-"),
+      }));
+    }
   } catch {
-    return [];
+    // Fall back to local data
   }
+  
+  // Generate from fallback data
+  return fallbackTrackSizesData.slice(0, 50).map((track) => ({
+    size: track.size.toLowerCase().replace(/\s+/g, "-"),
+  }));
 }
 
 export default async function TrackSizeDetailPage({ params }: PageProps) {
@@ -60,24 +103,34 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
   // Parse dimensions
   const dimensions = parseTrackSize(formattedSize);
 
-  let trackSizeData = null;
-  let compatibleMachines: Awaited<ReturnType<typeof getCompatibilityByTrackSize>> = [];
+  let trackSizeData: TrackSize | null = null;
+  let compatibleMachines: MachineModel[] = [];
   let products: Awaited<ReturnType<typeof getProducts>> = [];
 
   try {
-    const trackSizes = await getTrackSizes();
-    trackSizeData = trackSizes.find(
+    const apiTrackSizes = await getTrackSizes();
+    const found = apiTrackSizes?.find(
       (t) => t.size.toLowerCase().replace(/\s+/g, "") === formattedSize.toLowerCase().replace(/\s+/g, "")
     );
+    
+    trackSizeData = found || getFallbackTrackSizeData(formattedSize);
 
-    [compatibleMachines, products] = await Promise.all([
+    const [apiCompatibleMachines, apiProducts] = await Promise.all([
       getCompatibilityByTrackSize(formattedSize).catch(() => []),
       getProducts({ track_size: formattedSize }).catch(() => []),
     ]);
+    
+    compatibleMachines = apiCompatibleMachines && apiCompatibleMachines.length > 0
+      ? apiCompatibleMachines
+      : getFallbackCompatibleMachines(formattedSize);
+    products = apiProducts || [];
   } catch (error) {
-    console.error("Failed to fetch track size data:", error);
+    console.error("Failed to fetch track size data, using fallback:", error);
+    trackSizeData = getFallbackTrackSizeData(formattedSize);
+    compatibleMachines = getFallbackCompatibleMachines(formattedSize);
   }
 
+  // Allow page to render even without exact track size data if dimensions can be parsed
   if (!trackSizeData && !dimensions) {
     notFound();
   }
@@ -127,7 +180,7 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
       <TrackSizeDetailContent
         size={displaySize}
         slug={size}
-        trackSizeData={trackSizeData ?? null}
+        trackSizeData={trackSizeData}
         dimensions={dimensions}
         compatibleMachines={compatibleMachines}
         products={products}

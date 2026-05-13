@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useSWR from "swr";
 import Link from "next/link";
 import { Search, Loader2 } from "lucide-react";
@@ -14,33 +14,125 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { API, fetcher, type Brand, type Compatibility } from "@/lib/api";
+import { API, fetcher } from "@/lib/api";
+import {
+  brands as fallbackBrands,
+  getModelsByBrand,
+  machineCompatibility,
+} from "@/lib/data/machine-models";
+
+interface CompatibilityResult {
+  make: string;
+  model: string;
+  equipment_type?: string;
+  track_sizes?: string[];
+}
 
 export function CompatibilitySection() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [modelSearch, setModelSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<Compatibility[]>([]);
+  const [searchResults, setSearchResults] = useState<CompatibilityResult[]>([]);
   const [searching, setSearching] = useState(false);
+  const [availableModels, setAvailableModels] = useState<string[]>([]);
 
-  const { data: brands } = useSWR<Brand[]>(API.brands, fetcher);
+  // Fetch brands from API with fallback
+  const { data: apiBrands, error: brandsError } = useSWR<string[]>(
+    `${API.machineModelBrands}?include_all=true`,
+    fetcher,
+    { 
+      revalidateOnFocus: false,
+      shouldRetryOnError: false 
+    }
+  );
+
+  // Use API brands if available, otherwise fall back to local data
+  const brands = apiBrands && apiBrands.length > 0 ? apiBrands : fallbackBrands;
+
+  // Update available models when brand changes
+  useEffect(() => {
+    if (!selectedBrand) {
+      setAvailableModels([]);
+      return;
+    }
+
+    // Try to fetch models from API
+    const fetchModels = async () => {
+      try {
+        const response = await fetch(
+          `${API.machineModels}?brand=${encodeURIComponent(selectedBrand)}&include_all=true`
+        );
+        if (response.ok) {
+          const data = await response.json();
+          if (Array.isArray(data) && data.length > 0) {
+            const models = data.map((m: { model_name?: string; model?: string }) => m.model_name || m.model || "");
+            setAvailableModels(models.filter(Boolean));
+            return;
+          }
+        }
+      } catch {
+        // API failed, use fallback
+      }
+      
+      // Fall back to local data
+      const localModels = getModelsByBrand(selectedBrand);
+      setAvailableModels(localModels);
+    };
+
+    fetchModels();
+  }, [selectedBrand]);
 
   const handleSearch = async () => {
     if (!selectedBrand && !modelSearch) return;
 
     setSearching(true);
+    const results: CompatibilityResult[] = [];
+
     try {
+      // Try API first
       const params = new URLSearchParams();
       if (selectedBrand) params.append("make", selectedBrand);
       if (modelSearch) params.append("model", modelSearch);
+      params.append("include_all", "true");
 
-      const res = await fetch(`${API.compatibilitySearch}?${params.toString()}`);
-      const data = await res.json();
-      setSearchResults(data);
+      const response = await fetch(`${API.compatibilitySearch}?${params.toString()}`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (Array.isArray(data) && data.length > 0) {
+          setSearchResults(data);
+          setSearching(false);
+          return;
+        }
+      }
     } catch {
-      setSearchResults([]);
-    } finally {
-      setSearching(false);
+      // API failed, continue to fallback
     }
+
+    // Fallback to local data
+    if (selectedBrand) {
+      const models = getModelsByBrand(selectedBrand);
+      const filteredModels = modelSearch
+        ? models.filter((m) => m.toLowerCase().includes(modelSearch.toLowerCase()))
+        : models;
+
+      filteredModels.forEach((model) => {
+        const key = `${selectedBrand} ${model}`;
+        const trackSizes = machineCompatibility[key] || [];
+        results.push({
+          make: selectedBrand,
+          model: model,
+          equipment_type: "Compact Track Loader",
+          track_sizes: trackSizes,
+        });
+      });
+    }
+
+    setSearchResults(results);
+    setSearching(false);
+  };
+
+  const createMachineSlug = (make: string, model: string) => {
+    return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
   };
 
   return (
@@ -60,30 +152,45 @@ export function CompatibilitySection() {
         <div className="max-w-3xl mx-auto mb-8">
           <div className="bg-card rounded-lg p-6 border border-border">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Select value={selectedBrand} onValueChange={setSelectedBrand}>
+              <Select value={selectedBrand} onValueChange={(value) => {
+                setSelectedBrand(value);
+                setModelSearch("");
+                setSearchResults([]);
+              }}>
                 <SelectTrigger className="bg-secondary border-border">
                   <SelectValue placeholder="Select Brand" />
                 </SelectTrigger>
-                <SelectContent>
-                  {brands?.map((brand) => (
-                    <SelectItem key={brand.id} value={brand.name}>
-                      {brand.name}
+                <SelectContent className="max-h-60 overflow-y-auto">
+                  {brands.map((brand) => (
+                    <SelectItem key={brand} value={brand}>
+                      {brand}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
 
-              <Input
-                placeholder="Enter model number..."
-                value={modelSearch}
-                onChange={(e) => setModelSearch(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") handleSearch();
-                }}
-                className="bg-secondary border-border"
-              />
+              <div className="relative">
+                <Input
+                  placeholder={selectedBrand ? "Enter model number..." : "Select brand first..."}
+                  value={modelSearch}
+                  onChange={(e) => setModelSearch(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") handleSearch();
+                  }}
+                  className="bg-secondary border-border"
+                  disabled={!selectedBrand}
+                  list="model-suggestions"
+                />
+                {selectedBrand && availableModels.length > 0 && (
+                  <datalist id="model-suggestions">
+                    {availableModels.slice(0, 20).map((model) => (
+                      <option key={model} value={model} />
+                    ))}
+                  </datalist>
+                )}
+              </div>
 
-              <Button onClick={handleSearch} disabled={searching}>
+              <Button onClick={handleSearch} disabled={searching || (!selectedBrand && !modelSearch)}>
                 {searching ? (
                   <Loader2 className="h-5 w-5 mr-2 animate-spin" />
                 ) : (
@@ -92,6 +199,28 @@ export function CompatibilitySection() {
                 Search
               </Button>
             </div>
+            
+            {/* Quick model chips when brand is selected */}
+            {selectedBrand && availableModels.length > 0 && !searchResults.length && (
+              <div className="mt-4 pt-4 border-t border-border">
+                <p className="text-sm text-muted-foreground mb-2">Popular {selectedBrand} models:</p>
+                <div className="flex flex-wrap gap-2">
+                  {availableModels.slice(0, 8).map((model) => (
+                    <button
+                      key={model}
+                      onClick={() => {
+                        setModelSearch(model);
+                        // Auto-search after selecting
+                        setTimeout(() => handleSearch(), 100);
+                      }}
+                      className="px-3 py-1 bg-secondary hover:bg-secondary/80 rounded-full text-sm text-foreground transition-colors"
+                    >
+                      {model}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -102,9 +231,9 @@ export function CompatibilitySection() {
               Compatible Machines ({searchResults.length})
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {searchResults.slice(0, 6).map((machine, idx) => (
+              {searchResults.slice(0, 10).map((machine, idx) => (
                 <Card
-                  key={idx}
+                  key={`${machine.make}-${machine.model}-${idx}`}
                   className="bg-card border-border hover:border-primary transition-colors"
                 >
                   <CardContent className="p-4">
@@ -122,32 +251,48 @@ export function CompatibilitySection() {
                           </p>
                         )}
                       </div>
-                      <Link
-                        href={`/products?brand=${machine.make}&model=${machine.model}`}
-                      >
-                        <Button size="sm">View Parts</Button>
+                      <Link href={`/machines/${createMachineSlug(machine.make, machine.model)}`}>
+                        <Button size="sm">View Details</Button>
                       </Link>
                     </div>
                     {machine.track_sizes && machine.track_sizes.length > 0 && (
                       <div className="mt-3 pt-3 border-t border-border">
-                        <p className="text-sm text-muted-foreground">
-                          Track Sizes: {machine.track_sizes.join(", ")}
-                        </p>
+                        <p className="text-sm text-muted-foreground mb-2">Compatible Track Sizes:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {machine.track_sizes.map((size) => (
+                            <Link
+                              key={size}
+                              href={`/track-size/${size}`}
+                              className="px-2 py-1 bg-primary/10 text-primary rounded text-sm hover:bg-primary/20 transition-colors"
+                            >
+                              {size}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </CardContent>
                 </Card>
               ))}
             </div>
-            {searchResults.length > 6 && (
+            {searchResults.length > 10 && (
               <div className="text-center mt-6">
-                <Link href={`/products?brand=${selectedBrand}`}>
+                <Link href={`/machines?brand=${encodeURIComponent(selectedBrand)}`}>
                   <Button variant="outline">
                     View All {searchResults.length} Results
                   </Button>
                 </Link>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Empty state after search */}
+        {searchResults.length === 0 && (selectedBrand || modelSearch) && !searching && (
+          <div className="text-center py-8">
+            <p className="text-muted-foreground">
+              Click &quot;Search&quot; to find compatible machines{selectedBrand ? ` for ${selectedBrand}` : ""}
+            </p>
           </div>
         )}
       </div>

@@ -5,6 +5,8 @@ import {
   parseMachineSlug,
   getCompatibilityByMachine,
   getProducts,
+  MachineModel,
+  CompatibilitySearchResult,
 } from "@/lib/api";
 import { MachineDetailContent } from "@/components/machines/machine-detail-content";
 import {
@@ -12,9 +14,83 @@ import {
   generateMachineSchema,
   generateFAQPageSchema,
 } from "@/lib/schema";
+import {
+  machineModels as fallbackMachineModels,
+  machineCompatibility,
+  getModelsByBrand,
+} from "@/lib/data/machine-models";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+// Get fallback compatibility data for a machine
+function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
+  const key = `${make} ${model}`;
+  const trackSizes = machineCompatibility[key];
+  
+  if (!trackSizes || trackSizes.length === 0) {
+    // Check for partial matches
+    const makeModels = Object.keys(machineCompatibility);
+    const match = makeModels.find(k => 
+      k.toLowerCase() === key.toLowerCase() ||
+      k.toLowerCase().includes(model.toLowerCase())
+    );
+    
+    if (match) {
+      const matchedSizes = machineCompatibility[match];
+      return {
+        machine: {
+          id: 1,
+          make: make,
+          model: model,
+          equipment_type: "Compact Track Loader",
+        },
+        track_sizes: matchedSizes.map((size, i) => ({
+          id: i + 1,
+          size,
+          width: parseInt(size.split("x")[0]),
+          pitch: parseFloat(size.split("x")[1]),
+          links: parseInt(size.split("x")[2]),
+        })),
+        products: [],
+      };
+    }
+    
+    return null;
+  }
+
+  return {
+    machine: {
+      id: 1,
+      make: make,
+      model: model,
+      equipment_type: "Compact Track Loader",
+    },
+    track_sizes: trackSizes.map((size, i) => ({
+      id: i + 1,
+      size,
+      width: parseInt(size.split("x")[0]),
+      pitch: parseFloat(size.split("x")[1]),
+      links: parseInt(size.split("x")[2]),
+    })),
+    products: [],
+  };
+}
+
+// Get fallback related machines
+function getFallbackRelatedMachines(make: string, model: string): MachineModel[] {
+  const models = getModelsByBrand(make);
+  return models
+    .filter(m => m !== model)
+    .slice(0, 8)
+    .map((m, i) => ({
+      id: i + 1,
+      make: make,
+      model: m,
+      equipment_type: "Compact Track Loader",
+      track_sizes: machineCompatibility[`${make} ${m}`] || [],
+    }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -58,12 +134,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export async function generateStaticParams() {
   try {
     const machines = await getMachineModels();
-    return machines.slice(0, 100).map((machine) => ({
-      slug: `${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
-    }));
+    if (machines && machines.length > 0) {
+      return machines.slice(0, 100).map((machine) => ({
+        slug: `${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
+      }));
+    }
   } catch {
-    return [];
+    // Fall back to local data
   }
+  
+  // Generate from fallback data
+  const params: { slug: string }[] = [];
+  for (const [brand, models] of Object.entries(fallbackMachineModels)) {
+    models.slice(0, 10).forEach(model => {
+      params.push({
+        slug: `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`,
+      });
+    });
+  }
+  return params.slice(0, 100);
 }
 
 export default async function MachineDetailPage({ params }: PageProps) {
@@ -76,27 +165,31 @@ export default async function MachineDetailPage({ params }: PageProps) {
 
   const { make, model } = parsed;
 
-  let compatibility = null;
+  let compatibility: CompatibilitySearchResult | null = null;
   let products: Awaited<ReturnType<typeof getProducts>> = [];
-  let relatedMachines: Awaited<ReturnType<typeof getMachineModels>> = [];
+  let relatedMachines: MachineModel[] = [];
 
   try {
-    [compatibility, products, relatedMachines] = await Promise.all([
+    const [apiCompatibility, apiProducts, apiRelatedMachines] = await Promise.all([
       getCompatibilityByMachine(make, model).catch(() => null),
       getProducts({ brand: make, q: model }).catch(() => []),
       getMachineModels().catch(() => []),
     ]);
+    
+    // Use API data if available, otherwise fall back
+    compatibility = apiCompatibility || getFallbackCompatibility(make, model);
+    products = apiProducts || [];
+    relatedMachines = apiRelatedMachines && apiRelatedMachines.length > 0
+      ? apiRelatedMachines.filter((m) => m.make?.toLowerCase() === make.toLowerCase() && m.model !== model).slice(0, 8)
+      : getFallbackRelatedMachines(make, model);
   } catch (error) {
-    console.error("Failed to fetch machine data:", error);
+    console.error("Failed to fetch machine data, using fallback:", error);
+    compatibility = getFallbackCompatibility(make, model);
+    relatedMachines = getFallbackRelatedMachines(make, model);
   }
 
   const trackSizes = compatibility?.track_sizes?.map((t) => t.size) || [];
   const equipmentType = compatibility?.machine?.equipment_type || "Construction Equipment";
-
-  // Filter related machines by same brand, excluding current
-  const filteredRelated = relatedMachines
-    .filter((m) => m.make?.toLowerCase() === make.toLowerCase() && m.model !== model)
-    .slice(0, 8);
 
   const breadcrumbs = [
     { name: "Home", url: "https://rubbertrackwholesale.com" },
@@ -153,7 +246,7 @@ export default async function MachineDetailPage({ params }: PageProps) {
         slug={slug}
         compatibility={compatibility}
         products={products}
-        relatedMachines={filteredRelated}
+        relatedMachines={relatedMachines}
         faqs={faqs}
       />
     </>

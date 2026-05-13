@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { getTrackSizes, getTrackSizesGrouped, TrackSize, TrackSizeGrouped } from "@/lib/api";
 import { TrackSizesContent } from "@/components/track-sizes/track-sizes-content";
 import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema";
+import { trackSizes as fallbackTrackSizesData } from "@/lib/data/machine-models";
 
 export const metadata: Metadata = {
   title: "Rubber Track Sizes - Find Tracks by Size | Houston TX",
@@ -24,17 +25,60 @@ export const metadata: Metadata = {
   },
 };
 
+// Convert fallback data to API format
+function getFallbackTrackSizes(): TrackSize[] {
+  return fallbackTrackSizesData.map((ts, index) => ({
+    id: index + 1,
+    size: ts.size,
+    width: ts.width,
+    pitch: ts.pitch,
+    links: ts.links,
+    is_in_stock: true,
+  }));
+}
+
+function getFallbackTrackSizesGrouped(): TrackSizeGrouped[] {
+  const grouped: Record<number, TrackSize[]> = {};
+  
+  fallbackTrackSizesData.forEach((ts, index) => {
+    if (!grouped[ts.width]) {
+      grouped[ts.width] = [];
+    }
+    grouped[ts.width].push({
+      id: index + 1,
+      size: ts.size,
+      width: ts.width,
+      pitch: ts.pitch,
+      links: ts.links,
+      is_in_stock: true,
+    });
+  });
+
+  return Object.entries(grouped)
+    .map(([width, sizes]) => ({
+      width: parseInt(width),
+      sizes,
+    }))
+    .sort((a, b) => a.width - b.width);
+}
+
 export default async function TrackSizesPage() {
   let trackSizes: TrackSize[] = [];
   let trackSizesGrouped: TrackSizeGrouped[] = [];
 
   try {
-    [trackSizes, trackSizesGrouped] = await Promise.all([
+    const [apiTrackSizes, apiTrackSizesGrouped] = await Promise.all([
       getTrackSizes(),
       getTrackSizesGrouped(),
     ]);
+    
+    // Use API data if available, otherwise fall back
+    trackSizes = apiTrackSizes && apiTrackSizes.length > 0 ? apiTrackSizes : getFallbackTrackSizes();
+    trackSizesGrouped = apiTrackSizesGrouped && apiTrackSizesGrouped.length > 0 ? apiTrackSizesGrouped : getFallbackTrackSizesGrouped();
   } catch (error) {
-    console.error("Failed to fetch track sizes:", error);
+    console.error("Failed to fetch track sizes, using fallback data:", error);
+    trackSizes = getFallbackTrackSizes();
+    trackSizesGrouped = getFallbackTrackSizesGrouped();
   }
 
   const breadcrumbs = [
