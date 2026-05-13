@@ -133,9 +133,18 @@ export function TrackSizeDetailContent({
       {/* Compatible Machines */}
       <section className="py-12 lg:py-16 border-b border-border">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-8">
-            Machines Compatible with {size} Rubber Tracks
-          </h2>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+              Machines Compatible with {size} Rubber Tracks
+            </h2>
+            {compatibleMachines.length > 0 && (
+              <div className="px-4 py-2 bg-primary/10 rounded-lg border border-primary/20">
+                <span className="font-semibold text-primary">
+                  Compatible with {compatibleMachines.length} machine model{compatibleMachines.length !== 1 ? 's' : ''}
+                </span>
+              </div>
+            )}
+          </div>
 
           {compatibleMachines.length > 0 ? (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

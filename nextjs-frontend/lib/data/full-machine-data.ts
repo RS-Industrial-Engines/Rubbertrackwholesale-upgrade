@@ -22605,22 +22605,51 @@ export function searchMachines(query: string): { brand: string; model: string; t
 /**
  * Get machines compatible with a track size
  */
+/**
+ * Get all machines compatible with a specific track size.
+ * This performs a complete reverse lookup across ALL machines in fullMachineCompatibility.
+ * 
+ * Handles:
+ * - Multi-size strings separated by ; , | /
+ * - Inch-equivalent formats (18x4x56)
+ * - Decimal formats (381x101.6x42)
+ * - Whitespace variations
+ */
 export function getMachinesForTrackSize(trackSize: string): { brand: string; model: string }[] {
-  const normalizedSize = normalizeForMatching(trackSize);
+  // Normalize the input track size for comparison
+  const normalizedInput = normalizeForMatching(trackSize);
   const results: { brand: string; model: string }[] = [];
   
+  // Iterate through every machine in the compatibility map
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
     const [brand, model] = key.split('|');
     
-    for (const size of sizes) {
-      if (normalizeForMatching(size) === normalizedSize) {
-        results.push({ brand, model });
+    // Check each size in the machine's compatible sizes array
+    for (const sizeEntry of sizes) {
+      // Split multi-size strings by common delimiters: ; , | /
+      const individualSizes = sizeEntry.split(/[;,|/]/).map(s => s.trim()).filter(Boolean);
+      
+      // Check each individual size
+      for (const individualSize of individualSizes) {
+        if (normalizeForMatching(individualSize) === normalizedInput) {
+          results.push({ brand, model });
+          break; // Found a match for this machine, no need to check other sizes
+        }
+      }
+      
+      // If we already found this machine, don't check more sizes
+      if (results.length > 0 && results[results.length - 1].brand === brand && results[results.length - 1].model === model) {
         break;
       }
     }
   }
   
-  return results;
+  // Sort results alphabetically by brand, then by model
+  return results.sort((a, b) => {
+    const brandCompare = a.brand.localeCompare(b.brand);
+    if (brandCompare !== 0) return brandCompare;
+    return a.model.localeCompare(b.model);
+  });
 }
 
 /**
