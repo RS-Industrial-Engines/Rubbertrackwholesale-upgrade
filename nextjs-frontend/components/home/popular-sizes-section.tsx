@@ -1,49 +1,49 @@
 import Link from "next/link";
 import { ChevronRight, Package } from "lucide-react";
-import { TOP_SELLING_TRACK_SIZES, getTopMachinesForTrackSize, HIGH_PRIORITY_MACHINES } from "@/lib/data/seo-priorities";
+import { getTop10TrackSizes } from "@/lib/data/seo-priorities";
 import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
 
-// Top-selling sizes with accurate machine fits based on sales data
-const popularSizes = [
-  {
-    size: "400x86x52",
-    rank: 1,
-    description: "Most popular CTL size",
-    machines: "Kubota SVL95, John Deere 331G, Bobcat T740",
-  },
-  {
-    size: "300x52.5x80",
-    rank: 2,
-    description: "Top mini excavator size",
-    machines: "Kubota KX040, CAT 303.5, John Deere 35G",
-  },
-  {
-    size: "320x86x49",
-    rank: 3,
-    description: "Compact CTL size",
-    machines: "Bobcat T590, CAT 249D",
-  },
-  {
-    size: "450x86x58",
-    rank: 4,
-    description: "Large CTL size",
-    machines: "CAT 299D, Bobcat T770, John Deere 333G, Takeuchi TL12",
-  },
-  {
-    size: "450x86x60",
-    rank: 5,
-    description: "XL CTL size",
-    machines: "CAT 299D2, Bobcat T870",
-  },
-  {
-    size: "320x86x52",
-    rank: 6,
-    description: "Popular mid-size CTL",
-    machines: "Kubota SVL75, John Deere 325G, Takeuchi TL10",
-  },
-];
+/**
+ * Get sample machine names for a track size by looking up from full-machine-data.ts
+ * Returns a formatted string of machine names, limited to 3-4 machines.
+ */
+function getSampleMachinesForSize(trackSize: string): string {
+  const machines = getMachinesForTrackSize(trackSize);
+  
+  // Get a diverse sample of brands (up to 4 machines, different brands preferred)
+  const seenBrands = new Set<string>();
+  const sampleMachines: string[] = [];
+  
+  for (const machine of machines) {
+    if (sampleMachines.length >= 4) break;
+    
+    // Prefer different brands for variety
+    if (!seenBrands.has(machine.brand) || sampleMachines.length < 2) {
+      // Format model name - remove parenthetical descriptions for display
+      const displayModel = machine.model.replace(/\s*\([^)]*\)/g, "").trim();
+      sampleMachines.push(`${machine.brand} ${displayModel}`);
+      seenBrands.add(machine.brand);
+    }
+  }
+  
+  if (sampleMachines.length === 0) {
+    return "Multiple machines";
+  }
+  
+  return sampleMachines.join(", ");
+}
 
 export function PopularSizesSection() {
+  const top10Sizes = getTop10TrackSizes();
+  
+  // Build the popular sizes array with machine lookups from full-machine-data.ts
+  const popularSizes = top10Sizes.map(item => ({
+    size: item.size,
+    rank: item.rank,
+    description: item.description,
+    machines: getSampleMachinesForSize(item.size),
+  }));
+
   return (
     <section className="py-12 lg:py-16">
       <div className="container mx-auto px-4">
@@ -56,7 +56,7 @@ export function PopularSizesSection() {
               </span>
             </div>
             <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-              Top-Selling Track Sizes
+              Top 10 Selling Track Sizes
             </h2>
             <p className="text-muted-foreground mt-2">
               Based on real customer orders - ready to ship nationwide
@@ -71,8 +71,9 @@ export function PopularSizesSection() {
           </Link>
         </div>
 
+        {/* Top 6 with full cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {popularSizes.map((item) => (
+          {popularSizes.slice(0, 6).map((item) => (
             <Link
               key={item.size}
               href={`/track-size/${item.size.toLowerCase()}`}
@@ -96,7 +97,7 @@ export function PopularSizesSection() {
                   In Stock
                 </span>
               </div>
-              <p className="text-sm text-foreground mt-4 pt-4 border-t border-border">
+              <p className="text-sm text-foreground mt-4 pt-4 border-t border-border line-clamp-2">
                 <span className="text-muted-foreground">Fits: </span>
                 {item.machines}
               </p>
@@ -104,6 +105,29 @@ export function PopularSizesSection() {
                 View Compatible Machines
                 <ChevronRight className="h-3 w-3 ml-1" />
               </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Sizes 7-10 in compact row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          {popularSizes.slice(6, 10).map((item) => (
+            <Link
+              key={item.size}
+              href={`/track-size/${item.size.toLowerCase()}`}
+              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 flex items-center justify-center bg-muted text-muted-foreground text-xs font-bold rounded">
+                  #{item.rank}
+                </span>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary">
+                  {item.size}
+                </h3>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2 line-clamp-1">
+                {item.machines}
+              </p>
             </Link>
           ))}
         </div>
