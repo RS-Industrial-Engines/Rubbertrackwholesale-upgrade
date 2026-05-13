@@ -5,7 +5,10 @@ import {
   generateBreadcrumbSchema,
   generateProductCollectionSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Bottom Rollers | Undercarriage Parts | Houston TX",
@@ -42,8 +45,8 @@ export default async function BottomRollersPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Bottom Rollers", url: "https://rubbertrackwholesale.com/bottom-rollers" },
+    { name: "Home", url: SITE_URL },
+    { name: "Bottom Rollers", url: `${SITE_URL}/bottom-rollers` },
   ];
 
   const faqs = [

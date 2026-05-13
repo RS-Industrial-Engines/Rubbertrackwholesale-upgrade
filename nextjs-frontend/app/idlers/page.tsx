@@ -5,7 +5,10 @@ import {
   generateBreadcrumbSchema,
   generateProductCollectionSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Idlers | Front Idlers | Undercarriage Parts | Houston TX",
@@ -42,8 +45,8 @@ export default async function IdlersPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Idlers", url: "https://rubbertrackwholesale.com/idlers" },
+    { name: "Home", url: SITE_URL },
+    { name: "Idlers", url: `${SITE_URL}/idlers` },
   ];
 
   const faqs = [

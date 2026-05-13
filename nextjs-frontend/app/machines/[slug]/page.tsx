@@ -13,12 +13,15 @@ import {
   generateBreadcrumbSchema,
   generateMachineSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
 import {
   machineModels as fallbackMachineModels,
   machineCompatibility,
   getModelsByBrand,
 } from "@/lib/data/machine-models";
+
+const SITE_URL = getSiteUrl();
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -126,7 +129,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
     },
     alternates: {
-      canonical: `https://rubbertrackwholesale.com/machines/${slug}`,
+      canonical: `${SITE_URL}/machines/${slug}`,
     },
   };
 }
@@ -192,9 +195,9 @@ export default async function MachineDetailPage({ params }: PageProps) {
   const equipmentType = compatibility?.machine?.equipment_type || "Construction Equipment";
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Machines", url: "https://rubbertrackwholesale.com/machines" },
-    { name: `${make} ${model}`, url: `https://rubbertrackwholesale.com/machines/${slug}` },
+    { name: "Home", url: SITE_URL },
+    { name: "Machines", url: `${SITE_URL}/machines` },
+    { name: `${make} ${model}`, url: `${SITE_URL}/machines/${slug}` },
   ];
 
   const faqs = [

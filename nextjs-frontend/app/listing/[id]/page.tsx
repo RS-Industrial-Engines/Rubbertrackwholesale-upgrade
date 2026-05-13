@@ -12,7 +12,9 @@ import {
   fallbackIdlers,
   fallbackFinalDrives,
 } from "@/lib/data/products";
-import { generateBreadcrumbSchema } from "@/lib/schema";
+import { generateBreadcrumbSchema, getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 // Combine all fallback products
 const allFallbackProducts = [
@@ -67,9 +69,9 @@ export default async function ListingPage({ params }: ListingPageProps) {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: getCategoryName(listing.category), url: `https://rubbertrackwholesale.com/${listing.category}` },
-    { name: listing.title, url: `https://rubbertrackwholesale.com/listing/${listing.id}` },
+    { name: "Home", url: SITE_URL },
+    { name: getCategoryName(listing.category), url: `${SITE_URL}/${listing.category}` },
+    { name: listing.title, url: `${SITE_URL}/listing/${listing.id}` },
   ];
 
   return (
@@ -99,7 +101,7 @@ export default async function ListingPage({ params }: ListingPageProps) {
                 : "https://schema.org/OutOfStock",
               price: listing.price || undefined,
               priceCurrency: listing.price ? "USD" : undefined,
-              url: `https://rubbertrackwholesale.com/listing/${listing.id}`,
+              url: `${SITE_URL}/listing/${listing.id}`,
             },
           }),
         }}

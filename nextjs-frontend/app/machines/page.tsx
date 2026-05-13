@@ -1,12 +1,14 @@
 import { Metadata } from "next";
 import { getMachineModels, getMachineModelBrands, MachineModel } from "@/lib/api";
 import { MachinesContent } from "@/components/machines/machines-content";
-import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema";
+import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
 import {
   machineModels as fallbackMachineModels,
   brands as fallbackBrands,
   machineCompatibility,
 } from "@/lib/data/machine-models";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Machines - Find Rubber Tracks by Equipment Model",
@@ -72,13 +74,13 @@ export default async function MachinesPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Machines", url: "https://rubbertrackwholesale.com/machines" },
+    { name: "Home", url: SITE_URL },
+    { name: "Machines", url: `${SITE_URL}/machines` },
   ];
 
   const machineListItems = machines.slice(0, 50).map((machine, index) => ({
     name: `${machine.make} ${machine.model}`,
-    url: `https://rubbertrackwholesale.com/machines/${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${SITE_URL}/machines/${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
     position: index + 1,
   }));
 

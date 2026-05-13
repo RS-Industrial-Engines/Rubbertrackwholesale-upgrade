@@ -5,7 +5,10 @@ import {
   generateBreadcrumbSchema,
   generateProductCollectionSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Rubber Tracks | Wholesale Prices | Houston TX | Nationwide Shipping",
@@ -30,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   alternates: {
-    canonical: "https://rubbertrackwholesale.com/rubber-tracks",
+    canonical: `${SITE_URL}/rubber-tracks`,
   },
 };
 
@@ -48,8 +51,8 @@ export default async function RubberTracksPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Rubber Tracks", url: "https://rubbertrackwholesale.com/rubber-tracks" },
+    { name: "Home", url: SITE_URL },
+    { name: "Rubber Tracks", url: `${SITE_URL}/rubber-tracks` },
   ];
 
   const faqs = [

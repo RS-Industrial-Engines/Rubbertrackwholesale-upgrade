@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetailContent } from "@/components/products/product-detail-content";
 import { API } from "@/lib/api";
+import {
+  generateProductSchema,
+  generateBreadcrumbSchema,
+  getSiteUrl,
+} from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -31,11 +38,23 @@ export async function generateMetadata({
     };
   }
 
+  const title = product.title || product.name;
+  const description =
+    product.description ||
+    `${product.brand?.name || product.brand_name || ""} ${title} - Premium quality rubber track`;
+
   return {
-    title: product.title || product.name,
-    description:
-      product.description ||
-      `${product.brand?.name || product.brand_name || ""} ${product.title || product.name} - Premium quality rubber track`,
+    title: `${title} | Rubber Track Wholesale`,
+    description,
+    openGraph: {
+      title: `${title} | Rubber Track Wholesale`,
+      description,
+      type: "website",
+      images: product.images?.[0] || product.image_url ? [{ url: product.images?.[0] || product.image_url }] : undefined,
+    },
+    alternates: {
+      canonical: `${SITE_URL}/products/${id}`,
+    },
   };
 }
 
@@ -47,5 +66,27 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  return <ProductDetailContent product={product} />;
+  const breadcrumbs = [
+    { name: "Home", url: SITE_URL },
+    { name: "Products", url: `${SITE_URL}/products` },
+    { name: product.title || product.name, url: `${SITE_URL}/products/${id}` },
+  ];
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateProductSchema(product)),
+        }}
+      />
+      <ProductDetailContent product={product} />
+    </>
+  );
 }

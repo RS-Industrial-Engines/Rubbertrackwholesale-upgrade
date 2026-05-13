@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import { getTrackSizes, getTrackSizesGrouped, TrackSize, TrackSizeGrouped } from "@/lib/api";
 import { TrackSizesContent } from "@/components/track-sizes/track-sizes-content";
-import { generateBreadcrumbSchema, generateItemListSchema } from "@/lib/schema";
+import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
 import { trackSizes as fallbackTrackSizesData } from "@/lib/data/machine-models";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Rubber Track Sizes - Find Tracks by Size | Houston TX",
@@ -82,13 +84,13 @@ export default async function TrackSizesPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Track Sizes", url: "https://rubbertrackwholesale.com/track-size" },
+    { name: "Home", url: SITE_URL },
+    { name: "Track Sizes", url: `${SITE_URL}/track-size` },
   ];
 
   const sizeListItems = trackSizes.slice(0, 50).map((size, index) => ({
     name: `${size.size} Rubber Tracks`,
-    url: `https://rubbertrackwholesale.com/track-size/${size.size.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${SITE_URL}/track-size/${size.size.toLowerCase().replace(/\s+/g, "-")}`,
     position: index + 1,
   }));
 

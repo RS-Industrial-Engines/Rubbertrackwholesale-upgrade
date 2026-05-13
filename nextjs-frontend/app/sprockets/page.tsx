@@ -5,7 +5,10 @@ import {
   generateBreadcrumbSchema,
   generateProductCollectionSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Sprockets | Drive Sprockets | Undercarriage Parts | Houston TX",
@@ -42,8 +45,8 @@ export default async function SprocketsPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Sprockets", url: "https://rubbertrackwholesale.com/sprockets" },
+    { name: "Home", url: SITE_URL },
+    { name: "Sprockets", url: `${SITE_URL}/sprockets` },
   ];
 
   const faqs = [

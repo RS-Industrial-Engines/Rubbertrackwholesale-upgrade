@@ -1,8 +1,8 @@
 import { MetadataRoute } from "next";
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://rubbertrackwholesale.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
 
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
@@ -17,7 +17,7 @@ export default function robots(): MetadataRoute.Robots {
           "/checkout",
           "/account",
           "/account/*",
-          "/*?*", // Block query parameters (handled via canonical URLs)
+          "/*?*", // Block query parameter URLs (handled via canonical URLs)
         ],
       },
       {
@@ -37,7 +37,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/"],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

@@ -9,11 +9,13 @@ import {
   MachineModel,
 } from "@/lib/api";
 import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-detail-content";
-import { generateBreadcrumbSchema, generateFAQPageSchema } from "@/lib/schema";
+import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
 import {
   trackSizes as fallbackTrackSizesData,
   getMachinesByTrackSize,
 } from "@/lib/data/machine-models";
+
+const SITE_URL = getSiteUrl();
 
 interface PageProps {
   params: Promise<{ size: string }>;
@@ -72,7 +74,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "website",
     },
     alternates: {
-      canonical: `https://rubbertrackwholesale.com/track-size/${size}`,
+      canonical: `${SITE_URL}/track-size/${size}`,
     },
   };
 }
@@ -136,9 +138,9 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Track Sizes", url: "https://rubbertrackwholesale.com/track-size" },
-    { name: displaySize, url: `https://rubbertrackwholesale.com/track-size/${size}` },
+    { name: "Home", url: SITE_URL },
+    { name: "Track Sizes", url: `${SITE_URL}/track-size` },
+    { name: displaySize, url: `${SITE_URL}/track-size/${size}` },
   ];
 
   const faqs = [
@@ -169,6 +171,12 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateTrackSizeSchema(displaySize, compatibleMachines)),
         }}
       />
       <script

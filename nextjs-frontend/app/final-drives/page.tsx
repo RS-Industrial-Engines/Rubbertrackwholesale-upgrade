@@ -5,7 +5,10 @@ import {
   generateBreadcrumbSchema,
   generateProductCollectionSchema,
   generateFAQPageSchema,
+  getSiteUrl,
 } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Final Drives | Travel Motors | Undercarriage Parts | Houston TX",
@@ -42,8 +45,8 @@ export default async function FinalDrivesPage() {
   }
 
   const breadcrumbs = [
-    { name: "Home", url: "https://rubbertrackwholesale.com" },
-    { name: "Final Drives", url: "https://rubbertrackwholesale.com/final-drives" },
+    { name: "Home", url: SITE_URL },
+    { name: "Final Drives", url: `${SITE_URL}/final-drives` },
   ];
 
   const faqs = [

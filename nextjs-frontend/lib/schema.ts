@@ -1,4 +1,14 @@
-import type { Product, FAQ, Brand } from "./api";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
+
+import type { Product, FAQ } from "./api";
+
+// ============================================================================
+// SITE URL HELPER
+// ============================================================================
+
+export function getSiteUrl(): string {
+  return SITE_URL;
+}
 
 // ============================================================================
 // ORGANIZATION SCHEMA
@@ -10,8 +20,8 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     name: "Rubber Track Wholesale",
     alternateName: "RTW",
-    url: "https://rubbertrackwholesale.com",
-    logo: "https://rubbertrackwholesale.com/logo.png",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
     description:
       "Premier wholesale supplier of rubber tracks and undercarriage parts for construction equipment. Houston-based with nationwide shipping.",
     address: {
@@ -58,9 +68,9 @@ export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://rubbertrackwholesale.com/#localbusiness",
+    "@id": `${SITE_URL}/#localbusiness`,
     name: "Rubber Track Wholesale Houston",
-    image: "https://rubbertrackwholesale.com/warehouse.jpg",
+    image: `${SITE_URL}/warehouse.jpg`,
     description:
       "Houston's largest rubber track and undercarriage parts warehouse. Same-day pickup available. Serving contractors, rental companies, and equipment dealers nationwide.",
     address: {
@@ -76,7 +86,7 @@ export function generateLocalBusinessSchema() {
       latitude: 29.7604,
       longitude: -95.3698,
     },
-    url: "https://rubbertrackwholesale.com",
+    url: SITE_URL,
     telephone: "+1-800-XXX-XXXX",
     priceRange: "$$",
     openingHoursSpecification: [
@@ -166,7 +176,7 @@ export function generateFAQPageSchema(faqs: { question: string; answer: string }
 // PRODUCT SCHEMA
 // ============================================================================
 
-export function generateProductSchema(product: Product, baseUrl: string = "https://rubbertrackwholesale.com") {
+export function generateProductSchema(product: Product) {
   return {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -175,7 +185,7 @@ export function generateProductSchema(product: Product, baseUrl: string = "https
     sku: product.sku,
     mpn: product.part_number,
     image: product.images?.[0] || product.image_url,
-    url: `${baseUrl}/products/${product.id}`,
+    url: `${SITE_URL}/products/${product.id}`,
     brand: product.brand_name
       ? {
           "@type": "Brand",
@@ -185,7 +195,7 @@ export function generateProductSchema(product: Product, baseUrl: string = "https
     category: product.category_name,
     offers: {
       "@type": "Offer",
-      url: `${baseUrl}/products/${product.id}`,
+      url: `${SITE_URL}/products/${product.id}`,
       priceCurrency: "USD",
       price: product.sale_price || product.price,
       priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
@@ -234,8 +244,7 @@ export function generateItemListSchema(
 
 export function generateProductCollectionSchema(
   products: Product[],
-  collectionName: string,
-  baseUrl: string = "https://rubbertrackwholesale.com"
+  collectionName: string
 ) {
   return {
     "@context": "https://schema.org",
@@ -251,7 +260,7 @@ export function generateProductCollectionSchema(
         item: {
           "@type": "Product",
           name: product.title || product.name,
-          url: `${baseUrl}/products/${product.id}`,
+          url: `${SITE_URL}/products/${product.id}`,
           image: product.images?.[0] || product.image_url,
           offers: {
             "@type": "Offer",
@@ -275,8 +284,7 @@ export function generateMachineSchema(
   make: string,
   model: string,
   equipmentType: string,
-  trackSizes: string[],
-  baseUrl: string = "https://rubbertrackwholesale.com"
+  trackSizes: string[]
 ) {
   const slug = `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
   
@@ -290,7 +298,7 @@ export function generateMachineSchema(
     },
     model: model,
     vehicleConfiguration: equipmentType,
-    url: `${baseUrl}/machines/${slug}`,
+    url: `${SITE_URL}/machines/${slug}`,
     description: `Find compatible rubber tracks and undercarriage parts for ${make} ${model}. Compatible track sizes: ${trackSizes.join(", ")}.`,
     additionalProperty: trackSizes.map((size) => ({
       "@type": "PropertyValue",
@@ -301,21 +309,53 @@ export function generateMachineSchema(
 }
 
 // ============================================================================
+// TRACK SIZE SCHEMA (Product category)
+// ============================================================================
+
+export function generateTrackSizeSchema(
+  size: string,
+  compatibleMachines: { make: string; model: string }[]
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${size} Rubber Tracks`,
+    description: `${size} rubber tracks compatible with ${compatibleMachines.slice(0, 5).map(m => `${m.make} ${m.model}`).join(", ")}${compatibleMachines.length > 5 ? ` and ${compatibleMachines.length - 5} more machines` : ""}.`,
+    url: `${SITE_URL}/track-size/${size.toLowerCase()}`,
+    category: "Rubber Tracks",
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: "Rubber Track Wholesale",
+      },
+    },
+    additionalProperty: compatibleMachines.slice(0, 10).map((m) => ({
+      "@type": "PropertyValue",
+      name: "Compatible Machine",
+      value: `${m.make} ${m.model}`,
+    })),
+  };
+}
+
+// ============================================================================
 // WEBSITE SCHEMA
 // ============================================================================
 
-export function generateWebsiteSchema(baseUrl: string = "https://rubbertrackwholesale.com") {
+export function generateWebsiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Rubber Track Wholesale",
-    url: baseUrl,
+    url: SITE_URL,
     description: "Premier wholesale supplier of rubber tracks and undercarriage parts for construction equipment.",
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${baseUrl}/products?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
