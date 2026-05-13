@@ -12,9 +12,59 @@ interface MachinesContentProps {
   brands: string[];
 }
 
+// Popular/high-demand brands - prioritized for customer relevance
+const POPULAR_BRANDS = [
+  "Kubota",
+  "Bobcat",
+  "Caterpillar",
+  "CAT",
+  "John Deere",
+  "Takeuchi",
+  "CASE",
+  "Ditch Witch",
+  "Toro",
+  "New Holland",
+  "ASV",
+  "Yanmar",
+  "Komatsu",
+  "Vermeer",
+  "Wacker Neuson",
+  "Mustang",
+  "Terex",
+];
+
 export function MachinesContent({ machines, brands }: MachinesContentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
+  const [showAllBrands, setShowAllBrands] = useState(false);
+
+  // Sort brands: popular first, then alphabetically
+  const sortedBrands = useMemo(() => {
+    const popular: string[] = [];
+    const other: string[] = [];
+
+    brands.forEach((brand) => {
+      if (POPULAR_BRANDS.some((pb) => pb.toLowerCase() === brand.toLowerCase())) {
+        popular.push(brand);
+      } else {
+        other.push(brand);
+      }
+    });
+
+    // Sort popular brands by their priority order
+    popular.sort((a, b) => {
+      const aIndex = POPULAR_BRANDS.findIndex((pb) => pb.toLowerCase() === a.toLowerCase());
+      const bIndex = POPULAR_BRANDS.findIndex((pb) => pb.toLowerCase() === b.toLowerCase());
+      return aIndex - bIndex;
+    });
+
+    // Sort other brands alphabetically
+    other.sort((a, b) => a.localeCompare(b));
+
+    return { popular, other, all: [...popular, ...other] };
+  }, [brands]);
+
+  const displayedBrands = showAllBrands ? sortedBrands.all : sortedBrands.popular;
 
   const filteredMachines = useMemo(() => {
     let filtered = machines;
@@ -88,24 +138,49 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
       {/* Brand Filter */}
       <section className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Button
-              variant={selectedBrand === null ? "default" : "outline"}
-              onClick={() => setSelectedBrand(null)}
-              size="sm"
-            >
-              All Brands
-            </Button>
-            {brands.map((brand) => (
+          <div className="mb-4">
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+              Popular Brands
+            </h2>
+            <div className="flex flex-wrap gap-2">
               <Button
-                key={brand}
-                variant={selectedBrand === brand ? "default" : "outline"}
-                onClick={() => setSelectedBrand(brand)}
+                variant={selectedBrand === null ? "default" : "outline"}
+                onClick={() => setSelectedBrand(null)}
                 size="sm"
               >
-                {brand}
+                All Brands
               </Button>
-            ))}
+              {displayedBrands.map((brand) => (
+                <Button
+                  key={brand}
+                  variant={selectedBrand === brand ? "default" : "outline"}
+                  onClick={() => setSelectedBrand(brand)}
+                  size="sm"
+                >
+                  {brand}
+                </Button>
+              ))}
+              {!showAllBrands && sortedBrands.other.length > 0 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowAllBrands(true)}
+                  className="text-primary hover:text-primary/80"
+                >
+                  +{sortedBrands.other.length} More Brands
+                </Button>
+              )}
+              {showAllBrands && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowAllBrands(false)}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Show Less
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </section>

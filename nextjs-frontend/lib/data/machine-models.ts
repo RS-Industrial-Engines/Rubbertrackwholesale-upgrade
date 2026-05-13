@@ -315,8 +315,53 @@ export const machineCompatibility: Record<string, string[]> = {
   'New Holland C337': ['450x86x56']
 };
 
-// Get all unique brands from the machine models
-export const brands = Object.keys(machineModels).sort();
+// Popular/high-demand brands - prioritized for customer relevance
+export const popularBrands = [
+  "Kubota",
+  "Bobcat",
+  "CAT",
+  "Caterpillar",
+  "John Deere",
+  "Takeuchi",
+  "CASE",
+  "Ditch Witch",
+  "Toro",
+  "New Holland",
+  "ASV",
+  "Yanmar",
+  "Komatsu",
+  "Vermeer",
+  "Wacker Neuson",
+  "Mustang",
+  "Terex",
+];
+
+// Get all unique brands from the machine models, with popular brands first
+export const brands = (() => {
+  const allBrands = Object.keys(machineModels);
+  const popular: string[] = [];
+  const other: string[] = [];
+  
+  allBrands.forEach(brand => {
+    if (popularBrands.some(pb => pb.toLowerCase() === brand.toLowerCase())) {
+      popular.push(brand);
+    } else {
+      other.push(brand);
+    }
+  });
+  
+  // Sort popular by priority order
+  popular.sort((a, b) => {
+    const aIndex = popularBrands.findIndex(pb => pb.toLowerCase() === a.toLowerCase());
+    const bIndex = popularBrands.findIndex(pb => pb.toLowerCase() === b.toLowerCase());
+    return aIndex - bIndex;
+  });
+  
+  // Sort other alphabetically
+  other.sort((a, b) => a.localeCompare(b));
+  
+  return [...popular, ...other];
+})();
 
 // Get all track sizes as a simple list
 export const trackSizeList = trackSizes.map(t => t.size);

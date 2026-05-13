@@ -49,6 +49,7 @@ export interface Brand {
   website?: string;
   country?: string;
   product_count?: number;
+  machine_count?: number;
 }
 
 export interface Category {
