@@ -6,6 +6,7 @@ import { Search, ChevronRight, Wrench } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { MachineModel } from "@/lib/api";
+import { normalizeForMatching } from "@/lib/data/full-machine-data";
 
 interface MachinesContentProps {
   machines: MachineModel[];
@@ -76,12 +77,16 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
     }
 
     if (searchQuery) {
-      const query = searchQuery.toLowerCase();
+      const normalizedQuery = normalizeForMatching(searchQuery);
       filtered = filtered.filter(
-        (m) =>
-          m.make?.toLowerCase().includes(query) ||
-          m.model?.toLowerCase().includes(query) ||
-          `${m.make} ${m.model}`.toLowerCase().includes(query)
+        (m) => {
+          const normalizedMake = normalizeForMatching(m.make || '');
+          const normalizedModel = normalizeForMatching(m.model || '');
+          const normalizedFull = normalizeForMatching(`${m.make} ${m.model}`);
+          return normalizedMake.includes(normalizedQuery) ||
+                 normalizedModel.includes(normalizedQuery) ||
+                 normalizedFull.includes(normalizedQuery);
+        }
       );
     }
 

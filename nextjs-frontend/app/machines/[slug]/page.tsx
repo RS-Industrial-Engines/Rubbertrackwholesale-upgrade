@@ -16,10 +16,12 @@ import {
   getSiteUrl,
 } from "@/lib/schema";
 import {
-  machineModels as fallbackMachineModels,
-  machineCompatibility,
-  getModelsByBrand,
-} from "@/lib/data/machine-models";
+  fullMachineModels,
+  fullMachineCompatibility,
+  getModelsForBrand,
+  getTrackSizesForMachine,
+  normalizeForMatching,
+} from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -27,37 +29,64 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Get fallback compatibility data for a machine
-function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
-  const key = `${make} ${model}`;
-  const trackSizes = machineCompatibility[key];
+// Parse a machine from the slug with normalized matching
+function findMachineFromSlug(slug: string): { make: string; model: string } | null {
+  // Try standard slug parsing first
+  const parts = slug.split("-");
+  if (parts.length < 2) return null;
   
-  if (!trackSizes || trackSizes.length === 0) {
-    // Check for partial matches
-    const makeModels = Object.keys(machineCompatibility);
-    const match = makeModels.find(k => 
-      k.toLowerCase() === key.toLowerCase() ||
-      k.toLowerCase().includes(model.toLowerCase())
-    );
+  // Try to find a matching brand/model combo
+  const slugNormalized = normalizeForMatching(slug);
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    for (const model of models) {
+      const testSlug = `${brand}-${model}`.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+      const testNormalized = normalizeForMatching(`${brand}${model}`);
+      
+      if (testSlug === slug || testNormalized === slugNormalized) {
+        return { make: brand, model };
+      }
+    }
+  }
+  
+  // Fall back to standard parsing
+  const parsed = parseMachineSlug(slug);
+  return parsed;
+}
+
+// Get fallback compatibility data for a machine using normalized matching
+function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
+  // Try to find track sizes using normalized matching
+  const trackSizes = getTrackSizesForMachine(make, model);
+  
+  if (trackSizes.length === 0) {
+    // Try variations of the model name
+    const normalizedModel = normalizeForMatching(model);
     
-    if (match) {
-      const matchedSizes = machineCompatibility[match];
-      return {
-        machine: {
-          id: 1,
-          make: make,
-          model: model,
-          equipment_type: "Compact Track Loader",
-        },
-        track_sizes: matchedSizes.map((size, i) => ({
-          id: i + 1,
-          size,
-          width: parseInt(size.split("x")[0]),
-          pitch: parseFloat(size.split("x")[1]),
-          links: parseInt(size.split("x")[2]),
-        })),
-        products: [],
-      };
+    for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
+      const [keyBrand, keyModel] = key.split("|");
+      if (normalizeForMatching(keyBrand) === normalizeForMatching(make)) {
+        if (normalizeForMatching(keyModel) === normalizedModel ||
+            normalizeForMatching(keyModel).includes(normalizedModel) ||
+            normalizedModel.includes(normalizeForMatching(keyModel))) {
+          return {
+            machine: {
+              id: 1,
+              make: keyBrand,
+              model: keyModel,
+              equipment_type: "Compact Track Loader",
+            },
+            track_sizes: sizes.map((size, i) => ({
+              id: i + 1,
+              size,
+              width: parseInt(size.split("x")[0]) || 0,
+              pitch: parseFloat(size.split("x")[1]) || 0,
+              links: parseInt(size.split("x")[2]) || 0,
+            })),
+            products: [],
+          };
+        }
+      }
     }
     
     return null;
@@ -73,9 +102,9 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
     track_sizes: trackSizes.map((size, i) => ({
       id: i + 1,
       size,
-      width: parseInt(size.split("x")[0]),
-      pitch: parseFloat(size.split("x")[1]),
-      links: parseInt(size.split("x")[2]),
+      width: parseInt(size.split("x")[0]) || 0,
+      pitch: parseFloat(size.split("x")[1]) || 0,
+      links: parseInt(size.split("x")[2]) || 0,
     })),
     products: [],
   };
@@ -83,22 +112,25 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
 
 // Get fallback related machines
 function getFallbackRelatedMachines(make: string, model: string): MachineModel[] {
-  const models = getModelsByBrand(make);
+  const models = getModelsForBrand(make);
   return models
     .filter(m => m !== model)
     .slice(0, 8)
-    .map((m, i) => ({
-      id: i + 1,
-      make: make,
-      model: m,
-      equipment_type: "Compact Track Loader",
-      track_sizes: machineCompatibility[`${make} ${m}`] || [],
-    }));
+    .map((m, i) => {
+      const trackSizes = getTrackSizesForMachine(make, m);
+      return {
+        id: i + 1,
+        make: make,
+        model: m,
+        equipment_type: "Compact Track Loader",
+        track_sizes: trackSizes,
+      };
+    });
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const parsed = parseMachineSlug(slug);
+  const parsed = findMachineFromSlug(slug) || parseMachineSlug(slug);
 
   if (!parsed) {
     return {
@@ -138,29 +170,30 @@ export async function generateStaticParams() {
   try {
     const machines = await getMachineModels();
     if (machines && machines.length > 0) {
-      return machines.slice(0, 100).map((machine) => ({
+      return machines.slice(0, 200).map((machine) => ({
         slug: `${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
       }));
     }
   } catch {
-    // Fall back to local data
+    // Fall back to comprehensive data
   }
   
-  // Generate from fallback data
+  // Generate from comprehensive fallback data - include more machines
   const params: { slug: string }[] = [];
-  for (const [brand, models] of Object.entries(fallbackMachineModels)) {
-    models.slice(0, 10).forEach(model => {
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    models.forEach(model => {
       params.push({
-        slug: `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`,
+        slug: `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}`,
       });
     });
   }
-  return params.slice(0, 100);
+  // Return up to 500 for static generation, the rest will be generated on-demand
+  return params.slice(0, 500);
 }
 
 export default async function MachineDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const parsed = parseMachineSlug(slug);
+  const parsed = findMachineFromSlug(slug) || parseMachineSlug(slug);
 
   if (!parsed) {
     notFound();
@@ -179,14 +212,18 @@ export default async function MachineDetailPage({ params }: PageProps) {
       getMachineModels().catch(() => []),
     ]);
     
-    // Use API data if available, otherwise fall back
-    compatibility = apiCompatibility || getFallbackCompatibility(make, model);
+    // Use API data if available and has track sizes, otherwise use comprehensive fallback
+    compatibility = (apiCompatibility && apiCompatibility.track_sizes?.length > 0)
+      ? apiCompatibility
+      : getFallbackCompatibility(make, model);
+    
     products = apiProducts || [];
+    
     relatedMachines = apiRelatedMachines && apiRelatedMachines.length > 0
       ? apiRelatedMachines.filter((m) => m.make?.toLowerCase() === make.toLowerCase() && m.model !== model).slice(0, 8)
       : getFallbackRelatedMachines(make, model);
   } catch (error) {
-    console.error("Failed to fetch machine data, using fallback:", error);
+    console.error("Failed to fetch machine data, using comprehensive fallback:", error);
     compatibility = getFallbackCompatibility(make, model);
     relatedMachines = getFallbackRelatedMachines(make, model);
   }

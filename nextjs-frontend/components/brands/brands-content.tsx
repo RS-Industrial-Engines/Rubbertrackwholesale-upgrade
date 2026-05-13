@@ -9,45 +9,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { API, fetcher, type Brand } from "@/lib/api";
-import { brands as fallbackBrandList, machineModels } from "@/lib/data/machine-models";
+import {
+  fullMachineModels,
+  fullBrands,
+  popularBrands as POPULAR_BRANDS,
+  getBrandStats,
+} from "@/lib/data/full-machine-data";
 
-// Popular brands - prioritized for display
-const POPULAR_BRANDS = [
-  "Kubota",
-  "Bobcat",
-  "Caterpillar",
-  "CAT",
-  "John Deere",
-  "Takeuchi",
-  "CASE",
-  "Ditch Witch",
-  "Toro",
-  "New Holland",
-  "ASV",
-  "Yanmar",
-  "Komatsu",
-  "Vermeer",
-  "Wacker Neuson",
-  "Mustang",
-  "Terex",
-  "Gehl",
-  "JCB",
-  "Hitachi",
-  "Kobelco",
-  "Volvo",
-  "Hyundai",
-  "Sany",
-];
-
-// Convert fallback brand list to Brand objects
-function getFallbackBrands(): Brand[] {
-  return fallbackBrandList.map((name, index) => ({
+// Convert full brand list to Brand objects with model counts
+function getFullBrands(): Brand[] {
+  const stats = getBrandStats();
+  return stats.map((stat, index) => ({
     id: index + 1,
-    name,
-    slug: name.toLowerCase().replace(/\s+/g, "-"),
-    description: `Premium rubber tracks and undercarriage parts for ${name} equipment. Find compatible tracks for all ${name} models.`,
+    name: stat.brand,
+    slug: stat.brand.toLowerCase().replace(/\s+/g, "-"),
+    description: `Premium rubber tracks and undercarriage parts for ${stat.brand} equipment. Find compatible tracks for all ${stat.modelCount} ${stat.brand} models.`,
     logo_url: undefined,
-    machine_count: machineModels[name]?.length || 0,
+    machine_count: stat.modelCount,
   }));
 }
 
@@ -55,15 +33,15 @@ export function BrandsContent() {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: apiBrands, isLoading } = useSWR<Brand[]>(API.brands, fetcher);
 
-  // Use API data if available, otherwise use fallback
+  // Use API data if available AND has data, otherwise use comprehensive fallback
   const brands = useMemo(() => {
     if (apiBrands && apiBrands.length > 0) {
       return apiBrands;
     }
-    return getFallbackBrands();
+    return getFullBrands();
   }, [apiBrands]);
 
-  // Sort brands: popular first, then alphabetically
+  // Sort brands: popular first, then by model count
   const sortedBrands = useMemo(() => {
     const popular: Brand[] = [];
     const other: Brand[] = [];
@@ -83,8 +61,12 @@ export function BrandsContent() {
       return aIndex - bIndex;
     });
 
-    // Sort other brands alphabetically
-    other.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort other brands by model count then alphabetically
+    other.sort((a, b) => {
+      const countDiff = (b.machine_count || 0) - (a.machine_count || 0);
+      if (countDiff !== 0) return countDiff;
+      return a.name.localeCompare(b.name);
+    });
 
     return [...popular, ...other];
   }, [brands]);
@@ -101,12 +83,15 @@ export function BrandsContent() {
   }, [sortedBrands, searchQuery]);
 
   // Separate into popular and other for display
-  const popularBrands = filteredBrands.filter((brand) =>
+  const popularBrandsList = filteredBrands.filter((brand) =>
     POPULAR_BRANDS.some((pb) => pb.toLowerCase() === brand.name.toLowerCase())
   );
-  const otherBrands = filteredBrands.filter(
+  const otherBrandsList = filteredBrands.filter(
     (brand) => !POPULAR_BRANDS.some((pb) => pb.toLowerCase() === brand.name.toLowerCase())
   );
+
+  // Calculate total machines across all brands
+  const totalMachines = brands.reduce((sum, b) => sum + (b.machine_count || 0), 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -119,7 +104,9 @@ export function BrandsContent() {
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
               Find rubber tracks and undercarriage parts for all major heavy
-              machinery brands. We stock parts for {brands.length}+ equipment manufacturers.
+              machinery brands. We have compatibility data for{" "}
+              <strong className="text-foreground">{totalMachines.toLocaleString()} machines</strong> across{" "}
+              <strong className="text-foreground">{brands.length} brands</strong>.
             </p>
             
             {/* Search */}
@@ -146,14 +133,14 @@ export function BrandsContent() {
         ) : filteredBrands.length > 0 ? (
           <div className="space-y-12">
             {/* Popular Brands Section */}
-            {popularBrands.length > 0 && (
+            {popularBrandsList.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                   <span className="w-2 h-8 bg-primary rounded-full" />
                   Popular Brands
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {popularBrands.map((brand) => (
+                  {popularBrandsList.map((brand) => (
                     <BrandCard key={brand.id} brand={brand} />
                   ))}
                 </div>
@@ -161,14 +148,14 @@ export function BrandsContent() {
             )}
 
             {/* Other Brands Section */}
-            {otherBrands.length > 0 && (
+            {otherBrandsList.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                   <span className="w-2 h-8 bg-muted-foreground rounded-full" />
-                  All Brands
+                  All Brands ({otherBrandsList.length})
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {otherBrands.map((brand) => (
+                  {otherBrandsList.map((brand) => (
                     <BrandCard key={brand.id} brand={brand} />
                   ))}
                 </div>
@@ -193,10 +180,11 @@ export function BrandsContent() {
             <p className="text-muted-foreground mb-4">
               Rubber Track Wholesale is your trusted source for rubber tracks and
               undercarriage parts from all major construction equipment manufacturers.
-              We maintain extensive inventory for popular brands including{" "}
-              <strong>Kubota</strong>, <strong>Bobcat</strong>,{" "}
-              <strong>Caterpillar</strong>, <strong>John Deere</strong>,{" "}
-              <strong>Takeuchi</strong>, <strong>Case</strong>, and many more.
+              We maintain compatibility data for <strong>{totalMachines.toLocaleString()} machines</strong> including{" "}
+              <strong>Kubota</strong> ({fullMachineModels["Kubota"]?.length || 0} models),{" "}
+              <strong>Komatsu</strong> ({fullMachineModels["Komatsu"]?.length || 0} models),{" "}
+              <strong>Hitachi</strong> ({fullMachineModels["Hitachi"]?.length || 0} models),{" "}
+              <strong>CAT</strong> ({fullMachineModels["CAT"]?.length || 0} models), and many more.
             </p>
             <p className="text-muted-foreground">
               Whether you need tracks for a mini excavator, compact track loader,
@@ -212,7 +200,7 @@ export function BrandsContent() {
 }
 
 function BrandCard({ brand }: { brand: Brand }) {
-  const machineCount = brand.machine_count || machineModels[brand.name]?.length || 0;
+  const machineCount = brand.machine_count || fullMachineModels[brand.name]?.length || 0;
 
   return (
     <Card className="bg-card border-border hover:border-primary transition-all duration-300 group">

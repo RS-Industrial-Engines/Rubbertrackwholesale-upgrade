@@ -9,10 +9,12 @@ import { Input } from "@/components/ui/input";
 import { API } from "@/lib/api";
 import {
   searchMachines,
-  searchTrackSizes,
+  getMachinesForTrackSize,
   isTrackSizeQuery,
-  brands as fallbackBrands,
-} from "@/lib/data/machine-models";
+  fullBrands,
+  fullTrackSizes,
+  normalizeForMatching,
+} from "@/lib/data/full-machine-data";
 
 interface SearchResult {
   type: "machine" | "track-size" | "product";
@@ -61,42 +63,45 @@ export function HeroSection() {
     const results: SearchResult[] = [];
 
     try {
-      // Check if it's a track size query
-      if (isTrackSizeQuery(query)) {
-        // Search for track sizes
-        const trackSizeResults = searchTrackSizes(query);
-        trackSizeResults.forEach((ts) => {
-          results.push({
-            type: "track-size",
-            size: ts.size,
-          });
-        });
-      } else {
-        // Search for machines using the API first
-        try {
-          const params = new URLSearchParams();
-          // Try to extract brand and model from query
-          const queryLower = query.toLowerCase().trim();
-          
-          // Check if query starts with a known brand
-          const brandMatch = fallbackBrands.find(b => 
-            queryLower.startsWith(b.toLowerCase()) || 
-            queryLower.startsWith(b.toLowerCase().replace(' ', ''))
+        // Check if it's a track size query
+        if (isTrackSizeQuery(query)) {
+          // Search for matching track sizes
+          const normalizedQuery = normalizeForMatching(query);
+          const matchingTrackSizes = fullTrackSizes.filter(ts => 
+            normalizeForMatching(ts).includes(normalizedQuery)
           );
-          
-          if (brandMatch) {
-            params.set("make", brandMatch);
-            const modelPart = query.slice(brandMatch.length).trim();
-            if (modelPart) {
-              params.set("model", modelPart);
+          matchingTrackSizes.slice(0, 5).forEach((ts) => {
+            results.push({
+              type: "track-size",
+              size: ts,
+            });
+          });
+        } else {
+          // Search for machines using the API first
+          try {
+            const params = new URLSearchParams();
+            // Try to extract brand and model from query
+            const queryLower = query.toLowerCase().trim();
+            
+            // Check if query starts with a known brand
+            const brandMatch = fullBrands.find(b => 
+              queryLower.startsWith(b.toLowerCase()) || 
+              queryLower.startsWith(b.toLowerCase().replace(/\s+/g, ''))
+            );
+            
+            if (brandMatch) {
+              params.set("make", brandMatch);
+              const modelPart = query.slice(brandMatch.length).trim();
+              if (modelPart) {
+                params.set("model", modelPart);
+              }
+            } else {
+              // Search model only
+              params.set("model", query);
             }
-          } else {
-            // Search model only
-            params.set("model", query);
-          }
 
-          const apiUrl = `${API.compatibilitySearch}?${params.toString()}`;
-          const response = await fetch(apiUrl);
+            const apiUrl = `${API.compatibilitySearch}?${params.toString()}`;
+            const response = await fetch(apiUrl);
           
           if (response.ok) {
             const apiResults = await response.json();
@@ -115,13 +120,13 @@ export function HeroSection() {
           // API failed, continue to fallback
         }
 
-        // If no API results, use fallback data
+        // If no API results, use comprehensive fallback data with normalized search
         if (results.length === 0) {
           const machineResults = searchMachines(query);
           machineResults.slice(0, 10).forEach((m) => {
             results.push({
               type: "machine",
-              make: m.make,
+              make: m.brand,
               model: m.model,
               trackSizes: m.trackSizes,
             });
@@ -129,22 +134,28 @@ export function HeroSection() {
         }
 
         // Also check for track size matches in the query
-        const trackSizeResults = searchTrackSizes(query);
-        trackSizeResults.slice(0, 3).forEach((ts) => {
+        const normalizedQuery = normalizeForMatching(query);
+        const matchingTrackSizes = fullTrackSizes.filter(ts => 
+          normalizeForMatching(ts).includes(normalizedQuery)
+        );
+        matchingTrackSizes.slice(0, 3).forEach((ts) => {
           results.push({
             type: "track-size",
-            size: ts.size,
+            size: ts,
           });
         });
       }
     } catch {
-      // Fall back to local search on any error
+      // Fall back to comprehensive local search on any error
       if (isTrackSizeQuery(query)) {
-        const trackSizeResults = searchTrackSizes(query);
-        trackSizeResults.forEach((ts) => {
+        const normalizedQuery = normalizeForMatching(query);
+        const matchingTrackSizes = fullTrackSizes.filter(ts => 
+          normalizeForMatching(ts).includes(normalizedQuery)
+        );
+        matchingTrackSizes.slice(0, 5).forEach((ts) => {
           results.push({
             type: "track-size",
-            size: ts.size,
+            size: ts,
           });
         });
       } else {
@@ -152,7 +163,7 @@ export function HeroSection() {
         machineResults.slice(0, 10).forEach((m) => {
           results.push({
             type: "machine",
-            make: m.make,
+            make: m.brand,
             model: m.model,
             trackSizes: m.trackSizes,
           });

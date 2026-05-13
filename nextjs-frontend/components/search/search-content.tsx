@@ -16,9 +16,12 @@ import {
 } from "@/lib/search-utils";
 import {
   searchMachines,
-  searchTrackSizes,
-  getMachinesByBrand,
-} from "@/lib/data/machine-models";
+  getModelsForBrand,
+  getTrackSizesForMachine,
+  getMachinesForTrackSize,
+  normalizeForMatching,
+  fullBrands,
+} from "@/lib/data/full-machine-data";
 
 interface CompatibilityResult {
   make: string;
@@ -320,52 +323,49 @@ function MachineResultCard({ result }: { result: CompatibilityResult }) {
 }
 
 /**
- * Get fallback results from local data when API fails or returns empty
+ * Get fallback results from comprehensive local data when API fails or returns empty
  */
 function getFallbackResults(parsed: ParsedQuery): CompatibilityResult[] {
   switch (parsed.type) {
-    case "track_size":
-      // Search for machines with this track size
-      const trackSizeResults = searchTrackSizes(parsed.trackSize || "");
-      if (trackSizeResults.length > 0) {
-        const trackSize = trackSizeResults[0];
-        // Return machines that have this track size
-        const machines = searchMachines("");
-        return machines
-          .filter((m) => m.trackSizes.includes(trackSize.size))
-          .map((m) => ({
-            make: m.make,
-            model: m.model,
-            track_sizes: m.trackSizes,
-          }));
-      }
-      return [];
-
-    case "brand_only":
-      const brandMachines = getMachinesByBrand(parsed.make || "");
-      return brandMachines.map((m) => ({
-        make: m.make,
+    case "track_size": {
+      // Search for machines with this track size using normalized matching
+      const machines = getMachinesForTrackSize(parsed.trackSize || "");
+      return machines.map((m) => ({
+        make: m.brand,
         model: m.model,
-        track_sizes: m.trackSizes,
+        track_sizes: getTrackSizesForMachine(m.brand, m.model),
       }));
+    }
+
+    case "brand_only": {
+      // Get all models for the brand
+      const models = getModelsForBrand(parsed.make || "");
+      return models.map((model) => ({
+        make: parsed.make || "",
+        model: model,
+        track_sizes: getTrackSizesForMachine(parsed.make || "", model),
+      }));
+    }
 
     case "machine":
-    case "model_only":
-      // Search by model
+    case "model_only": {
+      // Search by model using normalized matching
       const modelResults = searchMachines(parsed.model || parsed.originalQuery);
       return modelResults.map((m) => ({
-        make: m.make,
+        make: m.brand,
         model: m.model,
         track_sizes: m.trackSizes,
       }));
+    }
 
-    default:
-      // Keyword search
+    default: {
+      // Keyword search with comprehensive data
       const keywordResults = searchMachines(parsed.originalQuery);
       return keywordResults.map((m) => ({
-        make: m.make,
+        make: m.brand,
         model: m.model,
         track_sizes: m.trackSizes,
       }));
+    }
   }
 }

@@ -4,9 +4,10 @@
  */
 
 import { API } from "./api";
+import { fullBrands, normalizeForMatching, BRAND_ALIASES, resolveBrandAlias } from "./data/full-machine-data";
 
-// Brand aliases for detection
-export const BRAND_ALIASES: Record<string, string> = {
+// Extended brand aliases for detection
+export const SEARCH_BRAND_ALIASES: Record<string, string> = {
   // Caterpillar
   cat: "CAT",
   caterpillar: "CAT",
@@ -30,7 +31,8 @@ export const BRAND_ALIASES: Record<string, string> = {
   // Ditch Witch
   "ditch witch": "Ditch Witch",
   ditchwitch: "Ditch Witch",
-  dw: "Ditch Witch",
+  "ditch-witch": "Ditch-Witch",
+  dw: "Ditch-Witch",
   // Wacker Neuson
   wacker: "Wacker Neuson",
   neuson: "Wacker Neuson",
@@ -60,42 +62,12 @@ export const BRAND_ALIASES: Record<string, string> = {
   morooka: "Morooka",
   marooka: "Morooka",
   sumitomo: "Sumitomo",
+  hanix: "Hanix",
+  hinowa: "Hinowa",
 };
 
-// All known brands for detection
-export const KNOWN_BRANDS = [
-  "Kubota",
-  "Bobcat",
-  "CAT",
-  "Caterpillar",
-  "John Deere",
-  "Takeuchi",
-  "CASE",
-  "Ditch Witch",
-  "Toro",
-  "New Holland",
-  "ASV",
-  "Yanmar",
-  "Komatsu",
-  "Vermeer",
-  "Wacker Neuson",
-  "Mustang",
-  "Terex",
-  "Gehl",
-  "JCB",
-  "Hitachi",
-  "Kobelco",
-  "Volvo",
-  "Hyundai",
-  "IHI",
-  "Boxer",
-  "SANY",
-  "XCMG",
-  "Nagano",
-  "Airman",
-  "Morooka",
-  "Sumitomo",
-];
+// Use the full brands list from comprehensive data
+export const KNOWN_BRANDS = fullBrands;
 
 export interface ParsedQuery {
   type: "track_size" | "machine" | "brand_only" | "model_only" | "keyword";
@@ -127,18 +99,34 @@ export function normalizeTrackSize(size: string): string {
 }
 
 /**
- * Detect brand from query string
+ * Detect brand from query string using normalized matching
  */
 export function detectBrand(query: string): { brand: string; remainder: string } | null {
   const queryLower = query.toLowerCase().trim();
+  const queryNormalized = normalizeForMatching(query);
   
   // Try to match brand aliases (longest match first)
-  const sortedAliases = Object.keys(BRAND_ALIASES).sort((a, b) => b.length - a.length);
+  const sortedAliases = Object.keys(SEARCH_BRAND_ALIASES).sort((a, b) => b.length - a.length);
   
   for (const alias of sortedAliases) {
     if (queryLower.startsWith(alias + " ") || queryLower === alias) {
-      const brand = BRAND_ALIASES[alias];
+      const brand = SEARCH_BRAND_ALIASES[alias];
       const remainder = query.slice(alias.length).trim();
+      return { brand, remainder };
+    }
+  }
+  
+  // Try normalized matching against full brand list
+  for (const brand of KNOWN_BRANDS) {
+    const brandNormalized = normalizeForMatching(brand);
+    if (queryNormalized.startsWith(brandNormalized)) {
+      const brandEndPos = queryLower.indexOf(brand.toLowerCase());
+      if (brandEndPos !== -1) {
+        const remainder = query.slice(brandEndPos + brand.length).trim();
+        return { brand, remainder };
+      }
+      // Use normalized length to find remainder
+      const remainder = query.slice(brand.length).trim();
       return { brand, remainder };
     }
   }

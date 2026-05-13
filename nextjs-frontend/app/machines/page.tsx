@@ -3,10 +3,11 @@ import { getMachineModels, getMachineModelBrands, MachineModel } from "@/lib/api
 import { MachinesContent } from "@/components/machines/machines-content";
 import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
 import {
-  machineModels as fallbackMachineModels,
-  brands as fallbackBrands,
-  machineCompatibility,
-} from "@/lib/data/machine-models";
+  fullMachineModels,
+  fullMachineCompatibility,
+  fullBrands,
+  popularBrands,
+} from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -32,15 +33,15 @@ export const metadata: Metadata = {
   },
 };
 
-// Convert fallback data to MachineModel format
-function getFallbackMachines(): MachineModel[] {
+// Convert full data to MachineModel format
+function getFullMachines(): MachineModel[] {
   const machines: MachineModel[] = [];
   let id = 1;
 
-  for (const [brand, models] of Object.entries(fallbackMachineModels)) {
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
-      const key = `${brand} ${model}`;
-      const trackSizes = machineCompatibility[key] || [];
+      const key = `${brand}|${model}`;
+      const trackSizes = fullMachineCompatibility[key] || [];
       machines.push({
         id: id++,
         make: brand,
@@ -54,6 +55,13 @@ function getFallbackMachines(): MachineModel[] {
   return machines;
 }
 
+// Get brands sorted with popular brands first
+function getSortedBrands(): string[] {
+  const popular = popularBrands.filter(b => fullBrands.includes(b));
+  const other = fullBrands.filter(b => !popularBrands.includes(b));
+  return [...popular, ...other];
+}
+
 export default async function MachinesPage() {
   let machines: MachineModel[] = [];
   let brands: string[] = [];
@@ -64,13 +72,13 @@ export default async function MachinesPage() {
       getMachineModelBrands(),
     ]);
     
-    // Use API data if available, otherwise fall back
-    machines = apiMachines && apiMachines.length > 0 ? apiMachines : getFallbackMachines();
-    brands = apiBrands && apiBrands.length > 0 ? apiBrands : fallbackBrands;
+    // Use API data if available AND has data, otherwise use comprehensive fallback
+    machines = apiMachines && apiMachines.length > 0 ? apiMachines : getFullMachines();
+    brands = apiBrands && apiBrands.length > 0 ? apiBrands : getSortedBrands();
   } catch (error) {
-    console.error("Failed to fetch machines, using fallback data:", error);
-    machines = getFallbackMachines();
-    brands = fallbackBrands;
+    console.error("Failed to fetch machines, using comprehensive data:", error);
+    machines = getFullMachines();
+    brands = getSortedBrands();
   }
 
   const breadcrumbs = [
