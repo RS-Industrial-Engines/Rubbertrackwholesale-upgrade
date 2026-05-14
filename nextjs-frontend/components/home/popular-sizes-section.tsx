@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ChevronRight, Package } from "lucide-react";
-import { getTop10TrackSizes } from "@/lib/data/seo-priorities";
+import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
 import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
 
 /**
@@ -34,7 +34,7 @@ function getSampleMachinesForSize(trackSize: string): string {
 }
 
 export function PopularSizesSection() {
-  const top10Sizes = getTop10TrackSizes();
+  const top10Sizes = TOP_SELLING_TRACK_SIZES.slice(0, 10);
   
   // Build the popular sizes array with machine lookups from full-machine-data.ts
   const popularSizes = top10Sizes.map(item => ({

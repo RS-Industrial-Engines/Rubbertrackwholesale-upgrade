@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
 import { createMachineSlug } from "@/lib/url-utils";
-import { getTop10TrackSizes } from "@/lib/data/seo-priorities";
+import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
 import { getTrackSizesForMachine } from "@/lib/data/full-machine-data";
 
 /**
@@ -60,7 +60,7 @@ function getPopularMachinesWithTrackSizes() {
 
 export function PopularMachinesSection() {
   const popularMachines = getPopularMachinesWithTrackSizes();
-  const top10Sizes = getTop10TrackSizes();
+  const top10Sizes = TOP_SELLING_TRACK_SIZES.slice(0, 10);
 
   return (
     <section className="py-12 lg:py-16 bg-secondary">

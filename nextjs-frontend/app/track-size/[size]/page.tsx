@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import {
   getTrackSizes,
   getCompatibilityByTrackSize,
-  getProducts,
   parseTrackSize,
   TrackSize,
   MachineModel,
@@ -108,7 +107,6 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
 
   let trackSizeData: TrackSize | null = null;
   let compatibleMachines: MachineModel[] = [];
-  let products: Awaited<ReturnType<typeof getProducts>> = [];
 
   try {
     const apiTrackSizes = await getTrackSizes();
@@ -118,10 +116,7 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
     
     trackSizeData = found || getFallbackTrackSizeData(formattedSize);
 
-    const [apiCompatibleMachines, apiProducts] = await Promise.all([
-      getCompatibilityByTrackSize(formattedSize).catch(() => []),
-      getProducts({ track_size: formattedSize }).catch(() => []),
-    ]);
+    const apiCompatibleMachines = await getCompatibilityByTrackSize(formattedSize).catch(() => []);
     
     // ALWAYS use full-machine-data as primary source - it has complete compatibility data
     // API results are supplementary and may be incomplete
@@ -137,8 +132,6 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
         }
       }
     }
-    
-    products = apiProducts || [];
   } catch (error) {
     console.error("Failed to fetch track size data, using local data:", error);
     trackSizeData = getFallbackTrackSizeData(formattedSize);
@@ -204,7 +197,6 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
         trackSizeData={trackSizeData}
         dimensions={dimensions}
         compatibleMachines={compatibleMachines}
-        products={products}
         faqs={faqs}
       />
     </>

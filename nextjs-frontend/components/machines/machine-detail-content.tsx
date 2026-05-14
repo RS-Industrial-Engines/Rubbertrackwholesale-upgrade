@@ -371,16 +371,16 @@ export function MachineDetailContent({
                 icon: Settings,
               },
             ].map((part) => (
-              <Card key={part.name} className="group hover:border-primary transition-colors">
-                <CardContent className="p-6">
+              <Card key={part.name} className="group hover:border-primary transition-colors h-full flex flex-col">
+                <CardContent className="p-6 flex flex-col h-full">
                   <part.icon className="h-10 w-10 text-primary mb-4" />
                   <h3 className="font-semibold text-lg mb-2 group-hover:text-primary">
                     {part.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-muted-foreground mb-4 flex-grow">
                     {part.description}
                   </p>
-                  <div className="flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 mt-auto">
                     <Button variant="outline" size="sm" asChild className="w-full">
                       <Link href={part.href}>Browse {part.name}</Link>
                     </Button>

@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | Rubber Track Wholesale",
   },
   description:
-    "Houston's #1 source for wholesale rubber tracks and undercarriage parts. Same-day shipping on Bobcat, Kubota, Caterpillar, and 50+ brands. 7 warehouses, lowest prices guaranteed.",
+    "Houston's #1 source for wholesale rubber tracks and undercarriage parts. Same-day shipping on Bobcat, Kubota, Caterpillar, and 50+ brands. Houston warehouse, lowest prices guaranteed.",
   keywords: [
     "rubber tracks Houston",
     "rubber tracks",
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rubber Tracks Houston | Rubber Track Wholesale",
     description:
-      "Wholesale rubber tracks and undercarriage parts. Same-day shipping from 7 warehouses nationwide.",
+      "Wholesale rubber tracks and undercarriage parts. Same-day shipping from Houston warehouse nationwide.",
   },
   robots: {
     index: true,

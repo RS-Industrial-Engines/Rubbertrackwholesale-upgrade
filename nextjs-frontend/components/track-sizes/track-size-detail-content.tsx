@@ -16,7 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { Product, MachineModel, TrackSize } from "@/lib/api";
+import type { MachineModel, TrackSize } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
 
@@ -26,7 +26,6 @@ interface TrackSizeDetailContentProps {
   trackSizeData: TrackSize | null;
   dimensions: { width: number; pitch: number; links: number } | null;
   compatibleMachines: MachineModel[];
-  products: Product[];
   faqs: { question: string; answer: string }[];
 }
 
@@ -36,7 +35,6 @@ export function TrackSizeDetailContent({
   trackSizeData,
   dimensions,
   compatibleMachines,
-  products,
   faqs,
 }: TrackSizeDetailContentProps) {
   const width = trackSizeData?.width || dimensions?.width;
@@ -184,50 +182,6 @@ export function TrackSizeDetailContent({
           )}
         </div>
       </section>
-
-      {/* Products */}
-      {products.length > 0 && (
-        <section className="py-12 lg:py-16 bg-secondary">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-8">
-              {size} Rubber Tracks Available
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.slice(0, 8).map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.id}`}
-                  className="group"
-                >
-                  <Card className="h-full hover:border-primary transition-colors">
-                    <CardContent className="p-4">
-                      <div className="aspect-square bg-muted rounded-lg mb-4 flex items-center justify-center">
-                        {product.image_url || product.images?.[0] ? (
-                          <img
-                            src={product.image_url || product.images?.[0]}
-                            alt={product.title || product.name || "Product"}
-                            className="object-contain w-full h-full"
-                          />
-                        ) : (
-                          <Package className="h-16 w-16 text-muted-foreground" />
-                        )}
-                      </div>
-                      <h3 className="font-semibold text-foreground group-hover:text-primary line-clamp-2">
-                        {product.title || product.name}
-                      </h3>
-                      {product.price && (
-                        <p className="text-lg font-bold text-primary mt-2">
-                          ${product.price.toFixed(2)}
-                        </p>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Why This Size */}
       <section className="py-12 lg:py-16">

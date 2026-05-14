@@ -30,28 +30,101 @@ export const TOP_SELLING_TRACK_SIZES = [
  * ONLY brand and model identifiers - NO track sizes.
  * Track sizes must be looked up from full-machine-data.ts
  * 
+ * PRIORITY ORDER: CTLs first (what customers search for most), then mini excavators.
  * Based on high-demand commercial machines from SEO clusters.
  */
 export const HIGH_PRIORITY_MACHINES = [
-  // ========== KUBOTA CTLs - extremely popular ==========
-  { brand: "Kubota", model: "SVL65-2" },
+  // ========== TOP PRIORITY: High-demand CTLs (what customers search) ==========
+  // Kubota SVL Series - extremely popular
   { brand: "Kubota", model: "SVL 75" },
   { brand: "Kubota", model: "SVL75-2" },
-  { brand: "Kubota", model: "SVL75-2C" },
   { brand: "Kubota", model: "SVL75-3" },
-  { brand: "Kubota", model: "SVL 90" },
-  { brand: "Kubota", model: "SVL90-2" },
   { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL95-2" },
-  { brand: "Kubota", model: "SVL95-2S" },
   { brand: "Kubota", model: "SVL97-2" },
   
-  // Kubota Mini Excavators
+  // CAT 2-Series CTLs - high search volume
+  { brand: "CAT", model: "259D" },
+  { brand: "CAT", model: "259D3" },
+  { brand: "CAT", model: "289D" },
+  { brand: "CAT", model: "299D" },
+  { brand: "CAT", model: "299D2" },
+  { brand: "CAT", model: "299D3" },
+  
+  // Bobcat T-Series - very popular
+  { brand: "Bobcat", model: "T650" },
+  { brand: "Bobcat", model: "T630" },
+  { brand: "Bobcat", model: "T770" },
+  { brand: "Bobcat", model: "T870" },
+  { brand: "Bobcat", model: "T590" },
+  { brand: "Bobcat", model: "T595" },
+  
+  // John Deere CTLs
+  { brand: "John Deere", model: "325G" },
+  { brand: "John Deere", model: "333G" },
+  { brand: "John Deere", model: "331G" },
+  
+  // Takeuchi - strong commercial presence
+  { brand: "Takeuchi", model: "TL10V2" },
+  { brand: "Takeuchi", model: "TL12V2" },
+  
+  // ========== SECONDARY PRIORITY: Additional CTLs ==========
+  { brand: "Kubota", model: "SVL65-2" },
+  { brand: "Kubota", model: "SVL75-2C" },
+  { brand: "Kubota", model: "SVL 90" },
+  { brand: "Kubota", model: "SVL90-2" },
+  { brand: "Kubota", model: "SVL95-2S" },
+  
+  { brand: "CAT", model: "239D" },
+  { brand: "CAT", model: "249D" },
+  { brand: "CAT", model: "249D3" },
+  { brand: "CAT", model: "259B" },
+  { brand: "CAT", model: "259B3" },
+  { brand: "CAT", model: "259C" },
+  { brand: "CAT", model: "279C" },
+  { brand: "CAT", model: "279D" },
+  { brand: "CAT", model: "279D3" },
+  { brand: "CAT", model: "289C" },
+  { brand: "CAT", model: "289D3" },
+  { brand: "CAT", model: "299C" },
+  
+  { brand: "Bobcat", model: "T180" },
+  { brand: "Bobcat", model: "T190" },
+  { brand: "Bobcat", model: "T200" },
+  { brand: "Bobcat", model: "T550" },
+  { brand: "Bobcat", model: "T570" },
+  { brand: "Bobcat", model: "T740" },
+  { brand: "Bobcat", model: "T830" },
+  
+  { brand: "John Deere", model: "317G" },
+  { brand: "John Deere", model: "319E" },
+  { brand: "John Deere", model: "323D" },
+  { brand: "John Deere", model: "323E" },
+  { brand: "John Deere", model: "325" },
+  { brand: "John Deere", model: "328" },
+  { brand: "John Deere", model: "CT319D" },
+  { brand: "John Deere", model: "CT319E" },
+  { brand: "John Deere", model: "CT322" },
+  { brand: "John Deere", model: "CT323D" },
+  { brand: "John Deere", model: "CT323E" },
+  { brand: "John Deere", model: "CT329D" },
+  { brand: "John Deere", model: "CT333D" },
+  { brand: "John Deere", model: "CT333E" },
+  
+  { brand: "Takeuchi", model: "TL6" },
+  { brand: "Takeuchi", model: "TL8" },
+  { brand: "Takeuchi", model: "TL10" },
+  { brand: "Takeuchi", model: "TL12" },
+  { brand: "Takeuchi", model: "TL12R2" },
+  
+  // ========== TERTIARY: Mini Excavators (important but not top priority) ==========
   { brand: "Kubota", model: "KX040-4" },
+  { brand: "Kubota", model: "KX121-3" },
+  { brand: "Bobcat", model: "E35" },
+  
   { brand: "Kubota", model: "KX042-4" },
   { brand: "Kubota", model: "KX057-4" },
   { brand: "Kubota", model: "KX080-4" },
-  { brand: "Kubota", model: "KX121-3" },
   { brand: "Kubota", model: "KX91-3" },
   { brand: "Kubota", model: "KX71-3" },
   { brand: "Kubota", model: "KX161-3" },
@@ -65,80 +138,18 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Kubota", model: "U55" },
   { brand: "Kubota", model: "U55-4" },
   
-  // ========== CAT CTLs - high commercial value ==========
-  { brand: "CAT", model: "216" },
-  { brand: "CAT", model: "226" },
-  { brand: "CAT", model: "236" },
-  { brand: "CAT", model: "236B" },
-  { brand: "CAT", model: "239D" },
-  { brand: "CAT", model: "249D" },
-  { brand: "CAT", model: "249D3" },
-  { brand: "CAT", model: "259B" },
-  { brand: "CAT", model: "259B3" },
-  { brand: "CAT", model: "259C" },
-  { brand: "CAT", model: "259D" },
-  { brand: "CAT", model: "259D3" },
-  { brand: "CAT", model: "279C" },
-  { brand: "CAT", model: "279D" },
-  { brand: "CAT", model: "279D3" },
-  { brand: "CAT", model: "289C" },
-  { brand: "CAT", model: "289D" },
-  { brand: "CAT", model: "289D3" },
-  { brand: "CAT", model: "299C" },
-  { brand: "CAT", model: "299D" },
-  { brand: "CAT", model: "299D2" },
-  { brand: "CAT", model: "299D3" },
-  
-  // CAT Mini Excavators
   { brand: "CAT", model: "303.5E2 CR" },
   { brand: "CAT", model: "304E2 CR" },
   { brand: "CAT", model: "305E2 CR" },
   { brand: "CAT", model: "308E2 CR" },
   
-  // ========== BOBCAT CTLs - very popular ==========
-  { brand: "Bobcat", model: "T180" },
-  { brand: "Bobcat", model: "T190" },
-  { brand: "Bobcat", model: "T200" },
-  { brand: "Bobcat", model: "T550" },
-  { brand: "Bobcat", model: "T570" },
-  { brand: "Bobcat", model: "T590" },
-  { brand: "Bobcat", model: "T595" },
-  { brand: "Bobcat", model: "T630" },
-  { brand: "Bobcat", model: "T650" },
-  { brand: "Bobcat", model: "T740" },
-  { brand: "Bobcat", model: "T770" },
-  { brand: "Bobcat", model: "T830" },
-  { brand: "Bobcat", model: "T870" },
-  
-  // Bobcat Mini Excavators
   { brand: "Bobcat", model: "E32" },
-  { brand: "Bobcat", model: "E35" },
   { brand: "Bobcat", model: "E42" },
   { brand: "Bobcat", model: "E50" },
   { brand: "Bobcat", model: "E55" },
   { brand: "Bobcat", model: "331" },
   { brand: "Bobcat", model: "334" },
   
-  // ========== JOHN DEERE CTLs ==========
-  { brand: "John Deere", model: "317G" },
-  { brand: "John Deere", model: "319E" },
-  { brand: "John Deere", model: "323D" },
-  { brand: "John Deere", model: "323E" },
-  { brand: "John Deere", model: "325" },
-  { brand: "John Deere", model: "325G" },
-  { brand: "John Deere", model: "328" },
-  { brand: "John Deere", model: "331G" },
-  { brand: "John Deere", model: "333G" },
-  { brand: "John Deere", model: "CT319D" },
-  { brand: "John Deere", model: "CT319E" },
-  { brand: "John Deere", model: "CT322" },
-  { brand: "John Deere", model: "CT323D" },
-  { brand: "John Deere", model: "CT323E" },
-  { brand: "John Deere", model: "CT329D" },
-  { brand: "John Deere", model: "CT333D" },
-  { brand: "John Deere", model: "CT333E" },
-  
-  // John Deere Mini Excavators
   { brand: "John Deere", model: "27D" },
   { brand: "John Deere", model: "35G" },
   { brand: "John Deere", model: "50D" },
@@ -146,47 +157,32 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "John Deere", model: "60D" },
   { brand: "John Deere", model: "60G" },
   
-  // ========== TAKEUCHI ==========
-  { brand: "Takeuchi", model: "TL6" },
-  { brand: "Takeuchi", model: "TL8" },
-  { brand: "Takeuchi", model: "TL10" },
-  { brand: "Takeuchi", model: "TL10V2" },
-  { brand: "Takeuchi", model: "TL12" },
-  { brand: "Takeuchi", model: "TL12V2" },
-  { brand: "Takeuchi", model: "TL12R2" },
   { brand: "Takeuchi", model: "TB045" },
   { brand: "Takeuchi", model: "TB145" },
   { brand: "Takeuchi", model: "TB250" },
   
   // ========== OTHER IMPORTANT OEMs ==========
-  // JCB
   { brand: "JCB", model: "180T" },
   { brand: "JCB", model: "190T" },
   
-  // CASE
   { brand: "CASE", model: "CX27" },
   { brand: "CASE", model: "TR270" },
   { brand: "CASE", model: "TR320" },
   
-  // New Holland
   { brand: "New Holland", model: "LS180" },
   { brand: "New Holland", model: "LS190" },
   { brand: "New Holland", model: "C232" },
   
-  // GEHL
   { brand: "GEHL", model: "6635" },
   { brand: "GEHL", model: "6640" },
   
-  // Mustang
   { brand: "Mustang", model: "1650RT" },
   { brand: "Mustang", model: "2500RT" },
   
-  // ASV
   { brand: "ASV", model: "RT-75" },
   { brand: "ASV", model: "RT-120" },
   { brand: "ASV", model: "VT-100" },
   
-  // Komatsu
   { brand: "Komatsu", model: "PC27" },
   { brand: "Komatsu", model: "PC27MR" },
   { brand: "Komatsu", model: "PC28" },
@@ -194,72 +190,33 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Komatsu", model: "PC45MR" },
   { brand: "Komatsu", model: "SK1020" },
   
-  // Kobelco
   { brand: "Kobelco", model: "SK27SR-3" },
   { brand: "Kobelco", model: "SK50" },
   
-  // Hitachi
   { brand: "Hitachi", model: "ZX27-3" },
 ] as const;
 
-/**
- * Get the top-selling track size strings only.
- */
-export function getTopSellingTrackSizes(): string[] {
-  return TOP_SELLING_TRACK_SIZES.map(item => item.size);
-}
+// Type for a priority machine
+export type PriorityMachine = (typeof HIGH_PRIORITY_MACHINES)[number];
 
-/**
- * Get top 10 track sizes with rank and description.
- */
-export function getTop10TrackSizes() {
-  return TOP_SELLING_TRACK_SIZES;
-}
-
-/**
- * Check if a track size is in the top-selling list.
- */
-export function isTopSellingTrackSize(size: string): boolean {
-  const normalizedSize = size.toLowerCase().replace(/\s+/g, "");
-  return TOP_SELLING_TRACK_SIZES.some(
-    item => item.size.toLowerCase().replace(/\s+/g, "") === normalizedSize
-  );
-}
-
-/**
- * Get SEO priority rank (1-10 for top sellers, 0 for others).
- */
-export function getTrackSizePriorityRank(trackSize: string): number {
-  const found = TOP_SELLING_TRACK_SIZES.find(
-    item => item.size.toLowerCase() === trackSize.toLowerCase()
-  );
-  return found ? found.rank : 0;
-}
-
-/**
- * Check if a machine is high-priority for SEO.
- * Uses fuzzy matching to handle model name variations.
- */
+// Helper to check if a machine is high priority
 export function isHighPriorityMachine(brand: string, model: string): boolean {
-  const normalizedBrand = brand.toLowerCase();
-  const normalizedModel = model.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const normalizedBrand = brand.toLowerCase().trim();
+  const normalizedModel = model.toLowerCase().trim();
   
-  return HIGH_PRIORITY_MACHINES.some(machine => {
-    const machineBrand = machine.brand.toLowerCase();
-    const machineModel = machine.model.toLowerCase().replace(/[^a-z0-9]/g, "");
-    
-    return machineBrand === normalizedBrand && 
-           (machineModel === normalizedModel ||
-            machineModel.includes(normalizedModel) ||
-            normalizedModel.includes(machineModel.split(/[^a-z0-9]/)[0]));
-  });
+  return HIGH_PRIORITY_MACHINES.some(
+    (m) => 
+      m.brand.toLowerCase() === normalizedBrand && 
+      m.model.toLowerCase() === normalizedModel
+  );
 }
 
-/**
- * Get high-priority machines by brand.
- */
-export function getHighPriorityMachinesByBrand(brand: string) {
-  return HIGH_PRIORITY_MACHINES.filter(
-    m => m.brand.toLowerCase() === brand.toLowerCase()
-  );
+// Get top 10 track size strings (for use in components)
+export function getTop10TrackSizeStrings(): string[] {
+  return TOP_SELLING_TRACK_SIZES.slice(0, 10).map(t => t.size);
+}
+
+// Get top 12 track size strings
+export function getTop12TrackSizeStrings(): string[] {
+  return TOP_SELLING_TRACK_SIZES.map(t => t.size);
 }
