@@ -28,6 +28,10 @@ const PRIORITY_MACHINE_SPECS = [
   // John Deere CTLs
   { brand: "John Deere", searchModel: "325G", displayModel: "325G", category: "Compact Track Loader" },
   { brand: "John Deere", searchModel: "333G", displayModel: "333G", category: "Compact Track Loader" },
+  
+  // Mini Excavators - fill final row slots for SEO clusters
+  { brand: "Kubota", searchModel: "KX121-3", displayModel: "KX121-3", category: "Mini Excavator" },
+  { brand: "Bobcat", searchModel: "E35", displayModel: "E35", category: "Mini Excavator" },
 ];
 
 /**
@@ -150,11 +154,20 @@ export function PopularMachinesSection() {
                 </p>
                 <div className="mt-3 pt-3 border-t border-border">
                   <p className="text-sm font-medium text-foreground">
-                    {machine.trackSize}
-                    {machine.hasMultipleSizes && (
-                      <span className="text-xs text-muted-foreground ml-1">
-                        +{machine.allTrackSizes.length - 1} more
-                      </span>
+                    {machine.allTrackSizes.length === 1 ? (
+                      // Single size - show it
+                      machine.trackSize
+                    ) : machine.allTrackSizes.length === 2 ? (
+                      // Two sizes - show both explicitly
+                      <>{machine.allTrackSizes[0]} + {machine.allTrackSizes[1]}</>
+                    ) : (
+                      // 3+ sizes - show first two + count
+                      <>
+                        {machine.allTrackSizes[0]}, {machine.allTrackSizes[1]}
+                        <span className="text-xs text-muted-foreground ml-1">
+                          +{machine.allTrackSizes.length - 2} more
+                        </span>
+                      </>
                     )}
                   </p>
                   <span className="inline-flex items-center text-xs text-primary mt-2 group-hover:underline">
