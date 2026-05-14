@@ -68,7 +68,8 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
 
   const displayedBrands = showAllBrands ? sortedBrands.all : sortedBrands.popular;
 
-  const filteredMachines = useMemo(() => {
+  // Separate exact matches from partial matches for better search UX
+  const { exactMatches, partialMatches } = useMemo(() => {
     let filtered = machines;
 
     if (selectedBrand) {
@@ -77,22 +78,54 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
       );
     }
 
-    if (searchQuery) {
-      const normalizedQuery = normalizeForMatching(searchQuery);
-      filtered = filtered.filter(
-        (m) => {
-          const normalizedMake = normalizeForMatching(m.make || '');
-          const normalizedModel = normalizeForMatching(m.model || '');
-          const normalizedFull = normalizeForMatching(`${m.make} ${m.model}`);
-          return normalizedMake.includes(normalizedQuery) ||
-                 normalizedModel.includes(normalizedQuery) ||
-                 normalizedFull.includes(normalizedQuery);
-        }
-      );
+    if (!searchQuery) {
+      return { exactMatches: [], partialMatches: filtered };
     }
 
-    return filtered;
+    const normalizedQuery = normalizeForMatching(searchQuery);
+    const queryLower = searchQuery.toLowerCase().trim();
+    
+    const exact: MachineModel[] = [];
+    const partial: MachineModel[] = [];
+    
+    filtered.forEach((m) => {
+      const normalizedMake = normalizeForMatching(m.make || '');
+      const normalizedModel = normalizeForMatching(m.model || '');
+      const normalizedFull = normalizeForMatching(`${m.make} ${m.model}`);
+      const modelLower = (m.model || '').toLowerCase();
+      
+      // Check for exact model match (e.g., "249D" matches "249D" exactly)
+      // Also check if model starts with query (e.g., "249" matches "249D", "249D3")
+      const isExactModelMatch = modelLower === queryLower || 
+                                normalizedModel === normalizedQuery;
+      
+      // Check if this is a close variant (model starts with query or vice versa)
+      const isCloseMatch = modelLower.startsWith(queryLower) || 
+                           queryLower.startsWith(modelLower.replace(/[^a-z0-9]/g, ''));
+      
+      if (isExactModelMatch) {
+        // Perfect match - put at very top
+        exact.unshift(m);
+      } else if (isCloseMatch) {
+        // Close variant - put in exact matches but after perfect matches
+        exact.push(m);
+      } else if (
+        normalizedMake.includes(normalizedQuery) ||
+        normalizedModel.includes(normalizedQuery) ||
+        normalizedFull.includes(normalizedQuery)
+      ) {
+        // Partial match - broader results
+        partial.push(m);
+      }
+    });
+
+    return { exactMatches: exact, partialMatches: partial };
   }, [machines, selectedBrand, searchQuery]);
+
+  // Combined filtered machines for grouping
+  const filteredMachines = useMemo(() => {
+    return [...exactMatches, ...partialMatches];
+  }, [exactMatches, partialMatches]);
 
   const machinesByBrand = useMemo(() => {
     const grouped: Record<string, MachineModel[]> = {};
@@ -192,7 +225,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
       {/* Machines Grid */}
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
-          {Object.keys(machinesByBrand).length === 0 ? (
+          {filteredMachines.length === 0 ? (
             <div className="text-center py-16">
               <Wrench className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
               <h2 className="text-2xl font-semibold text-foreground mb-2">
@@ -202,7 +235,94 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                 Try adjusting your search or filter criteria.
               </p>
             </div>
+          ) : searchQuery ? (
+            // Search results mode - show exact matches first, then related
+            <div className="space-y-12">
+              {exactMatches.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                    <span className="w-2 h-8 bg-primary rounded-full" />
+                    {exactMatches.length === 1 ? 'Exact Match' : 'Matching Machine Models'}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      ({exactMatches.length})
+                    </span>
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {exactMatches.map((machine) => (
+                      <Link
+                        key={`${machine.make}-${machine.model}`}
+                        href={createMachineUrl(machine)}
+                        className="group flex items-center justify-between p-4 bg-card rounded-lg border-2 border-primary hover:shadow-lg transition-all"
+                      >
+                        <div>
+                          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {machine.make} {machine.model}
+                          </h3>
+                          {machine.equipment_type && (
+                            <p className="text-sm text-muted-foreground">
+                              {machine.equipment_type}
+                            </p>
+                          )}
+                          {machine.track_sizes && machine.track_sizes.length > 0 && (
+                            <p className="text-xs text-primary mt-1">
+                              {machine.track_sizes.length} compatible track
+                              {machine.track_sizes.length !== 1 ? "s" : ""}
+                            </p>
+                          )}
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-primary transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {partialMatches.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                    <span className="w-2 h-8 bg-muted-foreground rounded-full" />
+                    {exactMatches.length > 0 ? 'Other Related Models' : 'Matching Machine Models'}
+                    <span className="text-sm font-normal text-muted-foreground">
+                      ({partialMatches.length})
+                    </span>
+                  </h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {partialMatches.slice(0, 20).map((machine) => (
+                      <Link
+                        key={`${machine.make}-${machine.model}`}
+                        href={createMachineUrl(machine)}
+                        className="group flex items-center justify-between p-4 bg-card rounded-lg border border-border hover:border-primary transition-colors"
+                      >
+                        <div>
+                          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {machine.make} {machine.model}
+                          </h3>
+                          {machine.equipment_type && (
+                            <p className="text-sm text-muted-foreground">
+                              {machine.equipment_type}
+                            </p>
+                          )}
+                          {machine.track_sizes && machine.track_sizes.length > 0 && (
+                            <p className="text-xs text-primary mt-1">
+                              {machine.track_sizes.length} compatible track
+                              {machine.track_sizes.length !== 1 ? "s" : ""}
+                            </p>
+                          )}
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
+                  {partialMatches.length > 20 && (
+                    <p className="text-sm text-muted-foreground mt-4 text-center">
+                      Showing 20 of {partialMatches.length} related models. Refine your search for more specific results.
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
           ) : (
+            // Browse mode - group by brand
             <div className="space-y-12">
               {Object.entries(machinesByBrand)
                 .sort(([a], [b]) => a.localeCompare(b))
