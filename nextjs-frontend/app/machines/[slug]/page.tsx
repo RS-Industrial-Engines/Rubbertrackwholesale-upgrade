@@ -265,19 +265,23 @@ export default async function MachineDetailPage({ params }: PageProps) {
     redirect(`/machines/${cleanSlug}`);
   }
 
-  // Try API first, then fallback
-  let compatibility: CompatibilitySearchResult | null = null;
-  try {
-    const apiResult = await getCompatibilityByMachine(make, model);
-    if (apiResult && apiResult.track_sizes?.length > 0) {
-      compatibility = apiResult;
+  // ALWAYS use full-machine-data.ts as PRIMARY source
+  // This ensures exact machine matching and prevents fuzzy API data issues
+  let compatibility: CompatibilitySearchResult | null = getFallbackCompatibility(make, model);
+  
+  // API is supplemental only - only use if local data is missing
+  if (!compatibility || (compatibility.track_sizes?.length === 0)) {
+    try {
+      const apiResult = await getCompatibilityByMachine(make, model);
+      if (apiResult && apiResult.track_sizes?.length > 0) {
+        // Only use API if we have NO local data
+        if (!compatibility) {
+          compatibility = apiResult;
+        }
+      }
+    } catch {
+      // API failed, continue with local data
     }
-  } catch {
-    // API failed, will use fallback
-  }
-
-  if (!compatibility) {
-    compatibility = getFallbackCompatibility(make, model);
   }
 
   if (!compatibility) {

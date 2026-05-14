@@ -2,56 +2,102 @@ import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
 import { createMachineSlug } from "@/lib/url-utils";
 import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
-import { getTrackSizesForMachine } from "@/lib/data/full-machine-data";
+import { getTrackSizesForMachine, fullMachineModels } from "@/lib/data/full-machine-data";
 
 /**
- * Popular machines for homepage display.
- * IMPORTANT: Model names MUST exactly match full-machine-data.ts
- * Track sizes are looked up from full-machine-data.ts, NOT hardcoded here.
+ * Priority machines for homepage display (simplified identifiers).
+ * The actual model name is resolved from full-machine-data.ts using slug matching.
  */
-const POPULAR_MACHINE_IDENTIFIERS = [
-  // CTLs first - highest demand (model names must match full-machine-data.ts exactly)
-  { brand: "Kubota", model: "SVL 75-2 (Compact Track Loader)", displayModel: "SVL75-2", category: "Compact Track Loader" },
-  { brand: "Kubota", model: "SVL 75-3 (Compact Track Loader)", displayModel: "SVL75-3", category: "Compact Track Loader" },
-  { brand: "Kubota", model: "SVL 95-2 (Compact Track Loader)", displayModel: "SVL95-2", category: "Compact Track Loader" },
-  { brand: "Kubota", model: "SVL 97-2 (Compact Track Loader)", displayModel: "SVL97-2", category: "Compact Track Loader" },
+const PRIORITY_MACHINE_SPECS = [
+  // CTLs first - highest demand
+  { brand: "Kubota", searchModel: "SVL75-2", displayModel: "SVL75-2", category: "Compact Track Loader" },
+  { brand: "Kubota", searchModel: "SVL75-3", displayModel: "SVL75-3", category: "Compact Track Loader" },
+  { brand: "Kubota", searchModel: "SVL95-2", displayModel: "SVL95-2", category: "Compact Track Loader" },
+  { brand: "Kubota", searchModel: "SVL97-2", displayModel: "SVL97-2", category: "Compact Track Loader" },
   
   // CAT CTLs
-  { brand: "CAT", model: "259D", displayModel: "259D", category: "Compact Track Loader" },
-  { brand: "CAT", model: "259D3", displayModel: "259D3", category: "Compact Track Loader" },
-  { brand: "CAT", model: "289D", displayModel: "289D", category: "Compact Track Loader" },
-  { brand: "CAT", model: "299D2", displayModel: "299D2", category: "Compact Track Loader" },
+  { brand: "CAT", searchModel: "259D", displayModel: "259D", category: "Compact Track Loader" },
+  { brand: "CAT", searchModel: "259D3", displayModel: "259D3", category: "Compact Track Loader" },
+  { brand: "CAT", searchModel: "289D", displayModel: "289D", category: "Compact Track Loader" },
+  { brand: "CAT", searchModel: "299D2", displayModel: "299D2", category: "Compact Track Loader" },
   
   // Bobcat CTLs
-  { brand: "Bobcat", model: "T650", displayModel: "T650", category: "Compact Track Loader" },
-  { brand: "Bobcat", model: "T770", displayModel: "T770", category: "Compact Track Loader" },
+  { brand: "Bobcat", searchModel: "T650", displayModel: "T650", category: "Compact Track Loader" },
+  { brand: "Bobcat", searchModel: "T770", displayModel: "T770", category: "Compact Track Loader" },
   
   // John Deere CTLs
-  { brand: "John Deere", model: "325G", displayModel: "325G", category: "Compact Track Loader" },
-  { brand: "John Deere", model: "333G", displayModel: "333G", category: "Compact Track Loader" },
+  { brand: "John Deere", searchModel: "325G", displayModel: "325G", category: "Compact Track Loader" },
+  { brand: "John Deere", searchModel: "333G", displayModel: "333G", category: "Compact Track Loader" },
 ];
+
+/**
+ * Resolve a priority machine to its actual full-machine-data.ts model name
+ * by matching the generated slug from the search model.
+ */
+function resolveActualModel(brand: string, searchModel: string): string | null {
+  const models = fullMachineModels[brand] || [];
+  const targetSlug = createMachineSlug(brand, searchModel);
+  
+  // Find the model whose slug matches
+  for (const model of models) {
+    const modelSlug = createMachineSlug(brand, model);
+    if (modelSlug === targetSlug) {
+      return model;
+    }
+  }
+  
+  return null;
+}
+
+interface PopularMachine {
+  brand: string;
+  model: string;
+  displayModel: string;
+  category: string;
+  trackSize: string;
+  allTrackSizes: string[];
+  hasMultipleSizes: boolean;
+}
 
 /**
  * Build the popular machines list with track sizes looked up from full-machine-data.ts
  */
-function getPopularMachinesWithTrackSizes() {
-  return POPULAR_MACHINE_IDENTIFIERS.map(machine => {
-    // Look up track sizes from the authoritative source
-    const trackSizes = getTrackSizesForMachine(machine.brand, machine.model);
-    // Use first track size as primary, or show "Multiple sizes" if more than one
-    const primaryTrackSize = trackSizes.length > 0 ? trackSizes[0] : "Contact for size";
+function getPopularMachinesWithTrackSizes(): PopularMachine[] {
+  const results: PopularMachine[] = [];
+  
+  for (const spec of PRIORITY_MACHINE_SPECS) {
+    // Resolve the actual model name from full-machine-data.ts
+    const actualModel = resolveActualModel(spec.brand, spec.searchModel);
+    
+    if (!actualModel) {
+      // Skip if model not found
+      continue;
+    }
+    
+    // Look up track sizes from the authoritative source using the actual model name
+    const trackSizes = getTrackSizesForMachine(spec.brand, actualModel);
+    
+    if (trackSizes.length === 0) {
+      // Skip machines with no track sizes
+      continue;
+    }
+    
+    // Use first track size as primary
+    const primaryTrackSize = trackSizes[0];
     const hasMultipleSizes = trackSizes.length > 1;
     
-    return {
-      brand: machine.brand,
-      model: machine.model,
-      displayModel: machine.displayModel,
-      category: machine.category,
+    results.push({
+      brand: spec.brand,
+      model: actualModel, // Use the actual model name for slug generation
+      displayModel: spec.displayModel,
+      category: spec.category,
       trackSize: primaryTrackSize,
       allTrackSizes: trackSizes,
       hasMultipleSizes,
-    };
-  });
+    });
+  }
+  
+  return results;
 }
 
 export function PopularMachinesSection() {

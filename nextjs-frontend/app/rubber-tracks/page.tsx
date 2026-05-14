@@ -58,21 +58,17 @@ export const metadata: Metadata = {
   },
 };
 
-// Top brands by model count
-const TOP_BRANDS = [
-  { name: "Kubota", modelCount: 89 },
-  { name: "Caterpillar", modelCount: 156 },
-  { name: "Bobcat", modelCount: 78 },
-  { name: "John Deere", modelCount: 124 },
-  { name: "Takeuchi", modelCount: 67 },
-  { name: "Case", modelCount: 54 },
-  { name: "Komatsu", modelCount: 98 },
-  { name: "Hitachi", modelCount: 76 },
-  { name: "Kobelco", modelCount: 52 },
-  { name: "Volvo", modelCount: 43 },
-  { name: "New Holland", modelCount: 38 },
-  { name: "ASV", modelCount: 35 },
-];
+// Top brands by model count - dynamically generated from actual data
+function getTopBrands() {
+  const brandCounts = Object.entries(fullMachineModels)
+    .map(([brand, models]) => ({
+      name: brand,
+      modelCount: models.length,
+    }))
+    .sort((a, b) => b.modelCount - a.modelCount)
+    .slice(0, 12);
+  return brandCounts;
+}
 
 // Tread pattern education
 const TREAD_PATTERNS = [
@@ -179,6 +175,9 @@ export default async function RubberTracksPage() {
   const totalBrands = TOTAL_BRANDS;
   const totalMachines = TOTAL_MACHINES;
   const totalTrackSizes = TOTAL_TRACK_SIZES;
+  
+  // Get top brands dynamically
+  const topBrands = getTopBrands();
 
   return (
     <>
@@ -353,7 +352,7 @@ export default async function RubberTracksPage() {
                   Top 12 best-selling track sizes based on real sales data
                 </p>
               </div>
-              <Link href="/track-sizes">
+              <Link href="/track-size">
                 <Button variant="outline" className="hidden sm:flex">
                   View All Sizes <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -395,7 +394,7 @@ export default async function RubberTracksPage() {
             </div>
 
             <div className="mt-6 text-center sm:hidden">
-              <Link href="/track-sizes">
+              <Link href="/track-size">
                 <Button variant="outline">
                   View All Track Sizes <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -424,7 +423,7 @@ export default async function RubberTracksPage() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-              {TOP_BRANDS.map((brand) => (
+                {topBrands.map((brand) => (
                 <Link
                   key={brand.name}
                   href={`/brands/${brand.name.toLowerCase().replace(/\s+/g, "-")}`}
