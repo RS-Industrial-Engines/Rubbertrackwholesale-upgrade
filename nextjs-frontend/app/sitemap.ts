@@ -4,6 +4,7 @@ import {
   fullTrackSizes,
   fullBrands,
 } from "@/lib/data/full-machine-data";
+import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
@@ -92,7 +93,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
   ];
+
+  // Blog post pages - from static blog posts
+  const blogPages: MetadataRoute.Sitemap = STATIC_BLOG_POSTS.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.published_at),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
 
   // Machine pages - generated from full-machine-data.ts
   // This is the authoritative source with 4,631 machines
@@ -133,6 +148,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticPages,
+    ...blogPages,
     ...machinePages,
     ...trackSizePages,
     ...brandPages,

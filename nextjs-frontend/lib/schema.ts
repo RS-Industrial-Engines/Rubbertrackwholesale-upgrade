@@ -1,5 +1,6 @@
-import { BUSINESS_INFO } from "./url-utils";
+import { BUSINESS_INFO, createMachineSlug } from "./url-utils";
 import type { Product } from "./api";
+import type { StaticBlogPost } from "./data/blog-posts";
 
 const SITE_URL = BUSINESS_INFO.url;
 
@@ -174,6 +175,42 @@ export function generateFAQPageSchema(faqs: { question: string; answer: string }
 }
 
 // ============================================================================
+// ARTICLE SCHEMA (for blog posts)
+// ============================================================================
+
+export function generateArticleSchema(post: StaticBlogPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.published_at,
+    dateModified: post.published_at, // Use published_at if no modified date
+    author: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug}`,
+    },
+    articleSection: post.category,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    // Note: image omitted unless real and crawlable
+  };
+}
+
+// ============================================================================
 // PRODUCT SCHEMA
 // ============================================================================
 
@@ -283,7 +320,8 @@ export function generateMachineSchema(
   equipmentType: string,
   trackSizes: string[]
 ) {
-  const slug = `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
+  // Use canonical slug from url-utils for exact URL matching
+  const slug = createMachineSlug(make, model);
   
   return {
     "@context": "https://schema.org",
@@ -337,7 +375,8 @@ export function generateBrandPageSchema(
           name: `${brand} ${m.model}`,
           manufacturer: { "@type": "Organization", name: brand },
           model: m.model,
-          url: `${SITE_URL}/machines/${brand.toLowerCase().replace(/\s+/g, "-")}-${m.model.toLowerCase().replace(/[^a-z0-9]/g, "")}`,
+          // Use canonical slug function for consistent URLs
+          url: `${SITE_URL}/machines/${createMachineSlug(brand, m.model)}`,
         },
       })),
     },

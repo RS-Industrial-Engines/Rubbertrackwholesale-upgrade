@@ -4,7 +4,6 @@ import {
   getMachineModels,
   parseMachineSlug,
   getCompatibilityByMachine,
-  getProducts,
   MachineModel,
   CompatibilitySearchResult,
 } from "@/lib/api";

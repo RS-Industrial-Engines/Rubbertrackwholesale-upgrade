@@ -6,33 +6,29 @@ import { getTrackSizesForMachine } from "@/lib/data/full-machine-data";
 
 /**
  * Popular machines for homepage display.
- * IMPORTANT: Track sizes are looked up from full-machine-data.ts, NOT hardcoded here.
- * Only brand, model, and category are specified.
+ * IMPORTANT: Model names MUST exactly match full-machine-data.ts
+ * Track sizes are looked up from full-machine-data.ts, NOT hardcoded here.
  */
 const POPULAR_MACHINE_IDENTIFIERS = [
-  // Kubota - extremely popular
+  // CTLs first - highest demand (model names must match full-machine-data.ts exactly)
   { brand: "Kubota", model: "SVL 75-2 (Compact Track Loader)", displayModel: "SVL75-2", category: "Compact Track Loader" },
+  { brand: "Kubota", model: "SVL 75-3 (Compact Track Loader)", displayModel: "SVL75-3", category: "Compact Track Loader" },
   { brand: "Kubota", model: "SVL 95-2 (Compact Track Loader)", displayModel: "SVL95-2", category: "Compact Track Loader" },
+  { brand: "Kubota", model: "SVL 97-2 (Compact Track Loader)", displayModel: "SVL97-2", category: "Compact Track Loader" },
   
-  // CAT - high commercial value
+  // CAT CTLs
   { brand: "CAT", model: "259D", displayModel: "259D", category: "Compact Track Loader" },
-  { brand: "CAT", model: "299D", displayModel: "299D", category: "Compact Track Loader" },
+  { brand: "CAT", model: "259D3", displayModel: "259D3", category: "Compact Track Loader" },
+  { brand: "CAT", model: "289D", displayModel: "289D", category: "Compact Track Loader" },
+  { brand: "CAT", model: "299D2", displayModel: "299D2", category: "Compact Track Loader" },
   
-  // Bobcat - very popular
+  // Bobcat CTLs
   { brand: "Bobcat", model: "T650", displayModel: "T650", category: "Compact Track Loader" },
   { brand: "Bobcat", model: "T770", displayModel: "T770", category: "Compact Track Loader" },
   
-  // John Deere
-  { brand: "John Deere", model: "333G", displayModel: "333G", category: "Compact Track Loader" },
+  // John Deere CTLs
   { brand: "John Deere", model: "325G", displayModel: "325G", category: "Compact Track Loader" },
-  
-  // Takeuchi
-  { brand: "Takeuchi", model: "TL12V2", displayModel: "TL12V2", category: "Compact Track Loader" },
-  { brand: "Takeuchi", model: "TL10V2", displayModel: "TL10V2", category: "Compact Track Loader" },
-  
-  // Mini Excavators
-  { brand: "Kubota", model: "KX040-4", displayModel: "KX040-4", category: "Mini Excavator" },
-  { brand: "CAT", model: "305E2 CR", displayModel: "305E2 CR", category: "Mini Excavator" },
+  { brand: "John Deere", model: "333G", displayModel: "333G", category: "Compact Track Loader" },
 ];
 
 /**
