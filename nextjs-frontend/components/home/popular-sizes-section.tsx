@@ -110,13 +110,13 @@ export function PopularSizesSection() {
           ))}
         </div>
 
-        {/* Sizes 7-10 - same structure as 1-6 for consistent height */}
+        {/* Sizes 7-10 - same visual treatment as 1-6 */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
           {popularSizes.slice(6, 10).map((item) => (
             <Link
               key={item.size}
               href={`/track-size/${item.size.toLowerCase()}`}
-              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all flex flex-col h-full"
+              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">
@@ -131,14 +131,10 @@ export function PopularSizesSection() {
                   In Stock
                 </span>
               </div>
-              <p className="text-xs text-muted-foreground mt-2 flex-grow">
+              <p className="text-xs text-muted-foreground mt-2 line-clamp-1">
                 <span className="text-muted-foreground">Fits: </span>
                 {item.machines}
               </p>
-              <span className="inline-flex items-center text-xs text-primary mt-2 group-hover:underline">
-                View Machines
-                <ChevronRight className="h-3 w-3 ml-1" />
-              </span>
             </Link>
           ))}
         </div>
