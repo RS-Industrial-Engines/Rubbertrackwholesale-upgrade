@@ -192,7 +192,7 @@ export const BUSINESS_INFO = {
   },
   email: "info@rubbertrackwholesale.com",
   category: "Rubber products supplier",
-  url: "https://www.rubbertrackwholesale.com",
+  url: "https://rubbertrackwholesale.com",
   // Google Business Profile data
   aggregateRating: {
     ratingValue: "4.9",

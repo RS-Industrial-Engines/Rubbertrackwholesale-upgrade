@@ -7,7 +7,7 @@ import {
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
 /**
  * Generate sitemap for the entire site.
