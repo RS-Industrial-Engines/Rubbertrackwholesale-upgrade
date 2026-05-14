@@ -22,8 +22,8 @@ import {
   getSiteUrl,
 } from "@/lib/schema";
 import { BUSINESS_INFO, createMachineSlug } from "@/lib/url-utils";
-import { fullBrands, fullTrackSizes, getMachinesForTrackSize, fullMachineModels } from "@/lib/data/full-machine-data";
-import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
+import { fullBrands, fullTrackSizes, getMachinesForTrackSize, fullMachineModels, getTrackSizesForMachine } from "@/lib/data/full-machine-data";
+import { TOP_SELLING_TRACK_SIZES, HIGH_PRIORITY_MACHINES } from "@/lib/data/seo-priorities";
 
 const SITE_URL = getSiteUrl();
 
@@ -273,7 +273,75 @@ export default async function RubberTracksPage() {
           </div>
         </section>
 
-        {/* Popular Track Sizes - TOP 10 */}
+        {/* Popular Rubber Tracks by Machine - MACHINE-FIRST SEO */}
+        <section className="py-12 lg:py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+                  Popular Rubber Tracks by Machine
+                </h2>
+                <p className="text-muted-foreground mt-1">
+                  Find rubber tracks for the most popular compact track loaders and mini excavators
+                </p>
+              </div>
+              <Link href="/machines">
+                <Button variant="outline" className="hidden sm:flex">
+                  View All Machines <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {HIGH_PRIORITY_MACHINES.slice(0, 16).map((machine) => {
+                const trackSizes = getTrackSizesForMachine(machine.brand, machine.model);
+                if (trackSizes.length === 0) return null;
+                const slug = createMachineSlug(machine.brand, machine.model);
+                return (
+                  <Link
+                    key={`${machine.brand}-${machine.model}`}
+                    href={`/machines/${slug}`}
+                    className="group"
+                  >
+                    <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
+                      <CardContent className="p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-xs font-medium text-muted-foreground">
+                            {machine.brand}
+                          </span>
+                          <span className="text-xs font-semibold px-2 py-0.5 bg-green-100 text-green-700 rounded">
+                            In Stock
+                          </span>
+                        </div>
+                        <div className="font-bold text-lg group-hover:text-primary transition-colors">
+                          {machine.model}
+                        </div>
+                        <div className="text-sm text-muted-foreground mt-2">
+                          <span className="font-medium">Track Size{trackSizes.length > 1 ? "s" : ""}:</span>{" "}
+                          {trackSizes.slice(0, 2).join(", ")}
+                          {trackSizes.length > 2 && ` +${trackSizes.length - 2} more`}
+                        </div>
+                        <div className="mt-3 text-xs text-primary font-medium group-hover:underline">
+                          View Rubber Tracks →
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              }).filter(Boolean)}
+            </div>
+
+            <div className="mt-6 text-center">
+              <Link href="/machines">
+                <Button variant="outline">
+                  Browse All {TOTAL_MACHINES.toLocaleString()}+ Machines <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Popular Track Sizes - TOP 12 */}
         <section className="py-12 lg:py-16">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
@@ -282,7 +350,7 @@ export default async function RubberTracksPage() {
                   Popular Rubber Track Sizes
                 </h2>
                 <p className="text-muted-foreground mt-1">
-                  Top 10 best-selling track sizes based on real sales data
+                  Top 12 best-selling track sizes based on real sales data
                 </p>
               </div>
               <Link href="/track-sizes">
