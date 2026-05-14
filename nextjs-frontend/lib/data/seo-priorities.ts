@@ -68,6 +68,10 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Takeuchi", model: "TL10V2" },
   { brand: "Takeuchi", model: "TL12V2" },
   
+  // ========== TOP MINI EXCAVATORS (fill grid, important SEO clusters) ==========
+  { brand: "Kubota", model: "KX121-3" },
+  { brand: "Bobcat", model: "E35" },
+  
   // ========== SECONDARY PRIORITY: Additional CTLs ==========
   { brand: "Kubota", model: "SVL65-2" },
   { brand: "Kubota", model: "SVL75-2C" },
@@ -119,8 +123,8 @@ export const HIGH_PRIORITY_MACHINES = [
   
   // ========== TERTIARY: Mini Excavators (important but not top priority) ==========
   { brand: "Kubota", model: "KX040-4" },
-  { brand: "Kubota", model: "KX121-3" },
-  { brand: "Bobcat", model: "E35" },
+  // KX121-3 moved to TOP MINI EXCAVATORS section
+  // E35 moved to TOP MINI EXCAVATORS section
   
   { brand: "Kubota", model: "KX042-4" },
   { brand: "Kubota", model: "KX057-4" },
