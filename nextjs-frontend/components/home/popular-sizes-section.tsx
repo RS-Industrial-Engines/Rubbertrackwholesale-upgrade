@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Package } from "lucide-react";
 import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
-import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
+import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
 
 /**
  * Get sample machine names for a track size by looking up from full-machine-data.ts
@@ -35,6 +35,7 @@ function getSampleMachinesForSize(trackSize: string): string {
 
 export function PopularSizesSection() {
   const top10Sizes = TOP_SELLING_TRACK_SIZES.slice(0, 10);
+  const totalTrackSizes = fullTrackSizes.length;
   
   // Build the popular sizes array with machine lookups from full-machine-data.ts
   const popularSizes = top10Sizes.map(item => ({
@@ -66,7 +67,7 @@ export function PopularSizesSection() {
             href="/track-size"
             className="hidden sm:flex items-center gap-1 text-primary hover:underline font-medium"
           >
-            View All 35+ Sizes
+            View All {totalTrackSizes}+ Sizes
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
