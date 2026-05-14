@@ -1,83 +1,131 @@
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Package } from "lucide-react";
+import { getTop10TrackSizes } from "@/lib/data/seo-priorities";
+import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
 
-const popularSizes = [
-  {
-    size: "400x86x52",
-    description: "Most common CTL size",
-    machines: "Kubota SVL75, Cat 259D, Bobcat T650",
-  },
-  {
-    size: "450x86x56",
-    description: "Large CTL size",
-    machines: "Kubota SVL95, Cat 289D, John Deere 333G",
-  },
-  {
-    size: "300x52.5x80",
-    description: "Mini excavator size",
-    machines: "Kubota KX121, Yanmar VIO35",
-  },
-  {
-    size: "320x86x52",
-    description: "Compact CTL size",
-    machines: "Bobcat T590, Cat 249D",
-  },
-  {
-    size: "400x72.5x72",
-    description: "Excavator/CTL size",
-    machines: "Kubota U35, Takeuchi TB230",
-  },
-  {
-    size: "450x81x76",
-    description: "Large excavator size",
-    machines: "Kubota KX080, Cat 308",
-  },
-];
+/**
+ * Get sample machine names for a track size by looking up from full-machine-data.ts
+ * Returns a formatted string of machine names, limited to 3-4 machines.
+ */
+function getSampleMachinesForSize(trackSize: string): string {
+  const machines = getMachinesForTrackSize(trackSize);
+  
+  // Get a diverse sample of brands (up to 4 machines, different brands preferred)
+  const seenBrands = new Set<string>();
+  const sampleMachines: string[] = [];
+  
+  for (const machine of machines) {
+    if (sampleMachines.length >= 4) break;
+    
+    // Prefer different brands for variety
+    if (!seenBrands.has(machine.brand) || sampleMachines.length < 2) {
+      // Format model name - remove parenthetical descriptions for display
+      const displayModel = machine.model.replace(/\s*\([^)]*\)/g, "").trim();
+      sampleMachines.push(`${machine.brand} ${displayModel}`);
+      seenBrands.add(machine.brand);
+    }
+  }
+  
+  if (sampleMachines.length === 0) {
+    return "Multiple machines";
+  }
+  
+  return sampleMachines.join(", ");
+}
 
 export function PopularSizesSection() {
+  const top10Sizes = getTop10TrackSizes();
+  
+  // Build the popular sizes array with machine lookups from full-machine-data.ts
+  const popularSizes = top10Sizes.map(item => ({
+    size: item.size,
+    rank: item.rank,
+    description: item.description,
+    machines: getSampleMachinesForSize(item.size),
+  }));
+
   return (
     <section className="py-12 lg:py-16">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Package className="h-5 w-5 text-primary" />
+              <span className="text-sm font-medium text-primary uppercase tracking-wider">
+                In Stock Now
+              </span>
+            </div>
             <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
-              Popular Track Sizes
+              Top 10 Selling Track Sizes
             </h2>
             <p className="text-muted-foreground mt-2">
-              Common rubber track sizes we keep in stock
+              Based on real customer orders - ready to ship nationwide
             </p>
           </div>
           <Link
             href="/track-size"
             className="hidden sm:flex items-center gap-1 text-primary hover:underline font-medium"
           >
-            View All Sizes
+            View All 35+ Sizes
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
 
+        {/* Top 6 with full cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {popularSizes.map((item) => (
+          {popularSizes.slice(0, 6).map((item) => (
             <Link
               key={item.size}
               href={`/track-size/${item.size.toLowerCase()}`}
-              className="group bg-card rounded-lg border border-border p-6 hover:border-primary transition-colors"
+              className="group bg-card rounded-lg border border-border p-6 hover:border-primary hover:shadow-md transition-all"
             >
               <div className="flex items-start justify-between">
                 <div>
-                  <h3 className="text-2xl font-bold text-primary group-hover:underline">
-                    {item.size}
-                  </h3>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <div className="flex items-center gap-2">
+                    <span className="w-6 h-6 flex items-center justify-center bg-primary text-primary-foreground text-xs font-bold rounded">
+                      #{item.rank}
+                    </span>
+                    <h3 className="text-xl font-bold text-primary group-hover:underline">
+                      {item.size}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2">
                     {item.description}
                   </p>
                 </div>
-                <span className="px-2 py-1 text-xs font-medium bg-green-500/10 text-green-500 rounded">
+                <span className="px-2 py-1 text-xs font-medium bg-green-500/10 text-green-600 rounded whitespace-nowrap">
                   In Stock
                 </span>
               </div>
-              <p className="text-sm text-foreground mt-3">
+              <p className="text-sm text-foreground mt-4 pt-4 border-t border-border line-clamp-2">
                 <span className="text-muted-foreground">Fits: </span>
+                {item.machines}
+              </p>
+              <span className="inline-flex items-center text-xs text-primary mt-3 group-hover:underline">
+                View Compatible Machines
+                <ChevronRight className="h-3 w-3 ml-1" />
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Sizes 7-10 in compact row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          {popularSizes.slice(6, 10).map((item) => (
+            <Link
+              key={item.size}
+              href={`/track-size/${item.size.toLowerCase()}`}
+              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all"
+            >
+              <div className="flex items-center gap-2">
+                <span className="w-5 h-5 flex items-center justify-center bg-muted text-muted-foreground text-xs font-bold rounded">
+                  #{item.rank}
+                </span>
+                <h3 className="text-lg font-bold text-foreground group-hover:text-primary">
+                  {item.size}
+                </h3>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2 line-clamp-1">
                 {item.machines}
               </p>
             </Link>
