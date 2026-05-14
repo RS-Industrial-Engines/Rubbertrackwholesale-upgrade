@@ -2,7 +2,6 @@ import { HeroSection } from "@/components/home/hero-section";
 import { CategoryNav } from "@/components/home/category-nav";
 import { FeaturesSection } from "@/components/home/features-section";
 import { CompatibilitySection } from "@/components/home/compatibility-section";
-import { FeaturedProducts } from "@/components/home/featured-products";
 import { PopularMachinesSection } from "@/components/home/popular-machines-section";
 import { PopularSizesSection } from "@/components/home/popular-sizes-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
@@ -46,7 +45,6 @@ export default function HomePage() {
         <PopularSizesSection />
         <CompatibilitySection />
         <FeaturesSection />
-        <FeaturedProducts />
         <TestimonialsSection />
         <SEOContentSection />
         <CTASection />

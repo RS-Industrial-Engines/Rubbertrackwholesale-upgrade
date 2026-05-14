@@ -1,5 +1,6 @@
-import { BUSINESS_INFO } from "./url-utils";
+import { BUSINESS_INFO, createMachineSlug } from "./url-utils";
 import type { Product } from "./api";
+import type { StaticBlogPost } from "./data/blog-posts";
 
 const SITE_URL = BUSINESS_INFO.url;
 
@@ -174,6 +175,42 @@ export function generateFAQPageSchema(faqs: { question: string; answer: string }
 }
 
 // ============================================================================
+// ARTICLE SCHEMA (for blog posts)
+// ============================================================================
+
+export function generateArticleSchema(post: StaticBlogPost) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.published_at,
+    dateModified: post.published_at, // Use published_at if no modified date
+    author: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/blog/${post.slug}`,
+    },
+    articleSection: post.category,
+    url: `${SITE_URL}/blog/${post.slug}`,
+    // Note: image omitted unless real and crawlable
+  };
+}
+
+// ============================================================================
 // PRODUCT SCHEMA
 // ============================================================================
 
@@ -208,11 +245,7 @@ export function generateProductSchema(product: Product) {
         name: BUSINESS_INFO.name,
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
-    },
+    // Note: aggregateRating removed - only add when visible reviews exist on page
   };
 }
 
@@ -287,7 +320,8 @@ export function generateMachineSchema(
   equipmentType: string,
   trackSizes: string[]
 ) {
-  const slug = `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
+  // Use canonical slug from url-utils for exact URL matching
+  const slug = createMachineSlug(make, model);
   
   return {
     "@context": "https://schema.org",
@@ -341,7 +375,8 @@ export function generateBrandPageSchema(
           name: `${brand} ${m.model}`,
           manufacturer: { "@type": "Organization", name: brand },
           model: m.model,
-          url: `${SITE_URL}/machines/${brand.toLowerCase().replace(/\s+/g, "-")}-${m.model.toLowerCase().replace(/[^a-z0-9]/g, "")}`,
+          // Use canonical slug function for consistent URLs
+          url: `${SITE_URL}/machines/${createMachineSlug(brand, m.model)}`,
         },
       })),
     },
@@ -356,27 +391,40 @@ export function generateTrackSizeSchema(
   size: string,
   compatibleMachines: { make: string; model: string }[]
 ) {
+  // Use CollectionPage - track-size pages are compatibility/encyclopedia pages,
+  // NOT individual product offer pages. No pricing is visible on these pages.
   return {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${size} Rubber Tracks`,
-    description: `${size} rubber tracks compatible with ${compatibleMachines.slice(0, 5).map(m => `${m.make} ${m.model}`).join(", ")}${compatibleMachines.length > 5 ? ` and ${compatibleMachines.length - 5} more machines` : ""}.`,
+    "@type": "CollectionPage",
+    name: `${size} Rubber Tracks - Compatible Machines`,
+    description: `Find ${size} rubber tracks compatible with ${compatibleMachines.slice(0, 5).map(m => `${m.make} ${m.model}`).join(", ")}${compatibleMachines.length > 5 ? ` and ${compatibleMachines.length - 5} more machines` : ""}.`,
     url: `${SITE_URL}/track-size/${size.toLowerCase()}`,
-    category: "Rubber Tracks",
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: BUSINESS_INFO.name,
-      },
+    breadcrumb: generateBreadcrumbSchema([
+      { name: "Home", url: SITE_URL },
+      { name: "Track Sizes", url: `${SITE_URL}/track-size` },
+      { name: size, url: `${SITE_URL}/track-size/${size.toLowerCase()}` },
+    ]),
+    mainEntity: {
+      "@type": "ItemList",
+      name: `Machines Compatible with ${size} Rubber Tracks`,
+      numberOfItems: compatibleMachines.length,
+      itemListElement: compatibleMachines.slice(0, 20).map((m, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Vehicle",
+          name: `${m.make} ${m.model}`,
+          manufacturer: { "@type": "Organization", name: m.make },
+          model: m.model,
+          url: `${SITE_URL}/machines/${createMachineSlug(m.make, m.model)}`,
+        },
+      })),
     },
-    additionalProperty: compatibleMachines.slice(0, 10).map((m) => ({
-      "@type": "PropertyValue",
-      name: "Compatible Machine",
-      value: `${m.make} ${m.model}`,
-    })),
+    provider: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+    },
   };
 }
 

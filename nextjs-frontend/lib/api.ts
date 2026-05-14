@@ -481,9 +481,9 @@ export async function submitQuote(data: QuoteRequest): Promise<{ success: boolea
 // URL HELPERS
 // ============================================================================
 
-export function createMachineSlug(make: string, model: string): string {
-  return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
-}
+// Note: createMachineSlug is the canonical implementation in lib/url-utils.ts
+// Re-export for backward compatibility with existing imports
+export { createMachineSlug } from "./url-utils";
 
 export function parseMachineSlug(slug: string): { make: string; model: string } | null {
   // Common patterns: kubota-svl75, cat-259d, bobcat-t650

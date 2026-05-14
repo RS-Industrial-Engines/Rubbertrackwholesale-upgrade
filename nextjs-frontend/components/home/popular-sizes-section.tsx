@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ChevronRight, Package } from "lucide-react";
-import { getTop10TrackSizes } from "@/lib/data/seo-priorities";
-import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
+import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
+import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
 
 /**
  * Get sample machine names for a track size by looking up from full-machine-data.ts
@@ -34,7 +34,8 @@ function getSampleMachinesForSize(trackSize: string): string {
 }
 
 export function PopularSizesSection() {
-  const top10Sizes = getTop10TrackSizes();
+  const top10Sizes = TOP_SELLING_TRACK_SIZES.slice(0, 10);
+  const totalTrackSizes = fullTrackSizes.length;
   
   // Build the popular sizes array with machine lookups from full-machine-data.ts
   const popularSizes = top10Sizes.map(item => ({
@@ -66,7 +67,7 @@ export function PopularSizesSection() {
             href="/track-size"
             className="hidden sm:flex items-center gap-1 text-primary hover:underline font-medium"
           >
-            View All 35+ Sizes
+            View All {totalTrackSizes}+ Sizes
             <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
@@ -109,7 +110,7 @@ export function PopularSizesSection() {
           ))}
         </div>
 
-        {/* Sizes 7-10 in compact row */}
+        {/* Sizes 7-10 - same visual treatment as 1-6 */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
           {popularSizes.slice(6, 10).map((item) => (
             <Link
@@ -117,15 +118,21 @@ export function PopularSizesSection() {
               href={`/track-size/${item.size.toLowerCase()}`}
               className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all"
             >
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 flex items-center justify-center bg-muted text-muted-foreground text-xs font-bold rounded">
-                  #{item.rank}
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-5 h-5 flex items-center justify-center bg-primary text-primary-foreground text-xs font-bold rounded">
+                    #{item.rank}
+                  </span>
+                  <h3 className="text-lg font-bold text-primary group-hover:underline">
+                    {item.size}
+                  </h3>
+                </div>
+                <span className="px-2 py-0.5 text-xs font-medium bg-green-500/10 text-green-600 rounded whitespace-nowrap">
+                  In Stock
                 </span>
-                <h3 className="text-lg font-bold text-foreground group-hover:text-primary">
-                  {item.size}
-                </h3>
               </div>
               <p className="text-xs text-muted-foreground mt-2 line-clamp-1">
+                <span className="text-muted-foreground">Fits: </span>
                 {item.machines}
               </p>
             </Link>

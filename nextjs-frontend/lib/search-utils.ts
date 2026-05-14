@@ -223,12 +223,9 @@ export function buildCompatibilitySearchUrl(parsed: ParsedQuery): string {
   return `${API.compatibilitySearch}?${params.toString()}`;
 }
 
-/**
- * Create a machine slug for URL
- */
-export function createMachineSlug(make: string, model: string): string {
-  return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
-}
+// Note: createMachineSlug is exported from lib/url-utils.ts - use that instead
+// Re-export for backward compatibility
+export { createMachineSlug } from "./url-utils";
 
 /**
  * Format track size for display

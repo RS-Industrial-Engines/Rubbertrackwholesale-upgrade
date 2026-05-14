@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rubbertrackwholesale.com";
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -20,22 +20,8 @@ export default function robots(): MetadataRoute.Robots {
           "/*?*", // Block query parameter URLs (handled via canonical URLs)
         ],
       },
-      {
-        userAgent: "GPTBot",
-        disallow: ["/"],
-      },
-      {
-        userAgent: "ChatGPT-User",
-        disallow: ["/"],
-      },
-      {
-        userAgent: "CCBot",
-        disallow: ["/"],
-      },
-      {
-        userAgent: "anthropic-ai",
-        disallow: ["/"],
-      },
+      // Note: AI crawlers (GPTBot, ChatGPT-User, CCBot, anthropic-ai) are ALLOWED
+      // We want RubberTrackWholesale.com discoverable in AI-assisted search/answer systems
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
     host: BASE_URL,
