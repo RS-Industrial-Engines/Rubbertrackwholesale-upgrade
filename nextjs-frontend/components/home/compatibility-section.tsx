@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { API, fetcher } from "@/lib/api";
+import { createMachineSlug } from "@/lib/url-utils";
 import {
   brands as fallbackBrands,
   getModelsByBrand,
@@ -129,10 +130,6 @@ export function CompatibilitySection() {
 
     setSearchResults(results);
     setSearching(false);
-  };
-
-  const createMachineSlug = (make: string, model: string) => {
-    return `${make.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`;
   };
 
   return (

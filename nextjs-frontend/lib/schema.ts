@@ -208,11 +208,7 @@ export function generateProductSchema(product: Product) {
         name: BUSINESS_INFO.name,
       },
     },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "127",
-    },
+    // Note: aggregateRating removed - only add when visible reviews exist on page
   };
 }
 

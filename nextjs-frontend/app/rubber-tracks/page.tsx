@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Search,
   ArrowRight,
@@ -21,15 +22,20 @@ import {
   getSiteUrl,
 } from "@/lib/schema";
 import { BUSINESS_INFO, createMachineSlug } from "@/lib/url-utils";
-import { fullBrands, getMachinesForTrackSize } from "@/lib/data/full-machine-data";
+import { fullBrands, fullTrackSizes, getMachinesForTrackSize, fullMachineModels } from "@/lib/data/full-machine-data";
 import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
 
 const SITE_URL = getSiteUrl();
 
+// Dynamic stats from actual data
+const TOTAL_MACHINES = Object.values(fullMachineModels).reduce((acc, models) => acc + models.length, 0);
+const TOTAL_BRANDS = fullBrands.length;
+const TOTAL_TRACK_SIZES = fullTrackSizes.length;
+
 export const metadata: Metadata = {
-  title: "Rubber Track Compatibility Encyclopedia | 4,600+ Machines | Rubber Track Wholesale",
+  title: `Rubber Track Compatibility Encyclopedia | ${TOTAL_MACHINES.toLocaleString()}+ Machines | Rubber Track Wholesale`,
   description:
-    "Find rubber tracks for 4,600+ machines from 350+ brands. Search by machine model, track size, or browse our complete compatibility database. Houston warehouse with nationwide shipping.",
+    `Find rubber tracks for ${TOTAL_MACHINES.toLocaleString()}+ machines from ${TOTAL_BRANDS}+ brands. Search by machine model, track size, or browse our complete compatibility database. Houston warehouse with nationwide shipping.`,
   keywords: [
     "rubber tracks",
     "rubber track compatibility",
@@ -44,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rubber Track Compatibility Encyclopedia | Rubber Track Wholesale",
     description:
-      "Find rubber tracks for 4,600+ machines. Search by model or track size. Houston warehouse, nationwide shipping.",
+      `Find rubber tracks for ${TOTAL_MACHINES.toLocaleString()}+ machines. Search by model or track size. Houston warehouse, nationwide shipping.`,
     type: "website",
   },
   alternates: {
@@ -75,30 +81,35 @@ const TREAD_PATTERNS = [
     description: "Most versatile pattern. Excellent for mixed terrain - dirt, gravel, and light pavement.",
     bestFor: "General construction, landscaping, agriculture",
     icon: "C",
+    image: "/images/tread-patterns/c-pattern.jpg",
   },
   {
     name: "Block Pattern",
     description: "Flat, wide lugs provide maximum surface contact. Best for paved surfaces and turf.",
     bestFor: "Paving, turf work, indoor operations",
     icon: "B",
+    image: "/images/tread-patterns/block-pattern.jpg",
   },
   {
     name: "Z-Pattern (Zig-Zag)",
     description: "Aggressive pattern for maximum traction in loose material. Excellent self-cleaning.",
     bestFor: "Muddy conditions, sandy terrain, demolition",
     icon: "Z",
+    image: "/images/tread-patterns/z-pattern.jpg",
   },
   {
     name: "Multi-Bar",
     description: "Multiple narrow bars provide smooth ride and even weight distribution.",
     bestFor: "Sensitive surfaces, finished concrete, asphalt",
     icon: "M",
+    image: "/images/tread-patterns/multi-bar.jpg",
   },
   {
     name: "Staggered Block",
     description: "Offset block pattern combines traction with surface protection.",
     bestFor: "Mixed terrain, light paving, general use",
     icon: "S",
+    image: "/images/tread-patterns/staggered-block.jpg",
   },
 ];
 
@@ -165,8 +176,9 @@ export default async function RubberTracksPage() {
   });
 
   // Total stats
-  const totalBrands = fullBrands.length;
-  const totalMachines = 4631; // Known from full-machine-data.ts
+  const totalBrands = TOTAL_BRANDS;
+  const totalMachines = TOTAL_MACHINES;
+  const totalTrackSizes = TOTAL_TRACK_SIZES;
 
   return (
     <>
@@ -224,10 +236,10 @@ export default async function RubberTracksPage() {
                   <div className="text-2xl lg:text-3xl font-bold text-primary">{totalBrands}+</div>
                   <div className="text-sm text-muted-foreground">Equipment Brands</div>
                 </div>
-                <div className="bg-card border border-border rounded-lg p-4">
-                  <div className="text-2xl lg:text-3xl font-bold text-primary">35+</div>
-                  <div className="text-sm text-muted-foreground">Track Sizes</div>
-                </div>
+              <div className="bg-card border border-border rounded-lg p-4">
+                <div className="text-2xl lg:text-3xl font-bold text-primary">{totalTrackSizes}+</div>
+                <div className="text-sm text-muted-foreground">Track Sizes</div>
+              </div>
                 <div className="bg-card border border-border rounded-lg p-4">
                   <div className="text-2xl lg:text-3xl font-bold text-primary">Houston</div>
                   <div className="text-sm text-muted-foreground">In-Stock Warehouse</div>
@@ -388,29 +400,37 @@ export default async function RubberTracksPage() {
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {TREAD_PATTERNS.map((pattern) => (
-                <Card key={pattern.name} className="h-full">
-                  <CardHeader className="pb-2">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                        <span className="text-lg font-bold text-primary">{pattern.icon}</span>
+                {TREAD_PATTERNS.map((pattern) => (
+                  <Card key={pattern.name} className="h-full overflow-hidden">
+                    <div className="aspect-[4/3] relative bg-muted">
+                      <Image
+                        src={pattern.image}
+                        alt={`${pattern.name} rubber track tread pattern`}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <CardHeader className="pb-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                          <span className="text-lg font-bold text-primary">{pattern.icon}</span>
+                        </div>
+                        <CardTitle className="text-lg">{pattern.name}</CardTitle>
                       </div>
-                      <CardTitle className="text-lg">{pattern.name}</CardTitle>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground text-sm mb-3">
-                      {pattern.description}
-                    </p>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span className="text-sm">
-                        <span className="font-medium">Best for:</span> {pattern.bestFor}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground text-sm mb-3">
+                        {pattern.description}
+                      </p>
+                      <div className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        <span className="text-sm">
+                          <span className="font-medium">Best for:</span> {pattern.bestFor}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
             </div>
 
             <div className="mt-8 text-center">
