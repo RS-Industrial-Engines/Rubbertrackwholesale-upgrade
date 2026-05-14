@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Twitter, Linkedin, Star } from "lucide-react";
 import { BUSINESS_INFO } from "@/lib/url-utils";
 
 const quickLinks = [
@@ -126,6 +126,15 @@ export function Footer() {
                 <div>
                   <p>{BUSINESS_INFO.address.full}</p>
                   <p className="text-muted-foreground">Nationwide Shipping Available</p>
+                </div>
+              </li>
+              {/* Google Rating - visible to match LocalBusiness schema */}
+              <li className="flex items-center gap-2 mt-2 pt-2 border-t border-border">
+                <Star className="h-5 w-5 text-yellow-500 fill-yellow-500 shrink-0" />
+                <div className="flex items-center gap-1.5">
+                  <span className="font-semibold text-foreground">{BUSINESS_INFO.aggregateRating.ratingValue}</span>
+                  <span className="text-muted-foreground">Google rating from</span>
+                  <span className="font-medium text-foreground">{BUSINESS_INFO.aggregateRating.reviewCount} reviews</span>
                 </div>
               </li>
             </ul>

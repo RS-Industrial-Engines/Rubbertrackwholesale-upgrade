@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://rubbertrackwholesale.com"),
+  metadataBase: new URL("https://www.rubbertrackwholesale.com"),
   title: {
     default: "Rubber Tracks Houston | Wholesale Rubber Tracks & Undercarriage Parts | Rubber Track Wholesale",
     template: "%s | Rubber Track Wholesale",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     siteName: "Rubber Track Wholesale",
-    url: "https://rubbertrackwholesale.com",
+    url: "https://www.rubbertrackwholesale.com",
   },
   twitter: {
     card: "summary_large_image",

@@ -391,27 +391,40 @@ export function generateTrackSizeSchema(
   size: string,
   compatibleMachines: { make: string; model: string }[]
 ) {
+  // Use CollectionPage - track-size pages are compatibility/encyclopedia pages,
+  // NOT individual product offer pages. No pricing is visible on these pages.
   return {
     "@context": "https://schema.org",
-    "@type": "Product",
-    name: `${size} Rubber Tracks`,
-    description: `${size} rubber tracks compatible with ${compatibleMachines.slice(0, 5).map(m => `${m.make} ${m.model}`).join(", ")}${compatibleMachines.length > 5 ? ` and ${compatibleMachines.length - 5} more machines` : ""}.`,
+    "@type": "CollectionPage",
+    name: `${size} Rubber Tracks - Compatible Machines`,
+    description: `Find ${size} rubber tracks compatible with ${compatibleMachines.slice(0, 5).map(m => `${m.make} ${m.model}`).join(", ")}${compatibleMachines.length > 5 ? ` and ${compatibleMachines.length - 5} more machines` : ""}.`,
     url: `${SITE_URL}/track-size/${size.toLowerCase()}`,
-    category: "Rubber Tracks",
-    offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: BUSINESS_INFO.name,
-      },
+    breadcrumb: generateBreadcrumbSchema([
+      { name: "Home", url: SITE_URL },
+      { name: "Track Sizes", url: `${SITE_URL}/track-size` },
+      { name: size, url: `${SITE_URL}/track-size/${size.toLowerCase()}` },
+    ]),
+    mainEntity: {
+      "@type": "ItemList",
+      name: `Machines Compatible with ${size} Rubber Tracks`,
+      numberOfItems: compatibleMachines.length,
+      itemListElement: compatibleMachines.slice(0, 20).map((m, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Vehicle",
+          name: `${m.make} ${m.model}`,
+          manufacturer: { "@type": "Organization", name: m.make },
+          model: m.model,
+          url: `${SITE_URL}/machines/${createMachineSlug(m.make, m.model)}`,
+        },
+      })),
     },
-    additionalProperty: compatibleMachines.slice(0, 10).map((m) => ({
-      "@type": "PropertyValue",
-      name: "Compatible Machine",
-      value: `${m.make} ${m.model}`,
-    })),
+    provider: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      url: SITE_URL,
+    },
   };
 }
 
