@@ -292,7 +292,7 @@ export default async function RubberTracksPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {HIGH_PRIORITY_MACHINES.slice(0, 16).map((machine) => {
+              {HIGH_PRIORITY_MACHINES.slice(0, 20).map((machine) => {
                 const trackSizes = getTrackSizesForMachine(machine.brand, machine.model);
                 if (trackSizes.length === 0) return null;
                 const slug = createMachineSlug(machine.brand, machine.model);
