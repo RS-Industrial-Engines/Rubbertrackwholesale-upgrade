@@ -6,7 +6,7 @@ import { Search, ChevronRight, Wrench, Phone } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { MachineModel } from "@/lib/api";
-import { normalizeForMatching } from "@/lib/data/full-machine-data";
+import { normalizeForMatching, normalizeBrand } from "@/lib/data/full-machine-data";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 
 interface MachinesContentProps {
@@ -73,8 +73,10 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
     let filtered = machines;
 
     if (selectedBrand) {
+      // Use brand normalization to handle variations like CASE/Case/case, CAT/Caterpillar
+      const normalizedSelectedBrand = normalizeBrand(selectedBrand);
       filtered = filtered.filter(
-        (m) => m.make?.toLowerCase() === selectedBrand.toLowerCase()
+        (m) => normalizeBrand(m.make || '') === normalizedSelectedBrand
       );
     }
 

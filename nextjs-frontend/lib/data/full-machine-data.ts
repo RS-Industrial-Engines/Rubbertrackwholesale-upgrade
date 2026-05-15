@@ -52,6 +52,34 @@ export function resolveBrandAlias(brand: string): string[] {
   return BRAND_ALIASES[normalized] || [brand];
 }
 
+/**
+ * Normalize a brand name for comparison
+ * This handles variations like CASE/Case/case, CAT/Caterpillar, etc.
+ * Returns a canonical lowercase key that can be used for matching
+ */
+export function normalizeBrand(brand: string): string {
+  const lower = brand.toLowerCase().trim();
+  
+  // Map common variations to canonical form
+  const brandMap: Record<string, string> = {
+    'caterpillar': 'cat',
+    'cat': 'cat',
+    'case': 'case',
+    'john deere': 'john deere',
+    'deere': 'john deere',
+    'jd': 'john deere',
+    'new holland': 'new holland',
+    'nh': 'new holland',
+    'ditch witch': 'ditch witch',
+    'ditch-witch': 'ditch witch',
+    'dw': 'ditch witch',
+    'wacker neuson': 'wacker neuson',
+    'wacker': 'wacker neuson',
+  };
+  
+  return brandMap[lower] || lower;
+}
+
 // All machine models grouped by brand
 // Total: 4631 machines across 349 brands
 export const fullMachineModels: Record<string, string[]> = {
