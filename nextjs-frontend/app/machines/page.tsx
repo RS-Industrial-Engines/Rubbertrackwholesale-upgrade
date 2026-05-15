@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import type { MachineModel } from "@/lib/api";
 import { MachinesContent } from "@/components/machines/machines-content";
 import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
+import { createMachineSlug } from "@/lib/url-utils";
 import {
   fullMachineModels,
   fullMachineCompatibility,
@@ -78,7 +79,7 @@ export default async function MachinesPage() {
 
   const machineListItems = machines.slice(0, 50).map((machine, index) => ({
     name: `${machine.make} ${machine.model}`,
-    url: `${SITE_URL}/machines/${machine.make?.toLowerCase().replace(/\s+/g, "-")}-${machine.model?.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${SITE_URL}/machines/${createMachineSlug(machine.make || "", machine.model || "")}`,
     position: index + 1,
   }));
 
