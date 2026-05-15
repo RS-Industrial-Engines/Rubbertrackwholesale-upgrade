@@ -34,51 +34,47 @@ export const TOP_SELLING_TRACK_SIZES = [
  * Based on high-demand commercial machines from SEO clusters.
  */
 export const HIGH_PRIORITY_MACHINES = [
-  // ========== TOP PRIORITY: High-demand CTLs (what customers search) ==========
-  // Kubota SVL Series - extremely popular
-  { brand: "Kubota", model: "SVL 75" },
+  // ========== TOP 14 PRIORITY: Shared between homepage & /rubber-tracks ==========
+  // These 14 machines appear in exact order on both pages for consistency
+  // Order: Kubota SVL → CAT → Bobcat → John Deere → Mini Excavators
+  
+  // Kubota SVL Series (4)
   { brand: "Kubota", model: "SVL75-2" },
   { brand: "Kubota", model: "SVL75-3" },
-  { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL95-2" },
   { brand: "Kubota", model: "SVL97-2" },
   
-  // CAT 2-Series CTLs - high search volume
+  // CAT CTLs (4)
   { brand: "CAT", model: "259D" },
   { brand: "CAT", model: "259D3" },
   { brand: "CAT", model: "289D" },
-  { brand: "CAT", model: "299D" },
   { brand: "CAT", model: "299D2" },
-  { brand: "CAT", model: "299D3" },
   
-  // Bobcat T-Series - very popular
+  // Bobcat CTLs (2)
   { brand: "Bobcat", model: "T650" },
-  { brand: "Bobcat", model: "T630" },
   { brand: "Bobcat", model: "T770" },
-  { brand: "Bobcat", model: "T870" },
-  { brand: "Bobcat", model: "T590" },
-  { brand: "Bobcat", model: "T595" },
   
-  // John Deere CTLs
+  // John Deere CTLs (2)
   { brand: "John Deere", model: "325G" },
   { brand: "John Deere", model: "333G" },
-  { brand: "John Deere", model: "331G" },
   
-  // Takeuchi - strong commercial presence
-  { brand: "Takeuchi", model: "TL10V2" },
-  { brand: "Takeuchi", model: "TL12V2" },
-  
-  // ========== TOP MINI EXCAVATORS (fill grid, important SEO clusters) ==========
+  // Mini Excavators (2) - fill last row
   { brand: "Kubota", model: "KX121-3" },
   { brand: "Bobcat", model: "E35" },
   
-  // ========== SECONDARY PRIORITY: Additional CTLs ==========
+  // ========== SECONDARY PRIORITY: Additional high-demand machines ==========
+  // Kubota SVL variants
+  { brand: "Kubota", model: "SVL 75" },
+  { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL65-2" },
   { brand: "Kubota", model: "SVL75-2C" },
   { brand: "Kubota", model: "SVL 90" },
   { brand: "Kubota", model: "SVL90-2" },
   { brand: "Kubota", model: "SVL95-2S" },
   
+  // Additional CAT models
+  { brand: "CAT", model: "299D" },
+  { brand: "CAT", model: "299D3" },
   { brand: "CAT", model: "239D" },
   { brand: "CAT", model: "249D" },
   { brand: "CAT", model: "249D3" },
@@ -92,6 +88,11 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "CAT", model: "289D3" },
   { brand: "CAT", model: "299C" },
   
+  // Additional Bobcat models
+  { brand: "Bobcat", model: "T630" },
+  { brand: "Bobcat", model: "T870" },
+  { brand: "Bobcat", model: "T590" },
+  { brand: "Bobcat", model: "T595" },
   { brand: "Bobcat", model: "T180" },
   { brand: "Bobcat", model: "T190" },
   { brand: "Bobcat", model: "T200" },
@@ -100,6 +101,8 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Bobcat", model: "T740" },
   { brand: "Bobcat", model: "T830" },
   
+  // Additional John Deere models
+  { brand: "John Deere", model: "331G" },
   { brand: "John Deere", model: "317G" },
   { brand: "John Deere", model: "319E" },
   { brand: "John Deere", model: "323D" },
@@ -115,16 +118,17 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "John Deere", model: "CT333D" },
   { brand: "John Deere", model: "CT333E" },
   
+  // Takeuchi
+  { brand: "Takeuchi", model: "TL10V2" },
+  { brand: "Takeuchi", model: "TL12V2" },
   { brand: "Takeuchi", model: "TL6" },
   { brand: "Takeuchi", model: "TL8" },
   { brand: "Takeuchi", model: "TL10" },
   { brand: "Takeuchi", model: "TL12" },
   { brand: "Takeuchi", model: "TL12R2" },
   
-  // ========== TERTIARY: Mini Excavators (important but not top priority) ==========
+  // ========== TERTIARY: Mini Excavators ==========
   { brand: "Kubota", model: "KX040-4" },
-  // KX121-3 moved to TOP MINI EXCAVATORS section
-  // E35 moved to TOP MINI EXCAVATORS section
   
   { brand: "Kubota", model: "KX042-4" },
   { brand: "Kubota", model: "KX057-4" },

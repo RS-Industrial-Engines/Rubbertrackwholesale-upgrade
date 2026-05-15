@@ -1,38 +1,8 @@
 import Link from "next/link";
 import { ChevronRight, TrendingUp } from "lucide-react";
 import { createMachineSlug } from "@/lib/url-utils";
-import { TOP_SELLING_TRACK_SIZES } from "@/lib/data/seo-priorities";
+import { TOP_SELLING_TRACK_SIZES, HIGH_PRIORITY_MACHINES } from "@/lib/data/seo-priorities";
 import { getTrackSizesForMachine, fullMachineModels } from "@/lib/data/full-machine-data";
-
-/**
- * Priority machines for homepage display (simplified identifiers).
- * The actual model name is resolved from full-machine-data.ts using slug matching.
- */
-const PRIORITY_MACHINE_SPECS = [
-  // CTLs first - highest demand
-  { brand: "Kubota", searchModel: "SVL75-2", displayModel: "SVL75-2", category: "Compact Track Loader" },
-  { brand: "Kubota", searchModel: "SVL75-3", displayModel: "SVL75-3", category: "Compact Track Loader" },
-  { brand: "Kubota", searchModel: "SVL95-2", displayModel: "SVL95-2", category: "Compact Track Loader" },
-  { brand: "Kubota", searchModel: "SVL97-2", displayModel: "SVL97-2", category: "Compact Track Loader" },
-  
-  // CAT CTLs
-  { brand: "CAT", searchModel: "259D", displayModel: "259D", category: "Compact Track Loader" },
-  { brand: "CAT", searchModel: "259D3", displayModel: "259D3", category: "Compact Track Loader" },
-  { brand: "CAT", searchModel: "289D", displayModel: "289D", category: "Compact Track Loader" },
-  { brand: "CAT", searchModel: "299D2", displayModel: "299D2", category: "Compact Track Loader" },
-  
-  // Bobcat CTLs
-  { brand: "Bobcat", searchModel: "T650", displayModel: "T650", category: "Compact Track Loader" },
-  { brand: "Bobcat", searchModel: "T770", displayModel: "T770", category: "Compact Track Loader" },
-  
-  // John Deere CTLs
-  { brand: "John Deere", searchModel: "325G", displayModel: "325G", category: "Compact Track Loader" },
-  { brand: "John Deere", searchModel: "333G", displayModel: "333G", category: "Compact Track Loader" },
-  
-  // Mini Excavators - fill final row slots for SEO clusters
-  { brand: "Kubota", searchModel: "KX121-3", displayModel: "KX121-3", category: "Mini Excavator" },
-  { brand: "Bobcat", searchModel: "E35", displayModel: "E35", category: "Mini Excavator" },
-];
 
 /**
  * Resolve a priority machine to its actual full-machine-data.ts model name
@@ -57,21 +27,24 @@ interface PopularMachine {
   brand: string;
   model: string;
   displayModel: string;
-  category: string;
   trackSize: string;
   allTrackSizes: string[];
   hasMultipleSizes: boolean;
 }
 
 /**
- * Build the popular machines list with track sizes looked up from full-machine-data.ts
+ * Build the popular machines list with track sizes looked up from full-machine-data.ts.
+ * Uses first 14 from HIGH_PRIORITY_MACHINES (shared with /rubber-tracks page).
  */
 function getPopularMachinesWithTrackSizes(): PopularMachine[] {
   const results: PopularMachine[] = [];
   
-  for (const spec of PRIORITY_MACHINE_SPECS) {
+  // Take first 14 machines from HIGH_PRIORITY_MACHINES (the shared priority list)
+  const top14 = HIGH_PRIORITY_MACHINES.slice(0, 14);
+  
+  for (const spec of top14) {
     // Resolve the actual model name from full-machine-data.ts
-    const actualModel = resolveActualModel(spec.brand, spec.searchModel);
+    const actualModel = resolveActualModel(spec.brand, spec.model);
     
     if (!actualModel) {
       // Skip if model not found
@@ -93,8 +66,7 @@ function getPopularMachinesWithTrackSizes(): PopularMachine[] {
     results.push({
       brand: spec.brand,
       model: actualModel, // Use the actual model name for slug generation
-      displayModel: spec.displayModel,
-      category: spec.category,
+      displayModel: spec.model, // Use the original model name for display
       trackSize: primaryTrackSize,
       allTrackSizes: trackSizes,
       hasMultipleSizes,
@@ -149,9 +121,6 @@ export function PopularMachinesSection() {
                     {machine.brand} {machine.displayModel}
                   </h3>
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {machine.category}
-                </p>
                 <div className="mt-3 pt-3 border-t border-border">
                   <p className="text-sm font-medium text-foreground">
                     {machine.allTrackSizes.length === 1 ? (
