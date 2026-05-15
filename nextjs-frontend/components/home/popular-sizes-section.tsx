@@ -78,7 +78,7 @@ export function PopularSizesSection() {
             <Link
               key={item.size}
               href={`/track-size/${item.size.toLowerCase()}`}
-              className="group bg-card rounded-lg border border-border p-6 hover:border-primary hover:shadow-md transition-all"
+              className="group bg-card rounded-lg border border-border p-6 hover:border-primary hover:shadow-md transition-all flex flex-col"
             >
               <div className="flex items-start justify-between">
                 <div>
@@ -98,7 +98,7 @@ export function PopularSizesSection() {
                   In Stock
                 </span>
               </div>
-              <p className="text-sm text-foreground mt-4 pt-4 border-t border-border line-clamp-2">
+              <p className="text-sm text-foreground mt-4 pt-4 border-t border-border flex-grow">
                 <span className="text-muted-foreground">Fits: </span>
                 {item.machines}
               </p>
@@ -110,13 +110,13 @@ export function PopularSizesSection() {
           ))}
         </div>
 
-        {/* Sizes 7-10 - same structure as 1-6 for consistent height */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        {/* Sizes 7-10 - use same responsive pattern as top 6 for alignment */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
           {popularSizes.slice(6, 10).map((item) => (
             <Link
               key={item.size}
               href={`/track-size/${item.size.toLowerCase()}`}
-              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all flex flex-col h-full"
+              className="group bg-card rounded-lg border border-border p-4 hover:border-primary hover:shadow-md transition-all flex flex-col"
             >
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">

@@ -246,7 +246,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                 <div>
                   <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                     <span className="w-2 h-8 bg-primary rounded-full" />
-                    {exactMatches.length === 1 ? 'Exact Match' : 'Matching Machine Models'}
+                    Exact Machine Match
                     <span className="text-sm font-normal text-muted-foreground">
                       ({exactMatches.length})
                     </span>
@@ -285,7 +285,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                 <div>
                   <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                     <span className="w-2 h-8 bg-muted-foreground rounded-full" />
-                    {exactMatches.length > 0 ? 'Other Related Models' : 'Matching Machine Models'}
+                    {exactMatches.length > 0 ? 'Related Machine Models' : 'Other Matching Models'}
                     <span className="text-sm font-normal text-muted-foreground">
                       ({partialMatches.length})
                     </span>
