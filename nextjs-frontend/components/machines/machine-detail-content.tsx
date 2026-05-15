@@ -27,6 +27,10 @@ import {
 import type { CompatibilitySearchResult } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
+import {
+  getMachineComponentUrls,
+  COMPONENT_PLURAL_NAMES,
+} from "@/lib/data/undercarriage-data";
 
 interface RelatedMachine {
   make: string;
@@ -345,44 +349,46 @@ export function MachineDetailContent({
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                name: "Rubber Tracks",
-                href: "/rubber-tracks",
-                description: `Premium quality rubber tracks for ${make} ${model}`,
-                icon: Package,
-              },
-              {
-                name: "Bottom Rollers",
-                href: "/bottom-rollers",
-                description: "Track rollers to support and guide your tracks",
-                icon: Settings,
-              },
-              {
-                name: "Sprockets",
-                href: "/sprockets",
-                description: "Drive sprockets for optimal power transfer",
-                icon: Settings,
-              },
-              {
-                name: "Idlers",
-                href: "/idlers",
-                description: "Front idlers for proper track tension",
-                icon: Settings,
-              },
-            ].map((part) => (
-              <Card key={part.name} className="group hover:border-primary transition-colors h-full flex flex-col">
+            {/* Rubber Tracks - links to current machine page */}
+            <Card className="group hover:border-primary transition-colors h-full flex flex-col">
+              <CardContent className="p-6 flex flex-col h-full">
+                <Package className="h-10 w-10 text-primary mb-4" />
+                <h3 className="font-semibold text-lg mb-2 group-hover:text-primary">
+                  Rubber Tracks
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4 flex-grow">
+                  Premium quality rubber tracks for {make} {model}
+                </p>
+                <div className="flex flex-col gap-2 mt-auto">
+                  <Button variant="outline" size="sm" asChild className="w-full">
+                    <Link href="/rubber-tracks">Browse Rubber Tracks</Link>
+                  </Button>
+                  <Button size="sm" asChild className="w-full">
+                    <Link href={businessInfo.phoneTel}>
+                      <Phone className="h-3 w-3 mr-2" />
+                      Get Quote
+                    </Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+            
+            {/* Machine-specific undercarriage component links */}
+            {getMachineComponentUrls(make, model).map((componentLink) => (
+              <Card key={componentLink.component} className="group hover:border-primary transition-colors h-full flex flex-col">
                 <CardContent className="p-6 flex flex-col h-full">
-                  <part.icon className="h-10 w-10 text-primary mb-4" />
+                  <Settings className="h-10 w-10 text-primary mb-4" />
                   <h3 className="font-semibold text-lg mb-2 group-hover:text-primary">
-                    {part.name}
+                    {COMPONENT_PLURAL_NAMES[componentLink.component]}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-grow">
-                    {part.description}
+                    {make} {model} {componentLink.displayName.toLowerCase()} replacement
                   </p>
                   <div className="flex flex-col gap-2 mt-auto">
                     <Button variant="outline" size="sm" asChild className="w-full">
-                      <Link href={part.href}>Browse {part.name}</Link>
+                      <Link href={componentLink.url}>
+                        View {make} {model} {COMPONENT_PLURAL_NAMES[componentLink.component]}
+                      </Link>
                     </Button>
                     <Button size="sm" asChild className="w-full">
                       <Link href={businessInfo.phoneTel}>

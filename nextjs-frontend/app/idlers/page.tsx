@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { getProducts, getMachineModelBrands, Product } from "@/lib/api";
-import { CategoryPageContent } from "@/components/categories/category-page-content";
+import { UndercarriageCategoryPageContent } from "@/components/undercarriage/undercarriage-category-page-content";
 import {
   generateBreadcrumbSchema,
-  generateProductCollectionSchema,
   generateFAQPageSchema,
   getSiteUrl,
 } from "@/lib/schema";
@@ -13,7 +11,7 @@ const SITE_URL = getSiteUrl();
 export const metadata: Metadata = {
   title: "Idlers | Front Idlers | Undercarriage Parts | Houston TX",
   description:
-    "Shop front idlers for mini excavators, skid steers, and CTLs. Wholesale prices on idlers for Kubota, Cat, Bobcat, John Deere. Fast shipping from Houston.",
+    "Find replacement front idlers for your mini excavator, skid steer, or CTL. Browse by machine make and model. Wholesale prices from Houston warehouse with fast nationwide shipping.",
   keywords: [
     "idlers",
     "front idlers",
@@ -22,49 +20,61 @@ export const metadata: Metadata = {
     "Kubota idlers",
     "Cat idlers",
     "excavator idlers",
+    "Bobcat idlers",
   ],
+  alternates: {
+    canonical: `${SITE_URL}/idlers`,
+  },
   openGraph: {
     title: "Idlers | Rubber Track Wholesale",
     description:
       "Premium front idlers for all major equipment brands. Wholesale prices from Houston.",
     type: "website",
+    url: `${SITE_URL}/idlers`,
   },
 };
 
-export default async function IdlersPage() {
-  let products: Product[] = [];
-  let brands: string[] = [];
+const faqs = [
+  {
+    question: "What is a front idler?",
+    answer:
+      "The front idler (also called track idler) guides the track around the front of the undercarriage and helps maintain proper track tension. It works with the track adjuster to keep the track at the correct tension and absorbs impact from terrain and debris.",
+  },
+  {
+    question: "How do I know if my idler needs replacement?",
+    answer:
+      "Signs of a worn idler include track wandering or coming off, unusual wear patterns on the idler surface, bearing noise or grinding, oil leaks from seals, excessive track slack even after adjustment, and wobbling during operation.",
+  },
+  {
+    question: "Do you carry idlers for my machine?",
+    answer:
+      "We stock front idlers for all major brands including Kubota, Caterpillar, Bobcat, John Deere, Takeuchi, CASE, Komatsu, Hitachi, and more. Use the search above or browse by brand to find your machine.",
+  },
+  {
+    question: "What causes idler failure?",
+    answer:
+      "Idler failure is commonly caused by seal damage allowing contamination, excessive track tension, impact damage from debris, normal bearing wear, and operating in harsh conditions. Regular inspection and proper track tension help extend idler life.",
+  },
+  {
+    question: "Can I replace just the idler bearings?",
+    answer:
+      "In some cases idler bearings can be replaced separately, but complete idler assemblies are often more cost-effective and ensure proper seal integrity. Contact us with your machine details to discuss the best option.",
+  },
+];
 
-  try {
-    [products, brands] = await Promise.all([
-      getProducts({ category: "idlers" }),
-      getMachineModelBrands(),
-    ]);
-  } catch (error) {
-    console.error("Failed to fetch idlers:", error);
-  }
+const seoContent = {
+  heading: "Wholesale Front Idlers - Houston & Nationwide",
+  paragraphs: [
+    "Front idlers are essential for proper track tension and alignment. At Rubber Track Wholesale, we stock premium idlers for mini excavators, skid steers, and compact track loaders from all major manufacturers.",
+    "Our idlers feature precision bearings and high-quality seals for long service life in demanding conditions. We stock idlers for Kubota, Caterpillar, Bobcat, John Deere, Takeuchi, CASE, Komatsu, and all major brands at our Houston warehouse.",
+    "A properly functioning idler is critical for track life and machine performance. Worn or damaged idlers can cause premature track wear, track derailment, and alignment issues that affect productivity.",
+  ],
+};
 
+export default function IdlersPage() {
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
     { name: "Idlers", url: `${SITE_URL}/idlers` },
-  ];
-
-  const faqs = [
-    {
-      question: "What is a front idler?",
-      answer:
-        "The front idler guides the track at the front of the undercarriage and maintains proper track tension. It's a critical component that affects track alignment and wear.",
-    },
-    {
-      question: "How do I know if my idler needs replacement?",
-      answer:
-        "Signs of a worn idler include track misalignment, unusual wear patterns, bearing noise, and oil leaks from seals. Regular inspection during maintenance helps identify issues early.",
-    },
-    {
-      question: "Do you carry idlers for my machine?",
-      answer:
-        "We stock front idlers for all major brands including Kubota, Caterpillar, Bobcat, John Deere, Takeuchi, and more. Contact us with your machine model for availability and pricing.",
-    },
   ];
 
   return (
@@ -78,41 +88,13 @@ export default async function IdlersPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(
-            generateProductCollectionSchema(products, "Idlers")
-          ),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
           __html: JSON.stringify(generateFAQPageSchema(faqs)),
         }}
       />
-      <CategoryPageContent
-        title="Idlers"
-        subtitle="Track Guidance Components"
-        description="Premium front idlers at wholesale prices. Keep your tracks aligned and running true with quality idlers for all major equipment brands."
-        categorySlug="idlers"
-        products={products}
-        brands={brands}
+      <UndercarriageCategoryPageContent
+        componentType="idler"
         faqs={faqs}
-        seoContent={{
-          heading: "Wholesale Front Idlers - Houston & Nationwide",
-          paragraphs: [
-            "Front idlers are essential for proper track tension and alignment. At Rubber Track Wholesale, we stock premium idlers for mini excavators, skid steers, and compact track loaders from all major manufacturers.",
-            "Our idlers feature precision bearings and high-quality seals for long service life. We stock idlers for Kubota, Caterpillar, Bobcat, John Deere, Takeuchi, and all major brands at our Houston warehouse.",
-            "A properly functioning idler is critical for track life and machine performance. Worn or damaged idlers can cause premature track wear and alignment issues.",
-          ],
-        }}
-        popularMachines={[
-          { name: "Kubota SVL75", slug: "kubota-svl75" },
-          { name: "Cat 259D", slug: "cat-259d" },
-          { name: "Bobcat T650", slug: "bobcat-t650" },
-          { name: "John Deere 333G", slug: "john-deere-333g" },
-          { name: "Takeuchi TL12", slug: "takeuchi-tl12" },
-          { name: "Case TR320", slug: "case-tr320" },
-        ]}
+        seoContent={seoContent}
       />
     </>
   );

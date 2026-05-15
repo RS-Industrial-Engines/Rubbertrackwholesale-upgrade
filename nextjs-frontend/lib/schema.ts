@@ -492,6 +492,80 @@ export function combineSchemas(...schemas: object[]) {
 }
 
 // ============================================================================
+// UNDERCARRIAGE COMPONENT PAGE SCHEMA
+// ============================================================================
+
+export function generateUndercarriageComponentSchema(
+  brand: string,
+  model: string,
+  componentType: string,
+  componentDisplayName: string,
+  componentPluralName: string,
+  urlPath: string
+) {
+  const machineSlug = `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`.replace(/-+/g, "-");
+  const pageUrl = `${SITE_URL}/${urlPath}/${machineSlug}`;
+  
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${brand} ${model} ${componentDisplayName} Replacement`,
+    description: `Find replacement ${componentPluralName.toLowerCase()} for your ${brand} ${model}. Premium quality undercarriage components with wholesale pricing and fast shipping from Houston warehouse.`,
+    url: pageUrl,
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: SITE_URL,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: componentPluralName,
+          item: `${SITE_URL}/${urlPath}`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: `${brand} ${model}`,
+          item: pageUrl,
+        },
+      ],
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      name: `${brand} ${model} ${componentPluralName}`,
+      description: `Replacement ${componentPluralName.toLowerCase()} available for ${brand} ${model}`,
+      numberOfItems: 1,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: `${brand} ${model} ${componentDisplayName}`,
+          url: pageUrl,
+        },
+      ],
+    },
+    provider: {
+      "@type": "Organization",
+      name: BUSINESS_INFO.name,
+      telephone: BUSINESS_INFO.phoneSchema,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: BUSINESS_INFO.address.street,
+        addressLocality: BUSINESS_INFO.address.city,
+        addressRegion: BUSINESS_INFO.address.state,
+        postalCode: BUSINESS_INFO.address.zipCode,
+        addressCountry: BUSINESS_INFO.address.country,
+      },
+    },
+  };
+}
+
+// ============================================================================
 // SCRIPT TAG GENERATOR
 // ============================================================================
 
