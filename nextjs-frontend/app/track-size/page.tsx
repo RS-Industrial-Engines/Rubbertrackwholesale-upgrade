@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { getTrackSizes, getTrackSizesGrouped, TrackSize, TrackSizeGrouped } from "@/lib/api";
+import { TrackSize, TrackSizeGrouped } from "@/lib/api";
 import { TrackSizesContent } from "@/components/track-sizes/track-sizes-content";
 import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
-import { trackSizes as fallbackTrackSizesData } from "@/lib/data/machine-models";
+import { fullTrackSizes } from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -27,33 +27,44 @@ export const metadata: Metadata = {
   },
 };
 
-// Convert fallback data to API format
-function getFallbackTrackSizes(): TrackSize[] {
-  return fallbackTrackSizesData.map((ts, index) => ({
-    id: index + 1,
-    size: ts.size,
-    width: ts.width,
-    pitch: ts.pitch,
-    links: ts.links,
-    is_in_stock: true,
-  }));
+// Parse track size string into components (e.g., "400x86x52" -> {width: 400, pitch: 86, links: 52})
+function parseTrackSizeString(size: string): { width: number; pitch: number; links: number } | null {
+  // Handle formats like "400x86x52" or "300x52.5x80"
+  const match = size.match(/^(\d+)x([\d.]+)x(\d+)$/);
+  if (match) {
+    return {
+      width: parseInt(match[1]),
+      pitch: parseFloat(match[2]),
+      links: parseInt(match[3]),
+    };
+  }
+  return null;
 }
 
-function getFallbackTrackSizesGrouped(): TrackSizeGrouped[] {
+// Build track sizes from fullTrackSizes (PRIMARY source - 381+ track sizes)
+function getTrackSizesFromData(): TrackSize[] {
+  return fullTrackSizes.map((ts, index) => {
+    const parsed = parseTrackSizeString(ts);
+    return {
+      id: index + 1,
+      size: ts,
+      width: parsed?.width || 0,
+      pitch: parsed?.pitch || 0,
+      links: parsed?.links || 0,
+      is_in_stock: true,
+    };
+  });
+}
+
+function getTrackSizesGroupedFromData(): TrackSizeGrouped[] {
+  const trackSizes = getTrackSizesFromData();
   const grouped: Record<number, TrackSize[]> = {};
   
-  fallbackTrackSizesData.forEach((ts, index) => {
+  trackSizes.forEach((ts) => {
     if (!grouped[ts.width]) {
       grouped[ts.width] = [];
     }
-    grouped[ts.width].push({
-      id: index + 1,
-      size: ts.size,
-      width: ts.width,
-      pitch: ts.pitch,
-      links: ts.links,
-      is_in_stock: true,
-    });
+    grouped[ts.width].push(ts);
   });
 
   return Object.entries(grouped)
@@ -65,23 +76,9 @@ function getFallbackTrackSizesGrouped(): TrackSizeGrouped[] {
 }
 
 export default async function TrackSizesPage() {
-  let trackSizes: TrackSize[] = [];
-  let trackSizesGrouped: TrackSizeGrouped[] = [];
-
-  try {
-    const [apiTrackSizes, apiTrackSizesGrouped] = await Promise.all([
-      getTrackSizes(),
-      getTrackSizesGrouped(),
-    ]);
-    
-    // Use API data if available, otherwise fall back
-    trackSizes = apiTrackSizes && apiTrackSizes.length > 0 ? apiTrackSizes : getFallbackTrackSizes();
-    trackSizesGrouped = apiTrackSizesGrouped && apiTrackSizesGrouped.length > 0 ? apiTrackSizesGrouped : getFallbackTrackSizesGrouped();
-  } catch (error) {
-    console.error("Failed to fetch track sizes, using fallback data:", error);
-    trackSizes = getFallbackTrackSizes();
-    trackSizesGrouped = getFallbackTrackSizesGrouped();
-  }
+  // Use fullTrackSizes as PRIMARY source - no API calls
+  const trackSizes = getTrackSizesFromData();
+  const trackSizesGrouped = getTrackSizesGroupedFromData();
 
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },
