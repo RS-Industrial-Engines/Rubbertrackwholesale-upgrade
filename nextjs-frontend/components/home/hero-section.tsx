@@ -6,10 +6,8 @@ import Link from "next/link";
 import { Search, Phone, MapPin, Truck, Clock, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { API } from "@/lib/api";
 import {
   searchMachines,
-  getMachinesForTrackSize,
   isTrackSizeQuery,
   fullBrands,
   fullTrackSizes,
@@ -52,7 +50,7 @@ export function HeroSection() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Debounced search function
+  // Debounced search function - uses full-machine-data as PRIMARY source
   const performSearch = useCallback(async (query: string) => {
     if (!query.trim() || query.length < 2) {
       setSearchResults([]);
@@ -64,75 +62,31 @@ export function HeroSection() {
     const results: SearchResult[] = [];
 
     try {
-        // Check if it's a track size query
-        if (isTrackSizeQuery(query)) {
-          // Search for matching track sizes
-          const normalizedQuery = normalizeForMatching(query);
-          const matchingTrackSizes = fullTrackSizes.filter(ts => 
-            normalizeForMatching(ts).includes(normalizedQuery)
-          );
-          matchingTrackSizes.slice(0, 5).forEach((ts) => {
-            results.push({
-              type: "track-size",
-              size: ts,
-            });
+      // Check if it's a track size query
+      if (isTrackSizeQuery(query)) {
+        // Search for matching track sizes from full-machine-data (PRIMARY source)
+        const normalizedQuery = normalizeForMatching(query);
+        const matchingTrackSizes = fullTrackSizes.filter(ts => 
+          normalizeForMatching(ts).includes(normalizedQuery)
+        );
+        matchingTrackSizes.slice(0, 5).forEach((ts) => {
+          results.push({
+            type: "track-size",
+            size: ts,
           });
-        } else {
-          // Search for machines using the API first
-          try {
-            const params = new URLSearchParams();
-            // Try to extract brand and model from query
-            const queryLower = query.toLowerCase().trim();
-            
-            // Check if query starts with a known brand
-            const brandMatch = fullBrands.find(b => 
-              queryLower.startsWith(b.toLowerCase()) || 
-              queryLower.startsWith(b.toLowerCase().replace(/\s+/g, ''))
-            );
-            
-            if (brandMatch) {
-              params.set("make", brandMatch);
-              const modelPart = query.slice(brandMatch.length).trim();
-              if (modelPart) {
-                params.set("model", modelPart);
-              }
-            } else {
-              // Search model only
-              params.set("model", query);
-            }
-
-            const apiUrl = `${API.compatibilitySearch}?${params.toString()}`;
-            const response = await fetch(apiUrl);
-          
-          if (response.ok) {
-            const apiResults = await response.json();
-            if (Array.isArray(apiResults) && apiResults.length > 0) {
-              apiResults.slice(0, 10).forEach((item: { make?: string; model?: string; track_sizes?: string[] }) => {
-                results.push({
-                  type: "machine",
-                  make: item.make,
-                  model: item.model,
-                  trackSizes: item.track_sizes || [],
-                });
-              });
-            }
-          }
-        } catch {
-          // API failed, continue to fallback
-        }
-
-        // If no API results, use comprehensive fallback data with normalized search
-        if (results.length === 0) {
-          const machineResults = searchMachines(query);
-          machineResults.slice(0, 10).forEach((m) => {
-            results.push({
-              type: "machine",
-              make: m.brand,
-              model: m.model,
-              trackSizes: m.trackSizes,
-            });
+        });
+      } else {
+        // Search for machines using full-machine-data (PRIMARY source)
+        // This is the authoritative 4,631-machine dataset
+        const machineResults = searchMachines(query);
+        machineResults.slice(0, 10).forEach((m) => {
+          results.push({
+            type: "machine",
+            make: m.brand,
+            model: m.model,
+            trackSizes: m.trackSizes,
           });
-        }
+        });
 
         // Also check for track size matches in the query
         const normalizedQuery = normalizeForMatching(query);
@@ -147,7 +101,7 @@ export function HeroSection() {
         });
       }
     } catch {
-      // Fall back to comprehensive local search on any error
+      // Fallback - still use full-machine-data
       if (isTrackSizeQuery(query)) {
         const normalizedQuery = normalizeForMatching(query);
         const matchingTrackSizes = fullTrackSizes.filter(ts => 

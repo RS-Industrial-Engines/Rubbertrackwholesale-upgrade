@@ -1,17 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  getTrackSizes,
-  getCompatibilityByTrackSize,
   parseTrackSize,
-  TrackSize,
   MachineModel,
 } from "@/lib/api";
 import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-detail-content";
 import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
-import {
-  trackSizes as fallbackTrackSizesData,
-} from "@/lib/data/machine-models";
 import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
@@ -20,21 +14,46 @@ interface PageProps {
   params: Promise<{ size: string }>;
 }
 
-// Get fallback track size data
-function getFallbackTrackSizeData(size: string): TrackSize | null {
+// Track size data structure
+interface TrackSizeData {
+  id: number;
+  size: string;
+  width: number;
+  pitch: number;
+  links: number;
+  is_in_stock: boolean;
+}
+
+// Parse track size string into components (e.g., "400x86x52" -> {width: 400, pitch: 86, links: 52})
+function parseTrackSizeString(size: string): { width: number; pitch: number; links: number } | null {
   const normalizedSize = size.toLowerCase().replace(/\s+/g, "").replace(/-/g, "x");
-  const found = fallbackTrackSizesData.find(
-    (ts) => ts.size.toLowerCase().replace(/\s+/g, "") === normalizedSize
+  const match = normalizedSize.match(/^(\d+)x([\d.]+)x(\d+)$/);
+  if (match) {
+    return {
+      width: parseInt(match[1]),
+      pitch: parseFloat(match[2]),
+      links: parseInt(match[3]),
+    };
+  }
+  return null;
+}
+
+// Get track size data from fullTrackSizes (PRIMARY source)
+function getTrackSizeData(size: string): TrackSizeData | null {
+  const normalizedSize = size.toLowerCase().replace(/\s+/g, "").replace(/-/g, "x");
+  const found = fullTrackSizes.find(
+    (ts) => ts.toLowerCase().replace(/\s+/g, "") === normalizedSize
   );
   
   if (!found) return null;
   
+  const parsed = parseTrackSizeString(found);
   return {
     id: 1,
-    size: found.size,
-    width: found.width,
-    pitch: found.pitch,
-    links: found.links,
+    size: found,
+    width: parsed?.width || 0,
+    pitch: parsed?.pitch || 0,
+    links: parsed?.links || 0,
     is_in_stock: true,
   };
 }
@@ -92,41 +111,12 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
   const formattedSize = size.replace(/-/g, "x");
   const displaySize = formattedSize.toUpperCase();
 
-  // Parse dimensions
+  // Parse dimensions from URL
   const dimensions = parseTrackSize(formattedSize);
 
-  let trackSizeData: TrackSize | null = null;
-  let compatibleMachines: MachineModel[] = [];
-
-  try {
-    const apiTrackSizes = await getTrackSizes();
-    const found = apiTrackSizes?.find(
-      (t) => t.size.toLowerCase().replace(/\s+/g, "") === formattedSize.toLowerCase().replace(/\s+/g, "")
-    );
-    
-    trackSizeData = found || getFallbackTrackSizeData(formattedSize);
-
-    const apiCompatibleMachines = await getCompatibilityByTrackSize(formattedSize).catch(() => []);
-    
-    // ALWAYS use full-machine-data as primary source - it has complete compatibility data
-    // API results are supplementary and may be incomplete
-    compatibleMachines = getCompatibleMachinesFromData(formattedSize);
-    
-    // If API returns results that aren't in our data, merge them
-    if (apiCompatibleMachines && apiCompatibleMachines.length > 0) {
-      const existingKeys = new Set(compatibleMachines.map(m => `${m.make}|${m.model}`.toLowerCase()));
-      for (const apiMachine of apiCompatibleMachines) {
-        const key = `${apiMachine.make}|${apiMachine.model}`.toLowerCase();
-        if (!existingKeys.has(key)) {
-          compatibleMachines.push(apiMachine);
-        }
-      }
-    }
-  } catch (error) {
-    console.error("Failed to fetch track size data, using local data:", error);
-    trackSizeData = getFallbackTrackSizeData(formattedSize);
-    compatibleMachines = getCompatibleMachinesFromData(formattedSize);
-  }
+  // Use full-machine-data as PRIMARY source - no API calls
+  const trackSizeData = getTrackSizeData(formattedSize);
+  const compatibleMachines = getCompatibleMachinesFromData(formattedSize);
 
   // Allow page to render even without exact track size data if dimensions can be parsed
   if (!trackSizeData && !dimensions) {

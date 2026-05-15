@@ -195,10 +195,7 @@ export function generateArticleSchema(post: StaticBlogPost) {
       "@type": "Organization",
       name: BUSINESS_INFO.name,
       url: SITE_URL,
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/logo.png`,
-      },
+      // Note: logo omitted until /public/logo.png exists
     },
     mainEntityOfPage: {
       "@type": "WebPage",

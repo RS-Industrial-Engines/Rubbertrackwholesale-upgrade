@@ -9,7 +9,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   parseSearchQuery,
-  buildCompatibilitySearchUrl,
   formatTrackSizeDisplay,
   ParsedQuery,
 } from "@/lib/search-utils";
@@ -66,52 +65,17 @@ export function SearchContent() {
     const parsed = parseSearchQuery(searchQuery);
     setSearchState((prev) => ({ ...prev, loading: true, error: null, parsed }));
 
-    try {
-      // Build the correct API URL based on parsed query
-      const apiUrl = buildCompatibilitySearchUrl(parsed);
-      
-      const response = await fetch(apiUrl);
-      
-      if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const results: CompatibilityResult[] = Array.isArray(data) ? data : [];
-
-      if (results.length > 0) {
-        setSearchState({
-          loading: false,
-          error: null,
-          results,
-          parsed,
-          source: "api",
-        });
-        return;
-      }
-
-      // API returned empty, use fallback data
-      const fallbackResults = getFallbackResults(parsed);
-      setSearchState({
-        loading: false,
-        error: null,
-        results: fallbackResults,
-        parsed,
-        source: "fallback",
-      });
-    } catch (err) {
-      console.error("[v0] Search API error:", err);
-      
-      // Use fallback data on error
-      const fallbackResults = getFallbackResults(parsed);
-      setSearchState({
-        loading: false,
-        error: fallbackResults.length === 0 ? "No results found. Try a different search." : null,
-        results: fallbackResults,
-        parsed,
-        source: "fallback",
-      });
-    }
+    // Use full-machine-data as PRIMARY source - it has the complete 4,631-machine dataset
+    // API is NOT used because it may return incomplete data
+    const results = getFallbackResults(parsed);
+    
+    setSearchState({
+      loading: false,
+      error: results.length === 0 ? "No results found. Try a different search." : null,
+      results,
+      parsed,
+      source: "fallback", // Always using local data as primary
+    });
   }, []);
 
   // Run search when query changes
