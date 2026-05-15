@@ -23,6 +23,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import { getTrackSizesForMachine } from "@/lib/data/full-machine-data";
 import {
   UndercarriageComponent,
   COMPONENT_DISPLAY_NAMES,
@@ -145,6 +146,9 @@ export function MachineComponentDetailContent({
   const availableComponents = getUndercarriageComponents(brand, model);
   const otherComponents = availableComponents.filter((c) => c !== componentType);
   
+  // Get track sizes for this machine
+  const machineTrackSizes = getTrackSizesForMachine(brand, model);
+  
   // Generic component image path
   const componentImagePath = `/images/undercarriage/${componentType}-generic.jpg`;
 
@@ -175,10 +179,10 @@ export function MachineComponentDetailContent({
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <p className="text-primary font-semibold mb-2 uppercase tracking-wide">
-                {equipmentType} {displayName}
+                {pluralName} for {equipmentType}
               </p>
               <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-foreground mb-4 text-balance">
-                {brand} {model} {displayName} Replacement
+                {brand} {model} {pluralName}
               </h1>
               
               <p className="text-lg text-muted-foreground mb-6 text-pretty">
@@ -354,6 +358,49 @@ export function MachineComponentDetailContent({
           </div>
         </div>
       </section>
+
+      {/* Compatible Rubber Track Sizes Section */}
+      {machineTrackSizes.length > 0 && (
+        <section className="py-12 lg:py-16 border-b border-border">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
+              Compatible Rubber Track Sizes for {brand} {model}
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Find the correct rubber track size for your {brand} {model}. Always verify with your serial number for accurate fitment.
+            </p>
+            
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+              {machineTrackSizes.map((trackSize) => (
+                <Link
+                  key={trackSize}
+                  href={`/track-size/${trackSize.toLowerCase()}`}
+                  className="group"
+                >
+                  <Card className="hover:border-primary transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <span className="font-semibold text-lg group-hover:text-primary">
+                        {trackSize}
+                      </span>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        View details
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            
+            <div className="mt-6 text-center">
+              <Button variant="outline" asChild>
+                <Link href={`/machines/${slug}`}>
+                  View All {brand} {model} Rubber Track Options →
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Request Quote Form */}
       <section className="py-12 lg:py-16 border-b border-border">

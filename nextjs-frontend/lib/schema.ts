@@ -503,7 +503,7 @@ export function generateUndercarriageComponentSchema(
   componentPluralName: string,
   urlPath: string
 ) {
-  const machineSlug = `${brand.toLowerCase().replace(/\s+/g, "-")}-${model.toLowerCase().replace(/\s+/g, "-")}`.replace(/-+/g, "-");
+  const machineSlug = createMachineSlug(brand, model);
   const pageUrl = `${SITE_URL}/${urlPath}/${machineSlug}`;
   
   return {

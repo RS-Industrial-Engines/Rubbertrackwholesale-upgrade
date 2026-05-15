@@ -6,6 +6,7 @@ import {
 } from "@/lib/data/full-machine-data";
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
+import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
@@ -50,6 +51,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/carrier-rollers`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
     },
     {
       url: `${BASE_URL}/final-drives`,
@@ -146,11 +153,44 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Undercarriage component pages - machine-specific
+  // Bottom rollers, sprockets, idlers for ALL machines
+  // Carrier rollers ONLY when hasCarrierRoller() returns true
+  const undercarriagePages: MetadataRoute.Sitemap = [];
+  const componentTypes = ["bottom-rollers", "sprockets", "idlers"] as const;
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      
+      // Add bottom-rollers, sprockets, idlers for ALL machines
+      for (const componentType of componentTypes) {
+        undercarriagePages.push({
+          url: `${BASE_URL}/${componentType}/${slug}`,
+          lastModified: new Date(),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        });
+      }
+      
+      // Add carrier-rollers ONLY when verified
+      if (hasCarrierRoller(brand, model)) {
+        undercarriagePages.push({
+          url: `${BASE_URL}/carrier-rollers/${slug}`,
+          lastModified: new Date(),
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        });
+      }
+    }
+  }
+
   return [
     ...staticPages,
     ...blogPages,
     ...machinePages,
     ...trackSizePages,
     ...brandPages,
+    ...undercarriagePages,
   ];
 }

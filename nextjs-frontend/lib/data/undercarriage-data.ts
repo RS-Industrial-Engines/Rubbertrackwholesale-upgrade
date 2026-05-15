@@ -37,97 +37,47 @@ export const COMPONENT_URL_PATHS: Record<UndercarriageComponent, string> = {
 };
 
 // Machine undercarriage configuration
+// These fields exist for future CMS enrichment - blank fields are NOT rendered publicly
 export interface MachineUndercarriage {
   brand: string;
   model: string;
   has_carrier_roller: boolean;
-  // Future CMS fields (schema exists now, populated later):
-  // primary_part_number?: string;
-  // alternate_part_numbers?: string[];
-  // common_fitment_notes?: string;
-  // chassis_type?: string;
-  // mount_type?: string;
-  // serial_break_notes?: string;
-  // bolt_style?: string;
-  // flange_type?: string;
+  // CMS fields - populated when data is imported/verified
+  component_type?: string;
+  machine_brand?: string;
+  machine_model?: string;
+  primary_part_number?: string;
+  alternate_part_numbers?: string[];
+  common_fitment_notes?: string;
+  chassis_type?: string;
+  mount_type?: string;
+  serial_break_notes?: string;
+  bolt_style?: string;
+  flange_type?: string;
+  source_url?: string;
+  confidence_level?: "verified" | "inferred" | "unverified";
+  publish_part_page?: boolean;
+  seo_short_description?: string;
 }
 
 /**
  * Machines that have carrier rollers (top rollers).
  * Most CTLs and mini excavators do NOT have carrier rollers.
- * Only add machines here when confirmed they have carrier rollers.
  * 
- * Common machines WITH carrier rollers:
- * - Large excavators (20+ ton)
- * - Bulldozers
- * - Some larger CTLs
+ * IMPORTANT: Carrier roller pages are DISABLED by default.
+ * Only add machines here when CMS/data EXPLICITLY confirms they have carrier rollers.
+ * Do not guess or assume - this must be verified data.
+ * 
+ * For now, this list is EMPTY until verified carrier roller data is imported.
+ * The /carrier-rollers index page still exists for SEO, but no machine-specific
+ * pages will be generated until machines are verified.
  */
 const MACHINES_WITH_CARRIER_ROLLERS: Set<string> = new Set([
-  // Large CAT excavators
-  "cat-320",
-  "cat-320d",
-  "cat-320e",
-  "cat-325",
-  "cat-329",
-  "cat-330",
-  "cat-336",
-  "cat-349",
-  // Large Komatsu excavators
-  "komatsu-pc200",
-  "komatsu-pc210",
-  "komatsu-pc220",
-  "komatsu-pc240",
-  "komatsu-pc300",
-  "komatsu-pc350",
-  "komatsu-pc400",
-  // Large Hitachi excavators
-  "hitachi-zx200",
-  "hitachi-zx210",
-  "hitachi-zx225",
-  "hitachi-zx240",
-  "hitachi-zx250",
-  "hitachi-zx270",
-  "hitachi-zx350",
-  // Large Kobelco excavators
-  "kobelco-sk200",
-  "kobelco-sk210",
-  "kobelco-sk250",
-  "kobelco-sk350",
-  // Large John Deere excavators
-  "john-deere-200d",
-  "john-deere-210g",
-  "john-deere-225d",
-  "john-deere-240d",
-  "john-deere-250g",
-  "john-deere-350g",
-  // Large Volvo excavators
-  "volvo-ec200",
-  "volvo-ec210",
-  "volvo-ec220",
-  "volvo-ec250",
-  "volvo-ec300",
-  "volvo-ec350",
-  // Dozers
-  "cat-d3",
-  "cat-d4",
-  "cat-d5",
-  "cat-d6",
-  "cat-d7",
-  "cat-d8",
-  "cat-d9",
-  "komatsu-d31",
-  "komatsu-d37",
-  "komatsu-d39",
-  "komatsu-d51",
-  "komatsu-d61",
-  "komatsu-d65",
-  "komatsu-d85",
-  "john-deere-450",
-  "john-deere-550",
-  "john-deere-650",
-  "john-deere-700",
-  "john-deere-750",
-  "john-deere-850",
+  // DISABLED: No verified carrier roller data yet
+  // When CMS data is ready, add verified machine slugs here:
+  // "cat-320",
+  // "komatsu-pc200",
+  // etc.
 ]);
 
 /**

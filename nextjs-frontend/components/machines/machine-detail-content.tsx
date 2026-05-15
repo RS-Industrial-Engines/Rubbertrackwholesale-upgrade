@@ -387,7 +387,7 @@ export function MachineDetailContent({
                   <div className="flex flex-col gap-2 mt-auto">
                     <Button variant="outline" size="sm" asChild className="w-full">
                       <Link href={componentLink.url}>
-                        View {make} {model} {COMPONENT_PLURAL_NAMES[componentLink.component]}
+                        View {COMPONENT_PLURAL_NAMES[componentLink.component]}
                       </Link>
                     </Button>
                     <Button size="sm" asChild className="w-full">

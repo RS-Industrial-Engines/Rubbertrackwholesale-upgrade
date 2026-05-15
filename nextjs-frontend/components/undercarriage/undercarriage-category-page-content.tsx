@@ -21,7 +21,9 @@ import {
   getSortedBrandsForComponent,
   PRIORITY_BRANDS,
 } from "@/lib/data/undercarriage-data";
+import { normalizeBrand, normalizeForMatching } from "@/lib/data/full-machine-data";
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 interface UndercarriageCategoryPageContentProps {
   componentType: UndercarriageComponent;
@@ -38,6 +40,7 @@ export function UndercarriageCategoryPageContent({
   seoContent,
 }: UndercarriageCategoryPageContentProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
   const displayName = COMPONENT_DISPLAY_NAMES[componentType];
   const pluralName = COMPONENT_PLURAL_NAMES[componentType];
   const urlPath = COMPONENT_URL_PATHS[componentType];
@@ -46,21 +49,65 @@ export function UndercarriageCategoryPageContent({
   const machinesByBrand = useMemo(() => getMachinesGroupedByBrand(componentType), [componentType]);
   const sortedBrands = useMemo(() => getSortedBrandsForComponent(componentType), [componentType]);
   
-  // Filter machines based on search
+  // Build flat list of all machines for exact matching
+  const allMachines = useMemo(() => {
+    const machines: Array<{ brand: string; model: string; slug: string }> = [];
+    for (const brand of Object.keys(machinesByBrand)) {
+      for (const machine of machinesByBrand[brand]) {
+        machines.push({ brand, model: machine.model, slug: machine.slug });
+      }
+    }
+    return machines;
+  }, [machinesByBrand]);
+  
+  // Find exact machine match for search query (e.g., "Kubota SVL75" -> /bottom-rollers/kubota-svl75)
+  const exactMachineMatch = useMemo(() => {
+    if (!searchQuery.trim() || searchQuery.length < 3) return null;
+    
+    const query = normalizeForMatching(searchQuery);
+    
+    // Check for exact brand+model match
+    for (const machine of allMachines) {
+      const fullName = normalizeForMatching(`${machine.brand} ${machine.model}`);
+      const fullNameAlt = normalizeForMatching(`${machine.brand}${machine.model}`);
+      
+      if (fullName === query || fullNameAlt === query) {
+        return machine;
+      }
+    }
+    
+    // Check for model-only exact match (less common)
+    for (const machine of allMachines) {
+      const modelNorm = normalizeForMatching(machine.model);
+      if (modelNorm === query) {
+        return machine;
+      }
+    }
+    
+    return null;
+  }, [searchQuery, allMachines]);
+  
+  // Filter machines based on search - supports brand, model, brand+model
   const filteredBrands = useMemo(() => {
     if (!searchQuery.trim()) return sortedBrands;
     
-    const query = searchQuery.toLowerCase();
+    const query = normalizeForMatching(searchQuery);
+    const normalizedBrandQuery = normalizeBrand(searchQuery);
+    
     return sortedBrands.filter((brand) => {
-      // Check if brand matches
-      if (brand.toLowerCase().includes(query)) return true;
+      // Check if brand matches (with normalization for CAT/Caterpillar, CASE/Case, etc.)
+      const brandNorm = normalizeForMatching(brand);
+      const brandNormalized = normalizeBrand(brand);
+      
+      if (brandNorm.includes(query) || brandNormalized === normalizedBrandQuery) return true;
       
       // Check if any model matches
       const machines = machinesByBrand[brand] || [];
-      return machines.some((machine) => 
-        machine.model.toLowerCase().includes(query) ||
-        `${brand} ${machine.model}`.toLowerCase().includes(query)
-      );
+      return machines.some((machine) => {
+        const modelNorm = normalizeForMatching(machine.model);
+        const fullName = normalizeForMatching(`${brand} ${machine.model}`);
+        return modelNorm.includes(query) || fullName.includes(query);
+      });
     });
   }, [sortedBrands, machinesByBrand, searchQuery]);
   
@@ -69,15 +116,28 @@ export function UndercarriageCategoryPageContent({
     const machines = machinesByBrand[brand] || [];
     if (!searchQuery.trim()) return machines;
     
-    const query = searchQuery.toLowerCase();
+    const query = normalizeForMatching(searchQuery);
+    const brandNorm = normalizeForMatching(brand);
+    
     // If brand matches, show all machines
-    if (brand.toLowerCase().includes(query)) return machines;
+    if (brandNorm.includes(query) || normalizeBrand(brand) === normalizeBrand(searchQuery)) {
+      return machines;
+    }
     
     // Otherwise filter machines
-    return machines.filter((machine) =>
-      machine.model.toLowerCase().includes(query) ||
-      `${brand} ${machine.model}`.toLowerCase().includes(query)
-    );
+    return machines.filter((machine) => {
+      const modelNorm = normalizeForMatching(machine.model);
+      const fullName = normalizeForMatching(`${brand} ${machine.model}`);
+      return modelNorm.includes(query) || fullName.includes(query);
+    });
+  };
+  
+  // Handle search form submission - navigate to exact match if found
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (exactMachineMatch) {
+      router.push(`/${urlPath}/${exactMachineMatch.slug}`);
+    }
   };
   
   // Count total machines
@@ -113,16 +173,30 @@ export function UndercarriageCategoryPageContent({
             </p>
             
             {/* Search */}
-            <div className="relative max-w-xl">
+            <form onSubmit={handleSearchSubmit} className="relative max-w-xl">
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder={`Search machines (e.g., "Kubota SVL75", "Cat 259D")`}
+                placeholder={`Search machines (e.g., "Kubota SVL75", "CAT 259D")`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 h-14 text-lg"
               />
-            </div>
+              {exactMachineMatch && (
+                <div className="absolute top-full left-0 right-0 mt-2 p-3 bg-card border border-border rounded-lg shadow-lg z-10">
+                  <p className="text-sm text-muted-foreground mb-2">Exact match found:</p>
+                  <Link
+                    href={`/${urlPath}/${exactMachineMatch.slug}`}
+                    className="flex items-center justify-between p-3 bg-primary/5 hover:bg-primary/10 rounded-md transition-colors"
+                  >
+                    <span className="font-semibold">
+                      {exactMachineMatch.brand} {exactMachineMatch.model} {pluralName}
+                    </span>
+                    <ChevronRight className="h-4 w-4 text-primary" />
+                  </Link>
+                </div>
+              )}
+            </form>
             
             {/* Stats */}
             <div className="flex flex-wrap gap-6 mt-8">
