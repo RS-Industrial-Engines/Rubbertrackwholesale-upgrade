@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getMachineModels, getMachineModelBrands, MachineModel } from "@/lib/api";
+import type { MachineModel } from "@/lib/api";
 import { MachinesContent } from "@/components/machines/machines-content";
 import { generateBreadcrumbSchema, generateItemListSchema, getSiteUrl } from "@/lib/schema";
 import {
@@ -63,23 +63,13 @@ function getSortedBrands(): string[] {
 }
 
 export default async function MachinesPage() {
-  let machines: MachineModel[] = [];
-  let brands: string[] = [];
+  // ALWAYS use full-machine-data.ts as PRIMARY source
+  // It has complete 4,631-machine data that API may not have
+  const machines: MachineModel[] = getFullMachines();
+  const brands: string[] = getSortedBrands();
 
-  try {
-    const [apiMachines, apiBrands] = await Promise.all([
-      getMachineModels(),
-      getMachineModelBrands(),
-    ]);
-    
-    // Use API data if available AND has data, otherwise use comprehensive fallback
-    machines = apiMachines && apiMachines.length > 0 ? apiMachines : getFullMachines();
-    brands = apiBrands && apiBrands.length > 0 ? apiBrands : getSortedBrands();
-  } catch (error) {
-    console.error("Failed to fetch machines, using comprehensive data:", error);
-    machines = getFullMachines();
-    brands = getSortedBrands();
-  }
+  // Note: API data is NOT used here - it may be incomplete
+  // full-machine-data.ts is the authoritative source
 
   const breadcrumbs = [
     { name: "Home", url: SITE_URL },

@@ -12,7 +12,7 @@ import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchem
 import {
   trackSizes as fallbackTrackSizesData,
 } from "@/lib/data/machine-models";
-import { getMachinesForTrackSize } from "@/lib/data/full-machine-data";
+import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -80,20 +80,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 export async function generateStaticParams() {
-  try {
-    const trackSizes = await getTrackSizes();
-    if (trackSizes && trackSizes.length > 0) {
-      return trackSizes.slice(0, 50).map((track) => ({
-        size: track.size.toLowerCase().replace(/\s+/g, "-"),
-      }));
-    }
-  } catch {
-    // Fall back to local data
-  }
-  
-  // Generate from fallback data
-  return fallbackTrackSizesData.slice(0, 50).map((track) => ({
-    size: track.size.toLowerCase().replace(/\s+/g, "-"),
+  // Use fullTrackSizes as PRIMARY source - it has all 381+ track sizes
+  // Do NOT use API or old machine-models.ts fallback
+  return fullTrackSizes.map((size) => ({
+    size: size.toLowerCase().replace(/\s+/g, "-"),
   }));
 }
 

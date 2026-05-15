@@ -22,7 +22,7 @@ export function generateOrganizationSchema() {
     "@type": "Organization",
     name: BUSINESS_INFO.name,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.png`,
+    // Note: logo field omitted until /public/logo.png exists
     description:
       "Premier wholesale supplier of rubber tracks and undercarriage parts for construction equipment. Houston-based with nationwide shipping.",
     address: {
@@ -67,7 +67,7 @@ export function generateLocalBusinessSchema() {
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}/#localbusiness`,
     name: BUSINESS_INFO.name,
-    image: `${SITE_URL}/warehouse.jpg`,
+    // Note: image field omitted until /public/warehouse.jpg exists
     description:
       "Houston's largest rubber track and undercarriage parts warehouse. Same-day pickup available. Serving contractors, rental companies, and equipment dealers nationwide.",
     address: {

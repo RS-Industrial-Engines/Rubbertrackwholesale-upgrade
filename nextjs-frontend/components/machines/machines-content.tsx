@@ -86,6 +86,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
     const queryLower = searchQuery.toLowerCase().trim();
     
     const exact: MachineModel[] = [];
+    const related: MachineModel[] = [];
     const partial: MachineModel[] = [];
     
     filtered.forEach((m) => {
@@ -94,21 +95,23 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
       const normalizedFull = normalizeForMatching(`${m.make} ${m.model}`);
       const modelLower = (m.model || '').toLowerCase();
       
-      // Check for exact model match (e.g., "249D" matches "249D" exactly)
-      // Also check if model starts with query (e.g., "249" matches "249D", "249D3")
-      const isExactModelMatch = modelLower === queryLower || 
-                                normalizedModel === normalizedQuery;
+      // EXACT MATCH ONLY: normalized model equals normalized query exactly
+      // e.g., "249D" matches "249D" but NOT "249D3"
+      const isExactModelMatch = normalizedModel === normalizedQuery;
       
-      // Check if this is a close variant (model starts with query or vice versa)
-      const isCloseMatch = modelLower.startsWith(queryLower) || 
-                           queryLower.startsWith(modelLower.replace(/[^a-z0-9]/g, ''));
+      // RELATED MATCH: model starts with query (close variants)
+      // e.g., "249D" query shows "249D3" as related, not exact
+      const isRelatedMatch = !isExactModelMatch && (
+        modelLower.startsWith(queryLower) || 
+        normalizedModel.startsWith(normalizedQuery)
+      );
       
       if (isExactModelMatch) {
-        // Perfect match - put at very top
-        exact.unshift(m);
-      } else if (isCloseMatch) {
-        // Close variant - put in exact matches but after perfect matches
+        // Perfect match - this is THE model the user searched for
         exact.push(m);
+      } else if (isRelatedMatch) {
+        // Close variant - put in related section
+        related.push(m);
       } else if (
         normalizedMake.includes(normalizedQuery) ||
         normalizedModel.includes(normalizedQuery) ||
@@ -119,7 +122,8 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
       }
     });
 
-    return { exactMatches: exact, partialMatches: partial };
+    // Exact matches shown first, then related variants in partial section
+    return { exactMatches: exact, partialMatches: [...related, ...partial] };
   }, [machines, selectedBrand, searchQuery]);
 
   // Combined filtered machines for grouping
