@@ -189,7 +189,7 @@ export default function BrandDetailContent({
       <section className="py-12 lg:py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-8">
-            {brand} Models ({filteredModels.length})
+            {brand} Rubber Tracks by Machine Model ({filteredModels.length})
           </h2>
 
           {groupedModels.length > 0 ? (
