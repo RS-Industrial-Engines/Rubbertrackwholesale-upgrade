@@ -40,6 +40,34 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
   const [selectedBrand, setSelectedBrand] = useState<string | null>(null);
   const [showAllBrands, setShowAllBrands] = useState(false);
 
+  // Handle search input - auto-clear brand filter if search contains a different brand
+  const handleSearchChange = (value: string) => {
+    setSearchQuery(value);
+    
+    // If user types a brand+model query, check if it conflicts with selected filter
+    if (value.trim() && selectedBrand) {
+      const queryParts = value.trim().toLowerCase().split(/\s+/);
+      const queryBrand = queryParts[0];
+      const normalizedQueryBrand = normalizeBrand(queryBrand);
+      const normalizedSelectedBrand = normalizeBrand(selectedBrand);
+      
+      // If query starts with a different brand, clear the filter
+      // e.g., user selected "Bobcat" but types "John Deere 333G"
+      if (queryParts.length >= 2) {
+        // Check if the query looks like a brand search
+        const matchesDifferentBrand = brands.some(brand => {
+          const brandNormalized = normalizeBrand(brand);
+          return (brand.toLowerCase().startsWith(queryBrand) || brandNormalized === normalizedQueryBrand) &&
+                 brandNormalized !== normalizedSelectedBrand;
+        });
+        
+        if (matchesDifferentBrand) {
+          setSelectedBrand(null);
+        }
+      }
+    }
+  };
+
   // Sort brands: popular first, then alphabetically
   const sortedBrands = useMemo(() => {
     const popular: string[] = [];
@@ -170,7 +198,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                 type="text"
                 placeholder="Search by make or model (e.g., Kubota SVL75, Cat 259D)..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="pl-12 h-14 text-lg bg-card border-border"
               />
             </div>

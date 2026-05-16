@@ -156,31 +156,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Undercarriage component pages - machine-specific
   // Bottom rollers, sprockets, idlers for ALL machines
   // Carrier rollers ONLY when hasCarrierRoller() returns true
+  // Uses Sets to prevent duplicate URLs
   const undercarriagePages: MetadataRoute.Sitemap = [];
+  const seenUndercarriageSlugs = new Set<string>();
   const componentTypes = ["bottom-rollers", "sprockets", "idlers"] as const;
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
       const slug = createMachineSlug(brand, model);
       
-      // Add bottom-rollers, sprockets, idlers for ALL machines
+      // Add bottom-rollers, sprockets, idlers for ALL machines (deduped)
       for (const componentType of componentTypes) {
-        undercarriagePages.push({
-          url: `${BASE_URL}/${componentType}/${slug}`,
-          lastModified: new Date(),
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        });
+        const key = `${componentType}/${slug}`;
+        if (!seenUndercarriageSlugs.has(key)) {
+          seenUndercarriageSlugs.add(key);
+          undercarriagePages.push({
+            url: `${BASE_URL}/${componentType}/${slug}`,
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+          });
+        }
       }
       
-      // Add carrier-rollers ONLY when verified
+      // Add carrier-rollers ONLY when verified (deduped)
       if (hasCarrierRoller(brand, model)) {
-        undercarriagePages.push({
-          url: `${BASE_URL}/carrier-rollers/${slug}`,
-          lastModified: new Date(),
-          changeFrequency: "monthly" as const,
-          priority: 0.6,
-        });
+        const carrierKey = `carrier-rollers/${slug}`;
+        if (!seenUndercarriageSlugs.has(carrierKey)) {
+          seenUndercarriageSlugs.add(carrierKey);
+          undercarriagePages.push({
+            url: `${BASE_URL}/carrier-rollers/${slug}`,
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.6,
+          });
+        }
       }
     }
   }

@@ -12,6 +12,88 @@ import { createMachineSlug } from "../url-utils";
 // Component types
 export type UndercarriageComponent = "bottom-roller" | "sprocket" | "idler" | "carrier-roller";
 
+// Equipment type classification based on model naming patterns
+export type EquipmentType = 
+  | "Compact Track Loader"
+  | "Mini Excavator"
+  | "Skid Steer"
+  | "Directional Drill"
+  | "Crawler Carrier"
+  | "Tracked Dumper"
+  | "Excavator"
+  | "Dozer"
+  | "Tracked Equipment"; // Neutral fallback
+
+/**
+ * Infer equipment type from brand and model
+ * Uses OEM naming patterns - returns neutral "Tracked Equipment" if unknown
+ */
+export function inferEquipmentType(brand: string, model: string): EquipmentType {
+  const modelUpper = model.toUpperCase();
+  const brandUpper = brand.toUpperCase();
+  
+  // Mini Excavator patterns
+  // Kubota: KX, U series; CAT: 3xx (small); Bobcat: E series; Takeuchi: TB; etc.
+  if (/^KX\d/i.test(model) || /^U\d/i.test(model)) return "Mini Excavator";
+  if (/^E\d{2,3}$/i.test(model)) return "Mini Excavator"; // Bobcat E32, E35, E85
+  if (/^TB\d/i.test(model)) return "Mini Excavator"; // Takeuchi TB
+  if (/^SK\d{2,3}SR/i.test(model)) return "Mini Excavator"; // Kobelco SK55SR, etc.
+  if (/^ZX\d{2,3}U/i.test(model)) return "Mini Excavator"; // Hitachi mini
+  if (/^PC\d{2,3}MR/i.test(model)) return "Mini Excavator"; // Komatsu mini
+  if (/^SV\d{2}/i.test(model)) return "Mini Excavator"; // Yanmar SV series
+  if (/^VIO\d/i.test(model)) return "Mini Excavator"; // Yanmar VIO
+  if (/^35G|50G|60G|75G|85G/i.test(model) && brandUpper === "JOHN DEERE") return "Mini Excavator";
+  if (/^301|302|303|304|305|306|307|308|309/i.test(model) && brandUpper.includes("CAT")) return "Mini Excavator";
+  
+  // Compact Track Loader (CTL) patterns
+  // Kubota: SVL series; CAT: 2xxD; Bobcat: T series; Takeuchi: TL; etc.
+  if (/^SVL\d/i.test(model)) return "Compact Track Loader";
+  if (/^T\d{3}/i.test(model) && brandUpper === "BOBCAT") return "Compact Track Loader"; // Bobcat T450, T650, T770
+  if (/^T\d{2}$/i.test(model) && brandUpper === "BOBCAT") return "Compact Track Loader"; // Bobcat T66, T76, T86
+  if (/^TL\d/i.test(model)) return "Compact Track Loader"; // Takeuchi TL
+  if (/^\d{3}D$/i.test(model) && brandUpper.includes("CAT")) return "Compact Track Loader"; // CAT 239D, 249D, 259D, 299D
+  if (/^TR\d{3}/i.test(model)) return "Compact Track Loader"; // CASE TR320, TR310
+  if (/^TV\d{3}/i.test(model)) return "Compact Track Loader"; // New Holland TV380
+  if (/^PT\d/i.test(model)) return "Compact Track Loader"; // Terex PT
+  if (/^RT\d/i.test(model) && brandUpper === "ASV") return "Compact Track Loader";
+  if (/^CTL\d/i.test(model)) return "Compact Track Loader";
+  if (/^333G|331G|329G|325G|323E|317G/i.test(model) && brandUpper === "JOHN DEERE") return "Compact Track Loader";
+  if (/^C\d{3}/i.test(model) && brandUpper === "NEW HOLLAND") return "Compact Track Loader"; // New Holland C175, C227
+  
+  // Skid Steer patterns
+  if (/^S\d{3}/i.test(model) && brandUpper === "BOBCAT") return "Skid Steer"; // Bobcat S570, S650
+  if (/^SR\d{3}/i.test(model)) return "Skid Steer"; // CASE SR200, SR175
+  if (/^L\d{3}/i.test(model) && brandUpper === "NEW HOLLAND") return "Skid Steer"; // New Holland L218
+  if (/^226D|232D|236D|242D|246D|262D|272D/i.test(model)) return "Skid Steer"; // CAT skid steers
+  
+  // Directional Drill patterns
+  if (/^JT\d/i.test(model)) return "Directional Drill"; // Ditch Witch JT series
+  if (/^D\d{2,3}x\d/i.test(model)) return "Directional Drill"; // Vermeer D20x22, etc.
+  
+  // Large Excavator patterns (20+ ton)
+  if (/^PC[2-9]\d{2}/i.test(model) && !modelUpper.includes("MR")) return "Excavator"; // Komatsu PC200+
+  if (/^ZX[2-9]\d{2}/i.test(model) && !modelUpper.includes("U")) return "Excavator"; // Hitachi ZX200+
+  if (/^SK[2-9]\d{2}/i.test(model) && !modelUpper.includes("SR")) return "Excavator"; // Kobelco SK200+
+  if (/^EC[2-9]\d{2}/i.test(model)) return "Excavator"; // Volvo EC200+
+  if (/^320|325|329|330|336|345|349|352|390/i.test(model) && brandUpper.includes("CAT")) return "Excavator";
+  
+  // Dozer patterns
+  if (/^D[3-9]$/i.test(model) && brandUpper.includes("CAT")) return "Dozer"; // CAT D3-D9
+  if (/^D[3-9][KNTLMHX]/i.test(model)) return "Dozer"; // CAT D6N, D6T, etc.
+  if (/^D[3-9]\d{1,2}/i.test(model) && brandUpper === "KOMATSU") return "Dozer"; // Komatsu D31, D65, etc.
+  if (/^450|550|650|700|750|850/i.test(model) && brandUpper === "JOHN DEERE") return "Dozer";
+  
+  // Crawler Carrier / Tracked Dumper
+  if (/^MST/i.test(model)) return "Crawler Carrier"; // Morooka MST
+  if (/^CD\d/i.test(model)) return "Tracked Dumper";
+  
+  // Default - neutral wording
+  return "Tracked Equipment";
+}
+
+// Component types
+export type UndercarriageComponent = "bottom-roller" | "sprocket" | "idler" | "carrier-roller";
+
 // Component display names
 export const COMPONENT_DISPLAY_NAMES: Record<UndercarriageComponent, string> = {
   "bottom-roller": "Bottom Roller",
@@ -113,14 +195,23 @@ export function getUndercarriageComponents(brand: string, model: string): Underc
 }
 
 /**
- * Get all machines for a specific component type
+ * Get all machines for a specific component type (deduped by slug)
  * For carrier rollers, only returns machines that have them
  */
 export function getAllMachinesForComponent(component: UndercarriageComponent): Array<{ brand: string; model: string; slug: string }> {
   const machines: Array<{ brand: string; model: string; slug: string }> = [];
+  const seenSlugs = new Set<string>();
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      
+      // Dedupe by slug
+      if (seenSlugs.has(slug)) {
+        continue;
+      }
+      seenSlugs.add(slug);
+      
       // For carrier rollers, only include machines that have them
       if (component === "carrier-roller" && !hasCarrierRoller(brand, model)) {
         continue;
@@ -129,7 +220,7 @@ export function getAllMachinesForComponent(component: UndercarriageComponent): A
       machines.push({
         brand,
         model,
-        slug: createMachineSlug(brand, model),
+        slug,
       });
     }
   }

@@ -3,18 +3,21 @@
 import { useMemo } from "react";
 import useSWR from "swr";
 import Link from "next/link";
-import { ArrowRight, Search } from "lucide-react";
+import { ArrowRight, Search, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { API, fetcher, type Brand } from "@/lib/api";
+import { API, fetcher, type Brand, type MachineModel } from "@/lib/api";
 import {
   fullMachineModels,
   fullBrands,
   popularBrands as POPULAR_BRANDS,
   getBrandStats,
+  normalizeBrand,
+  normalizeForMatching,
 } from "@/lib/data/full-machine-data";
+import { createMachineSlug } from "@/lib/url-utils";
 
 // Convert full brand list to Brand objects with model counts
 function getFullBrands(): Brand[] {
@@ -71,15 +74,73 @@ export function BrandsContent() {
     return [...popular, ...other];
   }, [brands]);
 
+  // Search for machines when query contains brand + model
+  const matchedMachines = useMemo(() => {
+    if (!searchQuery.trim() || searchQuery.trim().split(/\s+/).length < 2) {
+      return [];
+    }
+    
+    const normalizedQuery = normalizeForMatching(searchQuery);
+    const queryParts = searchQuery.trim().toLowerCase().split(/\s+/);
+    const matches: MachineModel[] = [];
+    
+    // Check if first word is a brand (with normalization)
+    const potentialBrand = queryParts[0];
+    const normalizedPotentialBrand = normalizeBrand(potentialBrand);
+    
+    for (const [brand, models] of Object.entries(fullMachineModels)) {
+      // Check if brand matches (with normalization for CAT/Caterpillar, CASE/Case, etc.)
+      const brandNormalized = normalizeBrand(brand);
+      const brandMatches = brandNormalized === normalizedPotentialBrand || 
+                          brand.toLowerCase().startsWith(potentialBrand);
+      
+      if (!brandMatches) continue;
+      
+      // If brand matches, look for model match in remaining query
+      const modelQuery = queryParts.slice(1).join(" ");
+      const normalizedModelQuery = normalizeForMatching(modelQuery);
+      
+      for (const model of models) {
+        const normalizedModel = normalizeForMatching(model);
+        
+        // Check for exact or partial model match
+        if (normalizedModel === normalizedModelQuery || 
+            normalizedModel.startsWith(normalizedModelQuery) ||
+            normalizedModel.includes(normalizedModelQuery)) {
+          matches.push({
+            id: matches.length,
+            make: brand,
+            model: model,
+            track_sizes: [],
+          });
+          
+          // Limit results
+          if (matches.length >= 5) break;
+        }
+      }
+      
+      if (matches.length >= 5) break;
+    }
+    
+    return matches;
+  }, [searchQuery]);
+
   // Filter brands by search query
   const filteredBrands = useMemo(() => {
     if (!searchQuery.trim()) {
       return sortedBrands;
     }
     const query = searchQuery.toLowerCase();
-    return sortedBrands.filter((brand) =>
-      brand.name.toLowerCase().includes(query)
-    );
+    // Also try normalized brand search (Caterpillar -> CAT, etc.)
+    const normalizedSearchBrand = normalizeBrand(query.split(/\s+/)[0]);
+    
+    return sortedBrands.filter((brand) => {
+      const brandLower = brand.name.toLowerCase();
+      const brandNormalized = normalizeBrand(brand.name);
+      return brandLower.includes(query) || 
+             brandNormalized === normalizedSearchBrand ||
+             brandLower.startsWith(query.split(/\s+/)[0]);
+    });
   }, [sortedBrands, searchQuery]);
 
   // Separate into popular and other for display
@@ -114,7 +175,7 @@ export function BrandsContent() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="text"
-                placeholder="Search brands..."
+                placeholder="Search brands or machines (e.g., Kubota KX040)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-12 h-12 bg-card border-border"
@@ -130,44 +191,84 @@ export function BrandsContent() {
             <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
             <p className="text-muted-foreground">Loading brands...</p>
           </div>
-        ) : filteredBrands.length > 0 ? (
+        ) : (
           <div className="space-y-12">
-            {/* Popular Brands Section */}
-            {popularBrandsList.length > 0 && (
+            {/* Machine matches from brand + model search */}
+            {matchedMachines.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
                   <span className="w-2 h-8 bg-primary rounded-full" />
-                  Popular Brands
+                  Machine Results
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {popularBrandsList.map((brand) => (
-                    <BrandCard key={brand.id} brand={brand} />
-                  ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {matchedMachines.map((machine) => {
+                    const slug = createMachineSlug(machine.make || "", machine.model || "");
+                    return (
+                      <Link
+                        key={slug}
+                        href={`/machines/${slug}`}
+                        className="group flex items-center justify-between p-4 bg-card rounded-lg border-2 border-primary hover:shadow-lg transition-all"
+                      >
+                        <div>
+                          <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                            {machine.make} {machine.model}
+                          </h3>
+                          <span className="text-xs text-primary mt-1 block">
+                            View Tracks & Parts
+                          </span>
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-primary transition-colors" />
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             )}
+            
+            {/* Show brands if any match or if no machine matches */}
+            {(filteredBrands.length > 0 || matchedMachines.length === 0) && (
+              <>
+                {/* Popular Brands Section */}
+                {popularBrandsList.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                      <span className="w-2 h-8 bg-primary rounded-full" />
+                      {searchQuery ? 'Matching Brands' : 'Popular Brands'}
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                      {popularBrandsList.map((brand) => (
+                        <BrandCard key={brand.id} brand={brand} />
+                      ))}
+                    </div>
+                  </div>
+                )}
 
-            {/* Other Brands Section */}
-            {otherBrandsList.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
-                  <span className="w-2 h-8 bg-muted-foreground rounded-full" />
-                  All Brands ({otherBrandsList.length})
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {otherBrandsList.map((brand) => (
-                    <BrandCard key={brand.id} brand={brand} />
-                  ))}
-                </div>
-              </div>
+                {/* Other Brands Section */}
+                {otherBrandsList.length > 0 && (
+                  <div>
+                    <h2 className="text-2xl font-bold text-foreground mb-6 flex items-center gap-3">
+                      <span className="w-2 h-8 bg-muted-foreground rounded-full" />
+                      {searchQuery ? `Other Matching Brands (${otherBrandsList.length})` : `All Brands (${otherBrandsList.length})`}
+                    </h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                      {otherBrandsList.map((brand) => (
+                        <BrandCard key={brand.id} brand={brand} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {/* No results */}
+                {filteredBrands.length === 0 && matchedMachines.length === 0 && (
+                  <div className="text-center py-16">
+                    <p className="text-muted-foreground mb-4">
+                      No brands or machines found matching &quot;{searchQuery}&quot;
+                    </p>
+                    <Button onClick={() => setSearchQuery("")}>Clear Search</Button>
+                  </div>
+                )}
+              </>
             )}
-          </div>
-        ) : (
-          <div className="text-center py-16">
-            <p className="text-muted-foreground mb-4">
-              No brands found matching &quot;{searchQuery}&quot;
-            </p>
-            <Button onClick={() => setSearchQuery("")}>Clear Search</Button>
           </div>
         )}
 

@@ -9,6 +9,7 @@ import {
   COMPONENT_DISPLAY_NAMES,
   COMPONENT_PLURAL_NAMES,
   COMPONENT_URL_PATHS,
+  inferEquipmentType,
 } from "@/lib/data/undercarriage-data";
 
 const COMPONENT_TYPE = "sprocket" as const;
@@ -18,15 +19,18 @@ interface PageProps {
   params: Promise<{ "machine-slug": string }>;
 }
 
-// Generate static params for all machines
+// Generate static params for all machines (deduped)
 export async function generateStaticParams() {
   const params: { "machine-slug": string }[] = [];
+  const seenSlugs = new Set<string>();
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
-      params.push({
-        "machine-slug": createMachineSlug(brand, model),
-      });
+      const slug = createMachineSlug(brand, model);
+      if (!seenSlugs.has(slug)) {
+        seenSlugs.add(slug);
+        params.push({ "machine-slug": slug });
+      }
     }
   }
   
@@ -105,6 +109,9 @@ export default async function SprocketMachinePage({ params }: PageProps) {
   const pluralName = COMPONENT_PLURAL_NAMES[COMPONENT_TYPE];
   const urlPath = COMPONENT_URL_PATHS[COMPONENT_TYPE];
   
+  // Infer equipment type (e.g., "Compact Track Loader", "Mini Excavator")
+  const equipmentType = inferEquipmentType(brand, model);
+  
   // Get track sizes for this machine
   const trackSizes = getTrackSizesForMachine(brand, model);
   
@@ -136,6 +143,7 @@ export default async function SprocketMachinePage({ params }: PageProps) {
         brand={brand}
         model={model}
         componentType={COMPONENT_TYPE}
+        equipmentType={equipmentType}
         trackSizes={trackSizes}
       />
     </>
