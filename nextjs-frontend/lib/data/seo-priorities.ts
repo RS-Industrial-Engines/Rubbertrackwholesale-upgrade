@@ -34,11 +34,12 @@ export const TOP_SELLING_TRACK_SIZES = [
  * Based on high-demand commercial machines from SEO clusters.
  */
 export const HIGH_PRIORITY_MACHINES = [
-  // ========== TOP 14 PRIORITY: Shared between homepage & /rubber-tracks ==========
-  // These 14 machines appear in exact order on both pages for consistency
+  // ========== TOP 15 PRIORITY: Shared between homepage & /rubber-tracks ==========
+  // These 15 machines appear in exact order on both pages for consistency
   // Order: Kubota SVL → CAT → Bobcat → John Deere → Mini Excavators
   
-  // Kubota SVL Series (4)
+  // Kubota SVL Series (5)
+  { brand: "Kubota", model: "SVL75" },
   { brand: "Kubota", model: "SVL75-2" },
   { brand: "Kubota", model: "SVL75-3" },
   { brand: "Kubota", model: "SVL95-2" },
@@ -63,8 +64,7 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Bobcat", model: "E35" },
   
   // ========== SECONDARY PRIORITY: Additional high-demand machines ==========
-  // Kubota SVL variants
-  { brand: "Kubota", model: "SVL 75" },
+  // Kubota SVL variants (SVL75 already in top priority, so skip it here)
   { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL65-2" },
   { brand: "Kubota", model: "SVL75-2C" },

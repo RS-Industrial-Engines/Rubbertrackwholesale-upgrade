@@ -20,8 +20,28 @@ export default function robots(): MetadataRoute.Robots {
           "/*?*", // Block query parameter URLs (handled via canonical URLs)
         ],
       },
-      // Note: AI crawlers (GPTBot, ChatGPT-User, CCBot, anthropic-ai) are ALLOWED
-      // We want RubberTrackWholesale.com discoverable in AI-assisted search/answer systems
+      // Explicitly ALLOW AI crawlers - we want RubberTrackWholesale.com discoverable
+      // in AI-assisted search and answer systems (ChatGPT, Claude, Perplexity, etc.)
+      {
+        userAgent: "GPTBot",
+        allow: "/",
+      },
+      {
+        userAgent: "ChatGPT-User",
+        allow: "/",
+      },
+      {
+        userAgent: "anthropic-ai",
+        allow: "/",
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+      },
+      {
+        userAgent: "PerplexityBot",
+        allow: "/",
+      },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,
     host: BASE_URL,

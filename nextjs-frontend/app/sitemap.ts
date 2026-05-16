@@ -6,17 +6,29 @@ import {
 } from "@/lib/data/full-machine-data";
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
+import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
+import { getSitemapPartSlugs } from "@/lib/data/verified-parts-data";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
 /**
- * Generate sitemap for the entire site.
- * Uses full-machine-data.ts as the authoritative source for all machine/track/brand URLs.
+ * SITEMAP GOVERNANCE RULES:
+ * ========================
+ * 1. Machine/component pages are PRIMARY SEO entities (priority 0.8-0.9)
+ * 2. Part pages are SECONDARY detail pages (priority 0.6-0.7)
+ * 3. Only published + indexed pages enter sitemap
+ * 4. Staged/draft/unverified pages EXCLUDED
+ * 5. Duplicates and canonicalized pages EXCLUDED
  * 
- * NO old fallback imports.
- * NO URLs with parentheses.
- * NO duplicate URLs.
- * NO admin routes.
+ * PRIORITY HIERARCHY:
+ * - 1.0: Homepage
+ * - 0.9: Category hubs (/rubber-tracks, /machines, /track-size, /brands)
+ * - 0.8: Component category pages (/bottom-rollers, /sprockets, /idlers)
+ * - 0.8: Machine-component pages (PRIMARY SEO) (/bottom-rollers/kubota-svl75)
+ * - 0.7: Track size pages (/track-size/400x86x52)
+ * - 0.7: Brand pages (/brands/kubota)
+ * - 0.6: Part detail pages (SECONDARY) (/parts/kubota-v0511-25104)
+ * - 0.5: Blog posts
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages - high priority core pages
@@ -52,6 +64,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
+      url: `${BASE_URL}/carrier-rollers`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/final-drives`,
       lastModified: new Date(),
       changeFrequency: "weekly",
@@ -71,6 +89,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/brands`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/parts`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -146,11 +170,65 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Undercarriage component pages - machine-specific
+  // Bottom rollers, sprockets, idlers for ALL machines
+  // Carrier rollers ONLY when hasCarrierRoller() returns true
+  // Uses Sets to prevent duplicate URLs
+  const undercarriagePages: MetadataRoute.Sitemap = [];
+  const seenUndercarriageSlugs = new Set<string>();
+  const componentTypes = ["bottom-rollers", "sprockets", "idlers"] as const;
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      
+      // Add bottom-rollers, sprockets, idlers for ALL machines (deduped)
+      // PRIORITY 0.8: Machine/component pages are PRIMARY SEO entities
+      for (const componentType of componentTypes) {
+        const key = `${componentType}/${slug}`;
+        if (!seenUndercarriageSlugs.has(key)) {
+          seenUndercarriageSlugs.add(key);
+          undercarriagePages.push({
+            url: `${BASE_URL}/${componentType}/${slug}`,
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.8, // PRIMARY SEO - same as machine pages
+          });
+        }
+      }
+      
+      // Add carrier-rollers ONLY when verified (deduped)
+      if (hasCarrierRoller(brand, model)) {
+        const carrierKey = `carrier-rollers/${slug}`;
+        if (!seenUndercarriageSlugs.has(carrierKey)) {
+          seenUndercarriageSlugs.add(carrierKey);
+          undercarriagePages.push({
+            url: `${BASE_URL}/carrier-rollers/${slug}`,
+            lastModified: new Date(),
+            changeFrequency: "monthly" as const,
+            priority: 0.8, // PRIMARY SEO - same as machine pages
+          });
+        }
+      }
+    }
+  }
+
+  // Verified parts pages (SECONDARY SEO - lower priority than machine pages)
+  // GOVERNANCE: Only includes published + indexed parts per getSitemapPartSlugs()
+  const verifiedPartPages: MetadataRoute.Sitemap = getSitemapPartSlugs().map((slug) => ({
+    url: `${BASE_URL}/parts/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6, // SECONDARY priority - machine pages are PRIMARY at 0.8
+  }));
+
   return [
     ...staticPages,
     ...blogPages,
     ...machinePages,
     ...trackSizePages,
     ...brandPages,
+    ...undercarriagePages,
+    ...verifiedPartPages,
   ];
 }

@@ -7,6 +7,7 @@ import {
 import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-detail-content";
 import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
 import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
+import { inferEquipmentType } from "@/lib/data/undercarriage-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -66,7 +67,7 @@ function getCompatibleMachinesFromData(size: string): MachineModel[] {
     id: i + 1,
     make: m.brand,
     model: m.model,
-    equipment_type: "Compact Track Loader",
+    equipment_type: inferEquipmentType(m.brand, m.model), // Use proper equipment type inference
   }));
 }
 

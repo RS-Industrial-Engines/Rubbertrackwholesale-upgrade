@@ -17,6 +17,8 @@ interface RequestQuoteFormProps {
   machineModel?: string;
   /** Pre-fill track size if known */
   trackSize?: string;
+  /** Pre-fill part number if known */
+  partNumber?: string;
   /** Pre-fill category (rubber-tracks, bottom-rollers, etc.) */
   category?: string;
   /** Source page for tracking */
@@ -42,6 +44,7 @@ export default function RequestQuoteForm({
   machineBrand = "",
   machineModel = "",
   trackSize = "",
+  partNumber = "",
   category = "",
   sourcePage = "",
   title = "Request a Quote",
@@ -56,7 +59,7 @@ export default function RequestQuoteForm({
     machineBrand,
     machineModel,
     trackSize,
-    partNumber: "",
+    partNumber,
     quantity: "",
     message: "",
     partsNeeded: category ? [category] : [] as string[],

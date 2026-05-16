@@ -8,7 +8,9 @@ import {
   fullMachineCompatibility,
   fullBrands,
   popularBrands,
+  cleanModelForDisplay,
 } from "@/lib/data/full-machine-data";
+import { inferEquipmentType } from "@/lib/data/undercarriage-data";
 
 const SITE_URL = getSiteUrl();
 
@@ -43,11 +45,15 @@ function getFullMachines(): MachineModel[] {
     for (const model of models) {
       const key = `${brand}|${model}`;
       const trackSizes = fullMachineCompatibility[key] || [];
+      // Use inferEquipmentType for accurate classification
+      const equipmentType = inferEquipmentType(brand, model);
+      // Use clean model name for display
+      const cleanModel = cleanModelForDisplay(model);
       machines.push({
         id: id++,
         make: brand,
-        model: model,
-        equipment_type: "Compact Track Loader",
+        model: cleanModel,
+        equipment_type: equipmentType,
         track_sizes: trackSizes,
       });
     }
