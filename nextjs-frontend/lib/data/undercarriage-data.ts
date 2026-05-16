@@ -91,9 +91,6 @@ export function inferEquipmentType(brand: string, model: string): EquipmentType 
   return "Tracked Equipment";
 }
 
-// Component types
-export type UndercarriageComponent = "bottom-roller" | "sprocket" | "idler" | "carrier-roller";
-
 // Component display names
 export const COMPONENT_DISPLAY_NAMES: Record<UndercarriageComponent, string> = {
   "bottom-roller": "Bottom Roller",

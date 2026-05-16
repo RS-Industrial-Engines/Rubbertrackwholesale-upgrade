@@ -273,7 +273,7 @@ Source Page: ${sourcePage || window.location.href}
                   <Checkbox
                     id={part.id}
                     checked={formData.partsNeeded.includes(part.id)}
-                    onCheckedChange={() => handlePartToggle(part.id)}
+                    onChange={() => handlePartToggle(part.id)}
                   />
                   <span className="text-foreground text-sm font-medium">{part.label}</span>
                 </label>
