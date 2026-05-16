@@ -79,15 +79,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       index: false,
       follow: false,
     },
-    // Show canonical as it WOULD appear if published
-    alternates: {
-      canonical: `${SITE_URL}/parts/${slug}`,
-    },
+    // DO NOT emit a real canonical to /parts/{slug} while row is staged.
+    // Proposed canonical is shown only in the visible SEO Audit Panel for QA.
     openGraph: {
       title: h1,
       description: metaDescription,
       type: "website",
-      url: `${SITE_URL}/parts/${slug}`,
     },
   };
 }
