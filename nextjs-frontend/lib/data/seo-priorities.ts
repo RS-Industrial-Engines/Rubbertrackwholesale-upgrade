@@ -64,8 +64,7 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Bobcat", model: "E35" },
   
   // ========== SECONDARY PRIORITY: Additional high-demand machines ==========
-  // Kubota SVL variants
-  { brand: "Kubota", model: "SVL 75" },
+  // Kubota SVL variants (SVL75 already in top priority, so skip it here)
   { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL65-2" },
   { brand: "Kubota", model: "SVL75-2C" },
