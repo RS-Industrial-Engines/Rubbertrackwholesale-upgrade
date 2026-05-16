@@ -5,22 +5,42 @@ import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
 
 export interface CheckboxProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  checked?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, ...props }, ref) => {
-    const [checked, setChecked] = React.useState(props.defaultChecked || false);
+  ({ className, checked: controlledChecked, onChange, defaultChecked, ...props }, ref) => {
+    // Support both controlled and uncontrolled modes
+    const [internalChecked, setInternalChecked] = React.useState(defaultChecked || false);
+    const isControlled = controlledChecked !== undefined;
+    const isChecked = isControlled ? controlledChecked : internalChecked;
+    
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    React.useImperativeHandle(ref, () => inputRef.current!);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!isControlled) {
+        setInternalChecked(e.target.checked);
+      }
+      onChange?.(e);
+    };
+    
+    const handleDivClick = () => {
+      // Trigger click on the hidden input to properly fire onChange
+      if (inputRef.current) {
+        inputRef.current.click();
+      }
+    };
 
     return (
       <div className="relative inline-flex items-center">
         <input
           type="checkbox"
-          ref={ref}
-          checked={checked}
-          onChange={(e) => {
-            setChecked(e.target.checked);
-            props.onChange?.(e);
-          }}
+          ref={inputRef}
+          checked={isChecked}
+          onChange={handleChange}
           className="sr-only peer"
           {...props}
         />
@@ -33,9 +53,9 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             "cursor-pointer flex items-center justify-center",
             className
           )}
-          onClick={() => setChecked(!checked)}
+          onClick={handleDivClick}
         >
-          {checked && <Check className="h-3 w-3 text-primary-foreground" />}
+          {isChecked && <Check className="h-3 w-3 text-primary-foreground" />}
         </div>
       </div>
     );

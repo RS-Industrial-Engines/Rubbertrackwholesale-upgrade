@@ -132,7 +132,7 @@ export function MachineComponentDetailContent({
   brand,
   model,
   componentType,
-  equipmentType = "Compact Track Loader",
+  equipmentType = "Tracked Equipment", // Neutral default - never assume CTL
   trackSizes = [],
 }: MachineComponentDetailContentProps) {
   const slug = createMachineSlug(brand, model);
