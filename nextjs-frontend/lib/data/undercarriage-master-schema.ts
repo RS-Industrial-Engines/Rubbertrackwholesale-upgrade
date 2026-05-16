@@ -193,21 +193,58 @@ export interface MasterUndercarriagePart {
   /** Date last modified */
   date_modified: string;
   
-  // ========== SEO FIELDS (Auto-Generated) ==========
-  /** URL slug (auto-generated if empty) */
+  // ========== SEO FIELDS (Auto-Generated with Manual Override Support) ==========
+  /** URL slug (auto-generated if empty, MANUAL OVERRIDE supported) */
   slug: string;
   
-  /** SEO title (auto-generated from template if empty) */
+  /** SEO title (auto-generated from template if empty, MANUAL OVERRIDE for high-value pages) */
   seo_title: string;
   
-  /** H1 heading (auto-generated from template if empty) */
+  /** H1 heading (auto-generated from template if empty, MANUAL OVERRIDE supported) */
   seo_h1: string;
   
-  /** Meta description (auto-generated from template if empty) */
+  /** H2 subheading (MANUAL OVERRIDE only - for high-value pages) */
+  seo_h2?: string;
+  
+  /** Meta description (auto-generated from template if empty, MANUAL OVERRIDE supported) */
   meta_description: string;
   
-  /** Canonical URL type preference */
+  /** Canonical URL type preference - MACHINE pages remain primary SEO entities */
   canonical_type: "part" | "machine";
+  
+  /** Breadcrumb label override (for cleaner breadcrumb display) */
+  breadcrumb_label?: string;
+  
+  /** Page intro/lede paragraph (MANUAL OVERRIDE for unique content) */
+  page_intro?: string;
+  
+  /** Custom fitment notes for display (MANUAL OVERRIDE) */
+  custom_fitment_notes?: string;
+  
+  // ========== CONTENT DEPTH FIELDS (For Semantic Authority) ==========
+  /** Wear patterns and indicators */
+  wear_patterns?: string;
+  
+  /** Replacement symptoms (when to replace) */
+  replacement_symptoms?: string;
+  
+  /** Operating environments (terrain, conditions) */
+  operating_environments?: string;
+  
+  /** Installation guidance (step-by-step or tips) */
+  installation_guidance?: string;
+  
+  /** Maintenance notes and schedule */
+  maintenance_notes?: string;
+  
+  /** OEM reference documentation */
+  oem_references?: string;
+  
+  /** Terrain/application context */
+  terrain_applications?: string;
+  
+  /** Expert tips and best practices */
+  expert_tips?: string;
   
   // ========== INTERNAL LINKING ==========
   /** Related sprocket part IDs */
@@ -261,17 +298,29 @@ export interface SerialRange {
 // ============================================================================
 
 /**
- * SEO templates for automatic generation.
- * Uses placeholders: {brand}, {model}, {part_number}, {component_type}
+ * SEO GOVERNANCE RULES:
+ * ---------------------
+ * 1. Machine-component pages are PRIMARY SEO entities (/bottom-rollers/kubota-svl75)
+ * 2. Part pages are SECONDARY detail pages (/parts/kubota-v0511-25104-bottom-roller)
+ * 3. Auto-generation provides baseline SEO - MANUAL OVERRIDES for high-value pages
+ * 4. Only published + indexed parts appear in sitemap
+ * 5. Quality over quantity - not a mass page generation engine
+ * 
+ * HIGH-VALUE MACHINES requiring manual SEO overrides:
+ * - Kubota SVL75, SVL95
+ * - CAT 259D, 299D
+ * - John Deere 333G, 331G
+ * - Bobcat T650, T770
+ * - Takeuchi TL12, TL10
  */
 export const SEO_TEMPLATES = {
-  // Part page templates
+  // Part page templates (SECONDARY)
   part_title: "{brand} {component_type} {part_number} | Wholesale Undercarriage Parts",
   part_h1: "{brand} {component_type} {part_number}",
   part_h2: "Compatible with {compatible_models_short}",
   part_meta: "In-stock {brand} {component_type} {part_number}. Wholesale undercarriage parts from Houston with nationwide shipping. Fits {compatible_models_short}.",
   
-  // Machine-component page templates (PRIMARY SEO)
+  // Machine-component page templates (PRIMARY SEO - highest priority)
   machine_title: "{brand} {model} {component_type} Replacement | {component_plural} | Rubber Track Wholesale",
   machine_h1: "{brand} {model} {component_type}",
   machine_meta: "Find replacement {component_plural_lower} for your {brand} {model}. Premium quality undercarriage components with wholesale pricing. Houston warehouse with fast nationwide shipping.",
@@ -627,12 +676,26 @@ export const CSV_COLUMNS = [
   "date_added",                 // ISO date
   "date_modified",              // ISO date
   
-  // SEO (Auto-generated if empty)
+  // SEO (Auto-generated if empty, MANUAL OVERRIDE supported)
   "slug",
   "seo_title",
   "seo_h1",
+  "seo_h2",                       // MANUAL OVERRIDE only
   "meta_description",
   "canonical_type",
+  "breadcrumb_label",             // MANUAL OVERRIDE for cleaner display
+  "page_intro",                   // MANUAL OVERRIDE for unique lede
+  "custom_fitment_notes",         // MANUAL OVERRIDE for high-value pages
+  
+  // Content Depth (For Semantic Authority)
+  "wear_patterns",
+  "replacement_symptoms",
+  "operating_environments",
+  "installation_guidance",
+  "maintenance_notes",
+  "oem_references",
+  "terrain_applications",
+  "expert_tips",
   
   // Internal Linking
   "related_sprockets",          // Pipe-delimited record IDs
@@ -653,3 +716,212 @@ export const CSV_COLUMNS = [
 ] as const;
 
 export type CsvColumnName = typeof CSV_COLUMNS[number];
+
+// ============================================================================
+// DEDUPLICATION RULES
+// ============================================================================
+
+/**
+ * DEDUPLICATION HIERARCHY:
+ * 1. brand + normalized_part_number (exact match)
+ * 2. brand + part_category + compatible_models overlap (potential duplicate)
+ * 3. alt_part_numbers cross-reference
+ * 4. superseded_part_numbers cross-reference
+ * 
+ * Duplicates are NOT allowed to:
+ * - Create separate pages for same part number
+ * - Create near-identical machine/component combinations
+ * - Dilute SEO authority across thin pages
+ */
+export interface DuplicateCheckResult {
+  isDuplicate: boolean;
+  duplicateOf?: string;       // record_id of original
+  matchType?: "exact" | "alt" | "superseded" | "overlap";
+  confidence: "certain" | "likely" | "possible";
+}
+
+/**
+ * Generate dedupe key for a part (brand + normalized part number + category)
+ */
+export function generateDedupeKey(part: Partial<MasterUndercarriagePart>): string {
+  const brand = (part.brand || "").toUpperCase().trim();
+  const partNum = normalizePartNumber(part.primary_part_number || "");
+  const category = part.part_category || "";
+  return `${brand}::${partNum}::${category}`;
+}
+
+/**
+ * Check for duplicates in a collection
+ */
+export function findDuplicates(
+  newPart: Partial<MasterUndercarriagePart>,
+  existingParts: MasterUndercarriagePart[]
+): DuplicateCheckResult {
+  const newKey = generateDedupeKey(newPart);
+  const newNormalized = normalizePartNumber(newPart.primary_part_number || "");
+  const newAlts = (newPart.alt_part_numbers || []).map(normalizePartNumber);
+  
+  for (const existing of existingParts) {
+    // 1. Exact match
+    const existingKey = generateDedupeKey(existing);
+    if (newKey === existingKey) {
+      return {
+        isDuplicate: true,
+        duplicateOf: existing.record_id,
+        matchType: "exact",
+        confidence: "certain",
+      };
+    }
+    
+    // 2. Alt part number cross-reference
+    const existingAlts = (existing.alt_part_numbers || []).map(normalizePartNumber);
+    const existingNormalized = normalizePartNumber(existing.primary_part_number);
+    
+    if (newAlts.includes(existingNormalized) || existingAlts.includes(newNormalized)) {
+      return {
+        isDuplicate: true,
+        duplicateOf: existing.record_id,
+        matchType: "alt",
+        confidence: "certain",
+      };
+    }
+    
+    // 3. Superseded part number check
+    const existingSuperseded = (existing.superseded_part_numbers || []).map(normalizePartNumber);
+    const newSuperseded = (newPart.superseded_part_numbers || []).map(normalizePartNumber);
+    
+    if (existingSuperseded.includes(newNormalized) || newSuperseded.includes(existingNormalized)) {
+      return {
+        isDuplicate: true,
+        duplicateOf: existing.record_id,
+        matchType: "superseded",
+        confidence: "certain",
+      };
+    }
+    
+    // 4. Same brand + category + significant model overlap (80%+ overlap)
+    if (newPart.brand === existing.brand && newPart.part_category === existing.part_category) {
+      const newModels = new Set(newPart.compatible_models || []);
+      const existingModels = new Set(existing.compatible_models || []);
+      
+      if (newModels.size > 0 && existingModels.size > 0) {
+        const intersection = [...newModels].filter(m => existingModels.has(m));
+        const overlapPercent = intersection.length / Math.min(newModels.size, existingModels.size);
+        
+        if (overlapPercent >= 0.8) {
+          return {
+            isDuplicate: true,
+            duplicateOf: existing.record_id,
+            matchType: "overlap",
+            confidence: "likely",
+          };
+        }
+      }
+    }
+  }
+  
+  return { isDuplicate: false, confidence: "certain" };
+}
+
+// ============================================================================
+// MODEL NAME NORMALIZATION
+// ============================================================================
+
+/**
+ * NORMALIZATION RULES:
+ * - SVL75, SVL 75, SVL-75 → SVL75
+ * - KX040-4, KX040 4, KX0404 → KX040-4 (preserve meaningful hyphens)
+ * - Remove equipment type suffixes: "(Compact Track Loader)", "(Mini Excavator)"
+ * - Preserve serial suffix: -2, -2S, etc.
+ * 
+ * Public display remains clean: "SVL75" not "SVL 75 (Compact Track Loader)"
+ */
+export function normalizeModelName(model: string): string {
+  let normalized = model
+    // Remove equipment type descriptors in parentheses
+    .replace(/\s*\([^)]*\)\s*/g, "")
+    // Collapse internal spaces for certain patterns
+    .replace(/([A-Z]{2,3})\s+(\d)/gi, "$1$2")  // SVL 75 → SVL75
+    // Preserve meaningful hyphens (model variants like -2, -4)
+    .replace(/\s+-/g, "-")
+    .replace(/-\s+/g, "-")
+    // Trim and collapse whitespace
+    .trim()
+    .replace(/\s+/g, " ");
+  
+  return normalized;
+}
+
+/**
+ * Normalize model for matching (more aggressive - for lookups only)
+ */
+export function normalizeModelForMatching(model: string): string {
+  return normalizeModelName(model)
+    .toUpperCase()
+    .replace(/[^A-Z0-9]/g, "");
+}
+
+// ============================================================================
+// PUBLISH GOVERNANCE RULES
+// ============================================================================
+
+/**
+ * PUBLISH GOVERNANCE:
+ * - Only "published" + "index_status: true" pages enter sitemap
+ * - staged/pending-review/draft pages are EXCLUDED from public site
+ * - Low-confidence parts require owner_approved before publishing
+ * - Duplicates/canonicalized pages NEVER enter sitemap
+ * 
+ * Page creation rules:
+ * - verified-imported-sold → can auto-publish if owner_approved
+ * - verified-researched → can auto-publish if owner_approved
+ * - high-confidence → requires manual review before publish
+ * - medium/low-confidence → requires enrichment before publish
+ * - unverified → stays in staging, never published
+ */
+export function canAutoPublish(part: MasterUndercarriagePart): boolean {
+  // Must have owner approval
+  if (!part.owner_approved) return false;
+  
+  // Must be high confidence
+  const autoPublishConfidences: ConfidenceLevel[] = [
+    "verified-imported-sold",
+    "verified-researched",
+  ];
+  
+  if (!autoPublishConfidences.includes(part.confidence)) return false;
+  
+  // Must have minimum required fields
+  if (!part.brand || !part.primary_part_number) return false;
+  if (!part.compatible_models || part.compatible_models.length === 0) return false;
+  
+  return true;
+}
+
+/**
+ * Check if part meets minimum quality for public display
+ */
+export function meetsPublishQuality(part: MasterUndercarriagePart): {
+  meets: boolean;
+  missing: string[];
+} {
+  const missing: string[] = [];
+  
+  // Required fields for any public page
+  if (!part.brand) missing.push("brand");
+  if (!part.primary_part_number) missing.push("primary_part_number");
+  if (!part.part_category) missing.push("part_category");
+  if (!part.compatible_models?.length) missing.push("compatible_models");
+  if (!part.seo_title) missing.push("seo_title");
+  if (!part.meta_description) missing.push("meta_description");
+  
+  // Quality checks
+  if (part.confidence === "unverified") missing.push("verified_confidence");
+  if (!part.owner_approved) missing.push("owner_approval");
+  
+  return {
+    meets: missing.length === 0,
+    missing,
+  };
+}
+

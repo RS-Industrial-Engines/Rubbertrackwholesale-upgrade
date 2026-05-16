@@ -4,6 +4,59 @@
 
 This document describes the unified MASTER UNDERCARRIAGE DATA TEMPLATE that supports all current and future undercarriage parts data.
 
+**CORE PRINCIPLE:** This system is an INDUSTRIAL COMPATIBILITY KNOWLEDGE PLATFORM, NOT a mass page-generation engine.
+
+## Governance Rules
+
+### 1. Quality Over Quantity
+- Every page must provide unique semantic value
+- No thin or repetitive template pages
+- Verified fitment required before publishing
+- Real-world utility is the primary metric
+
+### 2. SEO Hierarchy (Preserved)
+```
+PRIMARY SEO PAGES (Priority 0.8)     SECONDARY PAGES (Priority 0.6)
+─────────────────────────────────    ─────────────────────────────────
+/bottom-rollers/kubota-svl75         /parts/kubota-v0511-25104-bottom-roller
+/sprockets/kubota-svl75              /parts/kubota-k7561-14512-sprocket
+/idlers/kubota-svl75                 /parts/kubota-...
+```
+
+Machine-component pages remain PRIMARY. Part pages are SECONDARY detail pages.
+
+### 3. SEO Override Support
+Auto-generation provides baseline SEO. High-value pages support MANUAL OVERRIDES for:
+- `seo_title`, `seo_h1`, `seo_h2`
+- `meta_description`
+- `breadcrumb_label`
+- `page_intro` (custom lede paragraph)
+- `custom_fitment_notes`
+
+**High-value machines requiring manual SEO:**
+- Kubota SVL75, SVL95
+- CAT 259D, 299D
+- John Deere 333G, 331G
+- Bobcat T650, T770
+
+### 4. Publish Governance
+NOT every imported row becomes a public page:
+- `published` + `index_status=YES` → Live on site, indexed
+- `staged` → In CMS, not public
+- `pending-review` → Needs owner approval
+- `draft` → Work in progress
+- `unverified` confidence → Never auto-publish
+
+### 5. Deduplication Rules
+Hierarchy: brand + normalized_part_number + part_category + machine_relationship
+- No duplicate pages for same part number
+- No near-identical machine/component combinations
+- No SEO authority dilution across thin pages
+
+### 6. Model Name Normalization
+Internal normalization: SVL75 = SVL 75 = SVL-75
+Public display: Clean format only ("SVL75", not "SVL 75 (Compact Track Loader)")
+
 ## Architecture
 
 ```
@@ -102,14 +155,30 @@ nextjs-frontend/
 | `date_added` | No | ISO date |
 | `date_modified` | No | ISO date |
 
-### SEO (Auto-Generated if Empty)
+### SEO (Auto-Generated with Manual Override Support)
 | Column | Required | Description |
 |--------|----------|-------------|
 | `slug` | Auto | URL slug |
-| `seo_title` | Auto | Page title |
-| `seo_h1` | Auto | H1 heading |
-| `meta_description` | Auto | Meta description |
-| `canonical_type` | No | part or machine |
+| `seo_title` | Auto | Page title (MANUAL OVERRIDE for high-value pages) |
+| `seo_h1` | Auto | H1 heading (MANUAL OVERRIDE supported) |
+| `seo_h2` | Manual | H2 subheading (MANUAL OVERRIDE only) |
+| `meta_description` | Auto | Meta description (MANUAL OVERRIDE supported) |
+| `canonical_type` | No | part or machine (machine is primary) |
+| `breadcrumb_label` | Manual | Custom breadcrumb text |
+| `page_intro` | Manual | Custom intro paragraph for unique content |
+| `custom_fitment_notes` | Manual | Custom fitment notes for high-value pages |
+
+### Content Depth (For Semantic Authority)
+| Column | Required | Description |
+|--------|----------|-------------|
+| `wear_patterns` | No | Wear patterns and indicators |
+| `replacement_symptoms` | No | When to replace guidance |
+| `operating_environments` | No | Terrain and conditions |
+| `installation_guidance` | No | Step-by-step or tips |
+| `maintenance_notes` | No | Maintenance schedule |
+| `oem_references` | No | OEM documentation |
+| `terrain_applications` | No | Application context |
+| `expert_tips` | No | Best practices |
 
 ### Internal Linking
 | Column | Required | Description |

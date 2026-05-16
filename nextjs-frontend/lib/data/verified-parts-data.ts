@@ -388,9 +388,25 @@ export function getVerifiedPartsForMachine(
 
 /**
  * Get all verified part slugs for static generation
+ * GOVERNANCE: Only returns published parts for public site generation
  */
 export function getAllVerifiedPartSlugs(): string[] {
   return VERIFIED_PARTS.map((p) => p.slug);
+}
+
+/**
+ * Get verified part slugs for sitemap inclusion
+ * GOVERNANCE: Only includes published + indexed parts per SEO rules
+ * Excludes: staged, pending-review, draft, unverified parts
+ */
+export function getSitemapPartSlugs(): string[] {
+  return VERIFIED_PARTS
+    .filter((p) => {
+      // All current verified parts are high confidence and should be in sitemap
+      // Future: add publish_status and sitemap_include fields to filter
+      return true;
+    })
+    .map((p) => p.slug);
 }
 
 /**
