@@ -34,15 +34,16 @@ interface PopularMachine {
 
 /**
  * Build the popular machines list with track sizes looked up from full-machine-data.ts.
- * Uses first 14 from HIGH_PRIORITY_MACHINES (shared with /rubber-tracks page).
+ * Uses first 16 from HIGH_PRIORITY_MACHINES (shared with /rubber-tracks page).
+ * 16 machines display well in a 4-column grid (4 rows of 4).
  */
 function getPopularMachinesWithTrackSizes(): PopularMachine[] {
   const results: PopularMachine[] = [];
   
-  // Take first 14 machines from HIGH_PRIORITY_MACHINES (the shared priority list)
-  const top14 = HIGH_PRIORITY_MACHINES.slice(0, 14);
+  // Take first 16 machines from HIGH_PRIORITY_MACHINES (the shared priority list)
+  const top16 = HIGH_PRIORITY_MACHINES.slice(0, 16);
   
-  for (const spec of top14) {
+  for (const spec of top16) {
     // Resolve the actual model name from full-machine-data.ts
     const actualModel = resolveActualModel(spec.brand, spec.model);
     
