@@ -30,6 +30,39 @@
  *   publish_status = "published", owner_approved = true,
  *   index_status = true, sitemap_include = true
  * 
+ * STAGED REVIEW WORKFLOW:
+ * -----------------------
+ * 1. Researched row enters staged-parts-data.ts (this file)
+ *    - publish_status = "staged", owner_approved = false
+ *    - Slugs, SEO fields may be empty (acceptable for staged)
+ * 
+ * 2. Verify fitment against full-machine-data.ts
+ *    - Confirm compatible_models exist in fullMachineModels
+ *    - Check model normalization (KX 161-3 vs KX161-3)
+ *    - Validate chassis/serial notes if present
+ * 
+ * 3. Complete compatible machines list
+ *    - Ensure all known compatible models are listed
+ *    - Add chassis_mount_notes, serial_notes where needed
+ * 
+ * 4. Generate slug and SEO fields
+ *    - Auto-generate via import script, or manually set
+ *    - Verify seo_title, seo_h1, meta_description
+ * 
+ * 5. Owner approves the row
+ *    - Set owner_approved = true
+ *    - Set confidence = "verified-researched" or higher
+ * 
+ * 6. Move to verified-parts-data.ts (published data)
+ *    - Set publish_status = "published"
+ *    - Set index_status = true, sitemap_include = true
+ *    - Generate final slug if not already set
+ * 
+ * 7. Row appears on public site
+ *    - /parts/[slug] page generated
+ *    - Added to sitemap at priority 0.6
+ *    - Machine/component pages show verified part section
+ *
  * Source: master-undercarriage-combined.csv (rubbertrax-research-55 batch)
  * Import batch: rubbertrax-research-55
  * Total staged rows: 54
@@ -1865,10 +1898,29 @@ export function getStagedPartCountByBrand(): Record<string, number> {
 }
 
 /**
+ * Alias: getStagedPartStats - returns brand counts and total
+ * (matches documentation naming convention)
+ */
+export function getStagedPartStats(): { total: number; byBrand: Record<string, number> } {
+  return {
+    total: STAGED_PARTS.length,
+    byBrand: getStagedPartCountByBrand(),
+  };
+}
+
+/**
  * Get staged parts for a specific brand (internal enrichment only)
+ * Alias: getStagedPartsByBrand wraps this for documentation consistency
  */
 export function getStagedPartsForBrand(brand: string): StagedPart[] {
   return STAGED_PARTS.filter((p) => p.brand === brand);
+}
+
+/**
+ * Alias: getStagedPartsByBrand - matches documentation naming convention
+ */
+export function getStagedPartsByBrand(brand: string): StagedPart[] {
+  return getStagedPartsForBrand(brand);
 }
 
 /**
@@ -1906,4 +1958,21 @@ export function getStagedPartsByDataQuality(): {
   }
   
   return { enriched, minimal };
+}
+
+/**
+ * Get staged parts that are ready for owner review
+ * Ready = has compatible_models, has part_number, has brand
+ * These are the highest-priority candidates for approval
+ * (matches documentation naming convention: getStagedPartsReadyForReview)
+ */
+export function getStagedPartsReadyForReview(): StagedPart[] {
+  return STAGED_PARTS.filter((p) => {
+    return (
+      p.brand &&
+      p.primary_part_number &&
+      p.compatible_models.length > 0 &&
+      p.compatible_models_text.length > 0
+    );
+  });
 }
