@@ -15,6 +15,58 @@ export function normalizeForMatching(value: string): string {
 }
 
 /**
+ * Clean a model name for public display
+ * Removes equipment type descriptors like "(Compact Track Loader)", "(Mini Excavator)"
+ * Also normalizes spacing: "SVL 75" -> "SVL75", "KX 040" -> "KX040"
+ * 
+ * Examples:
+ * - "SVL 75 (Compact Track Loader)" -> "SVL75"
+ * - "SVL 95 (Compact Track Loader)" -> "SVL95"
+ * - "KX 040 (Mini Excavator)" -> "KX040"
+ * - "259D" -> "259D"
+ * - "T650" -> "T650"
+ */
+export function cleanModelForDisplay(model: string): string {
+  // Remove equipment type descriptors in parentheses
+  let cleaned = model.replace(/\s*\([^)]+\)\s*/g, '').trim();
+  
+  // Normalize model patterns: remove spaces between letters and numbers
+  // "SVL 75" -> "SVL75", "KX 040" -> "KX040", "U 17" -> "U17"
+  cleaned = cleaned.replace(/([A-Za-z]+)\s+(\d+)/g, '$1$2');
+  
+  // Also handle "PC 200" -> "PC200" pattern
+  cleaned = cleaned.replace(/(\d+)\s+([A-Za-z]+)/g, '$1$2');
+  
+  return cleaned;
+}
+
+/**
+ * Get searchable model variants for matching user queries
+ * Returns array of normalized strings that should match the model
+ * 
+ * For "SVL 75 (Compact Track Loader)" returns:
+ * - "svl75" (clean)
+ * - "svl75compacttrackloader" (full normalized)
+ * - "svl 75" (with space, normalized)
+ */
+export function getModelSearchVariants(model: string): string[] {
+  const variants: string[] = [];
+  
+  // Clean display version (no descriptor, no spaces)
+  const clean = cleanModelForDisplay(model);
+  variants.push(normalizeForMatching(clean));
+  
+  // Full original (normalized)
+  variants.push(normalizeForMatching(model));
+  
+  // Just the model part without descriptor but with original spacing
+  const withoutDescriptor = model.replace(/\s*\([^)]+\)\s*/g, '').trim();
+  variants.push(normalizeForMatching(withoutDescriptor));
+  
+  return [...new Set(variants)]; // Dedupe
+}
+
+/**
  * Check if two values match after normalization
  */
 export function normalizedMatch(a: string, b: string): boolean {

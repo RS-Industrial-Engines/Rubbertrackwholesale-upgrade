@@ -1,14 +1,13 @@
 "use client";
 
 import { useMemo } from "react";
-import useSWR from "swr";
 import Link from "next/link";
 import { ArrowRight, Search, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { API, fetcher, type Brand, type MachineModel } from "@/lib/api";
+import { type Brand, type MachineModel } from "@/lib/api";
 import {
   fullMachineModels,
   fullBrands,
@@ -16,6 +15,7 @@ import {
   getBrandStats,
   normalizeBrand,
   normalizeForMatching,
+  cleanModelForDisplay,
 } from "@/lib/data/full-machine-data";
 import { createMachineSlug } from "@/lib/url-utils";
 
@@ -34,15 +34,15 @@ function getFullBrands(): Brand[] {
 
 export function BrandsContent() {
   const [searchQuery, setSearchQuery] = useState("");
-  const { data: apiBrands, isLoading } = useSWR<Brand[]>(API.brands, fetcher);
+  // API data is NOT used - full-machine-data.ts is the authoritative source
+  // This prevents incomplete CMS/API data from overriding our complete dataset
+  const isLoading = false;
 
-  // Use API data if available AND has data, otherwise use comprehensive fallback
+  // ALWAYS use full-machine-data.ts as PRIMARY source for /brands
+  // full-machine-data.ts has complete 349-brand data that API may not have
   const brands = useMemo(() => {
-    if (apiBrands && apiBrands.length > 0) {
-      return apiBrands;
-    }
     return getFullBrands();
-  }, [apiBrands]);
+  }, []);
 
   // Sort brands: popular first, then by model count
   const sortedBrands = useMemo(() => {

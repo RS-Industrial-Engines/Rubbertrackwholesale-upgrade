@@ -21,7 +21,11 @@ import {
   getSortedBrandsForComponent,
   PRIORITY_BRANDS,
 } from "@/lib/data/undercarriage-data";
-import { normalizeBrand, normalizeForMatching } from "@/lib/data/full-machine-data";
+import { 
+  normalizeBrand, 
+  normalizeForMatching,
+  getModelSearchVariants,
+} from "@/lib/data/full-machine-data";
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 
@@ -61,25 +65,53 @@ export function UndercarriageCategoryPageContent({
   }, [machinesByBrand]);
   
   // Find exact machine match for search query (e.g., "Kubota SVL75" -> /bottom-rollers/kubota-svl75)
+  // Handles model name variations: "SVL 75 (Compact Track Loader)" matches "SVL75"
   const exactMachineMatch = useMemo(() => {
     if (!searchQuery.trim() || searchQuery.length < 3) return null;
     
     const query = normalizeForMatching(searchQuery);
+    const queryParts = searchQuery.trim().toLowerCase().split(/\s+/);
     
-    // Check for exact brand+model match
+    // Try to extract brand and model from query
+    // e.g., "Kubota SVL75" -> brand="kubota", modelQuery="svl75"
+    const potentialBrand = queryParts[0];
+    const normalizedBrand = normalizeBrand(potentialBrand);
+    const modelQuery = queryParts.slice(1).join('');
+    const normalizedModelQuery = normalizeForMatching(modelQuery);
+    
+    // Check for exact brand+model match with model variants
     for (const machine of allMachines) {
-      const fullName = normalizeForMatching(`${machine.brand} ${machine.model}`);
-      const fullNameAlt = normalizeForMatching(`${machine.brand}${machine.model}`);
+      const machineBrandNorm = normalizeBrand(machine.brand);
       
-      if (fullName === query || fullNameAlt === query) {
+      // Check if brand matches
+      const brandMatches = machineBrandNorm === normalizedBrand || 
+                          normalizeForMatching(machine.brand) === normalizeForMatching(potentialBrand);
+      
+      if (!brandMatches) continue;
+      
+      // Check if model matches using variants
+      const modelVariants = getModelSearchVariants(machine.model);
+      
+      // Check exact model match
+      if (modelVariants.some(v => v === normalizedModelQuery)) {
         return machine;
+      }
+      
+      // Check full query against brand+model variants
+      const fullQueryNorm = normalizeForMatching(searchQuery);
+      for (const variant of modelVariants) {
+        const fullWithVariant = normalizeForMatching(`${machine.brand}${variant}`);
+        const fullWithSpace = normalizeForMatching(`${machine.brand} ${variant}`);
+        if (fullQueryNorm === fullWithVariant || fullQueryNorm === fullWithSpace || fullQueryNorm === variant) {
+          return machine;
+        }
       }
     }
     
-    // Check for model-only exact match (less common)
+    // Fallback: check for model-only exact match
     for (const machine of allMachines) {
-      const modelNorm = normalizeForMatching(machine.model);
-      if (modelNorm === query) {
+      const modelVariants = getModelSearchVariants(machine.model);
+      if (modelVariants.some(v => v === query)) {
         return machine;
       }
     }

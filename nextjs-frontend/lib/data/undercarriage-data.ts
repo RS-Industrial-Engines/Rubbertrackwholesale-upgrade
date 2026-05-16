@@ -6,7 +6,7 @@
  * authoritative source for machine models.
  */
 
-import { fullMachineModels } from "./full-machine-data";
+import { fullMachineModels, cleanModelForDisplay } from "./full-machine-data";
 import { createMachineSlug } from "../url-utils";
 
 // Component types
@@ -288,10 +288,11 @@ export const PRIORITY_BRANDS = [
 ];
 
 /**
- * Get machines grouped by brand for a component
+ * Get machines grouped by brand for a component (deduped by slug)
  */
 export function getMachinesGroupedByBrand(component: UndercarriageComponent): Record<string, Array<{ model: string; slug: string }>> {
   const grouped: Record<string, Array<{ model: string; slug: string }>> = {};
+  const seenSlugsGlobal = new Set<string>(); // Global dedupe across all brands
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     const brandMachines: Array<{ model: string; slug: string }> = [];
@@ -302,9 +303,20 @@ export function getMachinesGroupedByBrand(component: UndercarriageComponent): Re
         continue;
       }
       
+      const slug = createMachineSlug(brand, model);
+      
+      // Dedupe by slug (both within brand and globally)
+      if (seenSlugsGlobal.has(slug)) {
+        continue;
+      }
+      seenSlugsGlobal.add(slug);
+      
+      // Use clean model name for display
+      const cleanModel = cleanModelForDisplay(model);
+      
       brandMachines.push({
-        model,
-        slug: createMachineSlug(brand, model),
+        model: cleanModel,
+        slug,
       });
     }
     
