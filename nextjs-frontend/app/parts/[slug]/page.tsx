@@ -15,12 +15,13 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BUSINESS_INFO, createMachineSlug } from "@/lib/url-utils";
+import { BUSINESS_INFO } from "@/lib/url-utils";
 import {
   VERIFIED_PARTS,
   getVerifiedPartBySlug,
   getAllVerifiedPartSlugs,
   getComponentTypeFromPart,
+  getCompatibleMachinesForPart,
   VerifiedPart,
 } from "@/lib/data/verified-parts-data";
 import {
@@ -69,6 +70,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 // Generate Product schema for verified parts only
+// Note: No price, offers, reviews, or ratings per requirements
+// Only showing verified factual information that matches visible page content
 function generatePartSchema(part: VerifiedPart) {
   const componentType = getComponentTypeFromPart(part);
   const componentName = componentType ? COMPONENT_DISPLAY_NAMES[componentType] : "Undercarriage Part";
@@ -85,27 +88,12 @@ function generatePartSchema(part: VerifiedPart) {
       name: part.brand,
     },
     category: componentName,
-    // Note: No price, offers, reviews, or ratings - per requirements
-    // Only showing verified factual information
     manufacturer: {
       "@type": "Organization",
       name: part.brand,
     },
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "Rubber Track Wholesale",
-        telephone: BUSINESS_INFO.phone,
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Houston",
-          addressRegion: "TX",
-          addressCountry: "US",
-        },
-      },
-    },
+    // No offers/availability/price - would require visible matching content on page
+    // No reviews/ratings - would require actual customer reviews
   };
 }
 
@@ -314,33 +302,55 @@ export default async function PartDetailPage({ params }: PageProps) {
                 Click a machine below to view the full {componentName.toLowerCase()} page with specifications, installation information, and ordering details.
               </p>
               
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                {part.compatible_models.slice(0, 15).map((model) => {
-                  const machineSlug = createMachineSlug(part.brand, model);
-                  return (
-                    <Link
-                      key={model}
-                      href={`/${componentUrlPath}/${machineSlug}`}
-                      className="group"
-                    >
-                      <Card className="hover:border-primary transition-colors">
-                        <CardContent className="p-4 text-center">
-                          <p className="text-xs text-muted-foreground mb-1">{part.brand}</p>
-                          <span className="font-semibold group-hover:text-primary">
-                            {model}
-                          </span>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  );
-                })}
-              </div>
-              
-              {part.compatible_models.length > 15 && (
-                <p className="text-sm text-muted-foreground mt-4 text-center">
-                  And {part.compatible_models.length - 15} more compatible models. Contact us for full compatibility list.
-                </p>
-              )}
+              {/* Get validated machine links - only render links for machines that exist */}
+              {(() => {
+                const { verified, unverified } = getCompatibleMachinesForPart(part, componentType);
+                
+                return (
+                  <>
+                    {/* Verified machines with working links */}
+                    {verified.length > 0 && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-6">
+                        {verified.slice(0, 15).map((machine) => (
+                          <Link
+                            key={machine.slug}
+                            href={machine.url}
+                            className="group"
+                          >
+                            <Card className="hover:border-primary transition-colors">
+                              <CardContent className="p-4 text-center">
+                                <p className="text-xs text-muted-foreground mb-1">{machine.brand}</p>
+                                <span className="font-semibold group-hover:text-primary">
+                                  {machine.model}
+                                </span>
+                              </CardContent>
+                            </Card>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                    
+                    {/* Unverified machines - show as text only, no links */}
+                    {unverified.length > 0 && (
+                      <div className="mt-6 p-4 bg-secondary rounded-lg">
+                        <p className="text-sm font-medium mb-2">Additional Compatible Models:</p>
+                        <p className="text-sm text-muted-foreground">
+                          {unverified.map((m) => `${m.brand} ${m.model}`).join(", ")}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-2">
+                          Contact us to verify fitment for these models.
+                        </p>
+                      </div>
+                    )}
+                    
+                    {verified.length > 15 && (
+                      <p className="text-sm text-muted-foreground mt-4 text-center">
+                        And {verified.length - 15} more compatible models with pages. Contact us for full compatibility list.
+                      </p>
+                    )}
+                  </>
+                );
+              })()}
             </div>
           </section>
         )}

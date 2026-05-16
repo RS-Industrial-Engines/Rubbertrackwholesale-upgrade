@@ -7,6 +7,7 @@ import {
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
 import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
+import { getAllVerifiedPartSlugs } from "@/lib/data/verified-parts-data";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
@@ -78,6 +79,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${BASE_URL}/brands`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/parts`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -195,6 +202,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // Verified parts pages - only published parts from verified-parts-data.ts
+  const verifiedPartPages: MetadataRoute.Sitemap = getAllVerifiedPartSlugs().map((slug) => ({
+    url: `${BASE_URL}/parts/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   return [
     ...staticPages,
     ...blogPages,
@@ -202,5 +217,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...trackSizePages,
     ...brandPages,
     ...undercarriagePages,
+    ...verifiedPartPages,
   ];
 }

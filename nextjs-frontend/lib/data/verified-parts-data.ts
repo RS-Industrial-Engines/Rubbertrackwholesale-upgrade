@@ -12,7 +12,8 @@
  */
 
 import { UndercarriageComponent } from "./undercarriage-data";
-import { normalizeForMatching, cleanModelForDisplay } from "./full-machine-data";
+import { normalizeForMatching, cleanModelForDisplay, fullMachineModels } from "./full-machine-data";
+import { createMachineSlug } from "../url-utils";
 
 // Part type mapping
 export type PartType = "roller" | "sprocket" | "idler";
@@ -67,7 +68,7 @@ export const VERIFIED_PARTS: VerifiedPart[] = [
     alt_part_numbers: ["V0511-25100"],
     oem_equivalent: "V0511-25104",
     product_name: "Kubota SVL75 and SVL90 compact track loaders bottom rollers",
-    compatible_models_text: "Kubota SVL 65-2, Kubota SVL 65-2C, Kubota SVL75, SVL90, SVL90C, SVL90-2, SVL90-2C, SVL95-2S, SVL95-2SC, SVL97-2, SVL97-2C",
+    compatible_models_text: "Kubota SVL65-2, Kubota SVL65-2C, Kubota SVL75, SVL90, SVL90C, SVL90-2, SVL90-2C, SVL95-2S, SVL95-2SC, SVL97-2, SVL97-2C",
     compatible_models: ["SVL65-2", "SVL65-2C", "SVL75", "SVL90", "SVL90C", "SVL90-2", "SVL90-2C", "SVL95-2S", "SVL95-2SC", "SVL97-2", "SVL97-2C"],
     track_sizes: [],
     chassis_mount_notes: "",
@@ -78,9 +79,9 @@ export const VERIFIED_PARTS: VerifiedPart[] = [
       "https://www.rubbertrax.com/rollers",
     ],
     verification_notes: "User-confirmed: imported and sold with no known issue. Use as highest-confidence launch data.",
-    seo_title: "Kubota Bottom Roller V0511-25104 for Kubota SVL 65-2",
-    seo_h1: "Kubota Bottom Roller V0511-25104 for Kubota SVL 65-2",
-    meta_description: "In-stock Kubota Bottom Roller V0511-25104 for Kubota SVL 65-2. Wholesale undercarriage parts from Houston with nationwide shipping.",
+    seo_title: "Kubota Bottom Roller V0511-25104 for Kubota SVL65-2",
+    seo_h1: "Kubota Bottom Roller V0511-25104 for Kubota SVL65-2",
+    meta_description: "In-stock Kubota Bottom Roller V0511-25104 for Kubota SVL65-2. Wholesale undercarriage parts from Houston with nationwide shipping.",
     slug: "kubota-v0511-25104-bottom-roller",
   },
   // UP-0002: CAT 259D Bottom Roller
@@ -390,4 +391,86 @@ export function getVerifiedPartsForMachine(
  */
 export function getAllVerifiedPartSlugs(): string[] {
   return VERIFIED_PARTS.map((p) => p.slug);
+}
+
+/**
+ * Validate if a machine exists in full-machine-data.ts and return link info
+ * Returns null if machine doesn't exist (should render as text only)
+ */
+export function getValidatedMachineLink(
+  brand: string,
+  model: string,
+  componentType: UndercarriageComponent
+): { slug: string; url: string } | null {
+  // Check if brand exists
+  const brandModels = fullMachineModels[brand];
+  if (!brandModels) {
+    // Try case variations
+    const brandKey = Object.keys(fullMachineModels).find(
+      (b) => normalizeForMatching(b) === normalizeForMatching(brand)
+    );
+    if (!brandKey) return null;
+    const models = fullMachineModels[brandKey];
+    if (!models) return null;
+    
+    // Check if model exists
+    const modelExists = models.some(
+      (m) => normalizeForMatching(cleanModelForDisplay(m)) === normalizeForMatching(model)
+    );
+    if (!modelExists) return null;
+    
+    const slug = createMachineSlug(brandKey, model);
+    const urlPath = componentType === "bottom-roller" ? "bottom-rollers" : 
+                    componentType === "sprocket" ? "sprockets" :
+                    componentType === "idler" ? "idlers" : "carrier-rollers";
+    return { slug, url: `/${urlPath}/${slug}` };
+  }
+  
+  // Check if model exists
+  const modelExists = brandModels.some(
+    (m) => normalizeForMatching(cleanModelForDisplay(m)) === normalizeForMatching(model)
+  );
+  if (!modelExists) return null;
+  
+  const slug = createMachineSlug(brand, model);
+  const urlPath = componentType === "bottom-roller" ? "bottom-rollers" : 
+                  componentType === "sprocket" ? "sprockets" :
+                  componentType === "idler" ? "idlers" : "carrier-rollers";
+  return { slug, url: `/${urlPath}/${slug}` };
+}
+
+/**
+ * Get compatible machines for a part, separated into verified (with links) and unverified (text only)
+ */
+export function getCompatibleMachinesForPart(
+  part: VerifiedPart,
+  componentType: UndercarriageComponent
+): {
+  verified: Array<{ brand: string; model: string; slug: string; url: string }>;
+  unverified: Array<{ brand: string; model: string }>;
+} {
+  const verified: Array<{ brand: string; model: string; slug: string; url: string }> = [];
+  const unverified: Array<{ brand: string; model: string }> = [];
+  
+  // Parse compatible models from the part
+  for (const modelName of part.compatible_models) {
+    // Try to match the brand from the part
+    const link = getValidatedMachineLink(part.brand, modelName, componentType);
+    
+    if (link) {
+      verified.push({
+        brand: part.brand,
+        model: cleanModelForDisplay(modelName),
+        slug: link.slug,
+        url: link.url,
+      });
+    } else {
+      unverified.push({
+        brand: part.brand,
+        model: cleanModelForDisplay(modelName),
+      });
+    }
+  }
+  
+  return { verified, unverified };
 }
