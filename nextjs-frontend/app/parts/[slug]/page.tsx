@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { BUSINESS_INFO } from "@/lib/url-utils";
+import { BUSINESS_INFO, createMachineSlug } from "@/lib/url-utils";
 import {
   VERIFIED_PARTS,
   getVerifiedPartBySlug,
@@ -312,20 +312,29 @@ export default async function PartDetailPage({ params }: PageProps) {
                     {verified.length > 0 && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 mb-6">
                         {verified.slice(0, 15).map((machine) => (
-                          <Link
-                            key={machine.slug}
-                            href={machine.url}
-                            className="group"
-                          >
-                            <Card className="hover:border-primary transition-colors">
-                              <CardContent className="p-4 text-center">
-                                <p className="text-xs text-muted-foreground mb-1">{machine.brand}</p>
-                                <span className="font-semibold group-hover:text-primary">
-                                  {machine.model}
-                                </span>
-                              </CardContent>
-                            </Card>
-                          </Link>
+                          <div key={machine.slug} className="flex flex-col gap-2">
+                            <Link
+                              href={machine.url}
+                              className="group"
+                            >
+                              <Card className="hover:border-primary transition-colors">
+                                <CardContent className="p-4 text-center">
+                                  <p className="text-xs text-muted-foreground mb-1">{machine.brand}</p>
+                                  <span className="font-semibold group-hover:text-primary">
+                                    {machine.model}
+                                  </span>
+                                  <p className="text-xs text-primary mt-1">{componentName}</p>
+                                </CardContent>
+                              </Card>
+                            </Link>
+                            {/* Link to machine authority page */}
+                            <Link
+                              href={`/machines/${machine.slug}`}
+                              className="text-xs text-muted-foreground hover:text-primary text-center"
+                            >
+                              View all {machine.brand} {machine.model} parts
+                            </Link>
+                          </div>
                         ))}
                       </div>
                     )}
