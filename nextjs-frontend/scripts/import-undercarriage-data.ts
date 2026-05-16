@@ -77,8 +77,12 @@ function parseCSV(content: string): CMSRecord[] {
       }
     });
     
-    if (record.machine_key && record.component_type) {
-      records.push(record as CMSRecord);
+    // Type guard: ensure required fields exist before casting
+    if (typeof record.machine_key === 'string' && 
+        typeof record.component_type === 'string' &&
+        record.machine_key && 
+        record.component_type) {
+      records.push(record as unknown as CMSRecord);
     }
   }
   
