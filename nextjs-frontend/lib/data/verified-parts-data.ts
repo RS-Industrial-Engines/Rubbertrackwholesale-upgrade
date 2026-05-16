@@ -1,14 +1,41 @@
 /**
- * Verified Undercarriage Parts Data
+ * ============================================================================
+ * VERIFIED UNDERCARRIAGE PARTS DATA
+ * ============================================================================
  * 
- * This file contains ONLY parts with:
- * - confidence = "Verified-Imported/Sold"
- * - should_publish = "YES"
+ * STATUS: ACTIVE - This file powers the public site
  * 
- * These are user-confirmed imported/sold parts with highest confidence.
+ * This is the CURRENT source of truth for verified undercarriage parts.
+ * It powers:
+ *   - /parts/[slug] detail pages
+ *   - /parts index page
+ *   - Sitemap part URLs (via getSitemapPartSlugs)
+ *   - Machine/component page verified parts sections
+ * 
+ * RELATIONSHIP TO MASTER SCHEMA:
+ * ------------------------------
+ * The master undercarriage schema (undercarriage-master-schema.ts) is the
+ * FUTURE architecture for scaling to thousands of parts. It provides:
+ *   - Comprehensive TypeScript interfaces
+ *   - CSV import/export templates
+ *   - Governance rules (publish, dedupe, SEO)
+ *   - Content depth fields
+ * 
+ * MIGRATION PATH:
+ * 1. Current: verified-parts-data.ts (this file) is active
+ * 2. Future: import-master-undercarriage.js generates master-undercarriage-data.ts
+ * 3. Final: Routes switch to master-undercarriage-data.ts
+ * 
+ * DO NOT DELETE THIS FILE until master system is fully wired and tested.
+ * 
+ * CONTAINS ONLY parts with:
+ *   - confidence = "Verified-Imported/Sold"
+ *   - should_publish = "YES"
+ *   - owner_approved = true
  * 
  * Source: rtw_undercarriage_parts_launch_master_v2.csv
  * Generated from import script - do not manually edit
+ * ============================================================================
  */
 
 import { UndercarriageComponent } from "./undercarriage-data";

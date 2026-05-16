@@ -3,26 +3,45 @@
  * MASTER UNDERCARRIAGE DATA SCHEMA
  * ============================================================================
  * 
- * This is the SINGLE SOURCE OF TRUTH for all undercarriage parts data.
+ * STATUS: STAGED - Future architecture for scaling
+ * 
+ * This schema defines the comprehensive data structure for undercarriage parts.
+ * It is NOT yet wired to public routes - see MIGRATION STATUS below.
+ * 
+ * CURRENT STATE (as of this commit):
+ * ----------------------------------
+ * - verified-parts-data.ts → ACTIVE (powers public site)
+ * - undercarriage-master-schema.ts → STAGED (this file, future architecture)
+ * 
+ * MIGRATION STATUS:
+ * -----------------
+ * [ ] Import script tested with full dataset
+ * [ ] master-undercarriage-data.ts generated
+ * [ ] /parts/[slug] routes switched to master data
+ * [ ] /parts index page switched to master data
+ * [ ] Sitemap switched to master data
+ * [ ] Machine/component pages use master enrichment
+ * [ ] verified-parts-data.ts deprecated
  * 
  * ARCHITECTURE PRINCIPLES:
  * ------------------------
  * 1. Machine/component pages remain PRIMARY SEO entities
- *    - /bottom-rollers/kubota-svl75 (primary)
- *    - /sprockets/kubota-svl75 (primary)
+ *    - /bottom-rollers/kubota-svl75 (priority 0.8)
+ *    - /sprockets/kubota-svl75 (priority 0.8)
  * 
  * 2. Part pages are SECONDARY detail pages
- *    - /parts/kubota-v0511-25104-bottom-roller (secondary)
+ *    - /parts/kubota-v0511-25104-bottom-roller (priority 0.6)
  * 
  * 3. All future imports use this same schema
- * 4. Automatic SEO generation from templates
+ * 4. Automatic SEO generation from templates (with manual override support)
  * 5. Staged vs published workflow preserved
+ * 6. Deduplication and governance rules enforced
  * 
  * DATA FLOW:
  * ----------
  * CSV Import → Validation → Normalization → TypeScript Data → Site Generation
  * 
- * IMPORT SCRIPT: scripts/import-master-undercarriage.ts
+ * IMPORT SCRIPT: scripts/import-master-undercarriage.js
  * TEMPLATE CSV:  data/master-undercarriage-template.csv
  */
 

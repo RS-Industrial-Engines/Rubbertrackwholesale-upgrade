@@ -6,6 +6,46 @@ This document describes the unified MASTER UNDERCARRIAGE DATA TEMPLATE that supp
 
 **CORE PRINCIPLE:** This system is an INDUSTRIAL COMPATIBILITY KNOWLEDGE PLATFORM, NOT a mass page-generation engine.
 
+## Source of Truth Status
+
+### Current State (Active)
+```
+verified-parts-data.ts  →  ACTIVE (powers public site)
+├── /parts/[slug] pages
+├── /parts index page  
+├── Sitemap part URLs
+└── Machine component verified parts sections
+```
+
+### Future State (Staged)
+```
+undercarriage-master-schema.ts  →  STAGED (future architecture)
+├── Comprehensive TypeScript interfaces
+├── CSV import/export templates
+├── Governance rules (publish, dedupe, SEO)
+└── Content depth fields
+
+import-master-undercarriage.js  →  STAGED (import tool)
+├── Parses CSV with validation
+├── Generates SEO with multi-model support
+├── Enhanced deduplication
+└── Outputs master-undercarriage-data.ts
+```
+
+### Migration Checklist
+Before switching public routes to master system:
+
+- [ ] Import script tested with full 55-machine dataset
+- [ ] master-undercarriage-data.ts generated and validated
+- [ ] /parts/[slug] routes switched to master data
+- [ ] /parts index page switched to master data
+- [ ] Sitemap switched to master filterSitemapParts()
+- [ ] Machine/component pages use master enrichment
+- [ ] All tests pass
+- [ ] verified-parts-data.ts deprecated
+
+**DO NOT merge master system until this checklist is complete.**
+
 ## Governance Rules
 
 ### 1. Quality Over Quantity

@@ -183,6 +183,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const slug = createMachineSlug(brand, model);
       
       // Add bottom-rollers, sprockets, idlers for ALL machines (deduped)
+      // PRIORITY 0.8: Machine/component pages are PRIMARY SEO entities
       for (const componentType of componentTypes) {
         const key = `${componentType}/${slug}`;
         if (!seenUndercarriageSlugs.has(key)) {
@@ -191,7 +192,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${BASE_URL}/${componentType}/${slug}`,
             lastModified: new Date(),
             changeFrequency: "monthly" as const,
-            priority: 0.6,
+            priority: 0.8, // PRIMARY SEO - same as machine pages
           });
         }
       }
@@ -205,7 +206,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${BASE_URL}/carrier-rollers/${slug}`,
             lastModified: new Date(),
             changeFrequency: "monthly" as const,
-            priority: 0.6,
+            priority: 0.8, // PRIMARY SEO - same as machine pages
           });
         }
       }

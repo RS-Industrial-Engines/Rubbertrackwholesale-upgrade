@@ -166,8 +166,22 @@ function transformRecord(raw) {
     slug: raw.slug || "",
     seo_title: raw.seo_title || "",
     seo_h1: raw.seo_h1 || "",
+    seo_h2: raw.seo_h2 || "",  // NEW: H2 subheading
     meta_description: raw.meta_description || "",
     canonical_type: raw.canonical_type || "part",
+    breadcrumb_label: raw.breadcrumb_label || "",  // NEW: Custom breadcrumb
+    page_intro: raw.page_intro || "",  // NEW: Custom intro paragraph
+    custom_fitment_notes: raw.custom_fitment_notes || "",  // NEW: Custom fitment
+    
+    // NEW: Content depth fields for semantic authority
+    wear_patterns: raw.wear_patterns || "",
+    replacement_symptoms: raw.replacement_symptoms || "",
+    operating_environments: raw.operating_environments || "",
+    installation_guidance: raw.installation_guidance || "",
+    maintenance_notes: raw.maintenance_notes || "",
+    oem_references: raw.oem_references || "",
+    terrain_applications: raw.terrain_applications || "",
+    expert_tips: raw.expert_tips || "",
     
     related_sprockets: parseArray(raw.related_sprockets),
     related_rollers: parseArray(raw.related_rollers),
@@ -212,29 +226,61 @@ function generateSEO(part) {
       .replace(/^-|-$/g, "");
   }
   
-  // Get first compatible model for SEO
-  const firstModel = part.compatible_models[0] || "";
-  const compatibleShort = part.compatible_models.slice(0, 3).join(", ");
+  // IMPROVED: Generate multi-model SEO titles for parts with many compatible machines
+  // Avoids making high-value SVL75 parts look like only SVL65 parts
+  const models = part.compatible_models || [];
+  const modelCount = models.length;
   
-  // Generate SEO title if empty
+  // Get representative models for SEO (first 3-4)
+  let compatibleShort;
+  if (modelCount === 0) {
+    compatibleShort = brand;
+  } else if (modelCount === 1) {
+    compatibleShort = models[0];
+  } else if (modelCount <= 4) {
+    // Show all models for small lists
+    const lastModel = models[modelCount - 1];
+    const otherModels = models.slice(0, -1).join(", ");
+    compatibleShort = `${otherModels} & ${lastModel}`;
+  } else {
+    // For 5+ models, show first 3 + "& more"
+    const shortList = models.slice(0, 3).join(", ");
+    compatibleShort = `${shortList} & ${modelCount - 3} more`;
+  }
+  
+  // Generate SEO title if empty - USES MULTI-MODEL FORMAT
   let seo_title = part.seo_title;
   if (!seo_title) {
-    seo_title = `${brand} ${componentType} ${partNumber} for ${brand} ${firstModel}`;
+    if (modelCount > 1) {
+      seo_title = `${brand} ${partNumber} ${componentType} for ${compatibleShort}`;
+    } else {
+      seo_title = `${brand} ${componentType} ${partNumber} for ${brand} ${models[0] || ""}`;
+    }
   }
   
   // Generate H1 if empty
   let seo_h1 = part.seo_h1;
   if (!seo_h1) {
-    seo_h1 = `${brand} ${componentType} ${partNumber} for ${brand} ${firstModel}`;
+    seo_h1 = `${brand} ${componentType} ${partNumber}`;
   }
   
-  // Generate meta description if empty
+  // Generate H2 if empty and multiple models
+  let seo_h2 = part.seo_h2;
+  if (!seo_h2 && modelCount > 1) {
+    seo_h2 = `Compatible with ${compatibleShort}`;
+  }
+  
+  // Generate meta description if empty - USES MULTI-MODEL FORMAT
   let meta_description = part.meta_description;
   if (!meta_description) {
-    meta_description = `In-stock ${brand} ${componentType} ${partNumber} for ${brand} ${firstModel}. Wholesale undercarriage parts from Houston with nationwide shipping.`;
+    if (modelCount > 1) {
+      meta_description = `In-stock ${brand} ${componentType} ${partNumber}. Fits ${compatibleShort}. Wholesale pricing from Houston with nationwide shipping.`;
+    } else {
+      meta_description = `In-stock ${brand} ${componentType} ${partNumber} for ${brand} ${models[0] || ""}. Wholesale undercarriage parts from Houston with nationwide shipping.`;
+    }
   }
   
-  return { slug, seo_title, seo_h1, meta_description };
+  return { slug, seo_title, seo_h1, seo_h2, meta_description };
 }
 
 // ============================================================================
@@ -276,11 +322,27 @@ function validatePart(part) {
 }
 
 // ============================================================================
-// DEDUPLICATION
+// DEDUPLICATION - Enhanced with machine relationship
 // ============================================================================
+
+/**
+ * DEDUPE HIERARCHY:
+ * 1. brand + normalized_part_number (exact match) - CERTAIN duplicate
+ * 2. brand + alt_part_numbers cross-reference - CERTAIN duplicate
+ * 3. brand + superseded_part_numbers cross-reference - CERTAIN duplicate
+ * 4. brand + part_category + 80%+ model overlap - LIKELY duplicate
+ */
 
 function normalizePartNumber(pn) {
   return pn.toUpperCase().replace(/[^A-Z0-9]/g, "");
+}
+
+function calculateModelOverlap(models1, models2) {
+  if (!models1?.length || !models2?.length) return 0;
+  const set1 = new Set(models1.map(m => m.toUpperCase()));
+  const set2 = new Set(models2.map(m => m.toUpperCase()));
+  const intersection = [...set1].filter(m => set2.has(m));
+  return intersection.length / Math.min(set1.size, set2.size);
 }
 
 function findDuplicates(parts) {
@@ -288,25 +350,68 @@ function findDuplicates(parts) {
   const duplicates = [];
   
   for (const part of parts) {
+    // 1. Primary key: brand + normalized part number
     const key = `${part.brand}:${normalizePartNumber(part.primary_part_number)}`;
     
     if (seen.has(key)) {
       duplicates.push({
         existing: seen.get(key),
         duplicate: part,
+        matchType: "exact",
+        confidence: "certain",
       });
+      continue; // Skip adding this duplicate to seen
     } else {
       seen.set(key, part);
     }
     
-    // Also check alt part numbers
-    for (const alt of part.alt_part_numbers) {
+    // 2. Check alt part numbers cross-reference
+    for (const alt of part.alt_part_numbers || []) {
       const altKey = `${part.brand}:${normalizePartNumber(alt)}`;
       if (seen.has(altKey) && seen.get(altKey).record_id !== part.record_id) {
         duplicates.push({
           existing: seen.get(altKey),
           duplicate: part,
+          matchType: "alt_cross_ref",
+          confidence: "certain",
           note: `via alt part number ${alt}`,
+        });
+      }
+    }
+    
+    // 3. Check superseded part numbers
+    for (const sup of part.superseded_part_numbers || []) {
+      const supKey = `${part.brand}:${normalizePartNumber(sup)}`;
+      if (seen.has(supKey) && seen.get(supKey).record_id !== part.record_id) {
+        duplicates.push({
+          existing: seen.get(supKey),
+          duplicate: part,
+          matchType: "superseded",
+          confidence: "certain",
+          note: `via superseded part number ${sup}`,
+        });
+      }
+    }
+    
+    // 4. Check for same brand + category + high model overlap
+    for (const [existingKey, existing] of seen.entries()) {
+      if (existing.record_id === part.record_id) continue;
+      if (existing.brand !== part.brand) continue;
+      if (existing.part_category !== part.part_category) continue;
+      
+      const overlap = calculateModelOverlap(
+        existing.compatible_models,
+        part.compatible_models
+      );
+      
+      if (overlap >= 0.8) {
+        duplicates.push({
+          existing,
+          duplicate: part,
+          matchType: "model_overlap",
+          confidence: "likely",
+          overlapPercent: Math.round(overlap * 100),
+          note: `${Math.round(overlap * 100)}% model overlap`,
         });
       }
     }
