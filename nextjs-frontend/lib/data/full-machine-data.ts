@@ -5491,35 +5491,35 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|MD-70": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC 2800": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC 2810": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC 4800": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC 4810": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC HD4500": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|POSI-TRAC HD4520": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|PT 100": [
     "18x4x220",
-    "457x101.6x55"
+    "457x101.6x56"
   ],
   "ASV|PT 50": [
     "15x4x166",
@@ -22157,6 +22157,7 @@ export const fullTrackSizes: string[] = [
   "457x101.6x50",
   "457x101.6x51",
   "457x101.6x55",
+  "457x101.6x56",
   "485x92x72",
   "500x100x65",
   "500x90x78",
