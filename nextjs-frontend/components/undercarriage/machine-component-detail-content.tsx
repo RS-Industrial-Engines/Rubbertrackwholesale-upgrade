@@ -325,7 +325,7 @@ function VerifiedPartCard({ part }: { part: VerifiedPart }) {
           <Shield className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-xs text-green-600 font-medium uppercase tracking-wide mb-1">
-              Verified Part - Imported and Sold by RTW
+              Verified Fitment - Compatibility Confirmed
             </p>
             <h4 className="font-bold text-lg">{part.primary_part_number}</h4>
           </div>
@@ -351,11 +351,11 @@ function VerifiedPartCard({ part }: { part: VerifiedPart }) {
         )}
         
         {part.serial_notes && (
-          <div className="mb-3 p-3 bg-yellow-500/10 rounded-lg">
+          <div className="mb-3 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
             <div className="flex items-start gap-2">
-              <Info className="h-4 w-4 text-yellow-600 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                Serial-specific: {part.serial_notes}
+              <Info className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
+                <span className="font-bold">Serial-specific:</span> {part.serial_notes}
               </p>
             </div>
           </div>
@@ -506,7 +506,7 @@ export function MachineComponentDetailContent({
               </h2>
             </div>
             <p className="text-muted-foreground mb-8 max-w-3xl">
-              The following part numbers have been verified through our import and sales records. These are parts we have imported and sold successfully for {brand} {cleanModel} {equipmentType.toLowerCase()}s.
+              The following part numbers have been verified through extensive compatibility research, fitment validation, and real-world application history for {brand} {cleanModel} {equipmentType.toLowerCase()}s.
             </p>
             
             <div className="grid md:grid-cols-2 gap-6">
