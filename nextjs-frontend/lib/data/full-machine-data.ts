@@ -6840,7 +6840,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x52"
   ],
   "Bobcat|T250": [
-    "18x4x56",
     "450x86x55",
     "400x86x55"
   ],
@@ -6849,7 +6848,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x55"
   ],
   "Bobcat|T300": [
-    "18x4x56",
     "450x86x55",
     "400x86x55"
   ],
@@ -6866,17 +6864,14 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x84x46"
   ],
   "Bobcat|T550": [
-    "18x4x56",
     "400x86x49",
     "320x86x49"
   ],
   "Bobcat|T590": [
-    "18x4x56",
     "400x86x49",
     "320x86x49"
   ],
   "Bobcat|T595": [
-    "18x4x56",
     "400x86x49",
     "320x86x49"
   ],
@@ -6885,7 +6880,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x50"
   ],
   "Bobcat|T630": [
-    "18x4x56",
     "450x86x52",
     "400x86x52",
     "320x86x52"
@@ -6895,7 +6889,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x50"
   ],
   "Bobcat|T650": [
-    "18x4x56",
     "450x86x52",
     "400x86x52",
     "320x86x52"
@@ -6910,11 +6903,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x53"
   ],
   "Bobcat|T740": [
-    "18x4x56",
     "450x86x55"
   ],
   "Bobcat|T750": [
-    "18x4x56",
     "450x86x55",
     "400x86x55"
   ],
@@ -6923,7 +6914,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x53"
   ],
   "Bobcat|T770": [
-    "18x4x56",
     "450x86x55",
     "400x86x55"
   ],
@@ -6935,7 +6925,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Bobcat|T870": [
     "450x84x59",
-    "18x4x56",
     "450x86x58"
   ],
   "Bobcat|X119": [
@@ -7915,7 +7904,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "457x100x51"
   ],
   "CAT|287C2": [
-    "18x4x56"
+    "457x100x51"
   ],
   "CAT|287D": [
     "457x100x51"
@@ -7953,7 +7942,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "457x100x51"
   ],
   "CAT|297D2XHP": [
-    "18x4x56"
+    "457x100x51"
   ],
   "CAT|299C": [
     "450x86x60",
@@ -21838,7 +21827,6 @@ export const fullTrackSizes: string[] = [
   "18x4x201",
   "18x4x220",
   "18x4x51",
-  "18x4x56",
   "190x72x34",
   "190x72x37",
   "190x72x38",
