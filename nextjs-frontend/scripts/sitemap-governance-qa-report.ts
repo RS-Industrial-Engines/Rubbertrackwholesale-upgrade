@@ -24,17 +24,30 @@ import {
 } from "../lib/config/staged-parts-flags";
 
 type ComponentType = "bottom-rollers" | "sprockets" | "idlers" | "carrier-rollers";
+type UndercarriageComponent = "bottom-roller" | "sprocket" | "idler" | "carrier-roller";
+
+// Map plural URL routes to singular component types
+function mapRouteToComponentType(routePath: ComponentType): UndercarriageComponent {
+  const mapping: Record<ComponentType, UndercarriageComponent> = {
+    "bottom-rollers": "bottom-roller",
+    "sprockets": "sprocket",
+    "idlers": "idler",
+    "carrier-rollers": "carrier-roller",
+  };
+  return mapping[routePath];
+}
 
 // Helper to check SEO value (mirrors sitemap-seo-helpers.ts)
-function hasComponentSEOValue(brand: string, model: string, componentType: ComponentType): boolean {
+function hasComponentSEOValue(brand: string, model: string, routePath: ComponentType): boolean {
   if (!REQUIRE_COMPONENT_DATA_FOR_SITEMAP) {
     return true;
   }
 
-  if (componentType === "carrier-rollers") {
+  if (routePath === "carrier-rollers") {
     return hasCarrierRoller(brand, model);
   }
 
+  const componentType = mapRouteToComponentType(routePath);
   const verifiedParts = getVerifiedPartsForMachine(brand, model, componentType);
   if (verifiedParts.length > 0) {
     return true;
