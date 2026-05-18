@@ -1976,3 +1976,82 @@ export function getStagedPartsReadyForReview(): StagedPart[] {
     );
   });
 }
+
+/**
+ * Normalize string for model matching (remove spaces, dashes, convert to uppercase)
+ */
+function normalizeForMatching(str: string): string {
+  return str.toUpperCase().replace(/[\s\-_\.]/g, "");
+}
+
+/**
+ * Map part_category to UndercarriageComponent type
+ */
+function mapPartCategoryToComponent(category: string, subtype: string): string {
+  const categoryLower = category.toLowerCase();
+  const subtypeLower = subtype?.toLowerCase() || "";
+  
+  if (categoryLower === "roller") {
+    if (subtypeLower === "carrier" || subtypeLower === "top") {
+      return "carrier-roller";
+    }
+    return "bottom-roller";
+  }
+  if (categoryLower === "sprocket" || categoryLower === "drive") {
+    return "sprocket";
+  }
+  if (categoryLower === "idler") {
+    return "idler";
+  }
+  if (categoryLower === "carrier-roller" || categoryLower === "top-roller") {
+    return "carrier-roller";
+  }
+  return "bottom-roller"; // default
+}
+
+/**
+ * Get staged parts for a specific brand+model+component combination
+ * Used to display researched parts on machine component pages
+ */
+export function getStagedPartsForMachine(
+  brand: string,
+  model: string,
+  componentType: string
+): StagedPart[] {
+  const normalizedBrand = brand.toUpperCase();
+  const normalizedModel = normalizeForMatching(model);
+  
+  return STAGED_PARTS.filter((part) => {
+    // Check brand (handle CAT/Caterpillar, etc.)
+    const partBrandUpper = part.brand.toUpperCase();
+    const brandMatches = 
+      partBrandUpper === normalizedBrand ||
+      (partBrandUpper === "CAT" && normalizedBrand === "CATERPILLAR") ||
+      (partBrandUpper === "CATERPILLAR" && normalizedBrand === "CAT");
+    
+    if (!brandMatches) return false;
+    
+    // Check component type matches
+    const partComponent = mapPartCategoryToComponent(part.part_category, part.part_subtype);
+    if (partComponent !== componentType) return false;
+    
+    // Must have compatible models to display
+    if (part.compatible_models.length === 0) return false;
+    
+    // Check if model matches any compatible model
+    for (const compatModel of part.compatible_models) {
+      const compatNormalized = normalizeForMatching(compatModel);
+      if (compatNormalized === normalizedModel) return true;
+      // Also check if the compatible model is contained in the search model or vice versa
+      if (compatNormalized.includes(normalizedModel) || normalizedModel.includes(compatNormalized)) {
+        return true;
+      }
+    }
+    
+    // Also check compatible_models_text for partial matches
+    const textNormalized = normalizeForMatching(part.compatible_models_text);
+    if (textNormalized.includes(normalizedModel)) return true;
+    
+    return false;
+  });
+}
