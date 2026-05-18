@@ -43,6 +43,7 @@ import {
   StagedPart,
   getStagedPartsForMachine,
 } from "@/lib/data/staged-parts-data";
+import { SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES } from "@/lib/config/staged-parts-flags";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
 
 interface MachineComponentDetailContentProps {
@@ -386,31 +387,65 @@ function VerifiedPartCard({ part }: { part: VerifiedPart }) {
 }
 
 // Researched Part Card Component (for staged/verified-researched parts)
+// GOVERNANCE: These are research-based parts requiring serial verification
+// They do NOT generate Product schema, sitemap entries, or /parts/[slug] pages
 function ResearchedPartCard({ part }: { part: StagedPart }) {
   return (
     <Card className="border-blue-500/30 bg-blue-500/5">
       <CardContent className="p-6">
+        {/* Status Badge - Clearly marked as research-based */}
         <div className="flex items-start gap-3 mb-4">
-          <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
+          <Info className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-xs text-blue-600 font-medium uppercase tracking-wide mb-1">
-              Verified Compatibility - Researched Fitment
+              Research-Based Fitment — Call to Confirm
             </p>
             <h4 className="font-bold text-lg">{part.primary_part_number}</h4>
+            {part.part_subtype && (
+              <p className="text-xs text-muted-foreground capitalize">{part.part_subtype} {part.part_category}</p>
+            )}
           </div>
         </div>
         
+        {/* Product Name */}
         {part.product_name && (
-          <p className="text-sm text-muted-foreground mb-3">{part.product_name}</p>
+          <p className="text-sm text-muted-foreground mb-4">{part.product_name}</p>
         )}
         
-        {part.alt_part_numbers.length > 0 && (
-          <div className="mb-3">
-            <p className="text-xs text-muted-foreground uppercase mb-1">Alternate / Interchange Numbers</p>
-            <p className="text-sm font-medium">{part.alt_part_numbers.join(", ")}</p>
+        {/* Part Number Hierarchy - Important for SEO and conversion */}
+        <div className="space-y-3 mb-4">
+          {/* Primary Part Number - Current/Active */}
+          <div className="p-3 bg-background rounded-lg border">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Primary Part Number</p>
+            <p className="font-bold text-lg">{part.primary_part_number}</p>
           </div>
-        )}
+          
+          {/* Alternate / Interchange Numbers */}
+          {part.alt_part_numbers.length > 0 && (
+            <div className="p-3 bg-background rounded-lg border">
+              <p className="text-xs text-muted-foreground uppercase mb-1">Alternate / Interchange Numbers</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                {part.alt_part_numbers.map((altNum, idx) => (
+                  <span key={idx} className="inline-flex items-center px-2 py-1 bg-muted rounded text-sm font-medium">
+                    {altNum}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Supersession / Interchange Notes - Critical for serial-break understanding */}
+          {part.superseded_part_numbers && (
+            <div className="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
+              <p className="text-xs text-amber-700 dark:text-amber-400 uppercase mb-1 font-medium">
+                Supersession / Interchange Notes
+              </p>
+              <p className="text-sm text-amber-900 dark:text-amber-100">{part.superseded_part_numbers}</p>
+            </div>
+          )}
+        </div>
         
+        {/* Compatible Machines */}
         {part.compatible_models_text && (
           <div className="mb-3">
             <p className="text-xs text-muted-foreground uppercase mb-1">Compatible Machines</p>
@@ -418,36 +453,45 @@ function ResearchedPartCard({ part }: { part: StagedPart }) {
           </div>
         )}
         
+        {/* Chassis / Mount Type */}
         {part.chassis_mount_notes && (
           <div className="mb-3">
-            <p className="text-xs text-muted-foreground uppercase mb-1">Mount Type / Notes</p>
+            <p className="text-xs text-muted-foreground uppercase mb-1">Mount Type / Chassis Notes</p>
             <p className="text-sm">{part.chassis_mount_notes}</p>
           </div>
         )}
         
+        {/* Serial Number Specific Warning - High visibility */}
         {part.serial_notes && (
-          <div className="mb-3 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
+          <div className="mb-4 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
             <div className="flex items-start gap-2">
-              <Info className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
-                <span className="font-bold">Serial-specific:</span> {part.serial_notes}
-              </p>
+              <AlertTriangle className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs text-amber-700 dark:text-amber-400 uppercase font-bold mb-1">
+                  Serial Number Specific
+                </p>
+                <p className="text-sm text-amber-900 dark:text-amber-100">
+                  {part.serial_notes}
+                </p>
+              </div>
             </div>
           </div>
         )}
         
-        {part.superseded_part_numbers && (
-          <div className="mb-3">
-            <p className="text-xs text-muted-foreground uppercase mb-1">Supersession Notes</p>
-            <p className="text-sm text-muted-foreground">{part.superseded_part_numbers}</p>
-          </div>
-        )}
+        {/* Research Disclaimer - Required for governance */}
+        <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 rounded-lg border border-blue-200 dark:border-blue-800">
+          <p className="text-xs text-blue-800 dark:text-blue-200">
+            <strong>Research-based fitment data.</strong> Please call with your machine serial number 
+            to confirm compatibility before ordering. Part numbers and fitment may vary by serial range.
+          </p>
+        </div>
         
-        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        {/* Call to Action */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button size="sm" asChild className="flex-1">
             <Link href={BUSINESS_INFO.phoneTel}>
               <Phone className="h-4 w-4 mr-2" />
-              Call for Pricing
+              Call to Confirm Fitment
             </Link>
           </Button>
           <Button size="sm" variant="outline" asChild className="flex-1">
@@ -456,7 +500,7 @@ function ResearchedPartCard({ part }: { part: StagedPart }) {
         </div>
         
         <p className="text-xs text-muted-foreground mt-3 text-center">
-          Call {BUSINESS_INFO.phone} to verify serial number fitment before ordering
+          {BUSINESS_INFO.phone} • Houston, TX
         </p>
       </CardContent>
     </Card>
@@ -483,7 +527,10 @@ export function MachineComponentDetailContent({
   const verifiedParts = getVerifiedPartsForMachine(brand, model, componentType);
   
   // Get staged/researched parts for this machine+component (verified compatibility data)
-  const stagedParts = getStagedPartsForMachine(brand, model, componentType);
+  // Controlled by feature flag - can be disabled before production launch
+  const stagedParts = SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES 
+    ? getStagedPartsForMachine(brand, model, componentType)
+    : [];
   
   // Get other available components for this machine
   const availableComponents = getUndercarriageComponents(brand, model);
@@ -604,18 +651,24 @@ export function MachineComponentDetailContent({
       )}
 
       {/* Researched Parts Section - Show staged parts with verified compatibility data */}
+      {/* GOVERNANCE: These parts are research-based, NOT fully verified imported/sold parts */}
+      {/* They do NOT create /parts/[slug] pages, sitemap entries, or Product schema */}
       {stagedParts.length > 0 && (
-        <section className="py-12 lg:py-16 border-b border-border bg-blue-500/5">
+        <section className="py-12 lg:py-16 border-b border-border bg-blue-50/50 dark:bg-blue-950/20">
           <div className="container mx-auto px-4">
-            <div className="flex items-center gap-3 mb-6">
-              <CheckCircle className="h-6 w-6 text-blue-500" />
+            <div className="flex items-center gap-3 mb-4">
+              <Info className="h-6 w-6 text-blue-500" />
               <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
                 {verifiedParts.length > 0 ? "Additional " : ""}Researched Part Numbers for {brand} {cleanModel}
               </h2>
             </div>
-            <p className="text-muted-foreground mb-8 max-w-3xl">
-              The following part numbers have been researched and verified for compatibility with {brand} {cleanModel} {equipmentType.toLowerCase()}s. Serial number verification is recommended before ordering.
-            </p>
+            <div className="mb-6 p-4 bg-blue-100/50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-800">
+              <p className="text-sm text-blue-800 dark:text-blue-200">
+                <strong>Research-Based Fitment Data:</strong> The following part numbers have been researched for compatibility 
+                with {brand} {cleanModel} {equipmentType.toLowerCase()}s. Part numbers and fitment vary by serial number range. 
+                <strong className="block mt-1">Please call {BUSINESS_INFO.phone} with your machine serial number to confirm exact fitment before ordering.</strong>
+              </p>
+            </div>
             
             <div className="grid md:grid-cols-2 gap-6">
               {stagedParts.map((part) => (
