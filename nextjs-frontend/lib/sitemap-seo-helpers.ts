@@ -12,7 +12,7 @@
  * - Avoid indexing thousands of thin placeholder pages
  */
 
-import { getVerifiedPartsForMachine } from "@/lib/data/verified-parts-data";
+import { getVerifiedPartsForMachine, UndercarriageComponent } from "@/lib/data/verified-parts-data";
 import { getStagedPartsForMachine } from "@/lib/data/staged-parts-data";
 import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
 import { 
@@ -20,7 +20,27 @@ import {
   REQUIRE_COMPONENT_DATA_FOR_SITEMAP 
 } from "@/lib/config/staged-parts-flags";
 
+// Route paths used in sitemap URLs (plural)
 export type ComponentType = "bottom-rollers" | "sprockets" | "idlers" | "carrier-rollers";
+
+/**
+ * Map plural URL route paths to singular component types used by data functions
+ * 
+ * Route paths (sitemap/URL):     Data functions expect:
+ * - bottom-rollers         →     bottom-roller
+ * - sprockets              →     sprocket
+ * - idlers                 →     idler
+ * - carrier-rollers        →     carrier-roller
+ */
+function mapRouteToComponentType(routePath: ComponentType): UndercarriageComponent {
+  const mapping: Record<ComponentType, UndercarriageComponent> = {
+    "bottom-rollers": "bottom-roller",
+    "sprockets": "sprocket",
+    "idlers": "idler",
+    "carrier-rollers": "carrier-roller",
+  };
+  return mapping[routePath];
+}
 
 /**
  * Check if a machine-component page has enough SEO value to be included in sitemap.
@@ -32,21 +52,24 @@ export type ComponentType = "bottom-rollers" | "sprockets" | "idlers" | "carrier
  * 
  * @param brand - Machine brand (e.g., "Bobcat")
  * @param model - Machine model (e.g., "T190")
- * @param componentType - Component type (e.g., "bottom-rollers")
+ * @param routePath - URL route path (e.g., "bottom-rollers") - will be mapped to singular
  * @returns boolean - Whether page should be in sitemap
  */
 export function hasComponentSEOValue(
   brand: string,
   model: string,
-  componentType: ComponentType
+  routePath: ComponentType
 ): boolean {
   // If governance flag is disabled, include all pages (legacy behavior)
   if (!REQUIRE_COMPONENT_DATA_FOR_SITEMAP) {
     return true;
   }
 
+  // Convert plural route path to singular component type for data functions
+  const componentType = mapRouteToComponentType(routePath);
+
   // Carrier rollers have their own verification (hasCarrierRoller)
-  if (componentType === "carrier-rollers") {
+  if (routePath === "carrier-rollers") {
     return hasCarrierRoller(brand, model);
   }
 
