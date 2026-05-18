@@ -54,3 +54,11 @@ export const ALLOW_STAGED_PARTS_IN_SITEMAP = false;
  * DEFAULT: false - MUST remain false for staged data
  */
 export const ALLOW_STAGED_PARTS_PRODUCT_SCHEMA = false;
+
+/**
+ * When TRUE: Machine-component pages with verified/researched data are included in sitemap
+ * When FALSE: All machine-component pages are included (may create thin content)
+ * 
+ * DEFAULT: true - Only include pages with actual part data
+ */
+export const REQUIRE_COMPONENT_DATA_FOR_SITEMAP = true;
