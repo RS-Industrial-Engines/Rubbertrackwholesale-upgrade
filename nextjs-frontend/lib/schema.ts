@@ -96,10 +96,50 @@ export function generateLocalBusinessSchema() {
         closes: BUSINESS_INFO.hours.saturday.closes,
       },
     ],
-    areaServed: {
-      "@type": "Country",
-      name: "United States",
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Houston",
+        containedInPlace: {
+          "@type": "State",
+          name: "Texas",
+        },
+      },
+      {
+        "@type": "State",
+        name: "Texas",
+      },
+      {
+        "@type": "Country",
+        name: "United States",
+      },
+    ],
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 29.7604,
+      longitude: -95.3698,
     },
+    serviceArea: {
+      "@type": "GeoCircle",
+      geoMidpoint: {
+        "@type": "GeoCoordinates",
+        latitude: 29.7604,
+        longitude: -95.3698,
+      },
+      geoRadius: "50 mi",
+    },
+    slogan: "Houston's Largest In-Stock Rubber Track & Undercarriage Supplier",
+    knowsAbout: [
+      "Rubber Tracks",
+      "Undercarriage Parts",
+      "Sprockets",
+      "Bottom Rollers",
+      "Idlers",
+      "Track Replacement",
+      "Mini Excavator Parts",
+      "Skid Steer Parts",
+      "Compact Track Loader Parts",
+    ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,

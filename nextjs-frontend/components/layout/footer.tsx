@@ -29,10 +29,18 @@ export function Footer() {
             <h3 className="text-xl font-bold text-foreground mb-4">
               {BUSINESS_INFO.name}
             </h3>
+            <p className="text-sm mb-2 font-medium text-primary">
+              Houston&apos;s Largest In-Stock Rubber Track Supplier
+            </p>
             <p className="text-sm mb-4">
               Your trusted source for premium rubber tracks and undercarriage
-              parts for all major heavy machinery brands. Wholesale pricing with
-              fast shipping from Houston, TX.
+              parts for all major heavy machinery brands. Serving Texas contractors
+              and equipment dealers nationwide from our Houston warehouse.
+            </p>
+            <p className="text-sm mb-4 text-muted-foreground">
+              <strong className="text-foreground">Products:</strong> Rubber tracks, bottom rollers, sprockets, 
+              idlers, and undercarriage parts for Kubota, CAT, Bobcat, John Deere, 
+              Takeuchi, and 50+ equipment brands.
             </p>
             <div className="flex gap-4">
               <a
