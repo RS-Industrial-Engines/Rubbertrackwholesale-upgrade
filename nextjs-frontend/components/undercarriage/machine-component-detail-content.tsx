@@ -322,51 +322,94 @@ function getComponentFAQs(brand: string, model: string, component: Undercarriage
 }
 
 // Verified Part Card Component
+// SEO: Part numbers are SSR-rendered as visible text for crawler indexing
 function VerifiedPartCard({ part }: { part: VerifiedPart }) {
   return (
     <Card className="border-green-500/30 bg-green-500/5">
       <CardContent className="p-6">
+        {/* Status Badge */}
         <div className="flex items-start gap-3 mb-4">
           <Shield className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
           <div>
             <p className="text-xs text-green-600 font-medium uppercase tracking-wide mb-1">
               Verified Fitment - Compatibility Confirmed
             </p>
-            <h4 className="font-bold text-lg">{part.primary_part_number}</h4>
+            <p className="text-xs text-muted-foreground">
+              Based on compatibility research, fitment validation, and real-world application history
+            </p>
           </div>
         </div>
         
-        {part.alt_part_numbers.length > 0 && (
-          <div className="mb-3">
-            <p className="text-xs text-muted-foreground uppercase mb-1">Alternate Part Numbers</p>
-            <p className="text-sm font-medium">{part.alt_part_numbers.join(", ")}</p>
+        {/* Part Number Hierarchy - Important for SEO and conversion */}
+        <div className="space-y-3 mb-4">
+          {/* Primary Part Number - Largest/Most Prominent */}
+          <div className="p-3 bg-background rounded-lg border border-green-200 dark:border-green-800">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Primary Part Number</p>
+            <p className="font-bold text-xl text-foreground">{part.primary_part_number}</p>
           </div>
-        )}
+          
+          {/* Alternate / Interchange Part Numbers - Individual Badges for SEO */}
+          {part.alt_part_numbers.length > 0 && (
+            <div className="p-3 bg-background rounded-lg border">
+              <p className="text-xs text-muted-foreground uppercase mb-2">Alternate / Interchange Part Numbers</p>
+              <div className="flex flex-wrap gap-2">
+                {part.alt_part_numbers.map((altNum, idx) => (
+                  <span 
+                    key={idx} 
+                    className="inline-flex items-center px-3 py-1.5 bg-muted rounded-md text-sm font-medium text-foreground"
+                    // Each number is a separate HTML element for crawler indexing
+                  >
+                    {altNum}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {/* Supersession / Compatibility Notes - Amber info style */}
+          {part.oem_equivalent && part.oem_equivalent !== part.primary_part_number && (
+            <div className="p-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg border border-amber-200 dark:border-amber-800">
+              <p className="text-xs text-amber-700 dark:text-amber-400 uppercase mb-1 font-medium">
+                OEM / Supersession Notes
+              </p>
+              <p className="text-sm text-amber-900 dark:text-amber-100">{part.oem_equivalent}</p>
+            </div>
+          )}
+        </div>
         
+        {/* Compatible Models */}
         <div className="mb-3">
           <p className="text-xs text-muted-foreground uppercase mb-1">Common Fitment</p>
           <p className="text-sm">{part.compatible_models_text}</p>
         </div>
         
+        {/* Chassis / Mount Notes */}
         {part.chassis_mount_notes && (
           <div className="mb-3">
-            <p className="text-xs text-muted-foreground uppercase mb-1">Notes</p>
+            <p className="text-xs text-muted-foreground uppercase mb-1">Mount Type / Notes</p>
             <p className="text-sm">{part.chassis_mount_notes}</p>
           </div>
         )}
         
+        {/* Serial-Break / Suspension Notes - High Visibility */}
         {part.serial_notes && (
-          <div className="mb-3 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
+          <div className="mb-4 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
             <div className="flex items-start gap-2">
-              <Info className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
-              <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
-                <span className="font-bold">Serial-specific:</span> {part.serial_notes}
-              </p>
+              <AlertTriangle className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="text-xs text-amber-700 dark:text-amber-400 uppercase font-bold mb-1">
+                  Serial Number Specific
+                </p>
+                <p className="text-sm text-amber-900 dark:text-amber-100">
+                  {part.serial_notes}
+                </p>
+              </div>
             </div>
           </div>
         )}
         
-        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        {/* Call to Action */}
+        <div className="flex flex-col sm:flex-row gap-3">
           <Button size="sm" asChild className="flex-1">
             <Link href={`/parts/${part.slug}`}>View Part Details</Link>
           </Button>
