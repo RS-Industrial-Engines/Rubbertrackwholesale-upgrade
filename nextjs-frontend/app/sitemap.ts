@@ -8,24 +8,33 @@ import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
 import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
 import { getSitemapPartSlugs } from "@/lib/data/verified-parts-data";
+import { hasComponentSEOValue, ComponentType } from "@/lib/sitemap-seo-helpers";
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://rubbertrackwholesale.com";
 
 /**
  * SITEMAP GOVERNANCE RULES:
  * ========================
- * 1. Machine/component pages are PRIMARY SEO entities (priority 0.8-0.9)
- * 2. Part pages are SECONDARY detail pages (priority 0.6-0.7)
- * 3. Only published + indexed pages enter sitemap
- * 4. Staged/draft/unverified pages EXCLUDED
- * 5. Duplicates and canonicalized pages EXCLUDED
+ * 1. Machine pages are PRIMARY SEO entities (priority 0.8)
+ * 2. Track size pages are PRIMARY SEO entities (priority 0.8)
+ * 3. Component pages (bottom-rollers, sprockets, idlers) are PRIMARY SEO entities
+ *    BUT only included when hasComponentSEOValue() returns true:
+ *    - Has verified parts data (imported/sold)
+ *    - Has researched parts data AND feature flag is enabled
+ *    - This prevents indexing thousands of thin placeholder pages
+ * 4. Carrier roller pages only included when hasCarrierRoller() returns true
+ * 5. Part pages are SECONDARY detail pages (priority 0.6)
+ * 6. Only published + indexed pages enter sitemap
+ * 7. Staged/draft/unverified pages EXCLUDED
+ * 8. Duplicates and canonicalized pages EXCLUDED
  * 
  * PRIORITY HIERARCHY:
  * - 1.0: Homepage
  * - 0.9: Category hubs (/rubber-tracks, /machines, /track-size, /brands)
  * - 0.8: Component category pages (/bottom-rollers, /sprockets, /idlers)
- * - 0.8: Machine-component pages (PRIMARY SEO) (/bottom-rollers/kubota-svl75)
- * - 0.7: Track size pages (/track-size/400x86x52)
+ * - 0.8: Machine-component pages WITH DATA (/bottom-rollers/kubota-svl75)
+ * - 0.8: Machine pages (/machines/kubota-svl75)
+ * - 0.8: Track size pages (/track-size/400x86x52)
  * - 0.7: Brand pages (/brands/kubota)
  * - 0.6: Part detail pages (SECONDARY) (/parts/kubota-v0511-25104)
  * - 0.5: Blog posts
@@ -171,22 +180,25 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Undercarriage component pages - machine-specific
-  // Bottom rollers, sprockets, idlers for ALL machines
-  // Carrier rollers ONLY when hasCarrierRoller() returns true
+  // GOVERNANCE: Only include pages with verified or researched part data
+  // This prevents indexing thousands of thin placeholder pages
+  // Bottom rollers, sprockets, idlers - ONLY when hasComponentSEOValue() returns true
+  // Carrier rollers - ONLY when hasCarrierRoller() returns true (verified availability)
   // Uses Sets to prevent duplicate URLs
   const undercarriagePages: MetadataRoute.Sitemap = [];
   const seenUndercarriageSlugs = new Set<string>();
-  const componentTypes = ["bottom-rollers", "sprockets", "idlers"] as const;
+  const componentTypes: ComponentType[] = ["bottom-rollers", "sprockets", "idlers"];
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
       const slug = createMachineSlug(brand, model);
       
-      // Add bottom-rollers, sprockets, idlers for ALL machines (deduped)
+      // Add bottom-rollers, sprockets, idlers ONLY when page has SEO value (deduped)
       // PRIORITY 0.8: Machine/component pages are PRIMARY SEO entities
+      // SEO VALUE: Must have verified parts OR researched parts (if flag enabled)
       for (const componentType of componentTypes) {
         const key = `${componentType}/${slug}`;
-        if (!seenUndercarriageSlugs.has(key)) {
+        if (!seenUndercarriageSlugs.has(key) && hasComponentSEOValue(brand, model, componentType)) {
           seenUndercarriageSlugs.add(key);
           undercarriagePages.push({
             url: `${BASE_URL}/${componentType}/${slug}`,
@@ -197,7 +209,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }
       }
       
-      // Add carrier-rollers ONLY when verified (deduped)
+      // Add carrier-rollers ONLY when verified availability exists (deduped)
+      // Uses hasCarrierRoller() which checks verified undercarriage data
       if (hasCarrierRoller(brand, model)) {
         const carrierKey = `carrier-rollers/${slug}`;
         if (!seenUndercarriageSlugs.has(carrierKey)) {
