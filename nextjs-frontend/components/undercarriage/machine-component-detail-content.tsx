@@ -39,6 +39,10 @@ import {
   VerifiedPart,
   getVerifiedPartsForMachine,
 } from "@/lib/data/verified-parts-data";
+import {
+  StagedPart,
+  getStagedPartsForMachine,
+} from "@/lib/data/staged-parts-data";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
 
 interface MachineComponentDetailContentProps {
@@ -381,6 +385,84 @@ function VerifiedPartCard({ part }: { part: VerifiedPart }) {
   );
 }
 
+// Researched Part Card Component (for staged/verified-researched parts)
+function ResearchedPartCard({ part }: { part: StagedPart }) {
+  return (
+    <Card className="border-blue-500/30 bg-blue-500/5">
+      <CardContent className="p-6">
+        <div className="flex items-start gap-3 mb-4">
+          <CheckCircle className="h-5 w-5 text-blue-500 flex-shrink-0 mt-0.5" />
+          <div>
+            <p className="text-xs text-blue-600 font-medium uppercase tracking-wide mb-1">
+              Verified Compatibility - Researched Fitment
+            </p>
+            <h4 className="font-bold text-lg">{part.primary_part_number}</h4>
+          </div>
+        </div>
+        
+        {part.product_name && (
+          <p className="text-sm text-muted-foreground mb-3">{part.product_name}</p>
+        )}
+        
+        {part.alt_part_numbers.length > 0 && (
+          <div className="mb-3">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Alternate / Interchange Numbers</p>
+            <p className="text-sm font-medium">{part.alt_part_numbers.join(", ")}</p>
+          </div>
+        )}
+        
+        {part.compatible_models_text && (
+          <div className="mb-3">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Compatible Machines</p>
+            <p className="text-sm">{part.compatible_models_text}</p>
+          </div>
+        )}
+        
+        {part.chassis_mount_notes && (
+          <div className="mb-3">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Mount Type / Notes</p>
+            <p className="text-sm">{part.chassis_mount_notes}</p>
+          </div>
+        )}
+        
+        {part.serial_notes && (
+          <div className="mb-3 p-3 bg-amber-100 dark:bg-amber-950/50 rounded-lg border border-amber-300 dark:border-amber-700">
+            <div className="flex items-start gap-2">
+              <Info className="h-4 w-4 text-amber-700 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
+                <span className="font-bold">Serial-specific:</span> {part.serial_notes}
+              </p>
+            </div>
+          </div>
+        )}
+        
+        {part.superseded_part_numbers && (
+          <div className="mb-3">
+            <p className="text-xs text-muted-foreground uppercase mb-1">Supersession Notes</p>
+            <p className="text-sm text-muted-foreground">{part.superseded_part_numbers}</p>
+          </div>
+        )}
+        
+        <div className="flex flex-col sm:flex-row gap-3 mt-4">
+          <Button size="sm" asChild className="flex-1">
+            <Link href={BUSINESS_INFO.phoneTel}>
+              <Phone className="h-4 w-4 mr-2" />
+              Call for Pricing
+            </Link>
+          </Button>
+          <Button size="sm" variant="outline" asChild className="flex-1">
+            <Link href="#quote">Request Quote</Link>
+          </Button>
+        </div>
+        
+        <p className="text-xs text-muted-foreground mt-3 text-center">
+          Call {BUSINESS_INFO.phone} to verify serial number fitment before ordering
+        </p>
+      </CardContent>
+    </Card>
+  );
+}
+
 export function MachineComponentDetailContent({
   brand,
   model,
@@ -399,6 +481,9 @@ export function MachineComponentDetailContent({
   
   // Get verified parts for this machine+component
   const verifiedParts = getVerifiedPartsForMachine(brand, model, componentType);
+  
+  // Get staged/researched parts for this machine+component (verified compatibility data)
+  const stagedParts = getStagedPartsForMachine(brand, model, componentType);
   
   // Get other available components for this machine
   const availableComponents = getUndercarriageComponents(brand, model);
@@ -518,8 +603,31 @@ export function MachineComponentDetailContent({
         </section>
       )}
 
-      {/* No Verified Parts - Show call to confirm */}
-      {verifiedParts.length === 0 && (
+      {/* Researched Parts Section - Show staged parts with verified compatibility data */}
+      {stagedParts.length > 0 && (
+        <section className="py-12 lg:py-16 border-b border-border bg-blue-500/5">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center gap-3 mb-6">
+              <CheckCircle className="h-6 w-6 text-blue-500" />
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+                {verifiedParts.length > 0 ? "Additional " : ""}Researched Part Numbers for {brand} {cleanModel}
+              </h2>
+            </div>
+            <p className="text-muted-foreground mb-8 max-w-3xl">
+              The following part numbers have been researched and verified for compatibility with {brand} {cleanModel} {equipmentType.toLowerCase()}s. Serial number verification is recommended before ordering.
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              {stagedParts.map((part) => (
+                <ResearchedPartCard key={part.record_id} part={part} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* No Parts Found - Show call to confirm */}
+      {verifiedParts.length === 0 && stagedParts.length === 0 && (
         <section className="py-8 border-b border-border">
           <div className="container mx-auto px-4">
             <Card className="bg-secondary/50">
