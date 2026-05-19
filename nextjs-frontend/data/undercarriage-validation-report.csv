@@ -1,0 +1,286 @@
+data_source,part_number,brand,model,component_type,url,machine_in_master_list,has_compatible_models,has_primary_part_number,has_alternate_numbers,has_serial_notes,has_chassis_notes,has_supersession_notes,normalization_match,overall_status
+staged,6693239,Bobcat,T180,bottom-rollers,/bottom-rollers/bobcat-t180,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T190,bottom-rollers,/bottom-rollers/bobcat-t190,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T250,bottom-rollers,/bottom-rollers/bobcat-t250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T320,bottom-rollers,/bottom-rollers/bobcat-t320,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T550,bottom-rollers,/bottom-rollers/bobcat-t550,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T590,bottom-rollers,/bottom-rollers/bobcat-t590,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T630,bottom-rollers,/bottom-rollers/bobcat-t630,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T650,bottom-rollers,/bottom-rollers/bobcat-t650,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T750,bottom-rollers,/bottom-rollers/bobcat-t750,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6693239,Bobcat,T770,bottom-rollers,/bottom-rollers/bobcat-t770,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6698047,Bobcat,T870,bottom-rollers,/bottom-rollers/bobcat-t870,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T140,bottom-rollers,/bottom-rollers/bobcat-t140,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T180,bottom-rollers,/bottom-rollers/bobcat-t180,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T190,bottom-rollers,/bottom-rollers/bobcat-t190,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T200,bottom-rollers,/bottom-rollers/bobcat-t200,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T250,bottom-rollers,/bottom-rollers/bobcat-t250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T300,bottom-rollers,/bottom-rollers/bobcat-t300,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T320,bottom-rollers,/bottom-rollers/bobcat-t320,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T550,bottom-rollers,/bottom-rollers/bobcat-t550,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T590,bottom-rollers,/bottom-rollers/bobcat-t590,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T630,bottom-rollers,/bottom-rollers/bobcat-t630,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T650,bottom-rollers,/bottom-rollers/bobcat-t650,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T750,bottom-rollers,/bottom-rollers/bobcat-t750,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,T770,bottom-rollers,/bottom-rollers/bobcat-t770,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6732901,Bobcat,864,bottom-rollers,/bottom-rollers/bobcat-864,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6800510,Bobcat,220,bottom-rollers,/bottom-rollers/bobcat-220,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,320,bottom-rollers,/bottom-rollers/bobcat-320,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,320D,bottom-rollers,/bottom-rollers/bobcat-320d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,320J,bottom-rollers,/bottom-rollers/bobcat-320j,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,322,bottom-rollers,/bottom-rollers/bobcat-322,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,322D,bottom-rollers,/bottom-rollers/bobcat-322d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,322G,bottom-rollers,/bottom-rollers/bobcat-322g,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6800510,Bobcat,323,bottom-rollers,/bottom-rollers/bobcat-323,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814874,Bobcat,320D,bottom-rollers,/bottom-rollers/bobcat-320d,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,320E,bottom-rollers,/bottom-rollers/bobcat-320e,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,320G,bottom-rollers,/bottom-rollers/bobcat-320g,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,320J,bottom-rollers,/bottom-rollers/bobcat-320j,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,320L,bottom-rollers,/bottom-rollers/bobcat-320l,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,322D,bottom-rollers,/bottom-rollers/bobcat-322d,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,322E,bottom-rollers,/bottom-rollers/bobcat-322e,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,322G,bottom-rollers,/bottom-rollers/bobcat-322g,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,322J,bottom-rollers,/bottom-rollers/bobcat-322j,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,322L,bottom-rollers,/bottom-rollers/bobcat-322l,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,335,bottom-rollers,/bottom-rollers/bobcat-335,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814874,Bobcat,430,bottom-rollers,/bottom-rollers/bobcat-430,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,225,bottom-rollers,/bottom-rollers/bobcat-225,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,231,bottom-rollers,/bottom-rollers/bobcat-231,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,325,bottom-rollers,/bottom-rollers/bobcat-325,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,328,bottom-rollers,/bottom-rollers/bobcat-328,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,331,bottom-rollers,/bottom-rollers/bobcat-331,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,334,bottom-rollers,/bottom-rollers/bobcat-334,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,335,bottom-rollers,/bottom-rollers/bobcat-335,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,430,bottom-rollers,/bottom-rollers/bobcat-430,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,E26,bottom-rollers,/bottom-rollers/bobcat-e26,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,E32,bottom-rollers,/bottom-rollers/bobcat-e32,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,E37,bottom-rollers,/bottom-rollers/bobcat-e37,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,E42,bottom-rollers,/bottom-rollers/bobcat-e42,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,E50,bottom-rollers,/bottom-rollers/bobcat-e50,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,337,bottom-rollers,/bottom-rollers/bobcat-337,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,442,bottom-rollers,/bottom-rollers/bobcat-442,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814882,Bobcat,ZX75,bottom-rollers,/bottom-rollers/bobcat-zx75,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,6814890,Bobcat,337,bottom-rollers,/bottom-rollers/bobcat-337,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,337D,bottom-rollers,/bottom-rollers/bobcat-337d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,X337,bottom-rollers,/bottom-rollers/bobcat-x337,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,341,bottom-rollers,/bottom-rollers/bobcat-341,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,341G,bottom-rollers,/bottom-rollers/bobcat-341g,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,435,bottom-rollers,/bottom-rollers/bobcat-435,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,6814890,Bobcat,X435,bottom-rollers,/bottom-rollers/bobcat-x435,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7013577,Bobcat,E45,bottom-rollers,/bottom-rollers/bobcat-e45,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7013577,Bobcat,E50,bottom-rollers,/bottom-rollers/bobcat-e50,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7013577,Bobcat,E55,bottom-rollers,/bottom-rollers/bobcat-e55,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7013577,Bobcat,337,bottom-rollers,/bottom-rollers/bobcat-337,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7013577,Bobcat,435,bottom-rollers,/bottom-rollers/bobcat-435,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7004933,Bobcat,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,7013575,Bobcat,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,7022649,Bobcat,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,7111447,Bobcat,T110,sprockets,/sprockets/bobcat-t110,YES,YES,YES,NO,NO,YES,YES,PASS,PASS
+staged,7165324,Bobcat,418,bottom-rollers,/bottom-rollers/bobcat-418,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7165324,Bobcat,E08,bottom-rollers,/bottom-rollers/bobcat-e08,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7165324,Bobcat,E10,bottom-rollers,/bottom-rollers/bobcat-e10,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7165324,Bobcat,E10E,bottom-rollers,/bottom-rollers/bobcat-e10e,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7165324,Bobcat,E10Z,bottom-rollers,/bottom-rollers/bobcat-e10z,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T550,bottom-rollers,/bottom-rollers/bobcat-t550,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T590,bottom-rollers,/bottom-rollers/bobcat-t590,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T595,bottom-rollers,/bottom-rollers/bobcat-t595,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T630,bottom-rollers,/bottom-rollers/bobcat-t630,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T650,bottom-rollers,/bottom-rollers/bobcat-t650,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T750,bottom-rollers,/bottom-rollers/bobcat-t750,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7233399,Bobcat,T770,bottom-rollers,/bottom-rollers/bobcat-t770,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T200,sprockets,/sprockets/bobcat-t200,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T250,sprockets,/sprockets/bobcat-t250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T300,sprockets,/sprockets/bobcat-t300,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T320,sprockets,/sprockets/bobcat-t320,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T630,sprockets,/sprockets/bobcat-t630,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T650,sprockets,/sprockets/bobcat-t650,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T740,sprockets,/sprockets/bobcat-t740,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T750,sprockets,/sprockets/bobcat-t750,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T770,sprockets,/sprockets/bobcat-t770,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,7107787,Bobcat,T870,sprockets,/sprockets/bobcat-t870,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,139-6261,CAT,301.5,bottom-rollers,/bottom-rollers/cat-3015,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,139-6261,CAT,301.6,bottom-rollers,/bottom-rollers/cat-3016,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,139-6261,CAT,301.6C,bottom-rollers,/bottom-rollers/cat-3016c,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,139-6261,CAT,301.8,bottom-rollers,/bottom-rollers/cat-3018,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,139-6261,CAT,301.8C,bottom-rollers,/bottom-rollers/cat-3018c,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,158-4765,CAT,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,185-7280,CAT,302.5,bottom-rollers,/bottom-rollers/cat-3025,YES,YES,YES,NO,NO,YES,YES,PASS,PASS
+staged,185-7280,CAT,303.5,bottom-rollers,/bottom-rollers/cat-3035,YES,YES,YES,NO,NO,YES,YES,PASS,PASS
+staged,185-7280,CAT,303CR,bottom-rollers,/bottom-rollers/cat-303cr,YES,YES,YES,NO,NO,YES,YES,PASS,PASS
+staged,1857280,CAT,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,265-7674,CAT,304CCR,bottom-rollers,/bottom-rollers/cat-304ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305CCR,bottom-rollers,/bottom-rollers/cat-305ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305DCR,bottom-rollers,/bottom-rollers/cat-305dcr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305ECR,bottom-rollers,/bottom-rollers/cat-305ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305E2,bottom-rollers,/bottom-rollers/cat-305e2,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305E2CR,bottom-rollers,/bottom-rollers/cat-305e2cr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5D,bottom-rollers,/bottom-rollers/cat-3055d,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5DCR,bottom-rollers,/bottom-rollers/cat-3055dcr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5E,bottom-rollers,/bottom-rollers/cat-3055e,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5E2,bottom-rollers,/bottom-rollers/cat-3055e2,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5ECR,bottom-rollers,/bottom-rollers/cat-3055ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,303.5E2CR,bottom-rollers,/bottom-rollers/cat-3035e2cr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,305.5E2FB,bottom-rollers,/bottom-rollers/cat-3055e2fb,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,265-7674,CAT,306E2FB,bottom-rollers,/bottom-rollers/cat-306e2fb,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,302.5C,bottom-rollers,/bottom-rollers/cat-3025c,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303CCR,bottom-rollers,/bottom-rollers/cat-303ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303ECR,bottom-rollers,/bottom-rollers/cat-303ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5C,bottom-rollers,/bottom-rollers/cat-3035c,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5CCR,bottom-rollers,/bottom-rollers/cat-3035ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5D,bottom-rollers,/bottom-rollers/cat-3035d,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5DCR,bottom-rollers,/bottom-rollers/cat-3035dcr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5E,bottom-rollers,/bottom-rollers/cat-3035e,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5ECR,bottom-rollers,/bottom-rollers/cat-3035ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,303.5E2CR,bottom-rollers,/bottom-rollers/cat-3035e2cr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,304DCR,bottom-rollers,/bottom-rollers/cat-304dcr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,304E,bottom-rollers,/bottom-rollers/cat-304e,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,304ECR,bottom-rollers,/bottom-rollers/cat-304ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,266-8793,CAT,304E2CR,bottom-rollers,/bottom-rollers/cat-304e2cr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,372-5926,CAT,300.9D,bottom-rollers,/bottom-rollers/cat-3009d,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,381-3040,CAT,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,386-0791,CAT,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,422-0837,CAT,304CCR,bottom-rollers,/bottom-rollers/cat-304ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,422-0837,CAT,305CCR,bottom-rollers,/bottom-rollers/cat-305ccr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,422-0837,CAT,305DCR,bottom-rollers,/bottom-rollers/cat-305dcr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,422-0837,CAT,305ECR,bottom-rollers,/bottom-rollers/cat-305ecr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,422-0837,CAT,305E2,bottom-rollers,/bottom-rollers/cat-305e2,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,422-0837,CAT,305E2CR,bottom-rollers,/bottom-rollers/cat-305e2cr,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,4340535,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,4357785,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,4640798,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,9237937,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,9239528,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,AT336091,John Deere,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RB511-21702,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RC101-21803,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RD101-99900,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RD118-21700,Kubota,KX121-3,bottom-rollers,/bottom-rollers/kubota-kx121-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD118-21700,Kubota,KX121-3SS,bottom-rollers,/bottom-rollers/kubota-kx121-3ss,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD118-21700,Kubota,KX121-3ST,bottom-rollers,/bottom-rollers/kubota-kx121-3st,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD118-21700,Kubota,KX040-4,bottom-rollers,/bottom-rollers/kubota-kx040-4,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD201-21700,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RD411-21700,Kubota,KX161-3,bottom-rollers,/bottom-rollers/kubota-kx161-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21700,Kubota,U45-3,bottom-rollers,/bottom-rollers/kubota-u45-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21700,Kubota,U40-3,bottom-rollers,/bottom-rollers/kubota-u40-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21700,Kubota,KX057-4,bottom-rollers,/bottom-rollers/kubota-kx057-4,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21700,Kubota,U55-4,bottom-rollers,/bottom-rollers/kubota-u55-4,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21703,Kubota,KX161-3,bottom-rollers,/bottom-rollers/kubota-kx161-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21703,Kubota,U45-3,bottom-rollers,/bottom-rollers/kubota-u45-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21703,Kubota,U40-3,bottom-rollers,/bottom-rollers/kubota-u40-3,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21703,Kubota,KX057-4,bottom-rollers,/bottom-rollers/kubota-kx057-4,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD411-21703,Kubota,U55-4,bottom-rollers,/bottom-rollers/kubota-u55-4,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,RD809-21703,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RG158-21700,Kubota,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,68621-14430,Kubota,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RC788-14430,Kubota,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,RD809-14433,Kubota,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,03313-06100,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,03913-02100,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,04313-00500,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,04313-11000,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,05613-07100,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,05613-11100,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,06813-00038,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,880130000,Takeuchi,(EMPTY),bottom-rollers,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,881130500,Takeuchi,TL140,bottom-rollers,/bottom-rollers/takeuchi-tl140,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,881130500,Takeuchi,TL150,bottom-rollers,/bottom-rollers/takeuchi-tl150,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,881130500,Takeuchi,TL10,bottom-rollers,/bottom-rollers/takeuchi-tl10,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,881130500,Takeuchi,TL12,bottom-rollers,/bottom-rollers/takeuchi-tl12,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,881130500,Takeuchi,TL240,bottom-rollers,/bottom-rollers/takeuchi-tl240,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,881130500,Takeuchi,TL250,bottom-rollers,/bottom-rollers/takeuchi-tl250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+staged,03516-08210,Takeuchi,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,05516-00120,Takeuchi,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+verified,V0511-25104,Kubota,SVL65-2,bottom-rollers,/bottom-rollers/kubota-svl65-2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL65-2C,bottom-rollers,/bottom-rollers/kubota-svl65-2c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL75,bottom-rollers,/bottom-rollers/kubota-svl75,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL90,bottom-rollers,/bottom-rollers/kubota-svl90,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL90C,bottom-rollers,/bottom-rollers/kubota-svl90c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL90-2,bottom-rollers,/bottom-rollers/kubota-svl90-2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL90-2C,bottom-rollers,/bottom-rollers/kubota-svl90-2c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL95-2S,bottom-rollers,/bottom-rollers/kubota-svl95-2s,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL95-2SC,bottom-rollers,/bottom-rollers/kubota-svl95-2sc,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL97-2,bottom-rollers,/bottom-rollers/kubota-svl97-2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,V0511-25104,Kubota,SVL97-2C,bottom-rollers,/bottom-rollers/kubota-svl97-2c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,259D,bottom-rollers,/bottom-rollers/cat-259d,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,279D,bottom-rollers,/bottom-rollers/cat-279d,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,289D,bottom-rollers,/bottom-rollers/cat-289d,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,299D,bottom-rollers,/bottom-rollers/cat-299d,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,226B,bottom-rollers,/bottom-rollers/cat-226b,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,272B,bottom-rollers,/bottom-rollers/cat-272b,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,267B,bottom-rollers,/bottom-rollers/cat-267b,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,259B3,bottom-rollers,/bottom-rollers/cat-259b3,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,259D3,bottom-rollers,/bottom-rollers/cat-259d3,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,279,bottom-rollers,/bottom-rollers/cat-279,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,279C2,bottom-rollers,/bottom-rollers/cat-279c2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,279D3,bottom-rollers,/bottom-rollers/cat-279d3,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,289C,bottom-rollers,/bottom-rollers/cat-289c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,289C2,bottom-rollers,/bottom-rollers/cat-289c2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,289D3,bottom-rollers,/bottom-rollers/cat-289d3,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,299D3,bottom-rollers,/bottom-rollers/cat-299d3,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,304-1890,CAT,299C,bottom-rollers,/bottom-rollers/cat-299c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
+verified,6689371,Bobcat,T140,bottom-rollers,/bottom-rollers/bobcat-t140,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T180,bottom-rollers,/bottom-rollers/bobcat-t180,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T190,bottom-rollers,/bottom-rollers/bobcat-t190,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T200,bottom-rollers,/bottom-rollers/bobcat-t200,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T250,bottom-rollers,/bottom-rollers/bobcat-t250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T300,bottom-rollers,/bottom-rollers/bobcat-t300,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T320,bottom-rollers,/bottom-rollers/bobcat-t320,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T630,bottom-rollers,/bottom-rollers/bobcat-t630,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T650,bottom-rollers,/bottom-rollers/bobcat-t650,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T550,bottom-rollers,/bottom-rollers/bobcat-t550,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T590,bottom-rollers,/bottom-rollers/bobcat-t590,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T750,bottom-rollers,/bottom-rollers/bobcat-t750,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,T770,bottom-rollers,/bottom-rollers/bobcat-t770,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,6689371,Bobcat,864,bottom-rollers,/bottom-rollers/bobcat-864,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
+verified,7323310,Bobcat,T870,bottom-rollers,/bottom-rollers/bobcat-t870,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL65-2,sprockets,/sprockets/kubota-svl65-2,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL65-2C,sprockets,/sprockets/kubota-svl65-2c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL75,sprockets,/sprockets/kubota-svl75,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL75-2,sprockets,/sprockets/kubota-svl75-2,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL75C,sprockets,/sprockets/kubota-svl75c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0511-21110,Kubota,SVL75-2C,sprockets,/sprockets/kubota-svl75-2c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL90,sprockets,/sprockets/kubota-svl90,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL90C,sprockets,/sprockets/kubota-svl90c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL90-2,sprockets,/sprockets/kubota-svl90-2,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL90-2C,sprockets,/sprockets/kubota-svl90-2c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL95-2S,sprockets,/sprockets/kubota-svl95-2s,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL95-2SC,sprockets,/sprockets/kubota-svl95-2sc,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL97-2,sprockets,/sprockets/kubota-svl97-2,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,V0611-21112,Kubota,SVL97-2C,sprockets,/sprockets/kubota-svl97-2c,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1916,CAT,279C,sprockets,/sprockets/cat-279c,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,279C2,sprockets,/sprockets/cat-279c2,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,279D,sprockets,/sprockets/cat-279d,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,279D3,sprockets,/sprockets/cat-279d3,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,289C,sprockets,/sprockets/cat-289c,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,289C2,sprockets,/sprockets/cat-289c2,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,289D,sprockets,/sprockets/cat-289d,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,289D3,sprockets,/sprockets/cat-289d3,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,299C,sprockets,/sprockets/cat-299c,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,299D,sprockets,/sprockets/cat-299d,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,299DR,sprockets,/sprockets/cat-299dr,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,299D3,sprockets,/sprockets/cat-299d3,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1916,CAT,299D3XE,sprockets,/sprockets/cat-299d3xe,YES,YES,YES,NO,YES,NO,YES,PASS,PASS
+verified,304-1870,CAT,239D,sprockets,/sprockets/cat-239d,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,239DR,sprockets,/sprockets/cat-239dr,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,249D,sprockets,/sprockets/cat-249d,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,249D3,sprockets,/sprockets/cat-249d3,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,255,sprockets,/sprockets/cat-255,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,259B3,sprockets,/sprockets/cat-259b3,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,259D,sprockets,/sprockets/cat-259d,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,259D3,sprockets,/sprockets/cat-259d3,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,239DLRC,sprockets,/sprockets/cat-239dlrc,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,249DLRC,sprockets,/sprockets/cat-249dlrc,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,259DLRC,sprockets,/sprockets/cat-259dlrc,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,304-1870,CAT,265,sprockets,/sprockets/cat-265,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,348-9647,CAT,259B3,idlers,/idlers/cat-259b3,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,259D,idlers,/idlers/cat-259d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,259D3,idlers,/idlers/cat-259d3,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,279C,idlers,/idlers/cat-279c,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,279D,idlers,/idlers/cat-279d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,289C,idlers,/idlers/cat-289c,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,289D,idlers,/idlers/cat-289d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,299C,idlers,/idlers/cat-299c,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,348-9647,CAT,299D,idlers,/idlers/cat-299d,YES,YES,YES,YES,NO,YES,YES,PASS,PASS
+verified,7204050,Bobcat,T450,sprockets,/sprockets/bobcat-t450,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,7204050,Bobcat,T595,sprockets,/sprockets/bobcat-t595,YES,YES,YES,NO,NO,NO,YES,PASS,PASS
+verified,7204050,Bobcat,T590,sprockets,/sprockets/bobcat-t590,YES,YES,YES,NO,NO,NO,YES,PASS,PASS

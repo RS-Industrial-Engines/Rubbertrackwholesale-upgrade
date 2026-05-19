@@ -27,8 +27,12 @@ export function normalizeForMatching(value: string): string {
  * - "T650" -> "T650"
  */
 export function cleanModelForDisplay(model: string): string {
-  // Remove equipment type descriptors in parentheses
-  let cleaned = model.replace(/\s*\([^)]+\)\s*/g, '').trim();
+  // Remove equipment type descriptors in parentheses and brackets
+  // Handles: "(Compact Track Loader)", "[I guiding | M-series]", "(562320000 and higher)"
+  let cleaned = model
+    .replace(/\s*\([^)]+\)\s*/g, '')  // Remove (parentheses)
+    .replace(/\s*\[[^\]]+\]\s*/g, '') // Remove [brackets]
+    .trim();
   
   // Normalize model patterns: remove spaces between letters and numbers
   // "SVL 75" -> "SVL75", "KX 040" -> "KX040", "U 17" -> "U17"
@@ -60,7 +64,10 @@ export function getModelSearchVariants(model: string): string[] {
   variants.push(normalizeForMatching(model));
   
   // Just the model part without descriptor but with original spacing
-  const withoutDescriptor = model.replace(/\s*\([^)]+\)\s*/g, '').trim();
+  const withoutDescriptor = model
+    .replace(/\s*\([^)]+\)\s*/g, '')  // Remove (parentheses)
+    .replace(/\s*\[[^\]]+\]\s*/g, '') // Remove [brackets]
+    .trim();
   variants.push(normalizeForMatching(withoutDescriptor));
   
   return [...new Set(variants)]; // Dedupe
@@ -527,14 +534,25 @@ export const fullMachineModels: Record<string, string[]> = {
   ],
   "Bobcat": [
     "220",
+    "225",
+    "231",
     "316",
     "319",
+    "320",
     "320 (562320000 and higher)",
     "320 (562320000 and lower)",
     "320 L",
+    "320D",
+    "320E",
+    "320G",
+    "320J",
     "321",
     "322",
+    "322D",
+    "322E",
     "322G",
+    "322J",
+    "322L",
     "323",
     "324",
     "325",
@@ -549,6 +567,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "334D",
     "335",
     "337",
+    "337D",
     "337G",
     "341",
     "341D",
@@ -557,10 +576,12 @@ export const fullMachineModels: Record<string, string[]> = {
     "418A",
     "425",
     "428",
+    "430",
     "430D(Fast TRACK)",
     "430G",
     "430ZHS",
     "430ZTS",
+    "435",
     "435 (Fast TRACK)",
     "442",
     "444",
@@ -591,6 +612,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "E35I [J guiding | R-series]",
     "E35M",
     "E35Z",
+    "E37",
     "E41",
     "E42",
     "E45",
@@ -881,11 +903,14 @@ export const fullMachineModels: Record<string, string[]> = {
   "CAT": [
     "216",
     "226",
+    "226B",
     "228",
     "232",
     "236",
     "239D",
     "239D3",
+    "239DLRC",
+    "239DR",
     "242",
     "246",
     "246C",
@@ -897,6 +922,8 @@ export const fullMachineModels: Record<string, string[]> = {
     "248",
     "249D",
     "249D3",
+    "249DLRC",
+    "255",
     "256C",
     "257",
     "257A",
@@ -911,7 +938,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "259C",
     "259D",
     "259D3",
+    "259DLRC",
     "262C",
+    "265",
     "267",
     "267A",
     "267B",
@@ -919,6 +948,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "269C",
     "269D",
     "269D3",
+    "272B",
     "272C",
     "277",
     "277A",
@@ -926,6 +956,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "277C",
     "277C2",
     "277D",
+    "279",
     "279C",
     "279C2",
     "279D",
@@ -956,6 +987,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "299D2XHP",
     "299D3",
     "299D3XE",
+    "299DR",
     "300.9D",
     "301.4C",
     "301.5",
@@ -974,8 +1006,11 @@ export const fullMachineModels: Record<string, string[]> = {
     "302.7DCR",
     "302CR",
     "303.5",
+    "303.5C",
     "303.5CCR",
+    "303.5D",
     "303.5DCR",
+    "303.5E",
     "303.5E2CR",
     "303.5ECR",
     "303CCR",
@@ -988,13 +1023,23 @@ export const fullMachineModels: Record<string, string[]> = {
     "304CCR",
     "304CR",
     "304DCR",
+    "304E",
     "304E2CR",
     "304ECR",
+    "305.5D",
     "305.5DCR",
+    "305.5E",
+    "305.5E2",
     "305.5E2CR",
+    "305.5E2FB",
     "305.5ECR",
     "305CCR",
+    "305DCR",
+    "305E2",
+    "305E2CR",
+    "305ECR",
     "306CR",
+    "306E2FB",
     "307",
     "307A (Japan E70B)",
     "307B",
@@ -3385,6 +3430,8 @@ export const fullMachineModels: Record<string, string[]> = {
     "KX 121-2S",
     "KX 121-3",
     "KX 121-3&",
+    "KX 121-3SS",
+    "KX 121-3ST",
     "KX 151",
     "KX 161-2",
     "KX 161-2S",
@@ -3450,15 +3497,22 @@ export const fullMachineModels: Record<string, string[]> = {
     "RX 502",
     "RX 502VA",
     "SVL 65-2 (Compact Track Loader)",
+    "SVL 65-2C (Compact Track Loader)",
     "SVL 75 (Compact Track Loader)",
     "SVL 75-2 (Compact Track Loader)",
+    "SVL 75-2C (Compact Track Loader)",
     "SVL 75-3 (Compact Track Loader)",
+    "SVL 75C (Compact Track Loader)",
     "SVL 90 (Compact Track Loader)",
     "SVL 90-2 (Compact Track Loader)",
+    "SVL 90-2C (Compact Track Loader)",
+    "SVL 90C (Compact Track Loader)",
     "SVL 95 (Compact Track Loader)",
     "SVL 95-2 (Compact Track Loader)",
     "SVL 95-2s (Compact Track Loader)",
+    "SVL 95-2SC (Compact Track Loader)",
     "SVL 97-2 (Compact Track Loader)",
+    "SVL 97-2C (Compact Track Loader)",
     "U-008",
     "U-10",
     "U-10-3",
@@ -3497,6 +3551,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "U-35-4",
     "U-35HG",
     "U-35SS (Super Series)",
+    "U-40-3",
     "U-36-4",
     "U-40",
     "U-45",
