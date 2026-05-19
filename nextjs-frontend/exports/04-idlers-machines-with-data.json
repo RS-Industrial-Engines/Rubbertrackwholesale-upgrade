@@ -1,0 +1,93 @@
+{
+  "exportDate": "2026-05-19T22:57:26.910Z",
+  "component": "idler",
+  "routePath": "idlers",
+  "totalMachines": 17,
+  "machines": [
+    {
+      "brand": "CAT",
+      "model": "259",
+      "slug": "cat-259"
+    },
+    {
+      "brand": "CAT",
+      "model": "259B",
+      "slug": "cat-259b"
+    },
+    {
+      "brand": "CAT",
+      "model": "259B3",
+      "slug": "cat-259b3"
+    },
+    {
+      "brand": "CAT",
+      "model": "259D",
+      "slug": "cat-259d"
+    },
+    {
+      "brand": "CAT",
+      "model": "259D3",
+      "slug": "cat-259d3"
+    },
+    {
+      "brand": "CAT",
+      "model": "279",
+      "slug": "cat-279"
+    },
+    {
+      "brand": "CAT",
+      "model": "279C",
+      "slug": "cat-279c"
+    },
+    {
+      "brand": "CAT",
+      "model": "279C2",
+      "slug": "cat-279c2"
+    },
+    {
+      "brand": "CAT",
+      "model": "279D",
+      "slug": "cat-279d"
+    },
+    {
+      "brand": "CAT",
+      "model": "279D2",
+      "slug": "cat-279d2"
+    },
+    {
+      "brand": "CAT",
+      "model": "289C",
+      "slug": "cat-289c"
+    },
+    {
+      "brand": "CAT",
+      "model": "289C2",
+      "slug": "cat-289c2"
+    },
+    {
+      "brand": "CAT",
+      "model": "289D",
+      "slug": "cat-289d"
+    },
+    {
+      "brand": "CAT",
+      "model": "289D2",
+      "slug": "cat-289d2"
+    },
+    {
+      "brand": "CAT",
+      "model": "299C",
+      "slug": "cat-299c"
+    },
+    {
+      "brand": "CAT",
+      "model": "299C2",
+      "slug": "cat-299c2"
+    },
+    {
+      "brand": "CAT",
+      "model": "299D",
+      "slug": "cat-299d"
+    }
+  ]
+}
