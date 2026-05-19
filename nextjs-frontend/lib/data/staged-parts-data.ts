@@ -3,10 +3,12 @@
  * STAGED UNDERCARRIAGE PARTS DATA
  * ============================================================================
  * 
- * STATUS: STAGED - NOT connected to public routes or sitemap
+ * STATUS: STAGED - Research-based fitment data
  * 
  * These are RESEARCHED part-number rows from the RubberTrax 55-machine dataset.
  * They are stored here for:
+ *   - Display on machine/component pages as blue "Research-Based Fitment" cards
+ *     (when SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES flag is enabled)
  *   - Compatibility enrichment on existing machine pages
  *   - Alternate part-number cross-referencing
  *   - Internal relationship mapping
@@ -17,18 +19,27 @@
  *   - publish_status = "staged"
  *   - owner_approved = false
  *   - index_status = false
- *   - sitemap_include = false
+ *   - sitemap_include = false (for standalone part pages)
  *   - confidence = "verified-researched"
  * 
- * DO NOT wire these to:
- *   - /parts/[slug] public pages
- *   - /parts index page
- *   - Sitemap
- *   - Any public-facing route
+ * WHAT STAGED PARTS MAY DO:
+ *   - Render on machine/component pages (e.g., /bottom-rollers/bobcat-337)
+ *     as blue "Research-Based Fitment" cards with disclaimers
+ *   - Enable machine/component page inclusion in sitemap (when data exists)
+ *   - Display part numbers, alternates, and compatibility in SSR HTML
+ *   - Show serial/chassis notes with appropriate warnings
+ * 
+ * WHAT STAGED PARTS MUST NOT DO:
+ *   - Generate standalone /parts/[slug] pages
+ *   - Generate Product schema markup
+ *   - Enter sitemap as standalone part URLs
+ *   - Show prices, inventory, or reviews
+ *   - Appear without clear "Research-Based" labeling and disclaimers
  * 
  * WHEN APPROVED: Move approved rows to verified-parts-data.ts with
  *   publish_status = "published", owner_approved = true,
  *   index_status = true, sitemap_include = true
+ *   This enables standalone /parts/[slug] pages and Product schema.
  * 
  * STAGED REVIEW WORKFLOW:
  * -----------------------

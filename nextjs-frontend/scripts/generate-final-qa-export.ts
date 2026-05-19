@@ -35,7 +35,8 @@ interface ExportRow {
   researched_vs_verified: "researched" | "verified";
   publish_status: string;
   generated_component_url: string;
-  included_in_sitemap: "YES" | "NO";
+  component_page_in_sitemap: "YES" | "NO";
+  standalone_part_page_in_sitemap: "YES" | "NO";
   generates_product_schema: "YES" | "NO";
   generates_parts_slug: "YES" | "NO";
 }
@@ -101,9 +102,10 @@ function processStaged(): ExportRow[] {
       const slug = createMachineSlug(part.brand, model);
       const url = `https://rubbertrackwholesale.com/${routePath}/${slug}`;
       
-      // Staged parts are included in sitemap when feature flag is enabled
-      const includedInSitemap = SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES && 
-                                REQUIRE_COMPONENT_DATA_FOR_SITEMAP ? "YES" : "NO";
+      // Staged parts: component page included in sitemap when feature flag enabled
+      // But standalone part pages are NEVER created for staged data
+      const componentPageInSitemap = SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES && 
+                                     REQUIRE_COMPONENT_DATA_FOR_SITEMAP ? "YES" : "NO";
       
       rows.push({
         brand: part.brand,
@@ -119,7 +121,8 @@ function processStaged(): ExportRow[] {
         researched_vs_verified: "researched",
         publish_status: part.publish_status,
         generated_component_url: url,
-        included_in_sitemap: includedInSitemap,
+        component_page_in_sitemap: componentPageInSitemap,
+        standalone_part_page_in_sitemap: "NO", // Staged parts NEVER get standalone sitemap entries
         generates_product_schema: ALLOW_STAGED_PARTS_PRODUCT_SCHEMA ? "YES" : "NO",
         generates_parts_slug: "NO", // Staged parts never get /parts/[slug] pages
       });
@@ -146,6 +149,10 @@ function processVerified(): ExportRow[] {
       const slug = createMachineSlug(part.brand, model);
       const url = `https://rubbertrackwholesale.com/${routePath}/${slug}`;
       
+      // Verified parts: component page always in sitemap
+      // Standalone part page in sitemap only if slug exists
+      const hasStandalonePartPage = !!part.slug;
+      
       rows.push({
         brand: part.brand,
         machine_model: model,
@@ -160,9 +167,10 @@ function processVerified(): ExportRow[] {
         researched_vs_verified: "verified",
         publish_status: part.publish_status,
         generated_component_url: url,
-        included_in_sitemap: "YES", // Verified parts always in sitemap
+        component_page_in_sitemap: "YES", // Verified parts always enable component page sitemap entry
+        standalone_part_page_in_sitemap: hasStandalonePartPage ? "YES" : "NO",
         generates_product_schema: "YES", // Verified parts get Product schema
-        generates_parts_slug: part.slug ? "YES" : "NO",
+        generates_parts_slug: hasStandalonePartPage ? "YES" : "NO",
       });
     }
   }
@@ -200,7 +208,8 @@ function generateExport() {
     "researched_vs_verified",
     "publish_status",
     "generated_component_url",
-    "included_in_sitemap",
+    "component_page_in_sitemap",
+    "standalone_part_page_in_sitemap",
     "generates_product_schema",
     "generates_parts_slug",
   ];
@@ -255,12 +264,14 @@ function generateExport() {
   }
   
   // Sitemap summary
-  const inSitemap = allRows.filter(r => r.included_in_sitemap === "YES").length;
+  const componentPagesInSitemap = allRows.filter(r => r.component_page_in_sitemap === "YES").length;
+  const standalonePartPagesInSitemap = allRows.filter(r => r.standalone_part_page_in_sitemap === "YES").length;
   const withSchema = allRows.filter(r => r.generates_product_schema === "YES").length;
   const withSlug = allRows.filter(r => r.generates_parts_slug === "YES").length;
   
   console.log("\nGovernance Summary:");
-  console.log(`  - Included in sitemap: ${inSitemap}`);
+  console.log(`  - Component page in sitemap: ${componentPagesInSitemap}`);
+  console.log(`  - Standalone part page in sitemap: ${standalonePartPagesInSitemap}`);
   console.log(`  - Generates Product schema: ${withSchema}`);
   console.log(`  - Generates /parts/[slug] page: ${withSlug}`);
   
