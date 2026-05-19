@@ -22680,6 +22680,25 @@ export function getModelsForBrand(brand: string): string[] {
 }
 
 /**
+ * Check if a track size string is valid metric format
+ * Valid: "400x86x49", "320x52.5x80", "300x52.5x84"
+ * Invalid: "13x4x56" (old inch format - width should be 3+ digits)
+ */
+function isValidMetricTrackSize(size: string): boolean {
+  // Pattern: WIDTHxPITCHxLINKS where WIDTH is 3+ digits
+  // WIDTH: 230-600mm typically (3 digits)
+  // PITCH: 52.5, 72, 86, etc.
+  // LINKS: 40-100 typically
+  const match = size.match(/^(\d+)x[\d.]+x\d+$/);
+  if (!match) return false;
+  
+  const width = parseInt(match[1], 10);
+  // Metric widths are 230mm+ for compact equipment
+  // Inch widths would be 8-18 inches (single/double digit)
+  return width >= 100;
+}
+
+/**
  * Get track sizes for a specific machine
  * 
  * IMPORTANT: This aggregates track sizes from ALL variants that normalize to the same base model.
@@ -22688,19 +22707,15 @@ export function getModelsForBrand(brand: string): string[] {
  * - "E32 [J guiding | R-series]"
  * 
  * This ensures the merged machine page shows all compatible track sizes.
+ * 
+ * NOTE: Filters out invalid inch-format sizes (e.g., "13x4x56")
  */
 export function getTrackSizesForMachine(brand: string, model: string): string[] {
-  // Try exact key first
-  const exactKey = `${brand}|${model}`;
-  if (fullMachineCompatibility[exactKey]) {
-    return fullMachineCompatibility[exactKey];
-  }
-  
   // Normalize the search model for comparison
   const normalizedBrand = normalizeForMatching(brand);
   const normalizedSearchModel = normalizeForMatching(cleanModelForDisplay(model));
   
-  // Aggregate track sizes from ALL matching variants
+  // Aggregate and dedupe track sizes from ALL matching variants
   const allSizes = new Set<string>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
@@ -22714,8 +22729,8 @@ export function getTrackSizesForMachine(brand: string, model: string): string[] 
     // Compare against the CLEANED version of the key model (strips guiding descriptors)
     const normalizedKeyModel = normalizeForMatching(cleanModelForDisplay(keyModel));
     if (normalizedKeyModel === normalizedSearchModel) {
-      // Found a matching variant - add its track sizes
-      sizes.forEach(size => allSizes.add(size));
+      // Found a matching variant - add its track sizes (filtered for valid metric, deduped)
+      sizes.filter(isValidMetricTrackSize).forEach(size => allSizes.add(size));
     }
   }
   

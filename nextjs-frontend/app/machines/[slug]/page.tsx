@@ -20,6 +20,7 @@ import {
   getModelsForBrand,
   getTrackSizesForMachine,
   normalizeForMatching,
+  cleanModelForDisplay,
 } from "@/lib/data/full-machine-data";
 import {
   createMachineSlug,
@@ -37,6 +38,7 @@ interface PageProps {
 
 // Parse a machine from the slug with EXACT matching
 // CRITICAL: john-deere-325g MUST match only "John Deere 325G", NOT "John Deere 325"
+// IMPORTANT: Returns CLEAN model name (without guiding descriptors) for display
 function findMachineFromSlug(slug: string): { make: string; model: string; equipmentType?: string; canonicalSlug?: string } | null {
   const slugNormalized = normalizeForMatching(slug);
   
@@ -47,10 +49,12 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
       
       // Exact slug match
       if (cleanSlug === slug) {
+        // Return CLEAN model name for display (strips guiding descriptors)
+        const cleanModel = cleanModelForDisplay(model);
         return { 
           make: brand, 
-          model,
-          equipmentType: getEquipmentType(model),
+          model: cleanModel,
+          equipmentType: getEquipmentType(cleanModel),
           canonicalSlug: cleanSlug,
         };
       }
@@ -58,10 +62,11 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
       // Normalized exact match (handles case differences)
       const cleanNormalized = normalizeForMatching(cleanSlug);
       if (cleanNormalized === slugNormalized) {
+        const cleanModel = cleanModelForDisplay(model);
         return { 
           make: brand, 
-          model,
-          equipmentType: getEquipmentType(model),
+          model: cleanModel,
+          equipmentType: getEquipmentType(cleanModel),
           canonicalSlug: cleanSlug,
         };
       }
@@ -79,11 +84,12 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
       if (normalizeForMatching(brand) === parsedMakeNorm) {
         for (const model of models) {
           if (normalizeForMatching(model) === parsedModelNorm) {
+            const cleanModel = cleanModelForDisplay(model);
             return {
               make: brand,
-              model,
-              equipmentType: getEquipmentType(model),
-              canonicalSlug: createMachineSlug(brand, model),
+              model: cleanModel,
+              equipmentType: getEquipmentType(cleanModel),
+              canonicalSlug: createMachineSlug(brand, cleanModel),
             };
           }
         }

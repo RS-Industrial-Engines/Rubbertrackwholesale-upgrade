@@ -311,16 +311,62 @@ export function getComponentUrl(brand: string, model: string, component: Underca
 }
 
 /**
- * Get all component URLs for a machine (only available components)
- */
+* Get all component URLs for a machine (only available components)
+*/
 export function getMachineComponentUrls(brand: string, model: string): Array<{ component: UndercarriageComponent; url: string; displayName: string }> {
-  const components = getUndercarriageComponents(brand, model);
+const components = getUndercarriageComponents(brand, model);
+
+return components.map((component) => ({
+component,
+url: getComponentUrl(brand, model, component),
+displayName: COMPONENT_DISPLAY_NAMES[component],
+}));
+}
+
+/**
+ * Component card info for machine pages
+ * Contains data availability status for conditional rendering
+ */
+export interface MachineComponentCard {
+  component: UndercarriageComponent;
+  displayName: string;
+  pluralName: string;
+  hasData: boolean;
+  url: string | null; // null if no data (should not link to SEO page)
+}
+
+/**
+ * Get ALL component cards for a machine page with data availability status
+ * 
+ * BUSINESS RULE: Machine pages must show all 4 component options:
+ * - Rubber Tracks (handled separately)
+ * - Bottom Rollers
+ * - Sprockets
+ * - Idlers
+ * 
+ * If a component has data → link to SEO page ("View Bottom Rollers")
+ * If no data → show quote CTA only ("Request Quote")
+ * 
+ * This preserves customer conversion while keeping SEO clean.
+ */
+export function getAllMachineComponentCards(brand: string, model: string): MachineComponentCard[] {
+  const allComponents: UndercarriageComponent[] = ["bottom-roller", "sprocket", "idler"];
+  // Note: carrier-roller excluded from default display - only shown if machine has them
   
-  return components.map((component) => ({
-    component,
-    url: getComponentUrl(brand, model, component),
-    displayName: COMPONENT_DISPLAY_NAMES[component],
-  }));
+  const slug = createMachineSlug(brand, model);
+  
+  return allComponents.map((component) => {
+    const routePath = COMPONENT_URL_PATHS[component] as ComponentRoutePath;
+    const hasData = hasComponentData(brand, model, routePath);
+    
+    return {
+      component,
+      displayName: COMPONENT_DISPLAY_NAMES[component],
+      pluralName: COMPONENT_PLURAL_NAMES[component],
+      hasData,
+      url: hasData ? `/${routePath}/${slug}` : null,
+    };
+  });
 }
 
 /**
