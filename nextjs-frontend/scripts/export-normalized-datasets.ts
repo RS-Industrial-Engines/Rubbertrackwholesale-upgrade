@@ -240,20 +240,21 @@ writeJSON("05-verified-parts-data.json", {
 const verifiedPartsCSVRows: string[][] = [];
 for (const part of VERIFIED_PARTS) {
   verifiedPartsCSVRows.push([
+    part.record_id,
     part.brand,
-    part.model,
-    part.partType,
-    part.partSubtype || "",
-    part.partNumber,
-    part.description || "",
-    part.price?.toString() || "",
-    part.source || "",
-    part.compatibleMachines?.join("; ") || "",
+    part.part_type,
+    part.part_subtype,
+    part.primary_part_number,
+    part.product_name,
+    part.compatible_models_text,
+    part.track_sizes.join("; "),
+    part.seo_title,
+    part.slug,
   ]);
 }
 
 writeCSV("05-verified-parts-data.csv", [
-  "Brand", "Model", "Part Type", "Part Subtype", "Part Number", "Description", "Price", "Source", "Compatible Machines"
+  "Record ID", "Brand", "Part Type", "Part Subtype", "Part Number", "Product Name", "Compatible Models", "Track Sizes", "SEO Title", "Slug"
 ], verifiedPartsCSVRows);
 
 // ============================================================================
