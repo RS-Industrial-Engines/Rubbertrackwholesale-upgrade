@@ -28,7 +28,7 @@ import type { CompatibilitySearchResult } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
 import {
-  getMachineComponentUrls,
+  getAllMachineComponentCards,
   COMPONENT_PLURAL_NAMES,
 } from "@/lib/data/undercarriage-data";
 
@@ -373,27 +373,29 @@ export function MachineDetailContent({
               </CardContent>
             </Card>
             
-            {/* Machine-specific undercarriage component links */}
-            {getMachineComponentUrls(make, model).map((componentLink) => (
-              <Card key={componentLink.component} className="group hover:border-primary transition-colors h-full flex flex-col">
+            {/* All undercarriage component cards - always show all 3 */}
+            {/* ALL cards link to component pages - page content varies by data availability */}
+            {getAllMachineComponentCards(make, model).map((card) => (
+              <Card key={card.component} className="group hover:border-primary transition-colors h-full flex flex-col">
                 <CardContent className="p-6 flex flex-col h-full">
                   <Settings className="h-10 w-10 text-primary mb-4" />
                   <h3 className="font-semibold text-lg mb-2 group-hover:text-primary">
-                    {COMPONENT_PLURAL_NAMES[componentLink.component]}
+                    {card.pluralName}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 flex-grow">
-                    {make} {model} {componentLink.displayName.toLowerCase()} replacement
+                    {make} {model} {card.displayName.toLowerCase()} replacement
                   </p>
                   <div className="flex flex-col gap-2 mt-auto">
+                    {/* ALWAYS link to component page - page handles data vs quote mode */}
                     <Button variant="outline" size="sm" asChild className="w-full">
-                      <Link href={componentLink.url}>
-                        View {COMPONENT_PLURAL_NAMES[componentLink.component]}
+                      <Link href={card.url}>
+                        View {card.pluralName}
                       </Link>
                     </Button>
                     <Button size="sm" asChild className="w-full">
                       <Link href={businessInfo.phoneTel}>
                         <Phone className="h-3 w-3 mr-2" />
-                        Get Quote
+                        Call to Confirm
                       </Link>
                     </Button>
                   </div>

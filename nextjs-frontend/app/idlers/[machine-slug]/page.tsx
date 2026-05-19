@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { MachineComponentDetailContent } from "@/components/undercarriage/machine-component-detail-content";
+import { MachineComponentQuoteContent } from "@/components/undercarriage/machine-component-quote-content";
 import { generateUndercarriageComponentSchema, generateBreadcrumbSchema, getSiteUrl } from "@/lib/schema";
 import { parseMachineSlugClean, createMachineSlug, isMessySlug, cleanMalformedSlug } from "@/lib/url-utils";
 import { fullMachineModels, normalizeForMatching, cleanModelForDisplay } from "@/lib/data/full-machine-data";
@@ -10,6 +11,7 @@ import {
   COMPONENT_PLURAL_NAMES,
   COMPONENT_URL_PATHS,
   inferEquipmentType,
+  hasComponentData,
 } from "@/lib/data/undercarriage-data";
 
 const COMPONENT_TYPE = "idler" as const;
@@ -117,15 +119,24 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Clean model for public display
   const cleanModel = cleanModelForDisplay(model);
   
+  // Check if this machine has real data for this component
+  const hasData = hasComponentData(brand, model, "idlers");
+  
   return {
     title: `${brand} ${cleanModel} ${displayName} Replacement | ${pluralName} | Rubber Track Wholesale`,
-    description: `Find replacement ${pluralName.toLowerCase()} for your ${brand} ${cleanModel}. Premium quality undercarriage components with wholesale pricing. Houston warehouse with fast nationwide shipping.`,
+    description: hasData
+      ? `Find replacement ${pluralName.toLowerCase()} for your ${brand} ${cleanModel}. Premium quality undercarriage components with wholesale pricing. Houston warehouse with fast nationwide shipping.`
+      : `Get a quote for ${brand} ${cleanModel} ${pluralName.toLowerCase()}. Call for serial number verification and pricing. Houston warehouse with fast nationwide shipping.`,
     alternates: {
       canonical: `${SITE_URL}/${COMPONENT_URL_PATHS[COMPONENT_TYPE]}/${slug}`,
     },
+    // NO-DATA PAGES: noindex, follow (allows crawling links but not indexing)
+    robots: hasData ? undefined : { index: false, follow: true },
     openGraph: {
       title: `${brand} ${cleanModel} ${displayName} Replacement`,
-      description: `Premium quality replacement ${pluralName.toLowerCase()} for ${brand} ${cleanModel}. Wholesale pricing with fast shipping from Houston.`,
+      description: hasData
+        ? `Premium quality replacement ${pluralName.toLowerCase()} for ${brand} ${cleanModel}. Wholesale pricing with fast shipping from Houston.`
+        : `Get a quote for ${brand} ${cleanModel} ${pluralName.toLowerCase()}. Call for serial number verification and pricing.`,
       type: "website",
       url: `${SITE_URL}/${COMPONENT_URL_PATHS[COMPONENT_TYPE]}/${slug}`,
     },
@@ -160,7 +171,38 @@ export default async function IdlerMachinePage({ params }: PageProps) {
   // Get track sizes for this machine
   const trackSizes = getTrackSizesForMachine(brand, model);
   
-  // Generate schema using clean model name
+  // Check if this machine has real data for this component
+  const hasData = hasComponentData(brand, model, "idlers");
+  
+  // Breadcrumb schema (always included)
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: SITE_URL },
+    { name: pluralName, url: `${SITE_URL}/${urlPath}` },
+    { name: `${brand} ${cleanModel}`, url: `${SITE_URL}/${urlPath}/${slug}` },
+  ]);
+  
+  // NO-DATA PAGE: Show quote/verification content, NO Product schema
+  if (!hasData) {
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema),
+          }}
+        />
+        <MachineComponentQuoteContent
+          brand={brand}
+          model={cleanModel}
+          componentType={COMPONENT_TYPE}
+          equipmentType={equipmentType}
+          trackSizes={trackSizes}
+        />
+      </>
+    );
+  }
+  
+  // DATA-BACKED PAGE: Show full SEO content with Product schema
   const componentSchema = generateUndercarriageComponentSchema(
     brand,
     cleanModel,
@@ -169,12 +211,6 @@ export default async function IdlerMachinePage({ params }: PageProps) {
     pluralName,
     urlPath
   );
-  
-  const breadcrumbSchema = generateBreadcrumbSchema([
-    { name: "Home", url: SITE_URL },
-    { name: pluralName, url: `${SITE_URL}/${urlPath}` },
-    { name: `${brand} ${cleanModel}`, url: `${SITE_URL}/${urlPath}/${slug}` },
-  ]);
 
   return (
     <>

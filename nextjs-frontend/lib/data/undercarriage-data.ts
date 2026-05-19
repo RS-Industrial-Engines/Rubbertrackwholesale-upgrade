@@ -265,7 +265,7 @@ export function getUndercarriageComponents(brand: string, model: string): Underc
 /**
  * Get all machines for a specific component type (deduped by slug)
  * Only returns machines that have real data for this component type
- * This ensures category pages only list machines with content
+ * USE FOR: Sitemap generation, SEO indexing decisions
  */
 export function getAllMachinesForComponent(component: UndercarriageComponent): Array<{ brand: string; model: string; slug: string }> {
   const machines: Array<{ brand: string; model: string; slug: string }> = [];
@@ -302,6 +302,44 @@ export function getAllMachinesForComponent(component: UndercarriageComponent): A
 }
 
 /**
+ * Get ALL machines for category page display (deduped by slug)
+ * Returns ALL machines with hasData flag for UI conditional rendering
+ * USE FOR: Category page navigation (not sitemap)
+ * 
+ * BUSINESS RULE: Category pages show ALL machines for complete navigation.
+ * The hasData flag determines if destination is SEO page or quote page.
+ */
+export function getAllMachinesForCategoryPage(component: UndercarriageComponent): Array<{ brand: string; model: string; slug: string; hasData: boolean }> {
+  const machines: Array<{ brand: string; model: string; slug: string; hasData: boolean }> = [];
+  const seenSlugs = new Set<string>();
+  
+  // Convert component type to route path for data check
+  const routePath = COMPONENT_URL_PATHS[component] as ComponentRoutePath;
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      
+      // Dedupe by slug
+      if (seenSlugs.has(slug)) {
+        continue;
+      }
+      
+      seenSlugs.add(slug);
+      
+      machines.push({
+        brand,
+        model: cleanModelForDisplay(model),
+        slug,
+        hasData: hasComponentData(brand, model, routePath),
+      });
+    }
+  }
+  
+  return machines;
+}
+
+/**
  * Get the URL for a machine's undercarriage component page
  */
 export function getComponentUrl(brand: string, model: string, component: UndercarriageComponent): string {
@@ -311,16 +349,64 @@ export function getComponentUrl(brand: string, model: string, component: Underca
 }
 
 /**
- * Get all component URLs for a machine (only available components)
- */
+* Get all component URLs for a machine (only available components)
+*/
 export function getMachineComponentUrls(brand: string, model: string): Array<{ component: UndercarriageComponent; url: string; displayName: string }> {
-  const components = getUndercarriageComponents(brand, model);
+const components = getUndercarriageComponents(brand, model);
+
+return components.map((component) => ({
+component,
+url: getComponentUrl(brand, model, component),
+displayName: COMPONENT_DISPLAY_NAMES[component],
+}));
+}
+
+/**
+ * Component card info for machine pages
+ * Contains data availability status for conditional rendering
+ */
+export interface MachineComponentCard {
+  component: UndercarriageComponent;
+  displayName: string;
+  pluralName: string;
+  hasData: boolean;
+  url: string; // ALWAYS set - page handles data vs quote mode
+}
+
+/**
+ * Get ALL component cards for a machine page with data availability status
+ * 
+ * BUSINESS RULE: Machine pages must show all 4 component options:
+ * - Rubber Tracks (handled separately)
+ * - Bottom Rollers
+ * - Sprockets
+ * - Idlers
+ * 
+ * ALL components ALWAYS link to their component page.
+ * The destination page handles data availability:
+ * - hasData=true → SEO-indexed page with product data
+ * - hasData=false → noindex quote/verification page
+ * 
+ * This preserves complete customer navigation while keeping SEO clean.
+ */
+export function getAllMachineComponentCards(brand: string, model: string): MachineComponentCard[] {
+  const allComponents: UndercarriageComponent[] = ["bottom-roller", "sprocket", "idler"];
+  // Note: carrier-roller excluded from default display - only shown if machine has them
   
-  return components.map((component) => ({
-    component,
-    url: getComponentUrl(brand, model, component),
-    displayName: COMPONENT_DISPLAY_NAMES[component],
-  }));
+  const slug = createMachineSlug(brand, model);
+  
+  return allComponents.map((component) => {
+    const routePath = COMPONENT_URL_PATHS[component] as ComponentRoutePath;
+    const hasData = hasComponentData(brand, model, routePath);
+    
+    return {
+      component,
+      displayName: COMPONENT_DISPLAY_NAMES[component],
+      pluralName: COMPONENT_PLURAL_NAMES[component],
+      hasData,
+      url: `/${routePath}/${slug}`, // ALWAYS link - page handles data vs quote mode
+    };
+  });
 }
 
 /**
@@ -366,6 +452,7 @@ export const PRIORITY_BRANDS = [
 /**
  * Get machines grouped by brand for a component (deduped by slug)
  * Only includes machines that have real data for this component type
+ * USE FOR: Sitemap generation only
  */
 export function getMachinesGroupedByBrand(component: UndercarriageComponent): Record<string, Array<{ model: string; slug: string }>> {
   const grouped: Record<string, Array<{ model: string; slug: string }>> = {};
@@ -398,6 +485,49 @@ export function getMachinesGroupedByBrand(component: UndercarriageComponent): Re
       brandMachines.push({
         model: cleanModel,
         slug,
+      });
+    }
+    
+    if (brandMachines.length > 0) {
+      grouped[brand] = brandMachines;
+    }
+  }
+  
+  return grouped;
+}
+
+/**
+ * Get ALL machines grouped by brand for category page display (deduped by slug)
+ * Returns ALL machines with hasData flag for UI conditional rendering
+ * USE FOR: Category page navigation (not sitemap)
+ * 
+ * BUSINESS RULE: Category pages show ALL brands and machines for complete navigation.
+ * The hasData flag determines if destination is SEO page or quote page.
+ */
+export function getAllMachinesGroupedByBrandForCategoryPage(component: UndercarriageComponent): Record<string, Array<{ model: string; slug: string; hasData: boolean }>> {
+  const grouped: Record<string, Array<{ model: string; slug: string; hasData: boolean }>> = {};
+  const seenSlugsGlobal = new Set<string>();
+  
+  const routePath = COMPONENT_URL_PATHS[component] as ComponentRoutePath;
+  
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    const brandMachines: Array<{ model: string; slug: string; hasData: boolean }> = [];
+    
+    for (const model of models) {
+      const slug = createMachineSlug(brand, model);
+      
+      if (seenSlugsGlobal.has(slug)) {
+        continue;
+      }
+      
+      seenSlugsGlobal.add(slug);
+      
+      const cleanModel = cleanModelForDisplay(model);
+      
+      brandMachines.push({
+        model: cleanModel,
+        slug,
+        hasData: hasComponentData(brand, model, routePath),
       });
     }
     

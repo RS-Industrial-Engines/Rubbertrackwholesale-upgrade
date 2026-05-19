@@ -15,6 +15,19 @@ export function normalizeForMatching(value: string): string {
 }
 
 /**
+ * Split a compatibility key into [brand, model] parts.
+ * IMPORTANT: Only splits at the FIRST pipe character, because model names
+ * may contain pipes in bracket descriptors (e.g., "E32 [I guiding | M-series]")
+ */
+export function splitCompatibilityKey(key: string): [string, string] {
+  const firstPipeIndex = key.indexOf('|');
+  if (firstPipeIndex === -1) {
+    return [key, ''];
+  }
+  return [key.slice(0, firstPipeIndex), key.slice(firstPipeIndex + 1)];
+}
+
+/**
  * Clean a model name for public display
  * Removes equipment type descriptors like "(Compact Track Loader)", "(Mini Excavator)"
  * Also normalizes spacing: "SVL 75" -> "SVL75", "KX 040" -> "KX040"
@@ -22667,41 +22680,81 @@ export function getModelsForBrand(brand: string): string[] {
 }
 
 /**
+ * Check if a track size string is valid metric format
+ * Valid: "400x86x49", "320x52.5x80", "300x52.5x84"
+ * Invalid: "13x4x56" (old inch format - width should be 3+ digits)
+ */
+function isValidMetricTrackSize(size: string): boolean {
+  // Pattern: WIDTHxPITCHxLINKS where WIDTH is 3+ digits
+  // WIDTH: 230-600mm typically (3 digits)
+  // PITCH: 52.5, 72, 86, etc.
+  // LINKS: 40-100 typically
+  const match = size.match(/^(\d+)x[\d.]+x\d+$/);
+  if (!match) return false;
+  
+  const width = parseInt(match[1], 10);
+  // Metric widths are 230mm+ for compact equipment
+  // Inch widths would be 8-18 inches (single/double digit)
+  return width >= 100;
+}
+
+/**
  * Get track sizes for a specific machine
+ * 
+ * IMPORTANT: This aggregates track sizes from ALL variants that normalize to the same base model.
+ * For example, "E32" will aggregate sizes from:
+ * - "E32 [I guiding | M-series]"
+ * - "E32 [J guiding | R-series]"
+ * 
+ * This ensures the merged machine page shows all compatible track sizes.
+ * 
+ * NOTE: Filters out invalid inch-format sizes (e.g., "13x4x56")
  */
 export function getTrackSizesForMachine(brand: string, model: string): string[] {
-  // Try exact key
-  const exactKey = `${brand}|${model}`;
-  if (fullMachineCompatibility[exactKey]) {
-    return fullMachineCompatibility[exactKey];
-  }
-  
-  // Try normalized matching
+  // Normalize the search model for comparison
   const normalizedBrand = normalizeForMatching(brand);
-  const normalizedModel = normalizeForMatching(model);
+  const normalizedSearchModel = normalizeForMatching(cleanModelForDisplay(model));
+  
+  // Aggregate and dedupe track sizes from ALL matching variants
+  const allSizes = new Set<string>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [keyBrand, keyModel] = key.split('|');
-    if (normalizeForMatching(keyBrand) === normalizedBrand &&
-        normalizeForMatching(keyModel) === normalizedModel) {
-      return sizes;
+    const [keyBrand, keyModel] = splitCompatibilityKey(key);
+    
+    // Brand must match
+    if (normalizeForMatching(keyBrand) !== normalizedBrand) {
+      continue;
+    }
+    
+    // Compare against the CLEANED version of the key model (strips guiding descriptors)
+    const normalizedKeyModel = normalizeForMatching(cleanModelForDisplay(keyModel));
+    if (normalizedKeyModel === normalizedSearchModel) {
+      // Found a matching variant - add its track sizes (filtered for valid metric, deduped)
+      sizes.filter(isValidMetricTrackSize).forEach(size => allSizes.add(size));
     }
   }
   
-  return [];
+  return Array.from(allSizes);
 }
 
 /**
  * Search machines by query (brand, model, or both)
- * Uses aggressive normalization
+ * Uses aggressive normalization.
+ * 
+ * IMPORTANT: Results are DEDUPED by base machine model.
+ * Guiding variants (E35 [I guiding], E35 [J guiding]) are merged into the base model (E35).
+ * Track sizes from all variants are combined.
+ * The returned model name is the CLEAN version without guiding descriptors.
  */
 export function searchMachines(query: string): { brand: string; model: string; trackSizes: string[] }[] {
   const normalizedQuery = normalizeForMatching(query);
   const queryWords = query.toLowerCase().split(/\s+/).filter(Boolean);
-  const results: { brand: string; model: string; trackSizes: string[] }[] = [];
+  
+  // Use a map to dedupe by base machine: "brand|baseModel" → combined result
+  const resultMap = new Map<string, { brand: string; model: string; trackSizes: Set<string> }>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [brand, model] = key.split('|');
+    const [brand, model] = splitCompatibilityKey(key);
     const normalizedBrand = normalizeForMatching(brand);
     const normalizedModel = normalizeForMatching(model);
     const normalizedFull = normalizeForMatching(`${brand} ${model}`);
@@ -22753,11 +22806,32 @@ export function searchMachines(query: string): { brand: string; model: string; t
     }
     
     if (matches) {
-      results.push({ brand, model, trackSizes: sizes });
+      // Get the clean model name (without guiding descriptors)
+      const cleanModel = cleanModelForDisplay(model);
+      // Create a dedupe key using normalized base model
+      const baseModelKey = `${brand}|${normalizeForMatching(cleanModel)}`;
+      
+      if (resultMap.has(baseModelKey)) {
+        // Merge track sizes into existing entry
+        const existing = resultMap.get(baseModelKey)!;
+        sizes.forEach(size => existing.trackSizes.add(size));
+      } else {
+        // Add new entry with clean model name
+        resultMap.set(baseModelKey, {
+          brand,
+          model: cleanModel, // Use clean model name without guiding descriptors
+          trackSizes: new Set(sizes),
+        });
+      }
     }
   }
   
-  return results;
+  // Convert map to array, converting Set to array for track sizes
+  return Array.from(resultMap.values()).map(({ brand, model, trackSizes }) => ({
+    brand,
+    model,
+    trackSizes: Array.from(trackSizes),
+  }));
 }
 
 /**
@@ -22780,7 +22854,7 @@ export function getMachinesForTrackSize(trackSize: string): { brand: string; mod
   
   // Iterate through every machine in the compatibility map
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [brand, model] = key.split('|');
+    const [brand, model] = splitCompatibilityKey(key);
     
     // Check each size in the machine's compatible sizes array
     for (const sizeEntry of sizes) {

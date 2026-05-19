@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "totalMachines": 4713,
+    "guidingVariants": 15,
+    "uniqueBaseMachines": 4587,
+    "slugsGenerated": 4713,
+    "malformedSlugs": [
+      "Astec Mini-Excavator → astec-mini-excavator",
+      "Bertolini Mini-excavator → bertolini-mini-excavator",
+      "Betram Crawler Crane → betram-crawlercrane",
+      "Holmed Mini-excavator → holmed-mini-excavator",
+      "ICE(Internationalstruction Equipment INC TD 308 (>2004 model) → ice(internationalstruction-equipment-inc-td308",
+      "Nemag Mini-excavator → nemag-mini-excavator"
+    ],
+    "guidingInSlugs": [],
+    "searchDedupeIssues": []
+  }
+}
