@@ -41,7 +41,7 @@ export function createMachineSlug(make: string, model: string): string {
     .trim()
     // Remove parentheses and their contents
     .replace(/\s*\([^)]*\)/g, "")
-    // Remove brackets and their contents
+    // Remove brackets and their contents (with or without leading space)
     .replace(/\s*\[[^\]]*\]/g, "")
     // Remove special characters except alphanumerics, hyphens, and spaces
     .replace(/[^a-z0-9\s-]/g, "")
@@ -71,6 +71,10 @@ export function isMessySlug(slug: string): boolean {
   if (slug.includes("[") || slug.includes("]")) return true;
   // Check for double hyphens
   if (slug.includes("--")) return true;
+  // Check for guiding descriptor residue (e.g., "e35iguiding", "e35jguiding", "cx36bmciguiding")
+  // These patterns indicate bracket content wasn't stripped properly from source
+  if (/[a-z0-9](i|j)guiding/i.test(slug)) return true;
+  if (/guiding|mseries|rseries/i.test(slug)) return true;
   // Check for common equipment type keywords in the slug
   const messyPatterns = [
     "compact-track-loader",
@@ -84,6 +88,32 @@ export function isMessySlug(slug: string): boolean {
     if (slug.toLowerCase().includes(pattern)) return true;
   }
   return false;
+}
+
+/**
+ * Clean a potentially malformed slug by removing guiding/descriptor residue.
+ * Used for redirect logic and fuzzy matching.
+ * 
+ * Examples:
+ * - "bobcat-e35iguiding" → "bobcat-e35"
+ * - "bobcat-e35iguidingmseries" → "bobcat-e35"
+ * - "case-cx36bmciguiding" → "case-cx36bmc"
+ * - "bobcat-e32jguidingrseries" → "bobcat-e32"
+ */
+export function cleanMalformedSlug(slug: string): string {
+  return slug
+    .toLowerCase()
+    // Remove guiding descriptor patterns and everything after
+    // Match: iguiding, jguiding, iguidingmseries, jguidingrseries, etc.
+    .replace(/[ij]guiding.*$/i, "")
+    // Remove any stray "guiding", "mseries", "rseries" that might remain
+    .replace(/guiding/gi, "")
+    .replace(/mseries/gi, "")
+    .replace(/rseries/gi, "")
+    // Clean up any trailing hyphens or double hyphens
+    .replace(/-+/g, "-")
+    .replace(/-$/g, "")
+    .trim();
 }
 
 /**

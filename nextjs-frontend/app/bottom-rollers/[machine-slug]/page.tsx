@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { MachineComponentDetailContent } from "@/components/undercarriage/machine-component-detail-content";
 import { generateUndercarriageComponentSchema, generateBreadcrumbSchema, getSiteUrl } from "@/lib/schema";
-import { parseMachineSlugClean, createMachineSlug } from "@/lib/url-utils";
+import { parseMachineSlugClean, createMachineSlug, isMessySlug, cleanMalformedSlug } from "@/lib/url-utils";
 import { fullMachineModels, normalizeForMatching, cleanModelForDisplay } from "@/lib/data/full-machine-data";
 import { getTrackSizesForMachine } from "@/lib/data/full-machine-data";
 import {
@@ -37,8 +37,8 @@ export async function generateStaticParams() {
   return params;
 }
 
-// Find machine by slug
-function findMachineBySlug(slug: string): { brand: string; model: string } | null {
+// Find machine by slug (with fallback for malformed slugs)
+function findMachineBySlug(slug: string): { brand: string; model: string; canonicalSlug: string } | null {
   // First try the clean parser
   const parsed = parseMachineSlugClean(slug);
   if (parsed) {
@@ -48,7 +48,8 @@ function findMachineBySlug(slug: string): { brand: string; model: string } | nul
       const normalizedParsedModel = normalizeForMatching(parsed.model);
       for (const model of models) {
         if (normalizeForMatching(model) === normalizedParsedModel) {
-          return { brand: parsed.make, model };
+          const canonicalSlug = createMachineSlug(parsed.make, model);
+          return { brand: parsed.make, model, canonicalSlug };
         }
       }
     }
@@ -57,8 +58,40 @@ function findMachineBySlug(slug: string): { brand: string; model: string } | nul
   // Fallback: search all machines for matching slug
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
-      if (createMachineSlug(brand, model) === slug) {
-        return { brand, model };
+      const canonicalSlug = createMachineSlug(brand, model);
+      if (canonicalSlug === slug) {
+        return { brand, model, canonicalSlug };
+      }
+    }
+  }
+  
+  // Try cleaning the malformed slug and searching again
+  if (isMessySlug(slug)) {
+    const cleanedSlug = cleanMalformedSlug(slug);
+    if (cleanedSlug !== slug) {
+      // Try parsing the cleaned slug
+      const cleanedParsed = parseMachineSlugClean(cleanedSlug);
+      if (cleanedParsed) {
+        const models = fullMachineModels[cleanedParsed.make];
+        if (models) {
+          const normalizedModel = normalizeForMatching(cleanedParsed.model);
+          for (const model of models) {
+            if (normalizeForMatching(model) === normalizedModel) {
+              const canonicalSlug = createMachineSlug(cleanedParsed.make, model);
+              return { brand: cleanedParsed.make, model, canonicalSlug };
+            }
+          }
+        }
+      }
+      
+      // Direct search with cleaned slug
+      for (const [brand, models] of Object.entries(fullMachineModels)) {
+        for (const model of models) {
+          const canonicalSlug = createMachineSlug(brand, model);
+          if (canonicalSlug === cleanedSlug) {
+            return { brand, model, canonicalSlug };
+          }
+        }
       }
     }
   }
@@ -107,7 +140,13 @@ export default async function BottomRollerMachinePage({ params }: PageProps) {
     notFound();
   }
   
-  const { brand, model } = machine;
+  const { brand, model, canonicalSlug } = machine;
+  
+  // Redirect malformed slugs to canonical URL (301 permanent redirect)
+  if (slug !== canonicalSlug) {
+    redirect(`/${COMPONENT_URL_PATHS[COMPONENT_TYPE]}/${canonicalSlug}`);
+  }
+  
   const displayName = COMPONENT_DISPLAY_NAMES[COMPONENT_TYPE];
   const pluralName = COMPONENT_PLURAL_NAMES[COMPONENT_TYPE];
   const urlPath = COMPONENT_URL_PATHS[COMPONENT_TYPE];

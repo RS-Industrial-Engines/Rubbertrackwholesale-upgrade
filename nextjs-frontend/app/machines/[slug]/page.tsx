@@ -24,6 +24,7 @@ import {
 import {
   createMachineSlug,
   isMessySlug,
+  cleanMalformedSlug,
   parseMachineSlugClean,
   BUSINESS_INFO,
 } from "@/lib/url-utils";
@@ -36,7 +37,7 @@ interface PageProps {
 
 // Parse a machine from the slug with EXACT matching
 // CRITICAL: john-deere-325g MUST match only "John Deere 325G", NOT "John Deere 325"
-function findMachineFromSlug(slug: string): { make: string; model: string; equipmentType?: string } | null {
+function findMachineFromSlug(slug: string): { make: string; model: string; equipmentType?: string; canonicalSlug?: string } | null {
   const slugNormalized = normalizeForMatching(slug);
   
   // First pass: find EXACT match by checking clean slugs
@@ -50,6 +51,7 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
           make: brand, 
           model,
           equipmentType: getEquipmentType(model),
+          canonicalSlug: cleanSlug,
         };
       }
       
@@ -60,6 +62,7 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
           make: brand, 
           model,
           equipmentType: getEquipmentType(model),
+          canonicalSlug: cleanSlug,
         };
       }
     }
@@ -80,6 +83,7 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
               make: brand,
               model,
               equipmentType: getEquipmentType(model),
+              canonicalSlug: createMachineSlug(brand, model),
             };
           }
         }
@@ -91,7 +95,20 @@ function findMachineFromSlug(slug: string): { make: string; model: string; equip
       make: parsed.make,
       model: parsed.model,
       equipmentType: getEquipmentType(parsed.model),
+      canonicalSlug: createMachineSlug(parsed.make, parsed.model),
     };
+  }
+  
+  // Third pass: try cleaning malformed slugs and searching again
+  if (isMessySlug(slug)) {
+    const cleanedSlug = cleanMalformedSlug(slug);
+    if (cleanedSlug !== slug) {
+      // Recursive call with cleaned slug
+      const cleanedResult = findMachineFromSlug(cleanedSlug);
+      if (cleanedResult) {
+        return cleanedResult;
+      }
+    }
   }
   
   return null;
