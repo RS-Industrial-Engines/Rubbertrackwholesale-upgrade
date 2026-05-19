@@ -338,8 +338,9 @@ export default async function MachineDetailPage({ params }: PageProps) {
       equipmentType: getEquipmentType(cleanModel),
     }));
 
-  // Generate FAQs
-  const trackSizes = compatibility.track_sizes?.map((t) => t.size) || [];
+  // Generate FAQs - SAFETY DEDUPE track sizes by size string
+  const rawTrackSizes = compatibility.track_sizes?.map((t) => t.size) || [];
+  const trackSizes = [...new Set(rawTrackSizes)]; // Dedupe by exact size string
   const primaryTrackSize = trackSizes[0] || "";
   
   const faqs = [

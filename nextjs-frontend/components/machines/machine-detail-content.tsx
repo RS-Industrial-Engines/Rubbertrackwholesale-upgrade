@@ -59,7 +59,15 @@ export function MachineDetailContent({
   faqs,
   businessInfo,
 }: MachineDetailContentProps) {
-  const trackSizes = compatibility?.track_sizes || [];
+  // SAFETY DEDUPE: Ensure no duplicate track sizes in render
+  // Dedupe by size string (e.g., "300x52.5x80") before rendering cards
+  const rawTrackSizes = compatibility?.track_sizes || [];
+  const seenSizes = new Set<string>();
+  const trackSizes = rawTrackSizes.filter((track) => {
+    if (seenSizes.has(track.size)) return false;
+    seenSizes.add(track.size);
+    return true;
+  });
   const primaryTrackSize = trackSizes[0]?.size || "";
   const slug = createMachineSlug(make, model);
 
