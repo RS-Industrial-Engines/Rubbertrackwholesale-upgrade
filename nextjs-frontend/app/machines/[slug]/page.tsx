@@ -21,6 +21,7 @@ import {
   getTrackSizesForMachine,
   normalizeForMatching,
   cleanModelForDisplay,
+  splitCompatibilityKey,
 } from "@/lib/data/full-machine-data";
 import {
   createMachineSlug,
@@ -153,20 +154,23 @@ function getFallbackCompatibility(make: string, model: string): CompatibilitySea
     const normalizedModel = normalizeForMatching(model);
     
     for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-      const [keyBrand, keyModel] = key.split("|");
+      const [keyBrand, keyModel] = splitCompatibilityKey(key);
       const keyBrandNorm = normalizeForMatching(keyBrand);
-      const keyModelNorm = normalizeForMatching(keyModel);
+      const keyModelNorm = normalizeForMatching(cleanModelForDisplay(keyModel));
       
-      // EXACT match only - brand must match AND model must match exactly
+      // EXACT match only - brand must match AND cleaned model must match exactly
       if (keyBrandNorm === normalizedMake && keyModelNorm === normalizedModel) {
+        // Return with CLEAN model name (not raw guiding variant)
+        const cleanModel = cleanModelForDisplay(keyModel);
         return {
           machine: {
             id: 1,
             make: keyBrand,
-            model: keyModel,
-            equipment_type: getEquipmentType(keyModel),
+            model: cleanModel,
+            equipment_type: getEquipmentType(cleanModel),
           },
-          track_sizes: sizes.map((size, i) => ({
+          // Get deduped track sizes using the aggregating function
+          track_sizes: getTrackSizesForMachine(keyBrand, cleanModel).map((size, i) => ({
             id: i + 1,
             size,
             width: parseInt(size.split("x")[0]) || 0,
@@ -311,18 +315,28 @@ export default async function MachineDetailPage({ params }: PageProps) {
     notFound();
   }
 
-  // Get related machines from same brand
-  const relatedModels = getModelsForBrand(make)
-    .filter((m) => m !== model)
-    .slice(0, 8);
-
-  const relatedMachines = relatedModels.map((relModel) => ({
-    make,
-    model: relModel,
-    slug: createMachineSlug(make, relModel),
-    trackSizes: getTrackSizesForMachine(make, relModel),
-    equipmentType: getEquipmentType(relModel),
-  }));
+  // Get related machines from same brand (deduplicated by clean model name)
+  const seenRelatedModels = new Set<string>();
+  const relatedMachines = getModelsForBrand(make)
+    .map((rawModel) => {
+      const cleanModel = cleanModelForDisplay(rawModel);
+      const slug = createMachineSlug(make, rawModel);
+      return { rawModel, cleanModel, slug };
+    })
+    .filter(({ cleanModel, slug }) => {
+      // Skip current machine and duplicates
+      if (cleanModel === model || seenRelatedModels.has(cleanModel)) return false;
+      seenRelatedModels.add(cleanModel);
+      return true;
+    })
+    .slice(0, 8)
+    .map(({ cleanModel, slug }) => ({
+      make,
+      model: cleanModel,
+      slug,
+      trackSizes: getTrackSizesForMachine(make, cleanModel),
+      equipmentType: getEquipmentType(cleanModel),
+    }));
 
   // Generate FAQs
   const trackSizes = compatibility.track_sizes?.map((t) => t.size) || [];
