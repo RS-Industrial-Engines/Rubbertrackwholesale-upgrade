@@ -22693,12 +22693,19 @@ export function getTrackSizesForMachine(brand: string, model: string): string[] 
 
 /**
  * Search machines by query (brand, model, or both)
- * Uses aggressive normalization
+ * Uses aggressive normalization.
+ * 
+ * IMPORTANT: Results are DEDUPED by base machine model.
+ * Guiding variants (E35 [I guiding], E35 [J guiding]) are merged into the base model (E35).
+ * Track sizes from all variants are combined.
+ * The returned model name is the CLEAN version without guiding descriptors.
  */
 export function searchMachines(query: string): { brand: string; model: string; trackSizes: string[] }[] {
   const normalizedQuery = normalizeForMatching(query);
   const queryWords = query.toLowerCase().split(/\s+/).filter(Boolean);
-  const results: { brand: string; model: string; trackSizes: string[] }[] = [];
+  
+  // Use a map to dedupe by base machine: "brand|baseModel" → combined result
+  const resultMap = new Map<string, { brand: string; model: string; trackSizes: Set<string> }>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
     const [brand, model] = key.split('|');
@@ -22753,11 +22760,32 @@ export function searchMachines(query: string): { brand: string; model: string; t
     }
     
     if (matches) {
-      results.push({ brand, model, trackSizes: sizes });
+      // Get the clean model name (without guiding descriptors)
+      const cleanModel = cleanModelForDisplay(model);
+      // Create a dedupe key using normalized base model
+      const baseModelKey = `${brand}|${normalizeForMatching(cleanModel)}`;
+      
+      if (resultMap.has(baseModelKey)) {
+        // Merge track sizes into existing entry
+        const existing = resultMap.get(baseModelKey)!;
+        sizes.forEach(size => existing.trackSizes.add(size));
+      } else {
+        // Add new entry with clean model name
+        resultMap.set(baseModelKey, {
+          brand,
+          model: cleanModel, // Use clean model name without guiding descriptors
+          trackSizes: new Set(sizes),
+        });
+      }
     }
   }
   
-  return results;
+  // Convert map to array, converting Set to array for track sizes
+  return Array.from(resultMap.values()).map(({ brand, model, trackSizes }) => ({
+    brand,
+    model,
+    trackSizes: Array.from(trackSizes),
+  }));
 }
 
 /**

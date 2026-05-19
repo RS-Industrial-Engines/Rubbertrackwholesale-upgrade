@@ -6,10 +6,64 @@
  */
 
 /**
+ * CENTRAL NORMALIZER: Strip Camso/descriptive track-only variants from machine names
+ * 
+ * This is the SINGLE SOURCE OF TRUTH for normalizing machine models for SEO purposes.
+ * Guiding descriptors are track-fitment attributes ONLY - they must NOT appear in:
+ * - Machine slugs, page URLs
+ * - H1s, titles, canonical URLs
+ * - Internal links, sitemap URLs
+ * - Schema model names
+ * 
+ * Examples:
+ * - "E35 [I guiding | M-series]" → "E35"
+ * - "E35 [J guiding | R-series]" → "E35"
+ * - "E32 [I guiding | M-series]" → "E32"
+ * - "CX 36BMC[I guiding]" → "CX 36BMC"
+ * - "CX 36B[J guiding]" → "CX 36B"
+ * - "E60 [I guiding]" → "E60"
+ * - "SVL 75 (Compact Track Loader)" → "SVL 75"
+ */
+export function normalizeMachineForSeoEntity(model: string): string {
+  return model
+    // Remove bracket descriptors (guiding variants): [I guiding], [J guiding | M-series], etc.
+    .replace(/\s*\[[^\]]*\]/g, "")
+    // Remove parentheses descriptors (equipment types): (Compact Track Loader), etc.
+    .replace(/\s*\([^)]*\)/g, "")
+    // Clean up any double spaces
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Get the base machine model for SEO deduplication.
+ * Multiple guiding variants should map to the same base model.
+ * 
+ * Examples:
+ * - "E35 [I guiding | M-series]" → "E35"
+ * - "E35 [J guiding | R-series]" → "E35"
+ * - "E35I [J guiding | R-series]" → "E35I" (note: E35I is a different base model)
+ * - "CX 36BMC[I guiding]" → "CX36BMC"
+ * - "CX 36BMC[J guiding]" → "CX36BMC"
+ */
+export function getBaseMachineModel(model: string): string {
+  // First normalize to remove brackets/parens
+  const normalized = normalizeMachineForSeoEntity(model);
+  // Then normalize for comparison (removes spaces, hyphens, case)
+  return normalized
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
+}
+
+/**
  * Create a clean, SEO-safe machine slug from make and model.
+ * 
+ * CRITICAL: Uses normalizeMachineForSeoEntity() to strip guiding variants.
+ * Multiple guiding variants MUST produce the same slug.
  * 
  * Rules:
  * - No parentheses or equipment type descriptions
+ * - No bracket guiding descriptors ([I guiding], [J guiding], etc.)
  * - No special characters except hyphens
  * - No double hyphens
  * - No spaces
@@ -17,12 +71,10 @@
  * 
  * Examples:
  * - createMachineSlug("Kubota", "SVL 95") → "kubota-svl95"
- * - createMachineSlug("Kubota", "SVL 95-2") → "kubota-svl95-2"
- * - createMachineSlug("Kubota", "KX 018-4") → "kubota-kx018-4"
- * - createMachineSlug("Kubota", "U-17") → "kubota-u17"
- * - createMachineSlug("CAT", "259D") → "cat-259d"
- * - createMachineSlug("John Deere", "333G") → "john-deere-333g"
- * - createMachineSlug("Kubota", "SVL 95 (Compact Track Loader)") → "kubota-svl95"
+ * - createMachineSlug("Bobcat", "E35 [I guiding | M-series]") → "bobcat-e35"
+ * - createMachineSlug("Bobcat", "E35 [J guiding | R-series]") → "bobcat-e35"
+ * - createMachineSlug("CASE", "CX 36BMC[I guiding]") → "case-cx36bmc"
+ * - createMachineSlug("CASE", "CX 36BMC[J guiding]") → "case-cx36bmc"
  */
 export function createMachineSlug(make: string, model: string): string {
   // Normalize make: lowercase, replace spaces with hyphens

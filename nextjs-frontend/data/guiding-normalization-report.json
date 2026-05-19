@@ -1,0 +1,27 @@
+{
+  "passed": false,
+  "errors": [
+    "SEARCH SLUG FAIL: \"Bobcat E35\" result would generate slug \"bobcat-e35iguiding\"",
+    "SEARCH SLUG FAIL: \"Bobcat E35\" result would generate slug \"bobcat-e35ijguiding\"",
+    "SEARCH SLUG FAIL: \"Bobcat E32\" result would generate slug \"bobcat-e32iguiding\"",
+    "SEARCH SLUG FAIL: \"Bobcat E32\" result would generate slug \"bobcat-e32jguiding\"",
+    "REQUIREMENT FAIL: Bobcat E35 search should link to /machines/bobcat-e35 - Got slug \"bobcat-e35iguiding\" instead of \"bobcat-e35\""
+  ],
+  "warnings": [],
+  "stats": {
+    "totalMachines": 4713,
+    "guidingVariants": 15,
+    "uniqueBaseMachines": 4587,
+    "slugsGenerated": 4713,
+    "malformedSlugs": [
+      "Astec Mini-Excavator → astec-mini-excavator",
+      "Bertolini Mini-excavator → bertolini-mini-excavator",
+      "Betram Crawler Crane → betram-crawlercrane",
+      "Holmed Mini-excavator → holmed-mini-excavator",
+      "ICE(Internationalstruction Equipment INC TD 308 (>2004 model) → ice(internationalstruction-equipment-inc-td308",
+      "Nemag Mini-excavator → nemag-mini-excavator"
+    ],
+    "guidingInSlugs": [],
+    "searchDedupeIssues": []
+  }
+}
