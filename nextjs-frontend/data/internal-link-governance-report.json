@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "errors": [],
+  "warnings": [],
+  "stats": {
+    "totalMachines": 4588,
+    "machinesWithComponentLinks": 399,
+    "machinesWithNoComponentLinks": 4189,
+    "totalInternalLinks": 498,
+    "malformedUrls": [],
+    "componentLinksGenerated": {
+      "bottom-rollers": 371,
+      "sprockets": 110,
+      "idlers": 17,
+      "carrier-rollers": 0
+    },
+    "sitemapPages": {
+      "bottom-rollers": 371,
+      "sprockets": 110,
+      "idlers": 17,
+      "carrier-rollers": 0
+    },
+    "linkSitemapMismatch": []
+  }
+}
