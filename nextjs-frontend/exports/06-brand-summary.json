@@ -1,0 +1,3147 @@
+{
+  "exportDate": "2026-05-19T22:57:26.939Z",
+  "totalBrands": 349,
+  "brands": [
+    {
+      "brand": "A.X.I.",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ACM",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ALLEN",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ALLtrack",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ASV",
+      "totalModels": 23,
+      "modelsWithTrackSizes": 23,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ATN",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Abbati",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Aces",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Active",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Agri",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Aichi",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Airman",
+      "totalModels": 99,
+      "modelsWithTrackSizes": 99,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Airman-Foredil",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Almac",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Amerequip Eagle",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "American Direction Drill",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ammann",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Andreoli",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Angel",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Antec",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Apageo",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Aros China",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Astec",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Atex",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Athena",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Atlas",
+      "totalModels": 32,
+      "modelsWithTrackSizes": 32,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ausa",
+      "totalModels": 10,
+      "modelsWithTrackSizes": 10,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Avant Tecno",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Awasi",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "BOART LONGYEAR",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Babyack",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bandit",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Baraladi",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Baratti",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Barreto",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bastei",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Belle",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bellon Maria",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Benassi",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Benati",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Benfra",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bentrac",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Beretta",
+      "totalModels": 14,
+      "modelsWithTrackSizes": 14,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bergmann",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bertani",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bertolini",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Betram",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bitelli",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bluelift",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bobcat",
+      "totalModels": 169,
+      "modelsWithTrackSizes": 156,
+      "modelsWithBottomRollers": 108,
+      "modelsWithSprockets": 17,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bonne Esperance",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Bormor",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Boxer",
+      "totalModels": 11,
+      "modelsWithTrackSizes": 11,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Brokk",
+      "totalModels": 23,
+      "modelsWithTrackSizes": 23,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "C & F",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CARAVAGGI",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CASE",
+      "totalModels": 129,
+      "modelsWithTrackSizes": 129,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CAT",
+      "totalModels": 208,
+      "modelsWithTrackSizes": 180,
+      "modelsWithBottomRollers": 81,
+      "modelsWithSprockets": 33,
+      "modelsWithIdlers": 17,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CEASER",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CELA",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CFC",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CMC",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "CME",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Cameca",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Camisa",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Cams Libra",
+      "totalModels": 17,
+      "modelsWithTrackSizes": 17,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Carlton",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Carmix",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Carrier",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Casorzo",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Celli",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Chieftan",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Chikusui/Canycom",
+      "totalModels": 39,
+      "modelsWithTrackSizes": 39,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Collina",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Coltrax",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Comacchio",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Comeca",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Comet",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Commander",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Comoter",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Compair Holman",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Conjet",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Cormidi",
+      "totalModels": 31,
+      "modelsWithTrackSizes": 31,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "DLGZ",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Daewoo",
+      "totalModels": 30,
+      "modelsWithTrackSizes": 30,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Dimex",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Dino",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ditch-Witch",
+      "totalModels": 42,
+      "modelsWithTrackSizes": 42,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Dodich",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Domine",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Doosan",
+      "totalModels": 18,
+      "modelsWithTrackSizes": 18,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Drago",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Dumec",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Durso",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Dynapac",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "EFCO",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "EMCI",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Eckart",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ecofore",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Electro Joe",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Energreen",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Enteco",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Erreppi",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "EuroCAT",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "EuroTrac",
+      "totalModels": 11,
+      "modelsWithTrackSizes": 11,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "EurocoMach",
+      "totalModels": 50,
+      "modelsWithTrackSizes": 50,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Eurodig",
+      "totalModels": 16,
+      "modelsWithTrackSizes": 16,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Eurofor",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Eurotom",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "FAI",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "FIGO",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "FORT",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Falcon Spider",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Fercad",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Fermec",
+      "totalModels": 14,
+      "modelsWithTrackSizes": 14,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Fiat-Hitachi",
+      "totalModels": 15,
+      "modelsWithTrackSizes": 15,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Fiori",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Foredil",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Forti",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Fraste",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Gayk",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Geawelltech",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Gehl",
+      "totalModels": 43,
+      "modelsWithTrackSizes": 43,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Gehlmax",
+      "totalModels": 30,
+      "modelsWithTrackSizes": 30,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Geier",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Gelai & Castegnaro",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Genie",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Geoprobe",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Goman",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Green Mech",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Green Technik",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Grillo",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Grundohit",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "HCC",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "HOEFLON",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hades",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Haihong",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hainzl",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hanix",
+      "totalModels": 81,
+      "modelsWithTrackSizes": 81,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hansa",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hanta",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Haulotte",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hematec",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hengte",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hiab",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hinowa",
+      "totalModels": 110,
+      "modelsWithTrackSizes": 110,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hitachi",
+      "totalModels": 230,
+      "modelsWithTrackSizes": 230,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hokuetsu",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Holmac",
+      "totalModels": 10,
+      "modelsWithTrackSizes": 10,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Holman",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Holmed",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Honda",
+      "totalModels": 12,
+      "modelsWithTrackSizes": 12,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Huki",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Husqvarna",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hutte",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hutter",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hydra",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hydramac",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hydro Rain",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Hyundai",
+      "totalModels": 27,
+      "modelsWithTrackSizes": 27,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "ICE(Internationalstruction Equipment INC",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "IHI",
+      "totalModels": 221,
+      "modelsWithTrackSizes": 221,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "INOVA",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Imai",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Imef",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Imer",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Italmec",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "JCB",
+      "totalModels": 89,
+      "modelsWithTrackSizes": 89,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "JIEHE",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "JLG",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Jekko",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "John Deere",
+      "totalModels": 64,
+      "modelsWithTrackSizes": 52,
+      "modelsWithBottomRollers": 46,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Joly",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kaidi",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kato",
+      "totalModels": 11,
+      "modelsWithTrackSizes": 11,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kato-Imer",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kawasaki",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kobelco",
+      "totalModels": 130,
+      "modelsWithTrackSizes": 130,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Komatsu",
+      "totalModels": 253,
+      "modelsWithTrackSizes": 253,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Kubota",
+      "totalModels": 291,
+      "modelsWithTrackSizes": 274,
+      "modelsWithBottomRollers": 84,
+      "modelsWithSprockets": 53,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Link-Belt",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "MBU",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Macanizacion Y Mineria Sa",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Macmoter",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Madro",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Maeda",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Manitou",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Massey Ferguson",
+      "totalModels": 10,
+      "modelsWithTrackSizes": 10,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Maweco",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Maxima",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mc Connel",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mc Elory",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mecalac",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mecanica Benassi",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mecbo",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Meinl",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Menzi Muck",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Merlo",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mertz",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Messersi",
+      "totalModels": 40,
+      "modelsWithTrackSizes": 40,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mini Mustang",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Minicarrier",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Minidig",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mintrac",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mira",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mitsubishi",
+      "totalModels": 16,
+      "modelsWithTrackSizes": 16,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Monitor",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mopas",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Morath",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Morooka",
+      "totalModels": 16,
+      "modelsWithTrackSizes": 16,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Multidrill",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Multitel",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Mustang",
+      "totalModels": 59,
+      "modelsWithTrackSizes": 59,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nagano",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nagano Highland",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nante",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Navago",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Navigator",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nemag",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nemek",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "New Holland",
+      "totalModels": 83,
+      "modelsWithTrackSizes": 83,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nibbi",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nifty",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nihon Flex",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nihon Freki",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Niko",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Nissan",
+      "totalModels": 36,
+      "modelsWithTrackSizes": 36,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Pagani Geotechnical Equipment",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Palazzani",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Paus-Hermann",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Pauselli",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Pazzaglia",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Peljob",
+      "totalModels": 46,
+      "modelsWithTrackSizes": 46,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Penta Moter",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Pezzolato",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Picchio",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Piccini",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Platform Basket",
+      "totalModels": 10,
+      "modelsWithTrackSizes": 10,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Platinum Lift",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Porello",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Porrello",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Positrack",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Powerfab",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Powerpac",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Pressoil",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Putzmeister",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "QIYUN",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "RHINOCEROS",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rampicar",
+      "totalModels": 14,
+      "modelsWithTrackSizes": 14,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ramrod",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rayco",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Raymar",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Renders",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Riebsamen",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rock",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rocky Rapid",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rolatec",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rossi",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rotomax",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Rufener",
+      "totalModels": 6,
+      "modelsWithTrackSizes": 6,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "SDP Manufacturing",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "SMC",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "SUP",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sacet",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Samsung",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sandqueen Uk",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sany",
+      "totalModels": 7,
+      "modelsWithTrackSizes": 7,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sato",
+      "totalModels": 9,
+      "modelsWithTrackSizes": 9,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Satvia",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Scattrack",
+      "totalModels": 14,
+      "modelsWithTrackSizes": 14,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Schaefer",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Schaeff",
+      "totalModels": 29,
+      "modelsWithTrackSizes": 29,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sedidrill",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Senic",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sequani",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Shibura",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Shin-Towa",
+      "totalModels": 11,
+      "modelsWithTrackSizes": 11,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Showa Aircraft",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sicocu",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sika",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Silea",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Silla",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Slane",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Slane International",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Smac",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "So.Ca.Ce",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Socomafor",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Soma",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Stanley",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Stenuick",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Straightline",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Streck",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sumitomo",
+      "totalModels": 89,
+      "modelsWithTrackSizes": 89,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Sunward",
+      "totalModels": 26,
+      "modelsWithTrackSizes": 26,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Supertoy",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TAIANLUYUE",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TCP",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TECOINSA",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TES",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TRACCESS",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TRS",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "TZ",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tadano",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Takeuchi",
+      "totalModels": 113,
+      "modelsWithTrackSizes": 103,
+      "modelsWithBottomRollers": 52,
+      "modelsWithSprockets": 7,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tanaka",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Taylorst. Plant",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tecniwell",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tekna",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Terex",
+      "totalModels": 31,
+      "modelsWithTrackSizes": 31,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Terra Jet",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Terramac",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Terramite",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tescar",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Thomas",
+      "totalModels": 14,
+      "modelsWithTrackSizes": 14,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Tifermec",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Top Steel",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Top Tec",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Topcat",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Track Star",
+      "totalModels": 3,
+      "modelsWithTrackSizes": 3,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Trackbull",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Trak",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Traklift",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Trax",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Traxmax",
+      "totalModels": 2,
+      "modelsWithTrackSizes": 2,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Turchi",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Unic",
+      "totalModels": 15,
+      "modelsWithTrackSizes": 15,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Unimov",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Unkauf",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Upright",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Utex",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "VIMALFIRE",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Velcodrill",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Venieri",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Vermeer",
+      "totalModels": 45,
+      "modelsWithTrackSizes": 45,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Vnk Crane Europe",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Volvo",
+      "totalModels": 59,
+      "modelsWithTrackSizes": 59,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "WAMET",
+      "totalModels": 4,
+      "modelsWithTrackSizes": 4,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Wacker Neuson",
+      "totalModels": 173,
+      "modelsWithTrackSizes": 173,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Wyssen",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "XCMG",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Yamaguchi / Winbull",
+      "totalModels": 21,
+      "modelsWithTrackSizes": 21,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Yanmar",
+      "totalModels": 207,
+      "modelsWithTrackSizes": 207,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Ygry",
+      "totalModels": 8,
+      "modelsWithTrackSizes": 8,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Yuchai",
+      "totalModels": 19,
+      "modelsWithTrackSizes": 19,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Yutani",
+      "totalModels": 5,
+      "modelsWithTrackSizes": 5,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Zavattini",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Zeppelin",
+      "totalModels": 13,
+      "modelsWithTrackSizes": 13,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Zhenyu",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    },
+    {
+      "brand": "Zntsis Brzesko",
+      "totalModels": 1,
+      "modelsWithTrackSizes": 1,
+      "modelsWithBottomRollers": 0,
+      "modelsWithSprockets": 0,
+      "modelsWithIdlers": 0,
+      "modelsWithCarrierRollers": 0
+    }
+  ]
+}

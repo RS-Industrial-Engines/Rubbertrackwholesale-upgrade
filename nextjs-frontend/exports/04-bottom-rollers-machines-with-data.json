@@ -1,0 +1,1863 @@
+{
+  "exportDate": "2026-05-19T22:57:26.860Z",
+  "component": "bottom-roller",
+  "routePath": "bottom-rollers",
+  "totalMachines": 371,
+  "machines": [
+    {
+      "brand": "Bobcat",
+      "model": "220",
+      "slug": "bobcat-220"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "225",
+      "slug": "bobcat-225"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "231",
+      "slug": "bobcat-231"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320",
+      "slug": "bobcat-320"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320L",
+      "slug": "bobcat-320l"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320D",
+      "slug": "bobcat-320d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320E",
+      "slug": "bobcat-320e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320G",
+      "slug": "bobcat-320g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "320J",
+      "slug": "bobcat-320j"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322",
+      "slug": "bobcat-322"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322D",
+      "slug": "bobcat-322d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322E",
+      "slug": "bobcat-322e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322G",
+      "slug": "bobcat-322g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322J",
+      "slug": "bobcat-322j"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "322L",
+      "slug": "bobcat-322l"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "323",
+      "slug": "bobcat-323"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "325",
+      "slug": "bobcat-325"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "328",
+      "slug": "bobcat-328"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "328G",
+      "slug": "bobcat-328g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "331",
+      "slug": "bobcat-331"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "331D",
+      "slug": "bobcat-331d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "331E",
+      "slug": "bobcat-331e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "331G",
+      "slug": "bobcat-331g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "334",
+      "slug": "bobcat-334"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "334D",
+      "slug": "bobcat-334d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "335",
+      "slug": "bobcat-335"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "337",
+      "slug": "bobcat-337"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "337D",
+      "slug": "bobcat-337d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "337G",
+      "slug": "bobcat-337g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "341",
+      "slug": "bobcat-341"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "341D",
+      "slug": "bobcat-341d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "341G",
+      "slug": "bobcat-341g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "418",
+      "slug": "bobcat-418"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "418A",
+      "slug": "bobcat-418a"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "430",
+      "slug": "bobcat-430"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "430D",
+      "slug": "bobcat-430d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "430G",
+      "slug": "bobcat-430g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "430ZHS",
+      "slug": "bobcat-430zhs"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "430ZTS",
+      "slug": "bobcat-430zts"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "435",
+      "slug": "bobcat-435"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "442",
+      "slug": "bobcat-442"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "864",
+      "slug": "bobcat-864"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "864H",
+      "slug": "bobcat-864h"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E08",
+      "slug": "bobcat-e08"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E10",
+      "slug": "bobcat-e10"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E10Z",
+      "slug": "bobcat-e10z"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E10e",
+      "slug": "bobcat-e10e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E26",
+      "slug": "bobcat-e26"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E32",
+      "slug": "bobcat-e32"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E32C",
+      "slug": "bobcat-e32c"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E37",
+      "slug": "bobcat-e37"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E42",
+      "slug": "bobcat-e42"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E45",
+      "slug": "bobcat-e45"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E50",
+      "slug": "bobcat-e50"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E55",
+      "slug": "bobcat-e55"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E60",
+      "slug": "bobcat-e60"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E62",
+      "slug": "bobcat-e62"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E63",
+      "slug": "bobcat-e63"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E80",
+      "slug": "bobcat-e80"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "E85",
+      "slug": "bobcat-e85"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "S220",
+      "slug": "bobcat-s220"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T110",
+      "slug": "bobcat-t110"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T140",
+      "slug": "bobcat-t140"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T180",
+      "slug": "bobcat-t180"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T180H",
+      "slug": "bobcat-t180h"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T190",
+      "slug": "bobcat-t190"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T190H",
+      "slug": "bobcat-t190h"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T200",
+      "slug": "bobcat-t200"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T250",
+      "slug": "bobcat-t250"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T250H",
+      "slug": "bobcat-t250h"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T300",
+      "slug": "bobcat-t300"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T300H",
+      "slug": "bobcat-t300h"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T320",
+      "slug": "bobcat-t320"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T550",
+      "slug": "bobcat-t550"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T590",
+      "slug": "bobcat-t590"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T595",
+      "slug": "bobcat-t595"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T630",
+      "slug": "bobcat-t630"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T650",
+      "slug": "bobcat-t650"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T750",
+      "slug": "bobcat-t750"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T770",
+      "slug": "bobcat-t770"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "T870",
+      "slug": "bobcat-t870"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X220",
+      "slug": "bobcat-x220"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X225",
+      "slug": "bobcat-x225"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X231",
+      "slug": "bobcat-x231"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X320",
+      "slug": "bobcat-x320"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X320D",
+      "slug": "bobcat-x320d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X320E",
+      "slug": "bobcat-x320e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X322",
+      "slug": "bobcat-x322"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X322D",
+      "slug": "bobcat-x322d"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X322E",
+      "slug": "bobcat-x322e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X322G",
+      "slug": "bobcat-x322g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X323",
+      "slug": "bobcat-x323"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X325",
+      "slug": "bobcat-x325"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X328",
+      "slug": "bobcat-x328"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X328E",
+      "slug": "bobcat-x328e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X331",
+      "slug": "bobcat-x331"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X331E",
+      "slug": "bobcat-x331e"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X334",
+      "slug": "bobcat-x334"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X334G",
+      "slug": "bobcat-x334g"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X337",
+      "slug": "bobcat-x337"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X341",
+      "slug": "bobcat-x341"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X418",
+      "slug": "bobcat-x418"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X430",
+      "slug": "bobcat-x430"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X435",
+      "slug": "bobcat-x435"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X442",
+      "slug": "bobcat-x442"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X442B",
+      "slug": "bobcat-x442b"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "X442ZTS",
+      "slug": "bobcat-x442zts"
+    },
+    {
+      "brand": "Bobcat",
+      "model": "ZX75",
+      "slug": "bobcat-zx75"
+    },
+    {
+      "brand": "CAT",
+      "model": "226",
+      "slug": "cat-226"
+    },
+    {
+      "brand": "CAT",
+      "model": "226B",
+      "slug": "cat-226b"
+    },
+    {
+      "brand": "CAT",
+      "model": "228",
+      "slug": "cat-228"
+    },
+    {
+      "brand": "CAT",
+      "model": "259",
+      "slug": "cat-259"
+    },
+    {
+      "brand": "CAT",
+      "model": "259B",
+      "slug": "cat-259b"
+    },
+    {
+      "brand": "CAT",
+      "model": "259B3",
+      "slug": "cat-259b3"
+    },
+    {
+      "brand": "CAT",
+      "model": "259D",
+      "slug": "cat-259d"
+    },
+    {
+      "brand": "CAT",
+      "model": "259D3",
+      "slug": "cat-259d3"
+    },
+    {
+      "brand": "CAT",
+      "model": "265",
+      "slug": "cat-265"
+    },
+    {
+      "brand": "CAT",
+      "model": "267",
+      "slug": "cat-267"
+    },
+    {
+      "brand": "CAT",
+      "model": "267B",
+      "slug": "cat-267b"
+    },
+    {
+      "brand": "CAT",
+      "model": "267B2",
+      "slug": "cat-267b2"
+    },
+    {
+      "brand": "CAT",
+      "model": "272B",
+      "slug": "cat-272b"
+    },
+    {
+      "brand": "CAT",
+      "model": "279",
+      "slug": "cat-279"
+    },
+    {
+      "brand": "CAT",
+      "model": "279C",
+      "slug": "cat-279c"
+    },
+    {
+      "brand": "CAT",
+      "model": "279C2",
+      "slug": "cat-279c2"
+    },
+    {
+      "brand": "CAT",
+      "model": "279D",
+      "slug": "cat-279d"
+    },
+    {
+      "brand": "CAT",
+      "model": "279D2",
+      "slug": "cat-279d2"
+    },
+    {
+      "brand": "CAT",
+      "model": "279D3",
+      "slug": "cat-279d3"
+    },
+    {
+      "brand": "CAT",
+      "model": "289C",
+      "slug": "cat-289c"
+    },
+    {
+      "brand": "CAT",
+      "model": "289C2",
+      "slug": "cat-289c2"
+    },
+    {
+      "brand": "CAT",
+      "model": "289D",
+      "slug": "cat-289d"
+    },
+    {
+      "brand": "CAT",
+      "model": "289D2",
+      "slug": "cat-289d2"
+    },
+    {
+      "brand": "CAT",
+      "model": "289D3",
+      "slug": "cat-289d3"
+    },
+    {
+      "brand": "CAT",
+      "model": "299C",
+      "slug": "cat-299c"
+    },
+    {
+      "brand": "CAT",
+      "model": "299D",
+      "slug": "cat-299d"
+    },
+    {
+      "brand": "CAT",
+      "model": "299D2",
+      "slug": "cat-299d2"
+    },
+    {
+      "brand": "CAT",
+      "model": "299D3",
+      "slug": "cat-299d3"
+    },
+    {
+      "brand": "CAT",
+      "model": "300.9D",
+      "slug": "cat-3009d"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.4C",
+      "slug": "cat-3014c"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.5",
+      "slug": "cat-3015"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.5CR",
+      "slug": "cat-3015cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.6",
+      "slug": "cat-3016"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.6C",
+      "slug": "cat-3016c"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.7D",
+      "slug": "cat-3017d"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.7DCR",
+      "slug": "cat-3017dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.8",
+      "slug": "cat-3018"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.8C",
+      "slug": "cat-3018c"
+    },
+    {
+      "brand": "CAT",
+      "model": "301.8CR",
+      "slug": "cat-3018cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "302.2D",
+      "slug": "cat-3022d"
+    },
+    {
+      "brand": "CAT",
+      "model": "302.4D",
+      "slug": "cat-3024d"
+    },
+    {
+      "brand": "CAT",
+      "model": "302.5",
+      "slug": "cat-3025"
+    },
+    {
+      "brand": "CAT",
+      "model": "302.5C",
+      "slug": "cat-3025c"
+    },
+    {
+      "brand": "CAT",
+      "model": "302.7DCR",
+      "slug": "cat-3027dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5",
+      "slug": "cat-3035"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5C",
+      "slug": "cat-3035c"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5CCR",
+      "slug": "cat-3035ccr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5D",
+      "slug": "cat-3035d"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5DCR",
+      "slug": "cat-3035dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5E",
+      "slug": "cat-3035e"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5E2CR",
+      "slug": "cat-3035e2cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303.5ECR",
+      "slug": "cat-3035ecr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303CCR",
+      "slug": "cat-303ccr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303CR",
+      "slug": "cat-303cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "303CR2007",
+      "slug": "cat-303cr2007"
+    },
+    {
+      "brand": "CAT",
+      "model": "303ECR",
+      "slug": "cat-303ecr"
+    },
+    {
+      "brand": "CAT",
+      "model": "304.5",
+      "slug": "cat-3045"
+    },
+    {
+      "brand": "CAT",
+      "model": "304.5E2XTC",
+      "slug": "cat-3045e2xtc"
+    },
+    {
+      "brand": "CAT",
+      "model": "304C",
+      "slug": "cat-304c"
+    },
+    {
+      "brand": "CAT",
+      "model": "304CCR",
+      "slug": "cat-304ccr"
+    },
+    {
+      "brand": "CAT",
+      "model": "304DCR",
+      "slug": "cat-304dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "304E",
+      "slug": "cat-304e"
+    },
+    {
+      "brand": "CAT",
+      "model": "304E2CR",
+      "slug": "cat-304e2cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "304ECR",
+      "slug": "cat-304ecr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5",
+      "slug": "cat-3055"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5D",
+      "slug": "cat-3055d"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5DCR",
+      "slug": "cat-3055dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5E",
+      "slug": "cat-3055e"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5E2",
+      "slug": "cat-3055e2"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5E2CR",
+      "slug": "cat-3055e2cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5E2FB",
+      "slug": "cat-3055e2fb"
+    },
+    {
+      "brand": "CAT",
+      "model": "305.5ECR",
+      "slug": "cat-3055ecr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305CCR",
+      "slug": "cat-305ccr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305DCR",
+      "slug": "cat-305dcr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305E2",
+      "slug": "cat-305e2"
+    },
+    {
+      "brand": "CAT",
+      "model": "305E2CR",
+      "slug": "cat-305e2cr"
+    },
+    {
+      "brand": "CAT",
+      "model": "305ECR",
+      "slug": "cat-305ecr"
+    },
+    {
+      "brand": "CAT",
+      "model": "306E2FB",
+      "slug": "cat-306e2fb"
+    },
+    {
+      "brand": "CAT",
+      "model": "MM15",
+      "slug": "cat-mm15"
+    },
+    {
+      "brand": "CAT",
+      "model": "MM25",
+      "slug": "cat-mm25"
+    },
+    {
+      "brand": "CAT",
+      "model": "MM35",
+      "slug": "cat-mm35"
+    },
+    {
+      "brand": "John Deere",
+      "model": "15",
+      "slug": "john-deere-15"
+    },
+    {
+      "brand": "John Deere",
+      "model": "17ZTS",
+      "slug": "john-deere-17zts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "17D",
+      "slug": "john-deere-17d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "17G",
+      "slug": "john-deere-17g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "17P",
+      "slug": "john-deere-17p"
+    },
+    {
+      "brand": "John Deere",
+      "model": "26G",
+      "slug": "john-deere-26g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "26P",
+      "slug": "john-deere-26p"
+    },
+    {
+      "brand": "John Deere",
+      "model": "27ZTS",
+      "slug": "john-deere-27zts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "27C",
+      "slug": "john-deere-27c"
+    },
+    {
+      "brand": "John Deere",
+      "model": "27C ZTS",
+      "slug": "john-deere-27czts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "27D",
+      "slug": "john-deere-27d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "30G",
+      "slug": "john-deere-30g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "30P",
+      "slug": "john-deere-30p"
+    },
+    {
+      "brand": "John Deere",
+      "model": "317",
+      "slug": "john-deere-317"
+    },
+    {
+      "brand": "John Deere",
+      "model": "317G",
+      "slug": "john-deere-317g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "325",
+      "slug": "john-deere-325"
+    },
+    {
+      "brand": "John Deere",
+      "model": "325G",
+      "slug": "john-deere-325g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "332",
+      "slug": "john-deere-332"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35ZTS",
+      "slug": "john-deere-35zts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35C",
+      "slug": "john-deere-35c"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35C ZTS",
+      "slug": "john-deere-35czts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35D",
+      "slug": "john-deere-35d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35G",
+      "slug": "john-deere-35g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "35P",
+      "slug": "john-deere-35p"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50ZTS",
+      "slug": "john-deere-50zts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50C",
+      "slug": "john-deere-50c"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50C ZTS",
+      "slug": "john-deere-50czts"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50D",
+      "slug": "john-deere-50d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50G",
+      "slug": "john-deere-50g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "50P",
+      "slug": "john-deere-50p"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT319D",
+      "slug": "john-deere-ct319d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT319E",
+      "slug": "john-deere-ct319e"
+    },
+    {
+      "brand": "John Deere",
+      "model": "319D",
+      "slug": "john-deere-319d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "319E",
+      "slug": "john-deere-319e"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT322",
+      "slug": "john-deere-ct322"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT315",
+      "slug": "john-deere-ct315"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT323D",
+      "slug": "john-deere-ct323d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT323E",
+      "slug": "john-deere-ct323e"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT325G",
+      "slug": "john-deere-ct325g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT329D",
+      "slug": "john-deere-ct329d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT329E",
+      "slug": "john-deere-ct329e"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT331G",
+      "slug": "john-deere-ct331g"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT332",
+      "slug": "john-deere-ct332"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT333D",
+      "slug": "john-deere-ct333d"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT333E",
+      "slug": "john-deere-ct333e"
+    },
+    {
+      "brand": "John Deere",
+      "model": "CT333G",
+      "slug": "john-deere-ct333g"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX015-4",
+      "slug": "kubota-kx015-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX016-4",
+      "slug": "kubota-kx016-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX018-4",
+      "slug": "kubota-kx018-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX019-4",
+      "slug": "kubota-kx019-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX040",
+      "slug": "kubota-kx040"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX040-4",
+      "slug": "kubota-kx040-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX040-4HGA",
+      "slug": "kubota-kx040-4hga"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX057-4",
+      "slug": "kubota-kx057-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX080",
+      "slug": "kubota-kx080"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX080-3",
+      "slug": "kubota-kx080-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX080-4",
+      "slug": "kubota-kx080-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX080-4S2",
+      "slug": "kubota-kx080-4s2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX12",
+      "slug": "kubota-kx12"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-2",
+      "slug": "kubota-kx121-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-2S",
+      "slug": "kubota-kx121-2s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-3",
+      "slug": "kubota-kx121-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-3SS",
+      "slug": "kubota-kx121-3ss"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-3ST",
+      "slug": "kubota-kx121-3st"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX121-2SS",
+      "slug": "kubota-kx121-2ss"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX161-2",
+      "slug": "kubota-kx161-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX161-2S",
+      "slug": "kubota-kx161-2s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX161-2SR",
+      "slug": "kubota-kx161-2sr"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX161-3",
+      "slug": "kubota-kx161-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX161-3CX",
+      "slug": "kubota-kx161-3cx"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41",
+      "slug": "kubota-kx41"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41-3",
+      "slug": "kubota-kx41-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41-3S",
+      "slug": "kubota-kx41-3s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41-3SGL",
+      "slug": "kubota-kx41-3sgl"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41-3V",
+      "slug": "kubota-kx41-3v"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX41-3VGL",
+      "slug": "kubota-kx41-3vgl"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX61",
+      "slug": "kubota-kx61"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX61-2",
+      "slug": "kubota-kx61-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX61-2SS",
+      "slug": "kubota-kx61-2ss"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX61-2S",
+      "slug": "kubota-kx61-2s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX71",
+      "slug": "kubota-kx71"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX71-2",
+      "slug": "kubota-kx71-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX71-3",
+      "slug": "kubota-kx71-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX71-3GL",
+      "slug": "kubota-kx71-3gl"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-2",
+      "slug": "kubota-kx91-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-2SS",
+      "slug": "kubota-kx91-2ss"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-2S",
+      "slug": "kubota-kx91-2s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-2SR",
+      "slug": "kubota-kx91-2sr"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-3",
+      "slug": "kubota-kx91-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "KX91-3&-2",
+      "slug": "kubota-kx91-3-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "RX302",
+      "slug": "kubota-rx302"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL65-2",
+      "slug": "kubota-svl65-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL65-2C",
+      "slug": "kubota-svl65-2c"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL75",
+      "slug": "kubota-svl75"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL90",
+      "slug": "kubota-svl90"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL90-2",
+      "slug": "kubota-svl90-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL90-2C",
+      "slug": "kubota-svl90-2c"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL90C",
+      "slug": "kubota-svl90c"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL95",
+      "slug": "kubota-svl95"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL95-2",
+      "slug": "kubota-svl95-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL95-2s",
+      "slug": "kubota-svl95-2s"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL95-2SC",
+      "slug": "kubota-svl95-2sc"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL97-2",
+      "slug": "kubota-svl97-2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "SVL97-2C",
+      "slug": "kubota-svl97-2c"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-25-3",
+      "slug": "kubota-u-25-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-25-3G",
+      "slug": "kubota-u-25-3g"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-25-3GL",
+      "slug": "kubota-u-25-3gl"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U25",
+      "slug": "kubota-u25"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-27-4",
+      "slug": "kubota-u-27-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-30",
+      "slug": "kubota-u-30"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-30-3",
+      "slug": "kubota-u-30-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35",
+      "slug": "kubota-u-35"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-3",
+      "slug": "kubota-u-35-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-3&2",
+      "slug": "kubota-u-35-32"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-3G",
+      "slug": "kubota-u-35-3g"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-3GAI",
+      "slug": "kubota-u-35-3gai"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-3HG",
+      "slug": "kubota-u-35-3hg"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35-4",
+      "slug": "kubota-u-35-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35HG",
+      "slug": "kubota-u-35hg"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-35SS",
+      "slug": "kubota-u-35ss"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U35-S2",
+      "slug": "kubota-u35-s2"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-40-3",
+      "slug": "kubota-u-40-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-40",
+      "slug": "kubota-u-40"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-45",
+      "slug": "kubota-u-45"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-45-3",
+      "slug": "kubota-u-45-3"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-45G",
+      "slug": "kubota-u-45g"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-45VA",
+      "slug": "kubota-u-45va"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-55",
+      "slug": "kubota-u-55"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-55-4",
+      "slug": "kubota-u-55-4"
+    },
+    {
+      "brand": "Kubota",
+      "model": "U-55-4S",
+      "slug": "kubota-u-55-4s"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB014",
+      "slug": "takeuchi-tb014"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB014A/LSA",
+      "slug": "takeuchi-tb014alsa"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB014S/LSA",
+      "slug": "takeuchi-tb014slsa"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB015",
+      "slug": "takeuchi-tb015"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB015A",
+      "slug": "takeuchi-tb015a"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB016",
+      "slug": "takeuchi-tb016"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB016S/LSA",
+      "slug": "takeuchi-tb016slsa"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB025",
+      "slug": "takeuchi-tb025"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB035",
+      "slug": "takeuchi-tb035"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB045",
+      "slug": "takeuchi-tb045"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB07",
+      "slug": "takeuchi-tb07"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB070",
+      "slug": "takeuchi-tb070"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB12",
+      "slug": "takeuchi-tb12"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB125",
+      "slug": "takeuchi-tb125"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB125LSA",
+      "slug": "takeuchi-tb125lsa"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB14",
+      "slug": "takeuchi-tb14"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB145",
+      "slug": "takeuchi-tb145"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB153FR",
+      "slug": "takeuchi-tb153fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB175",
+      "slug": "takeuchi-tb175"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB175LSA",
+      "slug": "takeuchi-tb175lsa"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB180FR",
+      "slug": "takeuchi-tb180fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB235",
+      "slug": "takeuchi-tb235"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB250",
+      "slug": "takeuchi-tb250"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB250-2",
+      "slug": "takeuchi-tb250-2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB250A",
+      "slug": "takeuchi-tb250a"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB280FR",
+      "slug": "takeuchi-tb280fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB285",
+      "slug": "takeuchi-tb285"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB290",
+      "slug": "takeuchi-tb290"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB53FR",
+      "slug": "takeuchi-tb53fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB53",
+      "slug": "takeuchi-tb53"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB068FR",
+      "slug": "takeuchi-tb068fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB75FR",
+      "slug": "takeuchi-tb75fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB80FR",
+      "slug": "takeuchi-tb80fr"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL10",
+      "slug": "takeuchi-tl10"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL10V2",
+      "slug": "takeuchi-tl10v2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL12",
+      "slug": "takeuchi-tl12"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL120",
+      "slug": "takeuchi-tl120"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL12R2",
+      "slug": "takeuchi-tl12r2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL12V2",
+      "slug": "takeuchi-tl12v2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL126",
+      "slug": "takeuchi-tl126"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL130",
+      "slug": "takeuchi-tl130"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL140",
+      "slug": "takeuchi-tl140"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL150",
+      "slug": "takeuchi-tl150"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TB180",
+      "slug": "takeuchi-tb180"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL230",
+      "slug": "takeuchi-tl230"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL230-2",
+      "slug": "takeuchi-tl230-2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL240",
+      "slug": "takeuchi-tl240"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL250",
+      "slug": "takeuchi-tl250"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL26-2",
+      "slug": "takeuchi-tl26-2"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL6",
+      "slug": "takeuchi-tl6"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL8",
+      "slug": "takeuchi-tl8"
+    },
+    {
+      "brand": "Takeuchi",
+      "model": "TL8R-2",
+      "slug": "takeuchi-tl8r-2"
+    }
+  ]
+}
