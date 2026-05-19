@@ -137,10 +137,13 @@ function processVerified(): ExportRow[] {
   const rows: ExportRow[] = [];
   
   for (const part of VERIFIED_PARTS) {
+    // Map part_type to UndercarriageComponent
+    // Verified parts use: roller (bottom/carrier), sprocket (drive), idler
     const componentType: UndercarriageComponent = 
-      part.part_subtype === "carrier" ? "carrier-roller" :
       part.part_type === "sprocket" ? "sprocket" :
-      part.part_type === "idler" ? "idler" : "bottom-roller";
+      part.part_type === "idler" ? "idler" :
+      part.part_subtype === "bottom" ? "bottom-roller" :
+      "bottom-roller"; // Default to bottom-roller for other roller types
     
     const routePath = mapComponentToRoute(componentType);
     
@@ -165,7 +168,7 @@ function processVerified(): ExportRow[] {
         chassis_mount_notes: part.chassis_mount_notes || "",
         supersession_notes: part.oem_equivalent || "",
         researched_vs_verified: "verified",
-        publish_status: part.publish_status,
+        publish_status: "published", // Verified parts are always published
         generated_component_url: url,
         component_page_in_sitemap: "YES", // Verified parts always enable component page sitemap entry
         standalone_part_page_in_sitemap: hasStandalonePartPage ? "YES" : "NO",
