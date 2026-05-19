@@ -1,12 +1,6 @@
 {
-  "passed": false,
-  "errors": [
-    "SEARCH SLUG FAIL: \"Bobcat E35\" result would generate slug \"bobcat-e35iguiding\"",
-    "SEARCH SLUG FAIL: \"Bobcat E35\" result would generate slug \"bobcat-e35ijguiding\"",
-    "SEARCH SLUG FAIL: \"Bobcat E32\" result would generate slug \"bobcat-e32iguiding\"",
-    "SEARCH SLUG FAIL: \"Bobcat E32\" result would generate slug \"bobcat-e32jguiding\"",
-    "REQUIREMENT FAIL: Bobcat E35 search should link to /machines/bobcat-e35 - Got slug \"bobcat-e35iguiding\" instead of \"bobcat-e35\""
-  ],
+  "passed": true,
+  "errors": [],
   "warnings": [],
   "stats": {
     "totalMachines": 4713,

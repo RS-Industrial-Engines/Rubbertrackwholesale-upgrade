@@ -15,6 +15,19 @@ export function normalizeForMatching(value: string): string {
 }
 
 /**
+ * Split a compatibility key into [brand, model] parts.
+ * IMPORTANT: Only splits at the FIRST pipe character, because model names
+ * may contain pipes in bracket descriptors (e.g., "E32 [I guiding | M-series]")
+ */
+export function splitCompatibilityKey(key: string): [string, string] {
+  const firstPipeIndex = key.indexOf('|');
+  if (firstPipeIndex === -1) {
+    return [key, ''];
+  }
+  return [key.slice(0, firstPipeIndex), key.slice(firstPipeIndex + 1)];
+}
+
+/**
  * Clean a model name for public display
  * Removes equipment type descriptors like "(Compact Track Loader)", "(Mini Excavator)"
  * Also normalizes spacing: "SVL 75" -> "SVL75", "KX 040" -> "KX040"
@@ -22681,7 +22694,7 @@ export function getTrackSizesForMachine(brand: string, model: string): string[] 
   const normalizedModel = normalizeForMatching(model);
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [keyBrand, keyModel] = key.split('|');
+    const [keyBrand, keyModel] = splitCompatibilityKey(key);
     if (normalizeForMatching(keyBrand) === normalizedBrand &&
         normalizeForMatching(keyModel) === normalizedModel) {
       return sizes;
@@ -22708,7 +22721,7 @@ export function searchMachines(query: string): { brand: string; model: string; t
   const resultMap = new Map<string, { brand: string; model: string; trackSizes: Set<string> }>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [brand, model] = key.split('|');
+    const [brand, model] = splitCompatibilityKey(key);
     const normalizedBrand = normalizeForMatching(brand);
     const normalizedModel = normalizeForMatching(model);
     const normalizedFull = normalizeForMatching(`${brand} ${model}`);
@@ -22808,7 +22821,7 @@ export function getMachinesForTrackSize(trackSize: string): { brand: string; mod
   
   // Iterate through every machine in the compatibility map
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-    const [brand, model] = key.split('|');
+    const [brand, model] = splitCompatibilityKey(key);
     
     // Check each size in the machine's compatible sizes array
     for (const sizeEntry of sizes) {
