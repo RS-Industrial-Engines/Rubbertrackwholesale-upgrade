@@ -17,7 +17,7 @@ import {
   COMPONENT_DISPLAY_NAMES,
   COMPONENT_PLURAL_NAMES,
   COMPONENT_URL_PATHS,
-  getMachinesGroupedByBrand,
+  getAllMachinesGroupedByBrandForCategoryPage,
   getSortedBrandsForComponent,
   PRIORITY_BRANDS,
 } from "@/lib/data/undercarriage-data";
@@ -49,16 +49,27 @@ export function UndercarriageCategoryPageContent({
   const pluralName = COMPONENT_PLURAL_NAMES[componentType];
   const urlPath = COMPONENT_URL_PATHS[componentType];
   
-  // Get machines grouped by brand
-  const machinesByBrand = useMemo(() => getMachinesGroupedByBrand(componentType), [componentType]);
-  const sortedBrands = useMemo(() => getSortedBrandsForComponent(componentType), [componentType]);
+  // Get ALL machines grouped by brand (for complete navigation)
+  const machinesByBrand = useMemo(() => getAllMachinesGroupedByBrandForCategoryPage(componentType), [componentType]);
+  const sortedBrands = useMemo(() => {
+    // Get all brands from the new function (includes all machines, not just data-backed)
+    const brands = Object.keys(machinesByBrand);
+    return brands.sort((a, b) => {
+      const aIndex = PRIORITY_BRANDS.indexOf(a);
+      const bIndex = PRIORITY_BRANDS.indexOf(b);
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+      return a.localeCompare(b);
+    });
+  }, [machinesByBrand]);
   
   // Build flat list of all machines for exact matching
   const allMachines = useMemo(() => {
-    const machines: Array<{ brand: string; model: string; slug: string }> = [];
+    const machines: Array<{ brand: string; model: string; slug: string; hasData: boolean }> = [];
     for (const brand of Object.keys(machinesByBrand)) {
       for (const machine of machinesByBrand[brand]) {
-        machines.push({ brand, model: machine.model, slug: machine.slug });
+        machines.push({ brand, model: machine.model, slug: machine.slug, hasData: machine.hasData });
       }
     }
     return machines;

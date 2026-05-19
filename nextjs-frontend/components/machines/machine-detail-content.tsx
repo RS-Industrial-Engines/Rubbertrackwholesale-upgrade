@@ -374,7 +374,7 @@ export function MachineDetailContent({
             </Card>
             
             {/* All undercarriage component cards - always show all 3 */}
-            {/* If data exists: link to SEO page. If no data: quote CTA only */}
+            {/* ALL cards link to component pages - page content varies by data availability */}
             {getAllMachineComponentCards(make, model).map((card) => (
               <Card key={card.component} className="group hover:border-primary transition-colors h-full flex flex-col">
                 <CardContent className="p-6 flex flex-col h-full">
@@ -386,21 +386,12 @@ export function MachineDetailContent({
                     {make} {model} {card.displayName.toLowerCase()} replacement
                   </p>
                   <div className="flex flex-col gap-2 mt-auto">
-                    {card.hasData && card.url ? (
-                      /* Data exists - link to SEO component page */
-                      <Button variant="outline" size="sm" asChild className="w-full">
-                        <Link href={card.url}>
-                          View {card.pluralName}
-                        </Link>
-                      </Button>
-                    ) : (
-                      /* No data - quote CTA only (no SEO link) */
-                      <Button variant="outline" size="sm" asChild className="w-full">
-                        <Link href="/contact">
-                          Request Quote
-                        </Link>
-                      </Button>
-                    )}
+                    {/* ALWAYS link to component page - page handles data vs quote mode */}
+                    <Button variant="outline" size="sm" asChild className="w-full">
+                      <Link href={card.url}>
+                        View {card.pluralName}
+                      </Link>
+                    </Button>
                     <Button size="sm" asChild className="w-full">
                       <Link href={businessInfo.phoneTel}>
                         <Phone className="h-3 w-3 mr-2" />
