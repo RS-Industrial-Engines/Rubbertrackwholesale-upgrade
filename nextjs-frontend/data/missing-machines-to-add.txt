@@ -1,2 +1,38 @@
 # Missing Machines to Add to fullMachineModels
 
+## CAT
+- "302.4D"
+- "305.5"
+
+## John Deere
+- "17P"
+- "26P"
+- "27C"
+- "30P"
+- "319D"
+- "319E"
+- "35C"
+- "35P"
+- "50C"
+- "50P"
+- "CT315"
+- "CT325G"
+
+## Kubota
+- "KX080-4S2"
+- "KX080-5"
+- "KX121-2SS"
+- "KX61-2SS"
+- "KX91-2SS"
+- "U25"
+- "U35-S2"
+
+## Takeuchi
+- "TB068FR"
+- "TB180"
+- "TB53"
+- "TB75FR"
+- "TL126"
+- "TL26-2"
+- "TL6"
+
