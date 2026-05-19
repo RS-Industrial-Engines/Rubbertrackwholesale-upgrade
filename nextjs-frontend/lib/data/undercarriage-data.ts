@@ -8,6 +8,12 @@
 
 import { fullMachineModels, cleanModelForDisplay } from "./full-machine-data";
 import { createMachineSlug } from "../url-utils";
+import { getVerifiedPartsForMachine } from "./verified-parts-data";
+import { getStagedPartsForMachine } from "./staged-parts-data";
+import { 
+  SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES,
+  REQUIRE_COMPONENT_DATA_FOR_SITEMAP 
+} from "@/lib/config/staged-parts-flags";
 
 // Component types
 export type UndercarriageComponent = "bottom-roller" | "sprocket" | "idler" | "carrier-roller";
@@ -170,6 +176,56 @@ export function hasCarrierRoller(brand: string, model: string): boolean {
   return MACHINES_WITH_CARRIER_ROLLERS.has(slug);
 }
 
+// Route paths used for SEO checks
+export type ComponentRoutePath = "bottom-rollers" | "sprockets" | "idlers" | "carrier-rollers";
+
+/**
+ * Check if a machine has data for a specific component type
+ * Used to control internal linking and prevent exposing thin content pages
+ * 
+ * Returns true if:
+ * - Has verified parts for this machine+component
+ * - Has researched/staged parts AND feature flag is enabled
+ * - Is a carrier-roller with verified availability
+ */
+export function hasComponentData(brand: string, model: string, routePath: ComponentRoutePath): boolean {
+  // If governance flag is disabled, include all pages (legacy behavior)
+  if (!REQUIRE_COMPONENT_DATA_FOR_SITEMAP) {
+    return true;
+  }
+
+  // Carrier rollers have their own verification
+  if (routePath === "carrier-rollers") {
+    return hasCarrierRoller(brand, model);
+  }
+
+  // Map route path to singular component type for data functions
+  const componentTypeMap: Record<ComponentRoutePath, UndercarriageComponent> = {
+    "bottom-rollers": "bottom-roller",
+    "sprockets": "sprocket",
+    "idlers": "idler",
+    "carrier-rollers": "carrier-roller",
+  };
+  const componentType = componentTypeMap[routePath];
+
+  // Check for verified parts (always qualify)
+  const verifiedParts = getVerifiedPartsForMachine(brand, model, componentType);
+  if (verifiedParts.length > 0) {
+    return true;
+  }
+
+  // Check for researched/staged parts (only if feature flag enabled)
+  if (SHOW_RESEARCHED_PARTS_ON_PUBLIC_COMPONENT_PAGES) {
+    const stagedParts = getStagedPartsForMachine(brand, model, componentType);
+    if (stagedParts.length > 0) {
+      return true;
+    }
+  }
+
+  // No data found - avoid exposing thin content
+  return false;
+}
+
 /**
  * Get undercarriage configuration for a machine
  */
@@ -183,11 +239,23 @@ export function getMachineUndercarriageConfig(brand: string, model: string): Mac
 
 /**
  * Get available undercarriage components for a machine
+ * Only returns components that have real data (verified or staged parts)
+ * This ensures internal links only go to pages with content
  */
 export function getUndercarriageComponents(brand: string, model: string): UndercarriageComponent[] {
-  const components: UndercarriageComponent[] = ["bottom-roller", "sprocket", "idler"];
+  const components: UndercarriageComponent[] = [];
   
-  if (hasCarrierRoller(brand, model)) {
+  // Check each component type for real data
+  if (hasComponentData(brand, model, "bottom-rollers")) {
+    components.push("bottom-roller");
+  }
+  if (hasComponentData(brand, model, "sprockets")) {
+    components.push("sprocket");
+  }
+  if (hasComponentData(brand, model, "idlers")) {
+    components.push("idler");
+  }
+  if (hasComponentData(brand, model, "carrier-rollers")) {
     components.push("carrier-roller");
   }
   
@@ -196,11 +264,15 @@ export function getUndercarriageComponents(brand: string, model: string): Underc
 
 /**
  * Get all machines for a specific component type (deduped by slug)
- * For carrier rollers, only returns machines that have them
+ * Only returns machines that have real data for this component type
+ * This ensures category pages only list machines with content
  */
 export function getAllMachinesForComponent(component: UndercarriageComponent): Array<{ brand: string; model: string; slug: string }> {
   const machines: Array<{ brand: string; model: string; slug: string }> = [];
   const seenSlugs = new Set<string>();
+  
+  // Convert component type to route path for SEO check
+  const routePath = COMPONENT_URL_PATHS[component] as "bottom-rollers" | "sprockets" | "idlers" | "carrier-rollers";
   
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     for (const model of models) {
@@ -210,16 +282,17 @@ export function getAllMachinesForComponent(component: UndercarriageComponent): A
       if (seenSlugs.has(slug)) {
         continue;
       }
-      seenSlugs.add(slug);
       
-      // For carrier rollers, only include machines that have them
-      if (component === "carrier-roller" && !hasCarrierRoller(brand, model)) {
+      // Only include machines that have real data for this component
+      if (!hasComponentData(brand, model, routePath)) {
         continue;
       }
       
+      seenSlugs.add(slug);
+      
       machines.push({
         brand,
-        model,
+        model: cleanModelForDisplay(model),
         slug,
       });
     }
@@ -292,26 +365,31 @@ export const PRIORITY_BRANDS = [
 
 /**
  * Get machines grouped by brand for a component (deduped by slug)
+ * Only includes machines that have real data for this component type
  */
 export function getMachinesGroupedByBrand(component: UndercarriageComponent): Record<string, Array<{ model: string; slug: string }>> {
   const grouped: Record<string, Array<{ model: string; slug: string }>> = {};
   const seenSlugsGlobal = new Set<string>(); // Global dedupe across all brands
   
+  // Convert component type to route path for SEO check
+  const routePath = COMPONENT_URL_PATHS[component] as "bottom-rollers" | "sprockets" | "idlers" | "carrier-rollers";
+  
   for (const [brand, models] of Object.entries(fullMachineModels)) {
     const brandMachines: Array<{ model: string; slug: string }> = [];
     
     for (const model of models) {
-      // For carrier rollers, only include machines that have them
-      if (component === "carrier-roller" && !hasCarrierRoller(brand, model)) {
-        continue;
-      }
-      
       const slug = createMachineSlug(brand, model);
       
       // Dedupe by slug (both within brand and globally)
       if (seenSlugsGlobal.has(slug)) {
         continue;
       }
+      
+      // Only include machines that have real data for this component
+      if (!hasComponentData(brand, model, routePath)) {
+        continue;
+      }
+      
       seenSlugsGlobal.add(slug);
       
       // Use clean model name for display
