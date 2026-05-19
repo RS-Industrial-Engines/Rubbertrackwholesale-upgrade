@@ -22681,27 +22681,45 @@ export function getModelsForBrand(brand: string): string[] {
 
 /**
  * Get track sizes for a specific machine
+ * 
+ * IMPORTANT: This aggregates track sizes from ALL variants that normalize to the same base model.
+ * For example, "E32" will aggregate sizes from:
+ * - "E32 [I guiding | M-series]"
+ * - "E32 [J guiding | R-series]"
+ * 
+ * This ensures the merged machine page shows all compatible track sizes.
  */
 export function getTrackSizesForMachine(brand: string, model: string): string[] {
-  // Try exact key
+  // Try exact key first
   const exactKey = `${brand}|${model}`;
   if (fullMachineCompatibility[exactKey]) {
     return fullMachineCompatibility[exactKey];
   }
   
-  // Try normalized matching
+  // Normalize the search model for comparison
   const normalizedBrand = normalizeForMatching(brand);
-  const normalizedModel = normalizeForMatching(model);
+  const normalizedSearchModel = normalizeForMatching(cleanModelForDisplay(model));
+  
+  // Aggregate track sizes from ALL matching variants
+  const allSizes = new Set<string>();
   
   for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
     const [keyBrand, keyModel] = splitCompatibilityKey(key);
-    if (normalizeForMatching(keyBrand) === normalizedBrand &&
-        normalizeForMatching(keyModel) === normalizedModel) {
-      return sizes;
+    
+    // Brand must match
+    if (normalizeForMatching(keyBrand) !== normalizedBrand) {
+      continue;
+    }
+    
+    // Compare against the CLEANED version of the key model (strips guiding descriptors)
+    const normalizedKeyModel = normalizeForMatching(cleanModelForDisplay(keyModel));
+    if (normalizedKeyModel === normalizedSearchModel) {
+      // Found a matching variant - add its track sizes
+      sizes.forEach(size => allSizes.add(size));
     }
   }
   
-  return [];
+  return Array.from(allSizes);
 }
 
 /**
