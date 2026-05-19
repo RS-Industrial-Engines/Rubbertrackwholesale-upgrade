@@ -4732,6 +4732,8 @@ export const fullMachineModels: Record<string, string[]> = {
     "TB 290",
     "TB 30UR",
     "TB 38FR",
+    "TB 370",
+    "TB370",
     "TB 53FR",
     "TB53",
     "TB 55R",

@@ -302,8 +302,13 @@ staged,881130500,Takeuchi,TL10,bottom-rollers,/bottom-rollers/takeuchi-tl10,YES,
 staged,881130500,Takeuchi,TL12,bottom-rollers,/bottom-rollers/takeuchi-tl12,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
 staged,881130500,Takeuchi,TL240,bottom-rollers,/bottom-rollers/takeuchi-tl240,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
 staged,881130500,Takeuchi,TL250,bottom-rollers,/bottom-rollers/takeuchi-tl250,YES,YES,YES,YES,YES,YES,YES,PASS,PASS
-staged,03516-08210,Takeuchi,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
-staged,05516-00120,Takeuchi,(EMPTY),sprockets,(NO URL - EMPTY MODELS),NO,NO,YES,NO,NO,NO,NO,FAIL,EMPTY_MODELS
+staged,03516-08210,Takeuchi,TB228,sprockets,/sprockets/takeuchi-tb228,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,03516-08210,Takeuchi,TB230,sprockets,/sprockets/takeuchi-tb230,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,03516-08210,Takeuchi,TB240,sprockets,/sprockets/takeuchi-tb240,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,05516-00120,Takeuchi,TB250-2,sprockets,/sprockets/takeuchi-tb250-2,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,05516-00120,Takeuchi,TB257FR,sprockets,/sprockets/takeuchi-tb257fr,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,05516-00120,Takeuchi,TB260,sprockets,/sprockets/takeuchi-tb260,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
+staged,05516-00120,Takeuchi,TB370,sprockets,/sprockets/takeuchi-tb370,YES,YES,YES,NO,NO,NO,NO,PASS,PASS
 verified,V0511-25104,Kubota,SVL65-2,bottom-rollers,/bottom-rollers/kubota-svl65-2,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
 verified,V0511-25104,Kubota,SVL65-2C,bottom-rollers,/bottom-rollers/kubota-svl65-2c,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
 verified,V0511-25104,Kubota,SVL75,bottom-rollers,/bottom-rollers/kubota-svl75,YES,YES,YES,YES,NO,NO,YES,PASS,PASS
