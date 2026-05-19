@@ -137,10 +137,13 @@ function processVerified(): ExportRow[] {
   const rows: ExportRow[] = [];
   
   for (const part of VERIFIED_PARTS) {
+    // Map part_type to UndercarriageComponent
+    // Verified parts use: roller (bottom/carrier), sprocket (drive), idler
     const componentType: UndercarriageComponent = 
-      part.part_subtype === "carrier" ? "carrier-roller" :
       part.part_type === "sprocket" ? "sprocket" :
-      part.part_type === "idler" ? "idler" : "bottom-roller";
+      part.part_type === "idler" ? "idler" :
+      part.part_subtype === "bottom" ? "bottom-roller" :
+      "bottom-roller"; // Default to bottom-roller for other roller types
     
     const routePath = mapComponentToRoute(componentType);
     
