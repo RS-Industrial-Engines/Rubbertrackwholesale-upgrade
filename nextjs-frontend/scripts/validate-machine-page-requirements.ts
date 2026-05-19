@@ -21,7 +21,7 @@ interface ValidationResult {
   testName: string;
   errors: string[];
   warnings: string[];
-  stats: Record<string, number | string[]>;
+  stats: Record<string, number | string | string[]>;
 }
 
 const results: ValidationResult[] = [];
