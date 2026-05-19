@@ -32,16 +32,21 @@ export const TOP_SELLING_TRACK_SIZES = [
  * 
  * PRIORITY ORDER: CTLs first (what customers search for most), then mini excavators.
  * Based on high-demand commercial machines from SEO clusters.
+ * 
+ * TOP 16 MACHINES (positions 0-15):
+ * Used on homepage "Popular Machine Models" and /rubber-tracks "Popular Rubber Tracks by Machine"
+ * Both pages show these in EXACT same order for SEO consistency.
  */
 export const HIGH_PRIORITY_MACHINES = [
-  // ========== TOP 15 PRIORITY: Shared between homepage & /rubber-tracks ==========
-  // These 15 machines appear in exact order on both pages for consistency
+  // ========== TOP 16 PRIORITY: Shared between homepage & /rubber-tracks ==========
+  // These 16 machines appear in exact order on both pages for consistency
   // Order: Kubota SVL → CAT → Bobcat → John Deere → Mini Excavators
   
-  // Kubota SVL Series (5)
+  // Kubota SVL Series (6)
   { brand: "Kubota", model: "SVL75" },
   { brand: "Kubota", model: "SVL75-2" },
   { brand: "Kubota", model: "SVL75-3" },
+  { brand: "Kubota", model: "SVL95" },    // Added: before SVL95-2
   { brand: "Kubota", model: "SVL95-2" },
   { brand: "Kubota", model: "SVL97-2" },
   
@@ -55,16 +60,20 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Bobcat", model: "T650" },
   { brand: "Bobcat", model: "T770" },
   
-  // John Deere CTLs (2)
+  // John Deere CTLs (1)
   { brand: "John Deere", model: "325G" },
-  { brand: "John Deere", model: "333G" },
   
-  // Mini Excavators (2) - fill last row
+  // Mini Excavators (2) - complete the 16
   { brand: "Kubota", model: "KX121-3" },
   { brand: "Bobcat", model: "E35" },
+  // 16th slot: Another high-demand model to fill grid
+  { brand: "Bobcat", model: "E32" },
   
   // ========== SECONDARY PRIORITY: Additional high-demand machines ==========
-  // Kubota SVL variants (SVL75 already in top priority, so skip it here)
+  // John Deere CTL (moved from top 16)
+  { brand: "John Deere", model: "333G" },
+  
+  // Kubota SVL variants
   { brand: "Kubota", model: "SVL 95" },
   { brand: "Kubota", model: "SVL65-2" },
   { brand: "Kubota", model: "SVL75-2C" },
