@@ -60,18 +60,17 @@ export const HIGH_PRIORITY_MACHINES = [
   { brand: "Bobcat", model: "T650" },
   { brand: "Bobcat", model: "T770" },
   
-  // John Deere CTLs (1)
+  // John Deere CTLs (2)
   { brand: "John Deere", model: "325G" },
+  { brand: "John Deere", model: "333G" },
   
   // Mini Excavators (2) - complete the 16
   { brand: "Kubota", model: "KX121-3" },
   { brand: "Bobcat", model: "E35" },
-  // 16th slot: Another high-demand model to fill grid
-  { brand: "Bobcat", model: "E32" },
   
   // ========== SECONDARY PRIORITY: Additional high-demand machines ==========
-  // John Deere CTL (moved from top 16)
-  { brand: "John Deere", model: "333G" },
+  // Additional Bobcat mini excavator
+  { brand: "Bobcat", model: "E32" },
   
   // Kubota SVL variants
   { brand: "Kubota", model: "SVL 95" },
