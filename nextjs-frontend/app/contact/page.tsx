@@ -3,11 +3,17 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { BUSINESS_INFO } from "@/lib/url-utils";
+import { getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: `Contact Us | ${BUSINESS_INFO.name}`,
   description:
     `Get in touch with ${BUSINESS_INFO.name}. Our expert team is ready to help you find the right rubber tracks and undercarriage parts for your equipment. Call ${BUSINESS_INFO.phone}.`,
+  alternates: {
+    canonical: `${SITE_URL}/contact`,
+  },
 };
 
 const contactInfo = [

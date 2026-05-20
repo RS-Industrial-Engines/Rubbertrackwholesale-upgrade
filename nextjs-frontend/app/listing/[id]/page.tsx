@@ -47,6 +47,9 @@ export async function generateMetadata({ params }: ListingPageProps): Promise<Me
   return {
     title: `${listing.title} | Rubber Track Wholesale`,
     description: listing.description,
+    alternates: {
+      canonical: `${SITE_URL}/listing/${id}`,
+    },
     openGraph: {
       title: listing.title,
       description: listing.description,

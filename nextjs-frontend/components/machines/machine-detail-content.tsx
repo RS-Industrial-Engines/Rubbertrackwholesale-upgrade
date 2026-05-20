@@ -141,19 +141,19 @@ export function MachineDetailContent({
         </div>
       </section>
 
-      {/* B. Compatible Rubber Track Sizes */}
+      {/* B. Compatible Rubber Track Sizes OR Call to Confirm Section */}
       <section className="py-12 lg:py-16 border-b border-border">
         <div className="container mx-auto px-4">
-          <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
-            Compatible Rubber Track Sizes for {make} {model}
-          </h2>
-          <p className="text-muted-foreground mb-8 max-w-3xl">
-            Below are the rubber track sizes that fit your {make} {model} {equipmentType.toLowerCase()}.
-            Click on a size to view detailed specifications and compatible machines.
-          </p>
-
           {trackSizes.length > 0 ? (
             <>
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                Compatible Rubber Track Sizes for {make} {model}
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-3xl">
+                Below are the rubber track sizes that fit your {make} {model} {equipmentType.toLowerCase()}.
+                Click on a size to view detailed specifications and compatible machines.
+              </p>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
                 {trackSizes.map((track) => (
                   <Link
@@ -209,19 +209,42 @@ export function MachineDetailContent({
               </Card>
             </>
           ) : (
-            <Card>
-              <CardContent className="p-8 text-center">
-                <p className="text-muted-foreground mb-4">
-                  Contact us for compatible track sizes for your {make} {model}.
-                </p>
-                <Button asChild>
-                  <Link href={businessInfo.phoneTel}>
-                    <Phone className="h-4 w-4 mr-2" />
-                    Call {businessInfo.phone}
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+            <>
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+                Call to Confirm Rubber Tracks & Undercarriage Parts for {make} {model}
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-3xl">
+                We&apos;re verifying the exact rubber track size for your {make} {model}. 
+                Contact our parts specialists to confirm compatibility and get a quote for your undercarriage needs.
+              </p>
+              <Card className="bg-secondary/50">
+                <CardContent className="p-8">
+                  <div className="flex flex-col md:flex-row items-center gap-6">
+                    <div className="flex-shrink-0">
+                      <Phone className="h-12 w-12 text-primary" />
+                    </div>
+                    <div className="text-center md:text-left">
+                      <h3 className="text-xl font-semibold mb-2">Need Help Finding the Right Parts?</h3>
+                      <p className="text-muted-foreground mb-4">
+                        Our experts can verify the correct track size and undercarriage components for your {make} {model}.
+                        We&apos;ll help you find the right parts at wholesale prices.
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <Button size="lg" asChild>
+                          <Link href={businessInfo.phoneTel}>
+                            <Phone className="h-4 w-4 mr-2" />
+                            Call {businessInfo.phone}
+                          </Link>
+                        </Button>
+                        <Button size="lg" variant="outline" asChild>
+                          <Link href="/contact">Request a Quote</Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </>
           )}
         </div>
       </section>

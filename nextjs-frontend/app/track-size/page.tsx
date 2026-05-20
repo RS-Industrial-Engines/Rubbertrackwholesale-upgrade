@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Rubber Track Sizes - Find Tracks by Size | Houston TX",
   description:
     "Browse rubber tracks by size. Find 400x86x52, 450x86x56, 300x52.5x80, and all popular track sizes. Wholesale prices from Houston warehouse with nationwide shipping.",
+  alternates: {
+    canonical: `${SITE_URL}/track-size`,
+  },
   keywords: [
     "rubber track sizes",
     "400x86x52 rubber tracks",

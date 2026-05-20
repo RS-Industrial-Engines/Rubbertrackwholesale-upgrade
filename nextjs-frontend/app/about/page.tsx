@@ -4,11 +4,17 @@ import Link from "next/link";
 import { Truck, Award, Clock, Users, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Rubber Track Wholesale - your trusted source for premium rubber tracks and undercarriage parts since 2005.",
+  alternates: {
+    canonical: `${SITE_URL}/about`,
+  },
 };
 
 const features = [

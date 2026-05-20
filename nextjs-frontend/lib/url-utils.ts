@@ -77,11 +77,26 @@ export function getBaseMachineModel(model: string): string {
  * - createMachineSlug("CASE", "CX 36BMC[J guiding]") → "case-cx36bmc"
  */
 export function createMachineSlug(make: string, model: string): string {
-  // Normalize make: lowercase, replace spaces with hyphens
+  // Normalize make: lowercase, sanitize same as model
+  // - Replace slashes with hyphens (e.g., "Chikusui/Canycom" → "chikusui-canycom")
+  // - Remove ampersands (e.g., "C & F" → "c-f")
+  // - Remove parentheses and special chars
+  // - Collapse duplicate hyphens
   const normalizedMake = make
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-");
+    // Replace slashes with hyphens
+    .replace(/\s*\/\s*/g, "-")
+    // Replace " & " with hyphen (e.g., "C & F" → "c-f")
+    .replace(/\s*&\s*/g, "-")
+    // Replace spaces with hyphens
+    .replace(/\s+/g, "-")
+    // Remove special characters except hyphens and alphanumerics
+    .replace(/[^a-z0-9-]/g, "")
+    // Collapse multiple hyphens
+    .replace(/-+/g, "-")
+    // Remove leading/trailing hyphens
+    .replace(/^-|-$/g, "");
   
   // Clean model:
   // 1. Remove parentheses and everything inside them (equipment type descriptors)
@@ -95,6 +110,10 @@ export function createMachineSlug(make: string, model: string): string {
     .replace(/\s*\([^)]*\)/g, "")
     // Remove brackets and their contents (with or without leading space)
     .replace(/\s*\[[^\]]*\]/g, "")
+    // Replace slashes with hyphens
+    .replace(/\s*\/\s*/g, "-")
+    // Replace ampersands with hyphens
+    .replace(/\s*&\s*/g, "-")
     // Remove special characters except alphanumerics, hyphens, and spaces
     .replace(/[^a-z0-9\s-]/g, "")
     // Normalize spaces between letters/numbers in model (e.g., "SVL 95" → "SVL95")

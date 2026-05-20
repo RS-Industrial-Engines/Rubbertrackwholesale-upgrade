@@ -2,10 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Cart",
   description: "Your shopping cart",
+  alternates: {
+    canonical: `${SITE_URL}/cart`,
+  },
 };
 
 export default function CartPage() {
