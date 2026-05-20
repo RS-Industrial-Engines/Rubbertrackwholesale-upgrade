@@ -145,61 +145,85 @@ function getEquipmentType(model: string): string {
 
 // Get fallback compatibility data for a machine
 // CRITICAL: Must use EXACT matching - "325" must NOT return "325G" data
+// IMPORTANT: Machine pages should render even if no track sizes - they may have undercarriage data
 function getFallbackCompatibility(make: string, model: string): CompatibilitySearchResult | null {
   const trackSizes = getTrackSizesForMachine(make, model);
   
-  if (trackSizes.length === 0) {
-    // Try EXACT match only - no fuzzy matching allowed
-    const normalizedMake = normalizeForMatching(make);
-    const normalizedModel = normalizeForMatching(model);
-    
-    for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
-      const [keyBrand, keyModel] = splitCompatibilityKey(key);
-      const keyBrandNorm = normalizeForMatching(keyBrand);
-      const keyModelNorm = normalizeForMatching(cleanModelForDisplay(keyModel));
-      
-      // EXACT match only - brand must match AND cleaned model must match exactly
-      if (keyBrandNorm === normalizedMake && keyModelNorm === normalizedModel) {
-        // Return with CLEAN model name (not raw guiding variant)
-        const cleanModel = cleanModelForDisplay(keyModel);
-        return {
-          machine: {
-            id: 1,
-            make: keyBrand,
-            model: cleanModel,
-            equipment_type: getEquipmentType(cleanModel),
-          },
-          // Get deduped track sizes using the aggregating function
-          track_sizes: getTrackSizesForMachine(keyBrand, cleanModel).map((size, i) => ({
-            id: i + 1,
-            size,
-            width: parseInt(size.split("x")[0]) || 0,
-            pitch: parseFloat(size.split("x")[1]) || 0,
-            links: parseInt(size.split("x")[2]) || 0,
-          })),
-          products: [],
-        };
+  // If we have track sizes, return immediately with that data
+  if (trackSizes.length > 0) {
+    return {
+      machine: {
+        id: 1,
+        make: make,
+        model: model,
+        equipment_type: getEquipmentType(model),
+      },
+      track_sizes: trackSizes.map((size, i) => ({
+        id: i + 1,
+        size,
+        width: parseInt(size.split("x")[0]) || 0,
+        pitch: parseFloat(size.split("x")[1]) || 0,
+        links: parseInt(size.split("x")[2]) || 0,
+      })),
+      products: [],
+    };
+  }
+  
+  // No track sizes - but machine may still exist in models list (e.g., undercarriage-only machines)
+  // Check if machine exists in fullMachineModels
+  const normalizedMake = normalizeForMatching(make);
+  const normalizedModel = normalizeForMatching(model);
+  
+  // First check fullMachineModels - if machine exists there, it's valid even without track sizes
+  for (const [brand, models] of Object.entries(fullMachineModels)) {
+    if (normalizeForMatching(brand) === normalizedMake) {
+      for (const m of models) {
+        if (normalizeForMatching(cleanModelForDisplay(m)) === normalizedModel) {
+          // Machine exists in models - return empty track_sizes (undercarriage-only machine)
+          return {
+            machine: {
+              id: 1,
+              make: brand,
+              model: cleanModelForDisplay(m),
+              equipment_type: getEquipmentType(m),
+            },
+            track_sizes: [], // No rubber track sizes, but machine is valid
+            products: [],
+          };
+        }
       }
     }
-    return null;
   }
-
-  return {
-    machine: {
-      id: 1,
-      make: make,
-      model: model,
-      equipment_type: getEquipmentType(model),
-    },
-    track_sizes: trackSizes.map((size, i) => ({
-      id: i + 1,
-      size,
-      width: parseInt(size.split("x")[0]) || 0,
-      pitch: parseFloat(size.split("x")[1]) || 0,
-      links: parseInt(size.split("x")[2]) || 0,
-    })),
-    products: [],
-  };
+  
+  // Also check fullMachineCompatibility for exact match
+  for (const [key, sizes] of Object.entries(fullMachineCompatibility)) {
+    const [keyBrand, keyModel] = splitCompatibilityKey(key);
+    const keyBrandNorm = normalizeForMatching(keyBrand);
+    const keyModelNorm = normalizeForMatching(cleanModelForDisplay(keyModel));
+    
+    // EXACT match only - brand must match AND cleaned model must match exactly
+    if (keyBrandNorm === normalizedMake && keyModelNorm === normalizedModel) {
+      const cleanModel = cleanModelForDisplay(keyModel);
+      return {
+        machine: {
+          id: 1,
+          make: keyBrand,
+          model: cleanModel,
+          equipment_type: getEquipmentType(cleanModel),
+        },
+        track_sizes: getTrackSizesForMachine(keyBrand, cleanModel).map((size, i) => ({
+          id: i + 1,
+          size,
+          width: parseInt(size.split("x")[0]) || 0,
+          pitch: parseFloat(size.split("x")[1]) || 0,
+          links: parseInt(size.split("x")[2]) || 0,
+        })),
+        products: [],
+      };
+    }
+  }
+  
+  return null;
 }
 
 // Generate static params for all machines using clean URLs
