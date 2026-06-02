@@ -1,69 +1,67 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Star } from "lucide-react";
+import { Star, ExternalLink } from "lucide-react";
+import { BUSINESS_INFO } from "@/lib/url-utils";
+import { Button } from "@/components/ui/button";
 
-const testimonials = [
-  {
-    id: 1,
-    name: "Mike Johnson",
-    company: "Johnson Excavating",
-    text: "Best rubber tracks I've purchased. Quality is outstanding and they last much longer than OEM.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Sarah Martinez",
-    company: "Martinez Construction",
-    text: "Fast shipping and excellent customer service. The tracks fit perfectly on our Bobcat fleet.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Tom Wilson",
-    company: "Wilson Landscaping",
-    text: "Great prices and the quality matches OEM. Will definitely order again.",
-    rating: 5,
-  },
-];
-
+/**
+ * Social Proof Section
+ * 
+ * Displays real Google Business Profile rating instead of fabricated testimonials.
+ * Links to actual Google reviews for authenticity and trust.
+ */
 export function TestimonialsSection() {
   return (
     <section className="py-16 bg-background">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
-            What Our Customers Say
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Trusted by contractors and construction companies nationwide
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="bg-card border-border">
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="w-5 h-5 text-primary fill-primary"
-                    />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  &quot;{testimonial.text}&quot;
-                </p>
-                <div className="border-t border-border pt-4">
-                  <p className="text-foreground font-semibold">
-                    {testimonial.name}
-                  </p>
-                  <p className="text-muted-foreground text-sm">
-                    {testimonial.company}
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Google Reviews Card */}
+          <Card className="bg-card border-border">
+            <CardContent className="py-10 px-6">
+              {/* Star Rating */}
+              <div className="flex justify-center mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-8 h-8 text-primary fill-primary"
+                  />
+                ))}
+              </div>
+              
+              {/* Rating Value */}
+              <div className="text-5xl font-bold text-foreground mb-2">
+                {BUSINESS_INFO.aggregateRating.ratingValue}
+              </div>
+              
+              {/* Review Count */}
+              <p className="text-lg text-muted-foreground mb-6">
+                Based on {BUSINESS_INFO.aggregateRating.reviewCount} Google Reviews
+              </p>
+              
+              {/* Google Business Profile Link */}
+              <a
+                href="https://www.google.com/maps/place/Rubber+Track+Wholesale+Houston/@29.7713,-95.2846,17z"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button variant="outline" className="gap-2">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                  </svg>
+                  Read Our Google Reviews
+                  <ExternalLink className="w-4 h-4" />
+                </Button>
+              </a>
+              
+              {/* Trust Statement */}
+              <p className="text-sm text-muted-foreground mt-6">
+                Trusted by contractors and construction companies across Texas and nationwide
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>
