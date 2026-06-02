@@ -681,6 +681,179 @@ export default async function RubberTracksPage() {
           </div>
         </section>
 
+        {/* Mini Excavator Rubber Track Guide */}
+        <section className="py-12 lg:py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
+                Mini Excavator Rubber Track Guide
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Understanding rubber track sizes for compact and mini excavators
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-10">
+                {/* Mini Excavator Track Sizing */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Ruler className="h-5 w-5 text-primary" />
+                      Mini Excavator Track Sizing
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      Mini excavator tracks use the same <strong>Width x Pitch x Links</strong> format, but typically have smaller widths and different pitch measurements than CTLs.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">W</div>
+                        <div>
+                          <div className="font-medium text-sm">Common Widths</div>
+                          <div className="text-xs text-muted-foreground">230mm, 250mm, 300mm, 350mm, 400mm for mini excavators</div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">P</div>
+                        <div>
+                          <div className="font-medium text-sm">Pitch Variations</div>
+                          <div className="text-xs text-muted-foreground">48.5mm, 52.5mm, 72mm - varies by machine class</div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">L</div>
+                        <div>
+                          <div className="font-medium text-sm">Link Counts</div>
+                          <div className="text-xs text-muted-foreground">70-96 links typical for mini excavators</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Popular Mini Excavator Sizes */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Factory className="h-5 w-5 text-primary" />
+                      Top Mini Excavator Track Sizes
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <Link href="/track-size/300x52.5x80" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">300x52.5x80</span>
+                        <span className="text-xs text-muted-foreground">Kubota KX121-3, Bobcat E35</span>
+                      </Link>
+                      <Link href="/track-size/300x52.5x84" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">300x52.5x84</span>
+                        <span className="text-xs text-muted-foreground">Kubota U35, Bobcat E35</span>
+                      </Link>
+                      <Link href="/track-size/230x48x70" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">230x48x70</span>
+                        <span className="text-xs text-muted-foreground">Kubota KX71, Bobcat E26</span>
+                      </Link>
+                      <Link href="/track-size/250x72x45" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">250x72x45</span>
+                        <span className="text-xs text-muted-foreground">CAT 301.7, John Deere 17G</span>
+                      </Link>
+                      <Link href="/track-size/400x72.5x72" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">400x72.5x72</span>
+                        <span className="text-xs text-muted-foreground">Kubota KX057, CAT 305.5</span>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* Mini Excavator Size Classes */}
+              <Card className="mb-10">
+                <CardHeader>
+                  <CardTitle>Mini Excavator Weight Classes &amp; Track Sizes</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Micro (Under 1 Ton)</div>
+                      <p className="text-xs text-muted-foreground mb-2">Track widths: 130-180mm</p>
+                      <p className="text-xs text-muted-foreground">Bobcat E10, Kubota K008</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Small (1-3 Tons)</div>
+                      <p className="text-xs text-muted-foreground mb-2">Track widths: 230-300mm</p>
+                      <p className="text-xs text-muted-foreground">Bobcat E26, Kubota KX71, CAT 301.7</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Mid-Size (3-5 Tons)</div>
+                      <p className="text-xs text-muted-foreground mb-2">Track widths: 300-400mm</p>
+                      <p className="text-xs text-muted-foreground">Bobcat E35, Kubota KX121-3, CAT 303.5</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Large (5-8 Tons)</div>
+                      <p className="text-xs text-muted-foreground mb-2">Track widths: 400-450mm</p>
+                      <p className="text-xs text-muted-foreground">Kubota KX057, CAT 305.5, Bobcat E50</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg col-span-full sm:col-span-2 lg:col-span-2">
+                      <div className="font-semibold text-sm mb-1">Compact (8+ Tons)</div>
+                      <p className="text-xs text-muted-foreground mb-2">Track widths: 450-600mm</p>
+                      <p className="text-xs text-muted-foreground">CAT 308, Kubota KX080, John Deere 85G - transitioning to midi excavator class</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Mini Excavator Track Tips */}
+              <div className="bg-card border border-border rounded-lg p-6">
+                <h3 className="text-xl font-bold text-foreground mb-4">Choosing the Right Mini Excavator Tracks</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-semibold mb-2 text-primary">Application Considerations</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Standard tread for general excavation work
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Turf-friendly tread for landscaping jobs
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Block tread for hard surfaces
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Wide tracks for soft ground conditions
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Longevity Factors</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Quality rubber compound affects lifespan
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Steel core reinforcement prevents stretching
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Proper tension extends track life 20-30%
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Matching machine specs is critical
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SEO Content */}
         <section className="py-12 lg:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
