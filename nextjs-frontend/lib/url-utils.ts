@@ -294,10 +294,10 @@ export const BUSINESS_INFO = {
   email: "info@rubbertrackwholesale.com",
   category: "Rubber products supplier",
   url: "https://rubbertrackwholesale.com",
-  // Google Business Profile data
+  // Google Business Profile data - must match actual GBP
   aggregateRating: {
     ratingValue: "4.9",
-    reviewCount: "31",
+    reviewCount: "38",
   },
   // Opening hours
   hours: {
