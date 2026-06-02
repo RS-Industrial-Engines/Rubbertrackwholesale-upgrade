@@ -22691,20 +22691,38 @@ export function getModelsForBrand(brand: string): string[] {
 /**
  * Check if a track size string is valid metric format
  * Valid: "400x86x49", "320x52.5x80", "300x52.5x84"
- * Invalid: "13x4x56" (old inch format - width should be 3+ digits)
+ * Invalid: 
+ *   - "13x4x56" (old inch format - width should be 3+ digits)
+ *   - "180x723x37" (typo - pitch should be ~72, not 723)
+ *   - "2303x72x56" (typo - width should be ~230, not 2303)
+ *   - "300x1009x39" (typo - pitch malformed)
+ *   - "400x725.5x74" (typo - pitch should be ~72.5, not 725.5)
+ *   - "450x8x60" (typo - pitch should be ~86, not 8)
  */
-function isValidMetricTrackSize(size: string): boolean {
-  // Pattern: WIDTHxPITCHxLINKS where WIDTH is 3+ digits
-  // WIDTH: 230-600mm typically (3 digits)
-  // PITCH: 52.5, 72, 86, etc.
-  // LINKS: 40-100 typically
-  const match = size.match(/^(\d+)x[\d.]+x\d+$/);
+export function isValidMetricTrackSize(size: string): boolean {
+  // Pattern: WIDTHxPITCHxLINKS
+  const match = size.match(/^(\d+)x([\d.]+)x(\d+)$/);
   if (!match) return false;
   
   const width = parseInt(match[1], 10);
-  // Metric widths are 230mm+ for compact equipment
-  // Inch widths would be 8-18 inches (single/double digit)
-  return width >= 100;
+  const pitch = parseFloat(match[2]);
+  const links = parseInt(match[3], 10);
+  
+  // Width validation: 130-600mm for valid rubber tracks
+  // Too small = likely inch format (8-18 inches)
+  // Too large = likely typo (2303mm is way too big)
+  if (width < 130 || width > 600) return false;
+  
+  // Pitch validation: 48-110mm for valid rubber tracks
+  // Common pitches: 48.5, 52.5, 54.5, 72, 72.5, 84, 86
+  // Too small = typo (8mm is invalid)
+  // Too large = typo (723mm, 725.5mm, 1009mm are invalid)
+  if (pitch < 40 || pitch > 110) return false;
+  
+  // Links validation: 30-120 for valid rubber tracks
+  if (links < 30 || links > 120) return false;
+  
+  return true;
 }
 
 /**

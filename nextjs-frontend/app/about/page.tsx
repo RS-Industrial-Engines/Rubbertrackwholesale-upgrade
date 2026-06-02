@@ -11,7 +11,7 @@ const SITE_URL = getSiteUrl();
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Rubber Track Wholesale - your trusted source for premium rubber tracks and undercarriage parts since 2005.",
+    "Learn about Rubber Track Wholesale Houston - your trusted source for premium rubber tracks and undercarriage parts. Family-owned business with nationwide shipping.",
   alternates: {
     canonical: `${SITE_URL}/about`,
   },
@@ -19,23 +19,23 @@ export const metadata: Metadata = {
 
 const features = [
   {
-    title: "Nationwide Coverage",
-    description: "7 strategically located warehouses for fast delivery",
+    title: "Houston Warehouse",
+    description: "Local pickup available at our Houston facility",
     icon: MapPin,
   },
   {
     title: "Expert Team",
-    description: "20+ years of industry experience",
+    description: "Knowledgeable parts specialists ready to help",
     icon: Users,
   },
   {
     title: "Quality Guaranteed",
-    description: "OEM-quality products with 1-year warranty",
+    description: "OEM-quality products with warranty coverage",
     icon: Award,
   },
   {
-    title: "Fast Shipping",
-    description: "Same-day shipping on most orders",
+    title: "Nationwide Shipping",
+    description: "Fast shipping to all 50 states",
     icon: Truck,
   },
 ];
@@ -53,11 +53,11 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 h-full flex items-center">
           <div className="max-w-2xl">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
-              About Rubber Track Wholesale
+              About Rubber Track Wholesale Houston
             </h1>
             <p className="text-xl text-muted-foreground">
               Your trusted partner for premium rubber tracks and undercarriage
-              parts since 2005.
+              parts with nationwide shipping from Houston, TX.
             </p>
           </div>
         </div>
@@ -72,19 +72,20 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="text-muted-foreground mb-4">
-                Founded in 2005, Rubber Track Wholesale has grown from a small
-                family business to one of the nation&apos;s leading suppliers of
-                rubber tracks and undercarriage parts.
+                Rubber Track Wholesale Houston is a family-owned business
+                dedicated to providing contractors and construction companies
+                with the highest quality rubber tracks and undercarriage parts
+                at wholesale prices.
               </p>
               <p className="text-muted-foreground mb-4">
-                Our mission is simple: provide contractors and construction
-                companies with the highest quality parts at wholesale prices,
-                backed by exceptional customer service.
+                Our mission is simple: help equipment owners keep their machines
+                running with quality replacement parts, backed by knowledgeable
+                customer service from people who understand the industry.
               </p>
               <p className="text-muted-foreground">
-                Today, we serve thousands of customers across the United States,
-                shipping from our network of 7 strategically located warehouses
-                to ensure fast delivery no matter where you are.
+                Based in Houston, TX, we serve customers across the United States
+                with fast nationwide shipping and local pickup available at our
+                warehouse facility.
               </p>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden">

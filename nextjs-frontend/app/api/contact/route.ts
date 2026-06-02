@@ -1,5 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 
+/**
+ * DEVELOPMENT NOTICE: This contact form is NOT production-ready.
+ * 
+ * Current behavior:
+ * - Logs form submissions to server console
+ * - Returns success response without sending email
+ * 
+ * TODO for production:
+ * 1. Connect Resend for email delivery to sales team
+ * 2. Store submissions in database for CRM
+ * 3. Send confirmation email to customer
+ * 4. Add rate limiting
+ * 5. Add honeypot/CAPTCHA for spam prevention
+ */
+
 interface ContactFormData {
   name: string;
   phone?: string;
@@ -34,14 +49,8 @@ export async function POST(request: NextRequest) {
       messageLength: body.message?.length || 0,
     });
 
-    // TODO: Connect Resend for email delivery
-    // For now, return success to not break the form
-    // The form data is logged above for manual follow-up if needed
-
-    // In production, you would:
-    // 1. Send email via Resend to sales team
-    // 2. Store in database for CRM
-    // 3. Send confirmation email to customer
+    // WARNING: Email is NOT being sent. Form data is only logged.
+    // See file header for production TODO items.
 
     return NextResponse.json({
       success: true,
