@@ -514,6 +514,173 @@ export default async function RubberTracksPage() {
           </div>
         </section>
 
+        {/* CTL vs Skid Steer Rubber Track Guide */}
+        <section className="py-12 lg:py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-2">
+                Compact Track Loader (CTL) Rubber Track Guide
+              </h2>
+              <p className="text-muted-foreground mb-8">
+                Everything you need to know about CTL rubber tracks, sizing, and maintenance
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8 mb-10">
+                {/* CTL Track Sizing */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Ruler className="h-5 w-5 text-primary" />
+                      Understanding CTL Track Sizes
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      CTL rubber tracks are measured in three dimensions: <strong>Width x Pitch x Links</strong>.
+                    </p>
+                    <div className="space-y-3">
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">W</div>
+                        <div>
+                          <div className="font-medium text-sm">Width (mm)</div>
+                          <div className="text-xs text-muted-foreground">Track width measured across. Common CTL widths: 320mm, 400mm, 450mm</div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">P</div>
+                        <div>
+                          <div className="font-medium text-sm">Pitch (mm)</div>
+                          <div className="text-xs text-muted-foreground">Distance between drive lugs. CTL standard: 86mm pitch</div>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-6 h-6 rounded bg-primary/10 flex items-center justify-center text-xs font-bold text-primary shrink-0">L</div>
+                        <div>
+                          <div className="font-medium text-sm">Links (count)</div>
+                          <div className="text-xs text-muted-foreground">Number of drive lugs around the track. Varies by machine length</div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Popular CTL Sizes */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Factory className="h-5 w-5 text-primary" />
+                      Top-Selling CTL Track Sizes
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <Link href="/track-size/400x86x52" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">400x86x52</span>
+                        <span className="text-xs text-muted-foreground">Kubota SVL75, CAT 259D</span>
+                      </Link>
+                      <Link href="/track-size/450x86x56" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">450x86x56</span>
+                        <span className="text-xs text-muted-foreground">Kubota SVL95-2, CAT 289D</span>
+                      </Link>
+                      <Link href="/track-size/450x86x58" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">450x86x58</span>
+                        <span className="text-xs text-muted-foreground">CAT 299D2, John Deere 333G</span>
+                      </Link>
+                      <Link href="/track-size/320x86x52" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">320x86x52</span>
+                        <span className="text-xs text-muted-foreground">Bobcat T590, Kubota SVL65</span>
+                      </Link>
+                      <Link href="/track-size/320x86x49" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
+                        <span className="font-medium group-hover:text-primary">320x86x49</span>
+                        <span className="text-xs text-muted-foreground">Bobcat T550, CAT 239D</span>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* CTL Maintenance Tips */}
+              <Card className="mb-10">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Wrench className="h-5 w-5 text-primary" />
+                    CTL Rubber Track Maintenance Tips
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Check Track Tension</div>
+                      <p className="text-xs text-muted-foreground">Inspect tension weekly. Proper sag is typically 1-1.5 inches at center span.</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Avoid Hard Surfaces</div>
+                      <p className="text-xs text-muted-foreground">Minimize spinning on concrete/asphalt. Use forward motion when possible.</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Clean Regularly</div>
+                      <p className="text-xs text-muted-foreground">Remove debris from undercarriage. Mud/rocks cause premature wear.</p>
+                    </div>
+                    <div className="p-4 bg-muted/50 rounded-lg">
+                      <div className="font-semibold text-sm mb-1">Inspect Drive Components</div>
+                      <p className="text-xs text-muted-foreground">Check sprockets, idlers, and rollers. Worn parts damage tracks.</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* CTL vs Skid Steer */}
+              <div className="bg-card border border-border rounded-lg p-6">
+                <h3 className="text-xl font-bold text-foreground mb-4">CTL vs Skid Steer: Which is Right for You?</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="font-semibold mb-2 text-primary">Compact Track Loaders (CTLs)</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Lower ground pressure - better for soft terrain
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Superior traction in mud, snow, and sand
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        Less turf damage on landscaping jobs
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                        More stable on slopes and uneven ground
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold mb-2">Wheeled Skid Steers</h4>
+                    <ul className="space-y-2 text-sm text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Lower initial cost and maintenance
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Better for hard surfaces and paved areas
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Faster travel speeds on flat terrain
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
+                        Easier tire replacement vs track replacement
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SEO Content */}
         <section className="py-12 lg:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
