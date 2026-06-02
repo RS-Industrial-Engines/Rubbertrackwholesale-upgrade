@@ -2852,7 +2852,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "CT332",
     "CT333D",
     "CT333E",
-    "CT333G"
+    "CT333G",
+    "331G",
+    "333G"
   ],
   "Joly": [
     "20HP (Minicarrier)"
@@ -13661,6 +13663,13 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x56"
   ],
   "John Deere|CT333G": [
+    "450x86x58"
+  ],
+  "John Deere|331G": [
+    "400x86x56",
+    "450x86x56"
+  ],
+  "John Deere|333G": [
     "450x86x58"
   ],
   "Joly|20HP (Minicarrier)": [

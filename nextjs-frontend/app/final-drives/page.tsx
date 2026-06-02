@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   title: "Final Drives | Travel Motors | Undercarriage Parts | Houston TX",
   description:
     "Shop final drives and travel motors for mini excavators, skid steers, and CTLs. Wholesale prices on final drives for Kubota, Cat, Bobcat. Houston warehouse.",
+  alternates: {
+    canonical: `${SITE_URL}/final-drives`,
+  },
   keywords: [
     "final drives",
     "travel motors",

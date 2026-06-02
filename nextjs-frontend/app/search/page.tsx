@@ -1,10 +1,16 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { SearchContent } from "@/components/search/search-content";
+import { getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Search Results",
   description: "Search for rubber tracks by machine model, track size, or brand. Find compatible tracks for your equipment.",
+  alternates: {
+    canonical: `${SITE_URL}/search`,
+  },
 };
 
 function SearchLoading() {

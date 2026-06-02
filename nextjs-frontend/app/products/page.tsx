@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ProductsContent } from "@/components/products/products-content";
+import { getSiteUrl } from "@/lib/schema";
+
+const SITE_URL = getSiteUrl();
 
 export const metadata: Metadata = {
   title: "Products",
   description:
     "Browse our complete selection of rubber tracks and undercarriage parts for all major heavy machinery brands.",
+  alternates: {
+    canonical: `${SITE_URL}/products`,
+  },
 };
 
 function ProductsLoading() {

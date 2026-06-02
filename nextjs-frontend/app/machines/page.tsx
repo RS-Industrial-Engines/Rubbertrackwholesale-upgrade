@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   title: "Machines - Find Rubber Tracks by Equipment Model",
   description:
     "Find compatible rubber tracks and undercarriage parts for your machine. Browse by Kubota, Cat, Bobcat, John Deere, Takeuchi, and more. Houston warehouse with nationwide shipping.",
+  alternates: {
+    canonical: `${SITE_URL}/machines`,
+  },
   keywords: [
     "rubber tracks by machine",
     "Kubota rubber tracks",
