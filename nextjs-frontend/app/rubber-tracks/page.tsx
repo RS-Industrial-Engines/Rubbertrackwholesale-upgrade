@@ -23,7 +23,7 @@ import {
 } from "@/lib/schema";
 import { BUSINESS_INFO, createMachineSlug } from "@/lib/url-utils";
 import { fullBrands, fullTrackSizes, getMachinesForTrackSize, fullMachineModels, getTrackSizesForMachine } from "@/lib/data/full-machine-data";
-import { TOP_SELLING_TRACK_SIZES, HIGH_PRIORITY_MACHINES } from "@/lib/data/seo-priorities";
+import { TOP_SELLING_TRACK_SIZES, HIGH_PRIORITY_MACHINES, getCTLTrackSizes, getMiniExcavatorTrackSizes } from "@/lib/data/seo-priorities";
 
 const SITE_URL = getSiteUrl();
 
@@ -564,7 +564,7 @@ export default async function RubberTracksPage() {
                   </CardContent>
                 </Card>
 
-                {/* Popular CTL Sizes */}
+                {/* Popular CTL Sizes - Data-Driven */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -574,26 +574,23 @@ export default async function RubberTracksPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      <Link href="/track-size/400x86x52" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">400x86x52</span>
-                        <span className="text-xs text-muted-foreground">Kubota SVL75, CAT 259D</span>
-                      </Link>
-                      <Link href="/track-size/450x86x56" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">450x86x56</span>
-                        <span className="text-xs text-muted-foreground">Kubota SVL95-2, CAT 289D</span>
-                      </Link>
-                      <Link href="/track-size/450x86x58" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">450x86x58</span>
-                        <span className="text-xs text-muted-foreground">CAT 299D2, John Deere 333G</span>
-                      </Link>
-                      <Link href="/track-size/320x86x52" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">320x86x52</span>
-                        <span className="text-xs text-muted-foreground">Bobcat T590, Kubota SVL65</span>
-                      </Link>
-                      <Link href="/track-size/320x86x49" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">320x86x49</span>
-                        <span className="text-xs text-muted-foreground">Bobcat T550, CAT 239D</span>
-                      </Link>
+                      {getCTLTrackSizes().slice(0, 8).map((size) => {
+                        const machines = getMachinesForTrackSize(size).slice(0, 2);
+                        return (
+                          <Link 
+                            key={size}
+                            href={`/track-size/${size.toLowerCase()}`} 
+                            className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group"
+                          >
+                            <span className="font-medium group-hover:text-primary">{size}</span>
+                            <span className="text-xs text-muted-foreground">
+                              {machines.length > 0 
+                                ? machines.map(m => `${m.brand} ${m.model}`).join(", ")
+                                : "Multiple machines"}
+                            </span>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </CardContent>
                 </Card>
@@ -731,7 +728,7 @@ export default async function RubberTracksPage() {
                   </CardContent>
                 </Card>
 
-                {/* Popular Mini Excavator Sizes */}
+                {/* Popular Mini Excavator Sizes - Data-Driven */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -741,26 +738,23 @@ export default async function RubberTracksPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      <Link href="/track-size/300x52.5x80" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">300x52.5x80</span>
-                        <span className="text-xs text-muted-foreground">Kubota KX121-3, Bobcat E35</span>
-                      </Link>
-                      <Link href="/track-size/300x52.5x84" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">300x52.5x84</span>
-                        <span className="text-xs text-muted-foreground">Kubota U35, Bobcat E35</span>
-                      </Link>
-                      <Link href="/track-size/230x48x70" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">230x48x70</span>
-                        <span className="text-xs text-muted-foreground">Kubota KX71, Bobcat E26</span>
-                      </Link>
-                      <Link href="/track-size/250x72x45" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">250x72x45</span>
-                        <span className="text-xs text-muted-foreground">CAT 301.7, John Deere 17G</span>
-                      </Link>
-                      <Link href="/track-size/400x72.5x72" className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group">
-                        <span className="font-medium group-hover:text-primary">400x72.5x72</span>
-                        <span className="text-xs text-muted-foreground">Kubota KX057, CAT 305.5</span>
-                      </Link>
+                      {getMiniExcavatorTrackSizes().slice(0, 5).map((size) => {
+                        const machines = getMachinesForTrackSize(size).slice(0, 2);
+                        return (
+                          <Link 
+                            key={size}
+                            href={`/track-size/${size.toLowerCase()}`} 
+                            className="flex items-center justify-between p-2 rounded hover:bg-muted transition-colors group"
+                          >
+                            <span className="font-medium group-hover:text-primary">{size}</span>
+                            <span className="text-xs text-muted-foreground">
+                              {machines.length > 0 
+                                ? machines.map(m => `${m.brand} ${m.model}`).join(", ")
+                                : "Multiple machines"}
+                            </span>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </CardContent>
                 </Card>

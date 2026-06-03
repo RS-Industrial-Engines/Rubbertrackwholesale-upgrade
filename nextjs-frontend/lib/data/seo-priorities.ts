@@ -8,7 +8,7 @@
  * - Components must look up track sizes from full-machine-data.ts
  */
 
-// Top 12 selling track sizes (from real sales data)
+// Top 16 selling track sizes (from real sales data)
 // This is purely ranking data - no machine associations
 export const TOP_SELLING_TRACK_SIZES = [
   { rank: 1, size: "400x86x52", description: "Most popular CTL size" },
@@ -22,7 +22,11 @@ export const TOP_SELLING_TRACK_SIZES = [
   { rank: 9, size: "300x52.5x84", description: "Mini excavator extended" },
   { rank: 10, size: "320x86x50", description: "Compact CTL alternate" },
   { rank: 11, size: "450x86x56", description: "Large CTL alternate" },
-  { rank: 12, size: "400x86x53", description: "CTL alternate pitch" },
+  { rank: 12, size: "450x84x57", description: "Specialty CTL size" },
+  { rank: 13, size: "400x86x53", description: "CTL alternate pitch" },
+  { rank: 14, size: "300x52.5x86", description: "Mini excavator long" },
+  { rank: 15, size: "450x86x55", description: "Large CTL compact" },
+  { rank: 16, size: "400x86x49", description: "CTL short pitch" },
 ] as const;
 
 /**
@@ -232,7 +236,19 @@ export function getTop10TrackSizeStrings(): string[] {
   return TOP_SELLING_TRACK_SIZES.slice(0, 10).map(t => t.size);
 }
 
-// Get top 12 track size strings
-export function getTop12TrackSizeStrings(): string[] {
+// Get top 16 track size strings (full list)
+export function getTop16TrackSizeStrings(): string[] {
   return TOP_SELLING_TRACK_SIZES.map(t => t.size);
+}
+
+// Get CTL track sizes (86mm pitch)
+export function getCTLTrackSizes(): string[] {
+  return TOP_SELLING_TRACK_SIZES.filter(t => t.size.includes("x86x")).map(t => t.size);
+}
+
+// Get mini excavator track sizes (52.5mm, 54.5mm, 72.5mm pitch)
+export function getMiniExcavatorTrackSizes(): string[] {
+  return TOP_SELLING_TRACK_SIZES.filter(t => 
+    t.size.includes("x52.5x") || t.size.includes("x54.5x") || t.size.includes("x72.5x")
+  ).map(t => t.size);
 }
