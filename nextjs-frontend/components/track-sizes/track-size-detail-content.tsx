@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ChevronRight,
   Phone,
@@ -180,6 +181,66 @@ export function TrackSizeDetailContent({
               </CardContent>
             </Card>
           )}
+        </div>
+      </section>
+
+      {/* Available Tread Patterns */}
+      <section className="py-12 lg:py-16 bg-secondary">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">
+            Available Tread Patterns
+          </h2>
+          <p className="text-muted-foreground mb-8 max-w-3xl">
+            Choose the right tread pattern for your {size} rubber tracks. All patterns in stock.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            {[
+              {
+                name: "Block Pattern",
+                image: "/images/tread-patterns/block-pattern.jpg",
+                bestFor: "Best for paved surfaces, turf, and finished concrete",
+              },
+              {
+                name: "C-Pattern (C-Lug)",
+                image: "/images/tread-patterns/c-pattern.jpg",
+                bestFor: "Most versatile — dirt, gravel, and mixed terrain",
+              },
+              {
+                name: "Multi-Bar",
+                image: "/images/tread-patterns/multi-bar.jpg",
+                bestFor: "Smooth ride for sensitive surfaces and asphalt",
+              },
+              {
+                name: "Staggered Block",
+                image: "/images/tread-patterns/staggered-block.jpg",
+                bestFor: "Mixed terrain with surface protection",
+              },
+              {
+                name: "Z-Pattern (Zig-Zag)",
+                image: "/images/tread-patterns/z-pattern.jpg",
+                bestFor: "Maximum traction in mud, snow, and loose material",
+              },
+            ].map((pattern) => (
+              <Card key={pattern.name} className="overflow-hidden">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={pattern.image}
+                    alt={`${pattern.name} rubber track tread`}
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <CardContent className="p-4">
+                  <h3 className="font-semibold text-foreground mb-1">{pattern.name}</h3>
+                  <p className="text-sm text-muted-foreground">{pattern.bestFor}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground mt-6">
+            All tread patterns available and in stock at our Houston warehouse. Block and C-Pattern are our most popular. Call {BUSINESS_INFO.phone} for same-day pickup or nationwide shipping.
+          </p>
         </div>
       </section>
 
