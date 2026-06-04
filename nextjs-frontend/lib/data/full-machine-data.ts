@@ -855,6 +855,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "CX 35B",
     "CX 36",
     "CX 36BMC[I guiding]",
+    "CK82",
     "CX 36BMC[J guiding]",
     "CX 36BMR[I guiding]",
     "CX 36BMR[J guiding]",
@@ -1423,7 +1424,13 @@ export const fullMachineModels: Record<string, string[]> = {
     "SK 350",
     "SK 600",
     "XT 850",
-    "XT 855"
+    "XT 855",
+    "SK 650",
+    "JT 1720",
+    "SK 750 Narrow",
+    "SK 755 Narrow",
+    "SK 750 Wide",
+    "SK 755 Wide"
   ],
   "Dodich": [
     "DM2.1"
@@ -1764,7 +1771,12 @@ export const fullMachineModels: Record<string, string[]> = {
     "RT250",
     "RT250 Q Pattern",
     "VT320",
-    "VT320 Q Pattern"
+    "VT320 Q Pattern",
+    "RT255",
+    "CTL55",
+    "CTL65",
+    "CTL70",
+    "CTL85"
   ],
   "Gehlmax": [
     "A 12",
@@ -2841,6 +2853,10 @@ export const fullMachineModels: Record<string, string[]> = {
     "50P",
     "60D",
     "60G [I Guiding]",
+    "17C",
+    "323E",
+    "329D",
+    "333",
     "60G [J Guiding]",
     "75C",
     "75D",
@@ -3837,7 +3853,8 @@ export const fullMachineModels: Record<string, string[]> = {
     "MST 600V",
     "MST 600VD",
     "Track Carrier 1500",
-    "Track Carrier 2200"
+    "Track Carrier 2200",
+    "MST 800"
   ],
   "Multidrill": [
     "ML (HD Drilling Machine)",
@@ -3907,7 +3924,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "MTL 316",
     "MTL 320",
     "MTL 325",
-    "RD 15"
+    "RD 15",
+    "2150RT",
+    "MTL 12"
   ],
   "Nagano": [
     "NB 30",
@@ -4863,7 +4882,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "TC 48",
     "TC 50",
     "TC 60",
-    "TC 75"
+    "TC 75",
+    "HR 18",
+    "HR 32"
   ],
   "Terra Jet": [
     "2514 B (drilling machine)",
@@ -21353,6 +21374,70 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Takeuchi|TL226 CTL": [
     "320x86x48"
+  ],
+  "Gehl|RT255": [
+    "450x86x58"
+  ],
+  "Gehl|CTL55": [
+    "320x86x46"
+  ],
+  "Gehl|CTL65": [
+    "320x86x46"
+  ],
+  "Gehl|CTL70": [
+    "450x100x48"
+  ],
+  "Gehl|CTL85": [
+    "450x100x48"
+  ],
+  "Mustang|2150RT": [
+    "450x86x56"
+  ],
+  "Mustang|MTL 12": [
+    "320x86x46"
+  ],
+  "CASE|CK82": [
+    "450x81x72"
+  ],
+  "Ditch-Witch|SK 650": [
+    "180x72x42"
+  ],
+  "Ditch-Witch|JT 1720": [
+    "280x72x56"
+  ],
+  "Ditch-Witch|SK 750 Narrow": [
+    "180x72x44"
+  ],
+  "Ditch-Witch|SK 755 Narrow": [
+    "180x72x44"
+  ],
+  "Ditch-Witch|SK 750 Wide": [
+    "230x72x44"
+  ],
+  "Ditch-Witch|SK 755 Wide": [
+    "230x72x44"
+  ],
+  "John Deere|17C": [
+    "230x48x70"
+  ],
+  "John Deere|323E": [
+    "320x86x52",
+    "400x86x52"
+  ],
+  "John Deere|329D": [
+    "450x86x58"
+  ],
+  "John Deere|333": [
+    "450x86x58"
+  ],
+  "Terex|HR 18": [
+    "400x72.5x72"
+  ],
+  "Terex|HR 32": [
+    "450x75.5x82"
+  ],
+  "Morooka|MST 800": [
+    "600x100x80"
   ]
 };
 
@@ -21521,6 +21606,7 @@ export const fullTrackSizes: string[] = [
   "280x72x47",
   "280x72x48",
   "280x72x52",
+  "280x72x56",
   "300x1009x39",
   "300x100x43",
   "300x101.6x39",
@@ -21671,6 +21757,7 @@ export const fullTrackSizes: string[] = [
   "450x71x86",
   "450x73.5x80",
   "450x73x80",
+  "450x75.5x82",
   "450x76x80",
   "450x76x82",
   "450x76x84",
@@ -21711,6 +21798,7 @@ export const fullTrackSizes: string[] = [
   "500x92x78",
   "500x92x84",
   "500x92x88",
+  "600x100x80",
   "700x100x98",
   "750x150x66"
 ];
