@@ -617,6 +617,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "E26",
     "E27",
     "E27z",
+    "E28",
     "E32 [I guiding | M-series]",
     "E32 [J guiding | R-series]",
     "E32C",
@@ -666,6 +667,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "T320",
     "T450",
     "T550",
+    "T570",
     "T590",
     "T595",
     "T62",
@@ -674,6 +676,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "T650",
     "T66",
     "T72",
+    "T730",
     "T740",
     "T750",
     "T76",
@@ -1751,7 +1754,17 @@ export const fullMachineModels: Record<string, string[]> = {
     "GE503Z",
     "Z35",
     "Z45",
-    "Z80"
+    "Z80",
+    "RT165",
+    "RT165 Zig Zag",
+    "RT175",
+    "RT210",
+    "RT215",
+    "RT215 Q Pattern",
+    "RT250",
+    "RT250 Q Pattern",
+    "VT320",
+    "VT320 Q Pattern"
   ],
   "Gehlmax": [
     "A 12",
@@ -3088,6 +3101,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "PC 20MRX Utility",
     "PC 20R",
     "PC 20R Utility",
+    "PC 12-1",
+    "PC 12-2",
+    "PC 12-2 R",
     "PC 20R-8 (SN > 10000) [OEM 260x52.5x76]",
     "PC 20R-8 [OEM 260x109x37]",
     "PC 20UU",
@@ -3219,6 +3235,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "PC 58uu-X",
     "PC 60-6 (type 2)",
     "PC 60-6 (type 3)",
+    "PC 60-7",
+    "PC 60-7B",
+    "PC 60-8",
     "PC 75",
     "PC 75-1 (S/N 1175 - 5001)",
     "PC 75-2 (S/N 5001 - 7927)",
@@ -4727,6 +4746,7 @@ export const fullMachineModels: Record<string, string[]> = {
     "TB 215R",
     "TB 216",
     "TB 217R [OEM 230x48x68]",
+    "TL226 CTL",
     "TB 225",
     "TB 228",
     "TB 230",
@@ -5074,7 +5094,8 @@ export const fullMachineModels: Record<string, string[]> = {
     "MCT 125C (Compact Track Loader)",
     "MCT 135C (Compact Track Loader)",
     "MCT 145C (Compact Track Loader)",
-    "MCT 85C (Compact Track Loader)"
+    "MCT 85C (Compact Track Loader)",
+    "EC20"
   ],
   "WAMET": [
     "KB-2G",
@@ -21268,6 +21289,70 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Zntsis Brzesko|RT-10": [
     "230x72x43"
+  ],
+  "Gehl|RT165": [
+    "320x86x49"
+  ],
+  "Gehl|RT165 Zig Zag": [
+    "320x86x49"
+  ],
+  "Gehl|RT175": [
+    "320x86x54"
+  ],
+  "Gehl|RT210": [
+    "450x86x56"
+  ],
+  "Gehl|RT215": [
+    "450x86x56"
+  ],
+  "Gehl|RT215 Q Pattern": [
+    "450x86x56"
+  ],
+  "Gehl|RT250": [
+    "450x86x58"
+  ],
+  "Gehl|RT250 Q Pattern": [
+    "450x86x58"
+  ],
+  "Gehl|VT320": [
+    "450x86x58"
+  ],
+  "Gehl|VT320 Q Pattern": [
+    "450x86x58"
+  ],
+  "Bobcat|T570": [
+    "320x86x49",
+    "400x86x49"
+  ],
+  "Bobcat|T730": [
+    "450x86x55"
+  ],
+  "Bobcat|E28": [
+    "300x52.5x80"
+  ],
+  "Komatsu|PC 12-1": [
+    "300x52.5x76"
+  ],
+  "Komatsu|PC 12-2": [
+    "300x52.5x76"
+  ],
+  "Komatsu|PC 12-2 R": [
+    "300x52.5x76"
+  ],
+  "Komatsu|PC 60-7": [
+    "450x83.5x72"
+  ],
+  "Komatsu|PC 60-7B": [
+    "450x83.5x72"
+  ],
+  "Komatsu|PC 60-8": [
+    "450x83.5x72"
+  ],
+  "Volvo|EC20": [
+    "230x48x72"
+  ],
+  "Takeuchi|TL226 CTL": [
+    "320x86x48"
   ]
 };
 
@@ -21596,6 +21681,7 @@ export const fullTrackSizes: string[] = [
   "450x81x74",
   "450x81x76",
   "450x81x78",
+  "450x83.5x72",
   "450x83.5x74",
   "450x84x53",
   "450x84x57",
