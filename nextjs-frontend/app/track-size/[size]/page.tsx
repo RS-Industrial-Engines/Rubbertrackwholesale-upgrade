@@ -6,7 +6,7 @@ import {
 } from "@/lib/api";
 import { TrackSizeDetailContent } from "@/components/track-sizes/track-size-detail-content";
 import { generateBreadcrumbSchema, generateFAQPageSchema, generateTrackSizeSchema, getSiteUrl } from "@/lib/schema";
-import { getMachinesForTrackSize, fullTrackSizes } from "@/lib/data/full-machine-data";
+import { getMachinesForTrackSize, fullTrackSizes, isValidMetricTrackSize } from "@/lib/data/full-machine-data";
 import { inferEquipmentType } from "@/lib/data/undercarriage-data";
 
 const SITE_URL = getSiteUrl();
@@ -101,8 +101,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export async function generateStaticParams() {
   // Use fullTrackSizes as PRIMARY source - it has all 381+ track sizes
-  // Do NOT use API or old machine-models.ts fallback
-  return fullTrackSizes.map((size) => ({
+  // Filter out invalid/corrupted sizes before generating params
+  return fullTrackSizes.filter(isValidMetricTrackSize).map((size) => ({
     size: size.toLowerCase().replace(/\s+/g, "-"),
   }));
 }
@@ -111,6 +111,11 @@ export default async function TrackSizeDetailPage({ params }: PageProps) {
   const { size } = await params;
   const formattedSize = size.replace(/-/g, "x");
   const displaySize = formattedSize.toUpperCase();
+
+  // Early 404 guard for invalid/corrupted track sizes
+  if (!isValidMetricTrackSize(formattedSize)) {
+    notFound();
+  }
 
   // Parse dimensions from URL
   const dimensions = parseTrackSize(formattedSize);

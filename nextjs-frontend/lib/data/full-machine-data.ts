@@ -959,8 +959,6 @@ export const fullMachineModels: Record<string, string[]> = {
     "267B",
     "267B2",
     "269C",
-    "269D",
-    "269D3",
     "272B",
     "272C",
     "277",
@@ -6930,7 +6928,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x86x49"
   ],
   "Bobcat|T190": [
-    "13x4x56",
     "400x86x49",
     "320x86x49"
   ],
@@ -6939,7 +6936,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x49"
   ],
   "Bobcat|T200": [
-    "13x4x56",
     "320x86x52",
     "450x86x52"
   ],
@@ -6961,8 +6957,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Bobcat|T320": [
     "450x86x55",
-    "400x86x55",
-    "18x4x51"
+    "400x86x55"
   ],
   "Bobcat|T450": [
     "300x84x46"
@@ -7264,7 +7259,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Brokk|330": [
     "300x55x78",
-    "300x25.5x80"
+    "300x52.5x80"
   ],
   "Brokk|40": [
     "130x72x29"
@@ -7616,7 +7611,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "CASE|CX 36BZTS[J guiding]": [
     "300x52.5x88",
-    "300x52x588"
+    "300x52.5x88"
   ],
   "CASE|CX 36B[I guiding]": [
     "300x52.5x88",
@@ -7945,14 +7940,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "CAT|269C": [
     "450x86x60",
-    "15x4x56",
-    "40x86x60"
-  ],
-  "CAT|269D": [
-    "15x4x56"
-  ],
-  "CAT|269D3": [
-    "15x4x56"
+    "400x86x60"
   ],
   "CAT|272C": [
     "450x86x63"
@@ -9585,7 +9573,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "EurocoMach|ES 25ZT": [
     "280x52.5x82",
-    "280x52x582"
+    "280x52.5x82"
   ],
   "EurocoMach|ES 300": [
     "300x55x72",
@@ -10416,15 +10404,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Hanix|H 22": [
     "300x55x72",
-    "300x52x574"
+    "300x52.5x74"
   ],
   "Hanix|H 22A": [
     "300x55x72",
-    "300x52x574"
+    "300x52.5x74"
   ],
   "Hanix|H 24": [
     "300x52.5x74",
-    "300x52x574"
+    "300x52.5x74"
   ],
   "Hanix|H 24A": [
     "300x55x72",
@@ -12918,15 +12906,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "IHI|IS 65UJ": [
     "450x71x82",
-    "450x71x182"
+    "450x71x82"
   ],
   "IHI|IS 65UJ3": [
     "450x71x82",
-    "450x71x182"
+    "450x71x82"
   ],
   "IHI|IS 70Z": [
     "450x71x82",
-    "450x71x182"
+    "450x71x82"
   ],
   "IHI|IS 75F": [
     "450x145x40",
@@ -22065,7 +22053,7 @@ export const fullTrackSizes: string[] = [
   "260x97x40",
   "260x97x42",
   "280x52.5x82",
-  "280x52x582",
+  "280x52.5x82",
   "280x72x47",
   "280x72x48",
   "280x72x52",
@@ -22084,7 +22072,7 @@ export const fullTrackSizes: string[] = [
   "300x109x42",
   "300x109x43",
   "300x109x44",
-  "300x25.5x80",
+  "300x52.5x80",
   "300x52.52x84",
   "300x52.5x72",
   "300x52.5x74",
@@ -22099,8 +22087,8 @@ export const fullTrackSizes: string[] = [
   "300x52.5x90",
   "300x52.5x92",
   "300x52.5x98",
-  "300x52x574",
-  "300x52x588",
+  "300x52.5x74",
+  "300x52.5x88",
   "300x53x80",
   "300x53x84",
   "300x54x72",
@@ -22221,7 +22209,7 @@ export const fullTrackSizes: string[] = [
   "400x86x56",
   "400x86x60",
   "40x73x72",
-  "40x86x60",
+  "400x86x60",
   "420x100x52",
   "420x100x54",
   "450x100x48",
@@ -22230,7 +22218,7 @@ export const fullTrackSizes: string[] = [
   "450x135x42",
   "450x145x40",
   "450x163x38",
-  "450x71x182",
+  "450x71x82",
   "450x71x78",
   "450x71x82",
   "450x71x84",

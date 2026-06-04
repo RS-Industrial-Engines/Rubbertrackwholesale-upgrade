@@ -3,6 +3,7 @@ import {
   fullMachineModels,
   fullTrackSizes,
   fullBrands,
+  isValidMetricTrackSize,
 } from "@/lib/data/full-machine-data";
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
 import { createMachineSlug } from "@/lib/url-utils";
@@ -164,7 +165,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
 
   // Track size pages - generated from full-machine-data.ts
-  const trackSizePages: MetadataRoute.Sitemap = fullTrackSizes.map((size) => ({
+  // Filter out invalid/corrupted sizes before generating sitemap entries
+  const trackSizePages: MetadataRoute.Sitemap = fullTrackSizes.filter(isValidMetricTrackSize).map((size) => ({
     url: `${BASE_URL}/track-size/${size.toLowerCase()}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
