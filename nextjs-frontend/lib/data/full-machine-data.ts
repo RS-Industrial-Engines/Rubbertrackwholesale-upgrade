@@ -6078,11 +6078,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x42"
   ],
   "Airman|HM30SGZ": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Airman|HM35": [
-    "300x109x42",
     "300x52.5x86"
   ],
   "Airman|HM45": [
@@ -6265,11 +6263,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x72x57"
   ],
   "Atlas|604.2": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Atlas|604.2 (96)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Atlas|604R": [
@@ -6318,15 +6314,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Atlas|CT27N": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Atlas|CT30N": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Atlas|CT35N": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Atlas|CT50N": [
@@ -6621,7 +6614,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Bobcat|325": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Bobcat|328": [
@@ -6633,11 +6625,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Bobcat|329": [
-    "320x52.5x80",
     "320x52.5x80"
   ],
   "Bobcat|331": [
-    "320x52.5x80",
     "320x52.5x80"
   ],
   "Bobcat|331D": [
@@ -6649,11 +6639,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Bobcat|331G": [
-    "320x52.5x80",
     "320x52.5x80"
   ],
   "Bobcat|334": [
-    "320x52.5x80",
     "320x52.5x80"
   ],
   "Bobcat|334D": [
@@ -6775,15 +6763,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x72"
   ],
   "Bobcat|E26": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Bobcat|E27": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Bobcat|E27z": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Bobcat|E32 [I guiding | M-series]": [
@@ -6799,11 +6784,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Bobcat|E34": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Bobcat|E35 [I guiding | M-series]": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Bobcat|E35I [J guiding | R-series]": [
@@ -6811,11 +6794,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x55x81"
   ],
   "Bobcat|E35M": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Bobcat|E35Z": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Bobcat|E41": [
@@ -6823,8 +6804,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x92"
   ],
   "Bobcat|E42": [
-    "350x55x88",
-    "300x52.5x92"
+    "350x55x88"
   ],
   "Bobcat|E45": [
     "400x72.5x74"
@@ -7143,7 +7123,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Bobcat|X430": [
-    "300x52.5x92",
     "300x52.5x92"
   ],
   "Bobcat|X435": [
@@ -7254,7 +7233,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Brokk|300": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Brokk|330": [
@@ -7340,27 +7318,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x52"
   ],
   "CASE|23": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "CASE|23 Maxi": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "CASE|28": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "CASE|28 Maxi": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "CASE|31": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "CASE|31 Maxi": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "CASE|35": [
@@ -7425,15 +7397,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x60"
   ],
   "CASE|50": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "CASE|50 Maxi": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "CASE|50 RTB": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "CASE|6010 Turbo": [
@@ -7490,27 +7459,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "CASE|CK23": [
-    "260x109x35",
     "300x52.5x72"
   ],
   "CASE|CK25": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "CASE|CK28": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "CASE|CK28 (1997)": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "CASE|CK31": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "CASE|CK32": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "CASE|CK35": [
@@ -7518,7 +7481,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "350x52.5x86"
   ],
   "CASE|CK36": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "CASE|CK38": [
@@ -7530,7 +7492,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "CASE|CK52": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "CASE|CX 26C": [
@@ -7553,7 +7514,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "CASE|CX 28": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "CASE|CX 30B": [
@@ -7561,11 +7521,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "CASE|CX 30C": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "CASE|CX 31": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "CASE|CX 31B": [
@@ -7591,30 +7549,24 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x88"
   ],
   "CASE|CX 36BMC[I guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36BMC[J guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36BMR[I guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36BMR[J guiding]": [
     "300x52.5x88"
   ],
   "CASE|CX 36BZTS[I guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36BZTS[J guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36B[I guiding]": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 36B[J guiding]": [
@@ -7624,7 +7576,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "CASE|CX 39B": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "CASE|CX 40B": [
@@ -7679,15 +7630,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x76"
   ],
   "CASE|CX 75SR": [
-    "450x81x76",
     "450x81x76"
   ],
   "CASE|CX 80": [
-    "450x81x76",
     "450x81x76"
   ],
   "CASE|CX 80C": [
-    "450x81x76",
     "450x81x76"
   ],
   "CASE|CX 90D": [
@@ -7756,7 +7704,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "CASE|CX23": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "CASE|CX25": [
@@ -7906,22 +7853,28 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "381x100x42"
   ],
   "CAT|259": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|259B": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|259B3": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|259C": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|259D": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|259D3": [
-    "320x86x53"
+    "320x86x53",
+    "400x86x53"
   ],
   "CAT|262C": [
     "450x86x60"
@@ -7964,16 +7917,16 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "457x100.6x51"
   ],
   "CAT|279C": [
-    "400x86x56",
+    "400x86x60",
     "450x86x60"
   ],
   "CAT|279C2": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|279D": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|279D2": [
     "400x86x56",
@@ -7981,7 +7934,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "CAT|279D3": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|287": [
     "457x100x51"
@@ -8002,24 +7955,24 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "457x100x51"
   ],
   "CAT|289C": [
-    "400x86x56",
+    "400x86x60",
     "450x86x60"
   ],
   "CAT|289C2": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|289D": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|289D2": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|289D3": [
     "400x86x56",
-    "450x86x60"
+    "450x86x56"
   ],
   "CAT|297C": [
     "457x100x51"
@@ -8232,23 +8185,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x71x86"
   ],
   "CAT|308CCR": [
-    "450x81x78",
     "450x81x78"
   ],
   "CAT|308CSR": [
-    "450x81x78",
     "450x81x78"
   ],
   "CAT|308DCRSB": [
-    "450x81x78",
     "450x81x78"
   ],
   "CAT|308E2CR": [
-    "450x81x78",
     "450x81x78"
   ],
   "CAT|308ECRSB": [
-    "450x81x78",
     "450x81x78"
   ],
   "CAT|311B": [
@@ -8280,27 +8228,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "CAT|ME20": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "CAT|ME25": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "CAT|ME30": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "CAT|ME30B": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "CAT|ME30T": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "CAT|ME35": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "CAT|ME40": [
@@ -8438,7 +8380,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x72x45"
   ],
   "CAT|MX35": [
-    "300x109x39",
     "300x52.5x80",
     "300x52.5x84"
   ],
@@ -8455,7 +8396,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x96x33"
   ],
   "CEASER|ES300": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "CEASER|ES400": [
@@ -8463,7 +8403,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "CEASER|ES400ZT": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "CEASER|ES500": [
@@ -8564,7 +8503,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Cams Libra|224S": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Cams Libra|229S": [
@@ -8582,15 +8520,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x86x48"
   ],
   "Cams Libra|CZ25": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Cams Libra|CZ30": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Cams Libra|CZ37": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Cams Libra|CZ50": [
@@ -8979,15 +8914,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x54"
   ],
   "Daewoo|AH30": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Daewoo|DH30": [
-    "300x52.5x76",
     "300x52.5x76"
   ],
   "Daewoo|DH35": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Daewoo|DH50": [
@@ -8995,7 +8927,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Daewoo|SL035": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Daewoo|Solar007": [
@@ -9021,11 +8952,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Daewoo|Solar030": [
-    "300x52.5x76",
     "300x52.5x76"
   ],
   "Daewoo|Solar030Plus": [
-    "300x52.5x76",
     "300x52.5x76"
   ],
   "Daewoo|Solar035": [
@@ -9044,15 +8973,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Daewoo|Solar25": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Daewoo|Solar30": [
-    "300x52.5x76",
     "300x52.5x76"
   ],
   "Daewoo|Solar35": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Daewoo|Solar55": [
@@ -9083,7 +9009,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x81x74"
   ],
   "Dimex|DBM0511": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Dino|185XTC": [
@@ -9114,7 +9039,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x92"
   ],
   "Ditch-Witch|JT 2321": [
-    "300x109x44",
     "300x52.5x92"
   ],
   "Ditch-Witch|JT 25": [
@@ -9166,7 +9090,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x56"
   ],
   "Ditch-Witch|JT 860": [
-    "300x109x44",
     "300x52.5x92"
   ],
   "Ditch-Witch|JT 9 (Drilling Machine)": [
@@ -9259,31 +9182,24 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Doosan|Dx27": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Doosan|Dx27Z": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Doosan|Dx30": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Doosan|Dx30Z": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Doosan|Dx35": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Doosan|Dx35Z": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Doosan|Dx35Z-7": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Doosan|Dx50Z-7": [
@@ -9386,11 +9302,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Dynapac|VD 251": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Dynapac|VD 351": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "EFCO|TN500R": [
@@ -9430,7 +9344,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "EuroCAT|350LSE": [
-    "320x109x39",
     "320x100x44"
   ],
   "EuroTrac|Comet MT13": [
@@ -9454,11 +9367,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "EuroTrac|chasis T300 (Undercarriage)": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "EuroTrac|chasis T300 Old (Undercarriage)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "EuroTrac|chasis T4  (Undercarriage)": [
@@ -9572,7 +9483,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "EurocoMach|ES 25ZT": [
-    "280x52.5x82",
     "280x52.5x82"
   ],
   "EurocoMach|ES 300": [
@@ -9580,14 +9490,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "EurocoMach|ES 300 ZT": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "EurocoMach|ES 35.2ZT": [
     "300x52.5x88"
   ],
   "EurocoMach|ES 350ZT": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "EurocoMach|ES 40.2ZT": [
@@ -9598,7 +9506,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "EurocoMach|ES 400SR": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "EurocoMach|ES 40ZT": [
@@ -9740,7 +9647,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Eurotom|TS 27S": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Eurotom|TS 30": [
@@ -9781,20 +9687,16 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "FAI|230": [
-    "300x109x39",
-    "300x109x41",
     "300x52.5x80",
     "300x52.5x84",
     "300x55x71",
     "300x55x81"
   ],
   "FAI|235": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "FAI|240": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -9823,23 +9725,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "Fermec|123": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Fermec|125": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Fermec|128": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Fermec|130": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Fermec|131": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Fermec|135": [
@@ -9859,11 +9756,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "Fermec|SK 025": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Fermec|SK 030": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Fermec|SK 035": [
@@ -10024,23 +9919,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x76"
   ],
   "Gehl|253": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Gehl|303": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Gehl|353": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Gehl|363": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Gehl|373": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Gehl|383Z": [
@@ -10109,7 +9999,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x76"
   ],
   "Gehl|GE 253": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Gehl|GE 272 (US Market)": [
@@ -10121,7 +10010,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Gehl|GE 303": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Gehl|GE 342 (US Market)": [
@@ -10129,7 +10017,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Gehl|GE 353": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Gehl|GE 362 (US Market)": [
@@ -10137,7 +10024,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Gehl|GE 373": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Gehl|GE 502 (US Market)": [
@@ -10211,7 +10097,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x72x45"
   ],
   "Gehlmax|MB 253": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "Gehlmax|MB 288": [
@@ -10411,7 +10296,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Hanix|H 24": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Hanix|H 24A": [
@@ -10423,15 +10307,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Hanix|H 26C": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Hanix|H 27": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Hanix|H 27-2": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Hanix|H 29A": [
@@ -10467,15 +10348,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Hanix|H 36C": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Hanix|H 36CR": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Hanix|H 36R": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Hanix|H 50B": [
@@ -10547,23 +10425,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Hanix|N 220-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Hanix|N 230-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Hanix|N 250-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Hanix|N 260-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Hanix|N 300-2": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Hanix|N 35": [
@@ -10571,7 +10444,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Hanix|N 350-2": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Hanix|N 80": [
@@ -10589,7 +10461,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x82"
   ],
   "Hanix|NS 25": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Hanix|RT 30 (Dumper)": [
@@ -10624,15 +10495,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Hanix|S&B300": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hanix|S&B300-2": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hanix|S&BX-1": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hanix|TP50-D": [
@@ -10729,7 +10597,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Hinowa|DM 30C": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Hinowa|DM 30S": [
@@ -10890,11 +10757,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x100x52"
   ],
   "Hinowa|PT 4000 (undercarriage)": [
-    "350x109x42",
     "350x52.5x86"
   ],
   "Hinowa|PT 4000G/100 (undercarriage)": [
-    "350x109x42",
     "350x52.5x86"
   ],
   "Hinowa|PT 70 (undercarriage)": [
@@ -11024,8 +10889,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Hinowa|VT 3000": [
     "300x52.5x76",
-    "250x52.5x76",
-    "300x52.5x76"
+    "250x52.5x76"
   ],
   "Hinowa|VT 3000 2V": [
     "300x54x78",
@@ -11036,7 +10900,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "350x52.5x86"
   ],
   "Hinowa|VT 4000 2V": [
-    "350x109x42",
     "350x52.5x86"
   ],
   "Hinowa|VTT 1300": [
@@ -11070,19 +10933,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x72"
   ],
   "Hitachi|30": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|30U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|35": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|35U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|40": [
@@ -11104,15 +10963,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Hitachi|70": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|80": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|85": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|AX16-2N (2002)": [
@@ -11264,21 +11120,17 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Hitachi|EX 20U-3": [
     "250x52.5x76",
-    "250x52.5x76",
     "300x52.5x76"
   ],
   "Hitachi|EX 20UR": [
-    "250x52.5x76",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Hitachi|EX 20UR-1": [
     "250x52.5x76",
-    "250x52.5x76",
     "300x52.5x76"
   ],
   "Hitachi|EX 20UR-3": [
-    "250x52.5x77",
     "250x52.5x77"
   ],
   "Hitachi|EX 21": [
@@ -11298,13 +11150,11 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x72"
   ],
   "Hitachi|EX 24": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Hitachi|EX 24U": [
     "300x52.5x76",
-    "250x52.5x76",
-    "300x52.5x76"
+    "250x52.5x76"
   ],
   "Hitachi|EX 25": [
     "300x55x74",
@@ -11322,29 +11172,23 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "Hitachi|EX 25U": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Hitachi|EX 26": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Hitachi|EX 27": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Hitachi|EX 27U": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Hitachi|EX 29U": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Hitachi|EX 29UR": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Hitachi|EX 30": [
@@ -11356,7 +11200,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x82"
   ],
   "Hitachi|EX 30-2": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|EX 30U Lotus root": [
@@ -11376,19 +11219,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "Hitachi|EX 30UR-3": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|EX 32U": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|EX 33": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Hitachi|EX 33Mu": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|EX 33U": [
@@ -11408,15 +11247,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Hitachi|EX 35-2": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|EX 35U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|EX 36U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|EX 40": [
@@ -11501,7 +11337,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Hitachi|EX 60 LC": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 60 LC-2": [
@@ -11512,7 +11347,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x81x76"
   ],
   "Hitachi|EX 60 LC-5": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 60 URG-2": [
@@ -11522,7 +11356,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x36"
   ],
   "Hitachi|EX 70U": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 75-2": [
@@ -11538,19 +11371,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x81x76"
   ],
   "Hitachi|EX 75UR-3 (SN > 1529)": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 75UR-5": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 75US": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 75US-7 ('2001)": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|EX 8": [
@@ -11585,7 +11414,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x78"
   ],
   "Hitachi|HX 64B (Lifting platform)": [
-    "250x52.5x76",
     "250x52.5x76",
     "300x52.5x76"
   ],
@@ -11637,7 +11465,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Hitachi|UE 20": [
-    "300x109x35",
     "320x100x38",
     "300x52.5x72"
   ],
@@ -11646,11 +11473,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x100x44"
   ],
   "Hitachi|UE 35": [
-    "300x109x42",
     "300x52.5x86"
   ],
   "Hitachi|UE 40": [
-    "350x109x42",
     "300x52.5x86"
   ],
   "Hitachi|UE 45": [
@@ -11713,11 +11538,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Hitachi|ZX 22U": [
-    "250x52.5x77",
     "250x52.5x77"
   ],
   "Hitachi|ZX 22U-2": [
-    "250x52.5x77",
     "250x52.5x77"
   ],
   "Hitachi|ZX 25": [
@@ -11729,83 +11552,63 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x72"
   ],
   "Hitachi|ZX 26U-5": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hitachi|ZX 27U": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Hitachi|ZX 27U-2": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hitachi|ZX 27U-3": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hitachi|ZX 29U": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hitachi|ZX 29U-3": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hitachi|ZX 30": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|ZX 30U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 30U-2": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 30U-3F": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 33U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 33U-3": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 33U-5": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 35": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Hitachi|ZX 35U-2": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 35U-3": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 35U-5": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 38U": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 38U-3": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 38U-5": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hitachi|ZX 40": [
@@ -11821,11 +11624,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Hitachi|ZX 48 U-3": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 48 U-5": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 50": [
@@ -11835,27 +11636,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Hitachi|ZX 50U (SN > 7000 )": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 50U-2": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 50U-3": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 50U-5": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 52U": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 52U-3": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 55U": [
@@ -11865,7 +11660,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Hitachi|ZX 55U-6": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Hitachi|ZX 60U-3": [
@@ -11890,7 +11684,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Hitachi|ZX 70LC": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|ZX 75US": [
@@ -11901,23 +11694,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x37"
   ],
   "Hitachi|ZX 80LC": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|ZX 85": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|ZX 85US": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|ZX 85US-3": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hitachi|ZX 85US-5A": [
-    "450x81x78",
     "450x81x78"
   ],
   "Hokuetsu|HM 07S": [
@@ -11939,7 +11727,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x42"
   ],
   "Hokuetsu|HM 30SZG": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Hokuetsu|HM 45": [
@@ -12103,7 +11890,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x37"
   ],
   "Hyundai|R 35 Z-9": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hyundai|Robex 15-5": [
@@ -12128,15 +11914,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Hyundai|Robex 25z-9ak": [
-    "250x52.5x78",
     "250x52.5x78"
   ],
   "Hyundai|Robex 27Z-9": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hyundai|Robex 28-5": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Hyundai|Robex 30": [
@@ -12144,19 +11927,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Hyundai|Robex 30z-9a": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hyundai|Robex 30z-9ak": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Hyundai|Robex 35-9": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hyundai|Robex 35Z-7A": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Hyundai|Robex 35z-9a": [
@@ -12166,7 +11945,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "Hyundai|Robex 36-7": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Hyundai|Robex 55-3": [
@@ -12300,7 +12078,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x80"
   ],
   "IHI|22UX": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "IHI|25J": [
@@ -12332,7 +12109,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "IHI|28UX": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "IHI|30J": [
@@ -12667,11 +12443,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x80"
   ],
   "IHI|IS 20LX": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 22UX": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "IHI|IS 25G": [
@@ -12690,19 +12464,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "IHI|IS 27": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 27G": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 27GX": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 28": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 28G": [
@@ -12721,7 +12491,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "IHI|IS 28LX": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "IHI|IS 28PX": [
@@ -12807,7 +12576,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x90"
   ],
   "IHI|IS 38UX": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "IHI|IS 40J": [
@@ -12905,15 +12673,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "IHI|IS 65UJ": [
-    "450x71x82",
     "450x71x82"
   ],
   "IHI|IS 65UJ3": [
-    "450x71x82",
     "450x71x82"
   ],
   "IHI|IS 70Z": [
-    "450x71x82",
     "450x71x82"
   ],
   "IHI|IS 75F": [
@@ -12998,15 +12763,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Imef|HE 230": [
     "320x100x43",
-    "350x109x44",
     "350x52.5x90"
   ],
   "Imef|HE 31": [
-    "350x109x44",
     "350x52.5x90"
   ],
   "Imef|HE 32": [
-    "350x109x44",
     "350x52.5x90"
   ],
   "Imef|HT 6.01 (Carrier)": [
@@ -13194,33 +12956,25 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x42"
   ],
   "JCB|802": [
-    "250x109x35",
-    "250x109x36",
     "300x52.5x72",
     "300x52.5x74"
   ],
   "JCB|802 Plus": [
-    "250x109x36",
     "300x52.5x74"
   ],
   "JCB|802 Super": [
-    "250x109x36",
     "300x52.5x74"
   ],
   "JCB|802,7 ZTS": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|802.4": [
-    "250x109x36",
     "300x52.5x74"
   ],
   "JCB|802.7": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "JCB|802.7 Plus": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "JCB|8020": [
@@ -13236,7 +12990,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x76"
   ],
   "JCB|8025ZTS(Long)": [
-    "250x109x41",
     "300x52.5x84"
   ],
   "JCB|8026": [
@@ -13248,11 +13001,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "JCB|8027Z('2002)": [
-    "250x109x41",
     "300x52.5x84"
   ],
   "JCB|8027ZTS": [
-    "250x109x41",
     "300x52.5x84"
   ],
   "JCB|8029CTS": [
@@ -13260,43 +13011,33 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "JCB|803": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|803 Magnum": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|803 Plus": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|803 Super": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|803,2ZTS": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|8030ZTS": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|8032Z('2002)": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|8032ZTS": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|8035Z": [
-    "300x109x43",
     "300x52.5x88"
   ],
   "JCB|803E": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "JCB|804": [
@@ -13312,7 +13053,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "350x52.5x84"
   ],
   "JCB|8040ZTS": [
-    "400x72.5x70",
     "400x72.5x70"
   ],
   "JCB|8045ZTS": [
@@ -13390,7 +13130,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x71x82"
   ],
   "JCB|JZ 70": [
-    "450x81x76",
     "450x81x76"
   ],
   "JCB|MTl 200": [
@@ -13494,33 +13233,27 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x58"
   ],
   "John Deere|26D": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "John Deere|26G": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "John Deere|27 ZTS (US Market)": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "John Deere|270": [
     "450x86x58"
   ],
   "John Deere|27C ZTS (US Market)": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "John Deere|27D": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "John Deere|280": [
     "450x86x60"
   ],
   "John Deere|30G": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "John Deere|317": [
@@ -13551,19 +13284,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x60"
   ],
   "John Deere|35 ZTS (US Market)": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "John Deere|35C ZTS (US Market)": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "John Deere|35D": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "John Deere|35G": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "John Deere|50 ZTS (US Market)": [
@@ -13576,7 +13305,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "John Deere|50G (Verify Spocket Width)": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "John Deere|60D": [
@@ -13589,23 +13317,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "John Deere|75C": [
-    "450x81x78",
     "450x81x78"
   ],
   "John Deere|75D": [
-    "450x81x78",
     "450x81x78"
   ],
   "John Deere|75G": [
-    "450x81x78",
     "450x81x78"
   ],
   "John Deere|85D": [
-    "450x81x78",
     "450x81x78"
   ],
   "John Deere|85G": [
-    "450x81x78",
     "450x81x78"
   ],
   "John Deere|8875": [
@@ -13686,7 +13409,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Kato|HD 205UR": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Kato|HD 250UR": [
@@ -13799,19 +13521,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Kobelco|SK 020": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kobelco|SK 020 Coupe": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kobelco|SK 025 Coupe": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|SK 030 Coupe": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|SK 035 Coupe": [
@@ -13837,7 +13555,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x88"
   ],
   "Kobelco|SK 35SR-5": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "Kobelco|SK 35SR-6": [
@@ -13865,71 +13582,54 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "Kobelco|Sk 024": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 024-1": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 025": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 025-1": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 025-2": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 025SR": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 027": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 027-1": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030-1": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030-2": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030SR": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030UR": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030UR-1": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 030UR-2": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 031": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kobelco|Sk 032": [
-    "350x109x41",
     "350x52.5x84"
   ],
   "Kobelco|Sk 035": [
@@ -14015,11 +13715,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "Kobelco|Sk 20UR ('2000)": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kobelco|Sk 25SR": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Sk 25SR-2": [
@@ -14030,7 +13728,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x55.5x79"
   ],
   "Kobelco|Sk 27": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 27SR-3": [
@@ -14045,37 +13742,30 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x88"
   ],
   "Kobelco|Sk 30SR": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 30SR-1": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 30SR-2 ('2001)": [
     "300x52.5x82"
   ],
   "Kobelco|Sk 30SR-3": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Kobelco|Sk 30SR-5": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "Kobelco|Sk 30SR-6": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "Kobelco|Sk 30UR": [
     "300x52.5x82"
   ],
   "Kobelco|Sk 30UR-1": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 30UR-2": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Sk 40SR ('96-'06)": [
@@ -14205,7 +13895,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x81x76"
   ],
   "Kobelco|Sk 95UR": [
-    "450x81x78",
     "450x81x78"
   ],
   "Kobelco|Sk25SR-3": [
@@ -14220,15 +13909,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x37"
   ],
   "Kobelco|Z13 (Crawler Crane)": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Kobelco|Z14 (Crawler Crane)": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Kobelco|Z15 (Crawler Crane)": [
-    "350x109x41",
     "350x52.5x84"
   ],
   "Kobelco|Z16 (Crawler Crane)": [
@@ -14276,7 +13962,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x56"
   ],
   "Komatsu|D27R-8": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 03": [
@@ -14426,16 +14111,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "Komatsu|PC 20-2": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 20-6": [
-    "300x109x39",
-    "300x109x41"
+    "300x52.5x80",
+    "300x52.5x84"
   ],
   "Komatsu|PC 20-7 (S/N < F20419)": [
-    "300x109x39"
+    "300x52.5x80"
   ],
   "Komatsu|PC 20-7 (S/N > F20419)": [
     "300x55x78"
@@ -14475,7 +14159,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "Komatsu|PC 20R-8 [OEM 260x109x37]": [
-    "260x109x37"
+    "300x52.5x80"
   ],
   "Komatsu|PC 20UU": [
     "250x52.5x78",
@@ -14490,30 +14174,24 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "Komatsu|PC 24MR-5": [
-    "250x52.5x76",
     "250x52.5x76"
   ],
   "Komatsu|PC 25": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 25 avance R (1001 < SN &lt; 6470)": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 25 avance R (SN > 6471)": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Komatsu|PC 25-1 (SN > 6470)": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 25-2": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14527,57 +14205,44 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Komatsu|PC 25R": [
     "300x52.5x80",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 25R-8": [
     "300x52.5x80",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 26MR": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 26MR-5": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27": [
-    "300x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 27MR": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27MR-1 avance (SN > 10001)": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27MR-2": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27MR-3": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27MRX": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC 27R": [
-    "300x55x78",
     "300x55x78"
   ],
   "Komatsu|PC 27R Utility": [
-    "300x55x78",
     "300x55x78"
   ],
   "Komatsu|PC 27R-8": [
-    "300x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
@@ -14586,109 +14251,87 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x55x77"
   ],
   "Komatsu|PC 28": [
-    "260x109x39",
     "300x52.5x80",
     "260x100x42",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28 UU-3 avance (SN > 30001)": [
     "300x52.5x80",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28-1 (S/N > 2358)": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28-2": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28-2 avance (7001 < SN &lt; 10800)": [
-    "300x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28-2 avance (SN > 10801)": [
     "300x52.5x80",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28R": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28uu": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28uu-1": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28uu-2": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 28uu-3": [
     "300x52.5x80",
-    "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC 30": [
-    "300x109x41",
     "320x100x45",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30 avance R": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30 avance R (SN > 26423)": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Komatsu|PC 30-5": [
-    "300x109x41",
     "320x100x45",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30-6": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30-7 (S/N < F18384)": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30-7 (S/N > F18384)": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30-7E": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30-8": [
-    "300x109x41",
     "300x55x81"
   ],
   "Komatsu|PC 30FR-1": [
-    "300x55x78",
     "300x55x78"
   ],
   "Komatsu|PC 30FR-2": [
@@ -14696,97 +14339,76 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Komatsu|PC 30MR": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30MR-1": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30MR-1 (> 05/04 mfg)": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 30MR-2": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 30MR-3": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 30MRX": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Komatsu|PC 30R": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30R-8": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30R-8 avance (SN > 10001)": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30uu-2": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 30uu-3": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 35": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 35-8": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Komatsu|PC 35MR": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 35MR-1": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 35MR-1 (> 05/04 mfg)": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 35MR-2": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 35MR-3": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 35MR-5": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Komatsu|PC 35MRX": [
     "300x52.5x84",
-    "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 35R": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14795,11 +14417,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Komatsu|PC 35R-8 Deluxe": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Komatsu|PC 35R-8 [OEM 300x109x41]": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14811,17 +14431,14 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Komatsu|PC 38": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 38-2": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 38-2 avance R": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14830,12 +14447,10 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "Komatsu|PC 38uu-2 avance (3001 < SN &lt; 4482)": [
-    "300x109x41",
     "300x52.5x84",
     "300x55x81"
   ],
   "Komatsu|PC 38uu-2 avance (SN > 4483)": [
-    "300x52.5x84",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14848,7 +14463,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "Komatsu|PC 38uuM-2 avance (SN > 1001)": [
-    "300x52.5x84",
     "300x52.5x84",
     "300x55x81"
   ],
@@ -14865,7 +14479,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x75.5x74"
   ],
   "Komatsu|PC 40MR": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 40MR-1 (SN > 1001)": [
@@ -14873,7 +14486,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 40MR-2": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 40MRX": [
@@ -14881,11 +14493,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 40R (S/N > 24522)": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 40R-8": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 40R-8 avance (SN > 30001)": [
@@ -14897,7 +14507,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 45": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45 avance R (S/N > 3505)": [
@@ -14908,15 +14517,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 45-1E": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45-8": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45MR": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45MR-1": [
@@ -14942,11 +14548,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x54"
   ],
   "Komatsu|PC 45R Utility": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45R-8": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 45R-8 avance (SN > 5001)": [
@@ -14958,34 +14562,27 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 50-2 avance R (S/N > 12771)": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 50-3": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 50FR-1": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 50FR-2 (Victas assymetric)": [
     "400x75.5x74"
   ],
   "Komatsu|PC 50M-2": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 50MR": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 50MR-1 (>05/04 mfg)": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 50MR-2 ('2006)": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 50UD UG-2 (SN > 12750)": [
@@ -15005,7 +14602,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 50uuM-2": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 50uuM-2 avance (SN > 10001)": [
@@ -15013,11 +14609,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Komatsu|PC 55MR": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 55MR-3": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Komatsu|PC 58SF-1 (SN > 1001)": [
@@ -15195,7 +14789,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Komatsu|PC15 P": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
@@ -15216,46 +14809,37 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "Komatsu|PC15 avance R(5001<SN&lt;6221)": [
-    "300x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15 avance R(SN>6222)": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC15-1 (SN>1001)": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-2 (Not on new rollers)": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-2 (SN>2001)": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-3": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-6": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-6 (Not on new rollers)": [
-    "260x109x39",
     "300x52.5x80",
     "300x55x77"
   ],
   "Komatsu|PC15-7": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Komatsu|PC16 R HS": [
@@ -15299,13 +14883,13 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "Komatsu|PC20 avance R (35001<SN&lt;42354)": [
-    "300x109x39"
+    "300x52.5x80"
   ],
   "Komatsu|PC20 avance R (SN>42355)": [
     "300x52.5x80"
   ],
   "Komatsu|PC20(F10038)": [
-    "300x109x41"
+    "300x52.5x80"
   ],
   "Komatsu|PC20-8": [
     "300x55x78",
@@ -15333,7 +14917,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x86x54"
   ],
   "Kubota|AR 30": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|D902": [
@@ -15373,34 +14956,29 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x60"
   ],
   "Kubota|K 020": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|K 022": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|K 025": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|K 028": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|K 030": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|K 030 (Lotus root)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|K 030-3": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|K 035": [
     "300x52.5x84"
@@ -15494,61 +15072,52 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x42"
   ],
   "Kubota|KH 02": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 021": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 021HG": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 024": [
-    "300x109x37"
+    "300x52.5x72"
   ],
   "Kubota|KH 026": [
-    "300x109x37"
+    "300x52.5x72"
   ],
   "Kubota|KH 026G": [
-    "300x109x35"
+    "300x52.5x72"
   ],
   "Kubota|KH 027": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 027G": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 02HG": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 030": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KH 030G": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KH 030HG": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KH 033 [OEM 300x109x39]": [
-    "300x109x39",
-    "300x109x41"
+    "300x52.5x80",
+    "300x52.5x84"
   ],
   "Kubota|KH 033HG [OEM 300x109x39]": [
-    "300x109x39",
-    "300x109x41"
+    "300x52.5x80",
+    "300x52.5x84"
   ],
   "Kubota|KH 040": [
     "400x142x37",
@@ -15572,7 +15141,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x76"
   ],
   "Kubota|KH 060": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
@@ -15580,11 +15148,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x37"
   ],
   "Kubota|KH 090": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|KH 101": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|KH 12": [
@@ -15594,7 +15160,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x42"
   ],
   "Kubota|KH 121": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 130": [
@@ -15622,17 +15187,14 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x36"
   ],
   "Kubota|KH 24": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 24HG": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 26HG": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
@@ -15677,15 +15239,13 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x42"
   ],
   "Kubota|KH 50 [OEM 230x72x42]": [
-    "230x72x42",
-    "250x109x35"
+    "230x72x42"
   ],
   "Kubota|KH 50SR [OEM 420x100x52]": [
     "420x100x52",
     "420x100x54"
   ],
   "Kubota|KH 51": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 51SR [OEM 420x100x52]": [
@@ -15693,7 +15253,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "420x100x54"
   ],
   "Kubota|KH 52": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 52SR [OEM 400x146x36]": [
@@ -15702,8 +15261,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "420x100x54"
   ],
   "Kubota|KH 55 [OEM 230x72x42]": [
-    "230x72x42",
-    "250x109x35"
+    "230x72x42"
   ],
   "Kubota|KH 55G": [
     "230x72x42"
@@ -15721,31 +15279,25 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x42"
   ],
   "Kubota|KH 60 [OEM 300x109x35]": [
-    "300x109x35",
-    "300x109x37"
+    "300x52.5x76"
   ],
   "Kubota|KH 61": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Kubota|KH 65": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KH 66 [OEM 300x109x35]": [
-    "300x109x35",
-    "300x109x37"
+    "300x52.5x76"
   ],
   "Kubota|KH 70 [OEM 300x109x37]": [
-    "300x109x37",
-    "300x109x39"
+    "300x52.5x76"
   ],
   "Kubota|KH 71 [OEM 300x109x35]": [
-    "300x109x35"
+    "300x52.5x76"
   ],
   "Kubota|KH 90": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|KH 91": [
@@ -15757,7 +15309,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x60"
   ],
   "Kubota|KN 51": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 007": [
@@ -15798,31 +15349,29 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x76"
   ],
   "Kubota|KX 024": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 026": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 027": [
-    "300x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KX 027-4": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 030 [OEM 300x109x39]": [
-    "300x109x39",
-    "300x109x41"
+    "300x52.5x80"
   ],
   "Kubota|KX 030-4": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 033 [OEM 300x109x39]": [
-    "300x109x39",
-    "300x109x41"
+    "300x52.5x80",
+    "300x52.5x84"
   ],
   "Kubota|KX 033-4": [
     "300x53x84"
@@ -15876,7 +15425,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "500x92x78"
   ],
   "Kubota|KX 101": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|KX 101-3": [
@@ -16034,81 +15582,73 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x60"
   ],
   "Kubota|KX 51": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 61": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 61-2": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KX 61-2&": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KX 61-2S": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
   "Kubota|KX 61-3": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 71": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Kubota|KX 71-2": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KX 71-2&": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KX 71-3": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 71-3GL": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 75UR": [
-    "450x81x76",
     "450x81x76"
   ],
   "Kubota|KX 80": [
-    "450x81x76",
     "450x81x76"
   ],
   "Kubota|KX 90": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|KX 91-2": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KX 91-2S": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KX 91-2SR": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Kubota|KX 91-3": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 91-3&": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KX 91-3&-2": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|KXB 300": [
     "180x72x37"
@@ -16118,7 +15658,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Kubota|RX 201": [
-    "250x109x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
@@ -16128,18 +15667,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x82"
   ],
   "Kubota|RX 301": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|RX 301UR": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|RX 302": [
     "300x52.5x84"
   ],
   "Kubota|RX 303": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Kubota|RX 501": [
@@ -16228,7 +15764,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x82"
   ],
   "Kubota|U-20 (Korean model)": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Kubota|U-20-3": [
@@ -16248,16 +15783,20 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x82"
   ],
   "Kubota|U-25-3": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|U-25-3G": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|U-25-3GL": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|U-27-4": [
-    "300x53x80"
+    "300x53x80",
+    "300x52.5x80"
   ],
   "Kubota|U-30": [
     "300x52.5x84"
@@ -16453,23 +15992,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x62"
   ],
   "Massey Ferguson|MF 123": [
-    "250x109x35",
     "300x52.5x72"
   ],
   "Massey Ferguson|MF 125": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Massey Ferguson|MF 128": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Massey Ferguson|MF 130": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Massey Ferguson|MF 131": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Massey Ferguson|MF 135": [
@@ -16776,7 +16310,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Mitsubishi|ME 30": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Mitsubishi|MM 20": [
@@ -16784,26 +16317,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Mitsubishi|MM 25": [
     "300x52.5x76",
-    "300x109x35",
     "300x52.5x72"
   ],
   "Mitsubishi|MM 30CR": [
     "300x52.5x80"
   ],
   "Mitsubishi|MM 35": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mitsubishi|MM 35A": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mitsubishi|MM 35B": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mitsubishi|MM 35T": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mitsubishi|MM 40": [
@@ -16824,7 +16352,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x72x45"
   ],
   "Mitsubishi|MX 35": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Mitsubishi|MX 45": [
@@ -16838,7 +16365,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x82"
   ],
   "Mopas|ME35": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Morath|BR 1800": [
@@ -16904,7 +16430,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x34"
   ],
   "Multidrill|XL (HD Drilling Machine)": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Multitel|SMX250.E": [
@@ -17050,7 +16575,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x76"
   ],
   "Mustang|ME 2503": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Mustang|ME 2702": [
@@ -17062,7 +16586,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Mustang|ME 3003": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Mustang|ME 3402": [
@@ -17070,7 +16593,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Mustang|ME 3503": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mustang|ME 3602": [
@@ -17078,7 +16600,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Mustang|ME 3703": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Mustang|ME 5002": [
@@ -17168,11 +16689,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Nagano|NS 35-2A": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Nagano|NS 35-2B": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Nagano|NS 75-2": [
@@ -17342,7 +16861,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "New Holland|E 35.2C": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "New Holland|E 35.2SR": [
@@ -17358,7 +16876,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "New Holland|E 39BSR": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "New Holland|E 40.2SR": [
@@ -17459,7 +16976,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "New Holland|EH 30B": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "New Holland|EH 35": [
@@ -17467,7 +16983,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "350x52.5x90"
   ],
   "New Holland|EH 35B": [
-    "300x52.5x88",
     "300x52.5x88"
   ],
   "New Holland|EH 45": [
@@ -17475,7 +16990,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "New Holland|EH 50B": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "New Holland|EH 80": [
@@ -17644,35 +17158,27 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Nissan|N 220-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Nissan|N 230-2": [
-    "230x96x33",
-    "320x109x36"
+    "230x96x33"
   ],
   "Nissan|N 230-2R": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Nissan|N 250-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Nissan|N 260-2": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Nissan|N 260-2R": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Nissan|N 300-2": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Nissan|N 300-2R": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Nissan|N 35": [
@@ -17680,11 +17186,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Nissan|N 350-2": [
-    "320x100x43",
-    "320x109x39"
+    "320x100x43"
   ],
   "Nissan|N 350-2R": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Nissan|N 80": [
@@ -17707,15 +17211,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Nissan|S&B 300": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Nissan|S&B 300-2": [
-    "320x109x39",
     "300x52.5x80"
   ],
   "Nissan|S&B X 1": [
-    "300x109x39",
     "320x100x40"
   ],
   "Nissan|X 1": [
@@ -17895,53 +17396,42 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x109x41"
   ],
   "Peljob|EB 250XT": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Peljob|EB 251": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Peljob|EB 252": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 271 ('1998)": [
     "230x72x43"
   ],
   "Peljob|EB 28": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 28.4": [
     "300x109x41"
   ],
   "Peljob|EB 28.6": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 281": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Peljob|EB 30.4": [
-    "300x109x35",
     "300x52.5x72"
   ],
   "Peljob|EB 300": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Peljob|EB 306": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 350": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 350XT": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 36 (new)": [
@@ -17951,11 +17441,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x100x43"
   ],
   "Peljob|EB 400": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 406": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|EB 450": [
@@ -17968,23 +17456,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x72"
   ],
   "Peljob|LS 200": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|LS 2000": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|LS 286": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|LS 386": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|LS 406": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Peljob|LS 502": [
@@ -18145,7 +17628,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Putzmeister|SPM 300": [
-    "300x109x43",
     "300x52.5x88"
   ],
   "QIYUN|GTJZ06": [
@@ -18301,7 +17783,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x56"
   ],
   "SDP Manufacturing|EZ Hauler55M": [
-    "300x52.5x92",
     "300x52.5x92"
   ],
   "SMC|MX 08XT": [
@@ -18319,7 +17800,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "SMC|MX 30": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "SMC|MX 35": [
@@ -18356,11 +17836,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x70"
   ],
   "Sany|SY26C": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Sany|SY26U": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Sany|SY35U": [
@@ -18428,7 +17906,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x45"
   ],
   "Scattrack|125": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Scattrack|130": [
@@ -18457,15 +17934,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x45"
   ],
   "Scattrack|530": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Scattrack|533": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Scattrack|535": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Scattrack|545": [
@@ -18479,11 +17953,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Schaeff|H 24": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Schaeff|H 27": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Schaeff|HR 02": [
@@ -18518,11 +17990,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Schaeff|HR 14": [
-    "300x52.5x74",
     "300x52.5x74"
   ],
   "Schaeff|HR 14 (< '1995)": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Schaeff|HR 14 (> '1995)": [
@@ -18530,7 +18000,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Schaeff|HR 16 (< '1995)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Schaeff|HR 16 (> '1995)": [
@@ -18562,23 +18031,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x76"
   ],
   "Schaeff|HR 24": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Schaeff|HR 27": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Schaeff|HR 3.7 (new)": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Schaeff|HR 3.7 (old)": [
-    "300x52.5x92",
     "300x52.5x92"
   ],
   "Schaeff|HR 31": [
-    "450x81x76",
     "450x81x76"
   ],
   "Schaeff|HR 32": [
@@ -18588,18 +18052,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x71x86"
   ],
   "Schaeff|HR 4-A": [
-    "320x109x36",
     "300x52.5x74"
   ],
   "Schaeff|HR 42": [
     "500x92x78"
   ],
   "Schaeff|HR 8 (New)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Schaeff|HR 8-A": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Schaeff|N 120": [
@@ -18752,11 +18213,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Sumitomo|LS 1200FXJ2": [
-    "400x72.5x70",
     "400x72.5x70"
   ],
   "Sumitomo|LS 1200FXJ3": [
-    "400x72.5x70",
     "400x72.5x70"
   ],
   "Sumitomo|LS 1300FXJ2": [
@@ -18815,15 +18274,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Sumitomo|S 100": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Sumitomo|S 100F2": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Sumitomo|S 100FJ3": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Sumitomo|S 120": [
@@ -18873,27 +18329,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x72"
   ],
   "Sumitomo|S 80F2": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Sumitomo|S 80FX2": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Sumitomo|S 90": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Sumitomo|S 90F2": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Sumitomo|S 90FX3": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Sumitomo|S 90FXJ3": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Sumitomo|SH 10UJ3": [
@@ -19096,11 +18546,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x88"
   ],
   "Sunward|SWE 50B": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Sunward|SWE 55": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Sunward|SWE 60": [
@@ -19220,25 +18668,21 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x55x75"
   ],
   "Takeuchi|TB 030UR": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Takeuchi|TB 035": [
-    "300x52.5x82",
     "300x52.5x82"
   ],
   "Takeuchi|TB 045": [
     "350x52.5x86"
   ],
   "Takeuchi|TB 07": [
-    "400x72.5x74",
     "400x72.5x74"
   ],
   "Takeuchi|TB 070": [
     "180x72x37"
   ],
   "Takeuchi|TB 08": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 080": [
@@ -19300,8 +18744,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Takeuchi|TB 145": [
     "400x72.5x74",
-    "400x72.5x73",
-    "400x72.5x74"
+    "400x72.5x73"
   ],
   "Takeuchi|TB 15 (New)": [
     "230x96x31",
@@ -19312,8 +18755,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Takeuchi|TB 153FR": [
     "400x72.5x74",
-    "400x72.5x73",
-    "400x72.5x74"
+    "400x72.5x73"
   ],
   "Takeuchi|TB 15F": [
     "230x96x35",
@@ -19326,15 +18768,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Takeuchi|TB 175": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 175LSA": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 180FR": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 20R": [
@@ -19388,8 +18827,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Takeuchi|TB 250A": [
     "400x72.5x74",
-    "400x72.5x73",
-    "400x72.5x74"
+    "400x72.5x73"
   ],
   "Takeuchi|TB 257FR": [
     "400x72.5x74"
@@ -19401,22 +18839,18 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x76"
   ],
   "Takeuchi|TB 280FR": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 285": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 28FR": [
     "300x52.5x82"
   ],
   "Takeuchi|TB 290": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 30UR": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Takeuchi|TB 38FR": [
@@ -19424,8 +18858,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Takeuchi|TB 53FR": [
     "400x72.5x74",
-    "400x72.5x73",
-    "400x72.5x74"
+    "400x72.5x73"
   ],
   "Takeuchi|TB 55R": [
     "400x73x72",
@@ -19441,7 +18874,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Takeuchi|TB 80FR": [
-    "450x81x76",
     "450x81x76"
   ],
   "Takeuchi|TB 980": [
@@ -19570,11 +19002,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Terex|AM 35R": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Terex|AM 37R": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Terex|AR 35": [
@@ -19582,7 +19012,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Terex|HR 14 (< '1995)": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Terex|HR 14 (> '1995)": [
@@ -19590,7 +19019,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x74"
   ],
   "Terex|HR 16 (< '1995)": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Terex|HR 16 (> '1995)": [
@@ -19664,7 +19092,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x96x33"
   ],
   "Terex|TC 25": [
-    "300x52.5x80",
     "300x52.5x80"
   ],
   "Terex|TC 29": [
@@ -19676,7 +19103,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Terex|TC 37": [
-    "300x52.5x86",
     "300x52.5x86"
   ],
   "Terex|TC 48": [
@@ -19754,8 +19180,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "Thomas|T-25S": [
     "300x52.5x76",
-    "250x52.5x76",
-    "300x52.5x76"
+    "250x52.5x76"
   ],
   "Thomas|T-35S": [
     "300x55x82",
@@ -19787,7 +19212,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x43"
   ],
   "Topcat|ZY55": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Track Star|28": [
@@ -20156,39 +19580,30 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Volvo|EC 25": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 25-281": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 25X": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 25XT": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 27C": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 30": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 30B": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 30X": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Volvo|EC 35": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Volvo|EC 35C": [
@@ -20219,18 +19634,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "400x72.5x74"
   ],
   "Volvo|ECR 25D": [
-    "250x109x38",
     "300x52.5x78"
   ],
   "Volvo|ECR 28": [
-    "250x109x38",
     "300x52.5x78"
   ],
   "Volvo|ECR 35D": [
     "300x52.5x84"
   ],
   "Volvo|ECR 38": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Volvo|ECR 40D": [
@@ -20550,11 +19962,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Wacker Neuson|2404RD": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Wacker Neuson|250": [
-    "300x52.5x78",
     "300x52.5x78"
   ],
   "Wacker Neuson|2500": [
@@ -20564,18 +19974,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Wacker Neuson|2503": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Wacker Neuson|2503RD": [
-    "250x109x37",
     "300x101.6x39",
     "300x52.5x76",
     "300x52.5x84",
     "300x101.6x43"
   ],
   "Wacker Neuson|2503RDV": [
-    "300x109x37",
     "300x52.5x76"
   ],
   "Wacker Neuson|2600": [
@@ -20657,11 +20064,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Wacker Neuson|3002": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Wacker Neuson|3003": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Wacker Neuson|3003 RD": [
@@ -20669,11 +20074,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x78"
   ],
   "Wacker Neuson|3003 Vario": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Wacker Neuson|3003RD": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Wacker Neuson|3200RD (New)": [
@@ -20703,15 +20106,12 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Wacker Neuson|3503 Vario": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|3503RD": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|3503RD Vario": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|3602": [
@@ -20731,19 +20131,15 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Wacker Neuson|3703": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|3703RD": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|38Z-3": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|38Z3": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Wacker Neuson|5000RD": [
@@ -20863,7 +20259,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x48x76"
   ],
   "Wacker Neuson|ET24": [
-    "250x109x37",
     "300x52.5x76"
   ],
   "Wacker Neuson|ET35": [
@@ -21745,11 +21140,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x43"
   ],
   "Yuchai|WY 2.5": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Yuchai|WY 3.5": [
-    "300x109x41",
     "300x52.5x84"
   ],
   "Yuchai|YC 15-7": [
@@ -21783,7 +21176,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Yuchai|YC 35-8": [
-    "300x52.5x84",
     "300x52.5x84"
   ],
   "Yuchai|YC 45 [OEM 300x55x86]": [
@@ -21811,11 +21203,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x81x76"
   ],
   "Yutani|Z 53": [
-    "300x109x38",
     "300x52.5x78"
   ],
   "Yutani|Z 54": [
-    "300x109x40",
     "300x52.5x82"
   ],
   "Yutani|Z 55": [
@@ -21856,7 +21246,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x48x66"
   ],
   "Zeppelin|ZRH 04": [
-    "300x109x36",
     "300x52.5x74"
   ],
   "Zeppelin|ZRH 12": [
@@ -21872,11 +21261,9 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x80"
   ],
   "Zeppelin|ZRH 8": [
-    "300x109x39",
     "300x52.5x80"
   ],
   "Zhenyu|ZY 55": [
-    "400x72.5x72",
     "400x72.5x72"
   ],
   "Zntsis Brzesko|RT-10": [
@@ -21888,7 +21275,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
 export const fullTrackSizes: string[] = [
   "108x72x37",
   "130x72x29",
-  "13x4x56",
   "150x60x40",
   "15x4x166",
   "15x4x56",
@@ -21998,10 +21384,7 @@ export const fullTrackSizes: string[] = [
   "250x107.5x37",
   "250x107x38",
   "250x109x35",
-  "250x109x36",
   "250x109x37",
-  "250x109x38",
-  "250x109x41",
   "250x19x37",
   "250x47x84",
   "250x48.5x80",
@@ -22041,9 +21424,6 @@ export const fullTrackSizes: string[] = [
   "250x96x40",
   "250x96x41",
   "260x100x42",
-  "260x109x35",
-  "260x109x37",
-  "260x109x39",
   "260x52.5x72",
   "260x52.5x74",
   "260x52.5x76",
@@ -22052,7 +21432,6 @@ export const fullTrackSizes: string[] = [
   "260x96x38",
   "260x97x40",
   "260x97x42",
-  "280x52.5x82",
   "280x52.5x82",
   "280x72x47",
   "280x72x48",
@@ -22063,16 +21442,7 @@ export const fullTrackSizes: string[] = [
   "300x101.6x40",
   "300x101.6x43",
   "300x109x35",
-  "300x109x36",
-  "300x109x37",
-  "300x109x38",
-  "300x109x39",
-  "300x109x40",
   "300x109x41",
-  "300x109x42",
-  "300x109x43",
-  "300x109x44",
-  "300x52.5x80",
   "300x52.52x84",
   "300x52.5x72",
   "300x52.5x74",
@@ -22087,8 +21457,6 @@ export const fullTrackSizes: string[] = [
   "300x52.5x90",
   "300x52.5x92",
   "300x52.5x98",
-  "300x52.5x74",
-  "300x52.5x88",
   "300x53x80",
   "300x53x84",
   "300x54x72",
@@ -22125,8 +21493,6 @@ export const fullTrackSizes: string[] = [
   "320x100x45",
   "320x100x52",
   "320x106x39",
-  "320x109x36",
-  "320x109x39",
   "320x52.5x74",
   "320x52.5x80",
   "320x52.5x82",
@@ -22148,9 +21514,6 @@ export const fullTrackSizes: string[] = [
   "350x108x41",
   "350x108x42",
   "350x108x44",
-  "350x109x41",
-  "350x109x42",
-  "350x109x44",
   "350x52.5x84",
   "350x52.5x86",
   "350x52.5x88",
@@ -22209,7 +21572,6 @@ export const fullTrackSizes: string[] = [
   "400x86x56",
   "400x86x60",
   "40x73x72",
-  "400x86x60",
   "420x100x52",
   "420x100x54",
   "450x100x48",
@@ -22218,7 +21580,6 @@ export const fullTrackSizes: string[] = [
   "450x135x42",
   "450x145x40",
   "450x163x38",
-  "450x71x82",
   "450x71x78",
   "450x71x82",
   "450x71x84",
@@ -22255,7 +21616,6 @@ export const fullTrackSizes: string[] = [
   "457x100x51",
   "457x101.6x50",
   "457x101.6x51",
-  "457x101.6x55",
   "457x101.6x56",
   "485x92x72",
   "500x100x65",
