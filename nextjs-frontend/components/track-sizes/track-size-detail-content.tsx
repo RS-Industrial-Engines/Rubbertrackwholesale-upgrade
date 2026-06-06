@@ -206,11 +206,6 @@ export function TrackSizeDetailContent({
                 bestFor: "Most versatile — dirt, gravel, and mixed terrain",
               },
               {
-                name: "Multi-Bar",
-                image: "/images/tread-patterns/multi-bar.jpg",
-                bestFor: "Smooth ride for sensitive surfaces and asphalt",
-              },
-              {
                 name: "Staggered Block",
                 image: "/images/tread-patterns/staggered-block.jpg",
                 bestFor: "Mixed terrain with surface protection",

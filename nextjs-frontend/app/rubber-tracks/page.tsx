@@ -94,13 +94,6 @@ const TREAD_PATTERNS = [
     image: "/images/tread-patterns/z-pattern.jpg",
   },
   {
-    name: "Multi-Bar",
-    description: "Multiple narrow bars provide smooth ride and even weight distribution.",
-    bestFor: "Sensitive surfaces, finished concrete, asphalt",
-    icon: "M",
-    image: "/images/tread-patterns/multi-bar.jpg",
-  },
-  {
     name: "Staggered Block",
     description: "Offset block pattern combines traction with surface protection.",
     bestFor: "Mixed terrain, light paving, general use",
