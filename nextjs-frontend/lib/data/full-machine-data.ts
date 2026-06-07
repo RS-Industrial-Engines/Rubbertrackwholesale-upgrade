@@ -186,9 +186,15 @@ export const fullMachineModels: Record<string, string[]> = {
     "RC 60",
     "RC 85",
     "RCV",
+    "RT 25",
+    "RT 30",
+    "RT 40",
     "RT 50",
+    "RT 60",
     "RT 65",
     "RT 75",
+    "RT 120",
+    "RT 135",
     "SC-50",
     "SR-80",
     "ST-50",
@@ -5697,8 +5703,24 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "18x4x200",
     "457x101.6x50"
   ],
+  "ASV|RT 25": [
+    "11x4x37",
+    "280x101.6x37"
+  ],
+  "ASV|RT 30": [
+    "11x4x37",
+    "280x101.6x37"
+  ],
+  "ASV|RT 40": [
+    "11x4x37",
+    "280x101.6x37"
+  ],
   "ASV|RT 50": [
     "15x4x166",
+    "381x101.6x42"
+  ],
+  "ASV|RT 60": [
+    "15x4x42",
     "381x101.6x42"
   ],
   "ASV|RT 65": [
@@ -5707,6 +5729,14 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   ],
   "ASV|RT 75": [
     "18x4x201",
+    "457x101.6x51"
+  ],
+  "ASV|RT 120": [
+    "18x4x51",
+    "457x101.6x51"
+  ],
+  "ASV|RT 135": [
+    "18x4x51",
     "457x101.6x51"
   ],
   "ASV|SC-50": [
@@ -6100,7 +6130,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "200x72x42"
   ],
   "Airman|HM10 NEW": [
-    "20x96x33",
+    "230x96x33",
     "230x48x66"
   ],
   "Airman|HM10G": [
@@ -7931,7 +7961,8 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "457x100.6x56"
   ],
   "CAT|267B2": [
-    "15x4x56"
+    "18x4x56",
+    "457x101.6x56"
   ],
   "CAT|269C": [
     "450x86x60",
@@ -8056,7 +8087,8 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "450x86x60"
   ],
   "CAT|299D2XHP": [
-    "18x4x51"
+    "400x86x60",
+    "450x86x60"
   ],
   "CAT|299D3": [
     "450x86x60",
@@ -21602,6 +21634,7 @@ export const fullTrackSizes: string[] = [
   "260x96x38",
   "260x97x40",
   "260x97x42",
+  "280x101.6x37",
   "280x52.5x82",
   "280x72x47",
   "280x72x48",
