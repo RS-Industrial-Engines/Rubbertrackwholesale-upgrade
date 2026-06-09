@@ -1432,7 +1432,9 @@ export const fullMachineModels: Record<string, string[]> = {
     "XT 850",
     "XT 855",
     "SK 650",
+    "JT 1220",
     "JT 1720",
+    "JT 2020",
     "SK 750 Narrow",
     "SK 755 Narrow",
     "SK 750 Wide",
@@ -6488,7 +6490,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x60x34"
   ],
   "Baraladi|Minding": [
-    "108x72x37",
     "180x72x37"
   ],
   "Baratti|Scorpio": [
@@ -7481,8 +7482,7 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "230x72x56"
   ],
   "CASE|6030 Turbo": [
-    "400x135x39",
-    "400x725.5x74"
+    "400x135x39"
   ],
   "CASE|6060 Turbo": [
     "400x73x74",
@@ -8530,7 +8530,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x72x42"
   ],
   "CMC|S24": [
-    "250x72x2",
     "250x72x52"
   ],
   "CME|M12": [
@@ -9167,20 +9166,16 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x92"
   ],
   "Ditch-Witch|JT 9 (Drilling Machine)": [
-    "230x72x56",
-    "2303x72x56"
+    "230x72x56"
   ],
   "Ditch-Witch|JT 920 (Drilling Machine)": [
-    "230x72x56",
-    "2303x72x56"
+    "230x72x56"
   ],
   "Ditch-Witch|JT 920L (Drilling Machine)": [
-    "230x72x56",
-    "2303x72x56"
+    "230x72x56"
   ],
   "Ditch-Witch|JT 922": [
-    "230x72x56",
-    "2303x72x56"
+    "230x72x56"
   ],
   "Ditch-Witch|MX 15": [
     "230x96x35",
@@ -9325,12 +9320,10 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "180x72x34"
   ],
   "Durso|14.100 Auto": [
-    "190x72x37",
-    "180x723x37"
+    "190x72x37"
   ],
   "Durso|14.100 Dumper": [
-    "190x72x37",
-    "180x723x37"
+    "190x72x37"
   ],
   "Durso|18.100 Auto": [
     "190x72x37",
@@ -11330,16 +11323,13 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x86"
   ],
   "Hitachi|EX 40": [
-    "400x72.5x72",
-    "400x725x72"
+    "400x72.5x72"
   ],
   "Hitachi|EX 40-2": [
-    "400x72.5x72",
-    "400x725x72"
+    "400x72.5x72"
   ],
   "Hitachi|EX 40U": [
-    "400x72.5x72",
-    "400x725x72"
+    "400x72.5x72"
   ],
   "Hitachi|EX 40UR": [
     "300x55x82",
@@ -14541,7 +14531,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x55x81"
   ],
   "Komatsu|PC 40 avance R (> 24521)": [
-    "40x73x72",
     "400x72.5x72"
   ],
   "Komatsu|PC 40-7 (SN > 24521)": [
@@ -15375,7 +15364,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "300x52.5x84"
   ],
   "Kubota|KH 91": [
-    "300x1009x39",
     "300x52.5x80"
   ],
   "Kubota|KN 36": [
@@ -15418,7 +15406,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "250x109x37"
   ],
   "Kubota|KX 021UR": [
-    "250x19x37",
     "250x52.5x76",
     "300x52.5x76"
   ],
@@ -18983,12 +18970,10 @@ export const fullMachineCompatibility: Record<string, string[]> = {
     "320x86x46"
   ],
   "Takeuchi|TL 12R2 (Compact Track Loader)": [
-    "450x86x60",
-    "450x8x60"
+    "450x86x60"
   ],
   "Takeuchi|TL 12V2 (Compact Track Loader)": [
-    "450x86x60",
-    "450x8x60"
+    "450x86x60"
   ],
   "Takeuchi|TL 130 (Compact Track Loader)": [
     "320x86x52"
@@ -21434,8 +21419,17 @@ export const fullMachineCompatibility: Record<string, string[]> = {
   "Ditch-Witch|SK 650": [
     "180x72x42"
   ],
+  "Ditch-Witch|JT 1220": [
+    "280x72x56",
+    "250x72x56"
+  ],
   "Ditch-Witch|JT 1720": [
-    "280x72x56"
+    "280x72x56",
+    "250x72x56"
+  ],
+  "Ditch-Witch|JT 2020": [
+    "280x72x56",
+    "250x72x56"
   ],
   "Ditch-Witch|SK 750 Narrow": [
     "180x72x44"
@@ -21475,7 +21469,6 @@ export const fullMachineCompatibility: Record<string, string[]> = {
 
 // All unique track sizes
 export const fullTrackSizes: string[] = [
-  "108x72x37",
   "130x72x29",
   "150x60x40",
   "15x4x166",
@@ -21492,7 +21485,6 @@ export const fullTrackSizes: string[] = [
   "180x60x37",
   "180x60x38",
   "180x68x28",
-  "180x723x37",
   "180x72x31",
   "180x72x32",
   "180x72x34",
@@ -21542,7 +21534,6 @@ export const fullTrackSizes: string[] = [
   "200x96x33",
   "200x96x35",
   "20x96x33",
-  "2303x72x56",
   "230x48x60",
   "230x48x62",
   "230x48x63",
@@ -21587,7 +21578,6 @@ export const fullTrackSizes: string[] = [
   "250x107x38",
   "250x109x35",
   "250x109x37",
-  "250x19x37",
   "250x47x84",
   "250x48.5x80",
   "250x48.5x84",
@@ -21603,7 +21593,6 @@ export const fullTrackSizes: string[] = [
   "250x52.5x78",
   "250x52.5x80",
   "250x55.5x79",
-  "250x72x2",
   "250x72x35",
   "250x72x39",
   "250x72x41",
@@ -21640,7 +21629,6 @@ export const fullTrackSizes: string[] = [
   "280x72x48",
   "280x72x52",
   "280x72x56",
-  "300x1009x39",
   "300x100x43",
   "300x101.6x39",
   "300x101.6x40",
@@ -21753,8 +21741,6 @@ export const fullTrackSizes: string[] = [
   "400x72.5x76",
   "400x72.5x78",
   "400x72.5x82",
-  "400x725.5x74",
-  "400x725x72",
   "400x72x74",
   "400x73x68",
   "400x73x70",
@@ -21775,7 +21761,6 @@ export const fullTrackSizes: string[] = [
   "400x86x55",
   "400x86x56",
   "400x86x60",
-  "40x73x72",
   "420x100x52",
   "420x100x54",
   "450x100x48",
@@ -21816,7 +21801,6 @@ export const fullTrackSizes: string[] = [
   "450x86x58",
   "450x86x60",
   "450x86x63",
-  "450x8x60",
   "457x100.6x51",
   "457x100.6x56",
   "457x100x51",
@@ -22263,19 +22247,19 @@ export function isValidMetricTrackSize(size: string): boolean {
   const pitch = parseFloat(match[2]);
   const links = parseInt(match[3], 10);
   
-  // Width validation: 130-600mm for valid rubber tracks
+  // Width validation: 130-820mm for valid rubber tracks
   // Too small = likely inch format (8-18 inches)
-  // Too large = likely typo (2303mm is way too big)
-  if (width < 130 || width > 600) return false;
+  // Too large = likely typo. 820 ceiling allows large carrier tracks (e.g. 700mm, 750mm Morooka)
+  if (width < 130 || width > 820) return false;
   
-  // Pitch validation: 48-110mm for valid rubber tracks
-  // Common pitches: 48.5, 52.5, 54.5, 72, 72.5, 84, 86
+  // Pitch validation: 40-170mm for valid rubber tracks
+  // Common pitches: 48.5, 52.5, 54.5, 72, 72.5, 84, 86; wide excavator/carrier tracks reach 132-163mm
   // Too small = typo (8mm is invalid)
   // Too large = typo (723mm, 725.5mm, 1009mm are invalid)
-  if (pitch < 40 || pitch > 110) return false;
+  if (pitch < 40 || pitch > 170) return false;
   
-  // Links validation: 30-120 for valid rubber tracks
-  if (links < 30 || links > 120) return false;
+  // Links validation: 26-120 for valid rubber tracks (26 floor allows short tracks like Brokk 130x72x29, stump grinders 180x60x28)
+  if (links < 26 || links > 120) return false;
   
   return true;
 }

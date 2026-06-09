@@ -16,7 +16,7 @@ const features = [
   {
     title: "Fast Delivery",
     description:
-      "Ships same day from one of our 7 strategically located warehouses",
+      "Ships same day from our Houston, Texas warehouse with nationwide shipping",
     icon: Clock,
   },
 ];

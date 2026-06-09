@@ -270,7 +270,7 @@ Consider these factors:
 
 ## Our Recommendation
 
-For most users, the **C-pattern** offers the best all-around performance. If you frequently work in mud, consider **block tread**. For turf work, go with **multi-bar**.
+For most users, the **C-pattern** offers the best all-around performance. If you frequently work in mud, consider **block tread**. For turf work, choose the **C-pattern** or a **block tread** to minimize ground disturbance.
 
 Need help choosing? Call **(346) 438-6252** for personalized recommendations.
     `,
@@ -527,7 +527,7 @@ For most SVL75 owners, **premium aftermarket tracks** offer the best value. You 
 The SVL75 works well with:
 - **C-Pattern:** Best for general construction (most popular)
 - **Block Tread:** Better for muddy conditions
-- **Multi-Bar:** For turf/landscape work
+- **Turf/landscape work:** Choose a **C-pattern** or **block tread** to minimize ground disturbance
 
 ## Installation Tips
 

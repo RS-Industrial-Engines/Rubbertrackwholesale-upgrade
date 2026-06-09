@@ -20,6 +20,7 @@ import {
 import type { MachineModel, TrackSize } from "@/lib/api";
 import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
+import { DualDimensionTable, getDualDimension } from "@/components/track-sizes/dual-dimension-table";
 
 interface TrackSizeDetailContentProps {
   size: string;
@@ -75,31 +76,37 @@ export function TrackSizeDetailContent({
             </p>
 
             {/* Specifications */}
-            {(width || pitch || links) && (
-              <div className="flex flex-wrap gap-4 mb-8">
-                {width && (
-                  <div className="px-4 py-2 bg-card rounded-lg border border-border">
-                    <span className="text-muted-foreground text-sm">Width:</span>
-                    <span className="ml-2 font-semibold text-foreground">
-                      {width}mm
-                    </span>
-                  </div>
-                )}
-                {pitch && (
-                  <div className="px-4 py-2 bg-card rounded-lg border border-border">
-                    <span className="text-muted-foreground text-sm">Pitch:</span>
-                    <span className="ml-2 font-semibold text-foreground">
-                      {pitch}mm
-                    </span>
-                  </div>
-                )}
-                {links && (
-                  <div className="px-4 py-2 bg-card rounded-lg border border-border">
-                    <span className="text-muted-foreground text-sm">Links:</span>
-                    <span className="ml-2 font-semibold text-foreground">{links}</span>
-                  </div>
-                )}
+            {getDualDimension(size) ? (
+              <div className="mb-8 max-w-xl">
+                <DualDimensionTable size={size} />
               </div>
+            ) : (
+              (width || pitch || links) && (
+                <div className="flex flex-wrap gap-4 mb-8">
+                  {width && (
+                    <div className="px-4 py-2 bg-card rounded-lg border border-border">
+                      <span className="text-muted-foreground text-sm">Width:</span>
+                      <span className="ml-2 font-semibold text-foreground">
+                        {width}mm
+                      </span>
+                    </div>
+                  )}
+                  {pitch && (
+                    <div className="px-4 py-2 bg-card rounded-lg border border-border">
+                      <span className="text-muted-foreground text-sm">Pitch:</span>
+                      <span className="ml-2 font-semibold text-foreground">
+                        {pitch}mm
+                      </span>
+                    </div>
+                  )}
+                  {links && (
+                    <div className="px-4 py-2 bg-card rounded-lg border border-border">
+                      <span className="text-muted-foreground text-sm">Links:</span>
+                      <span className="ml-2 font-semibold text-foreground">{links}</span>
+                    </div>
+                  )}
+                </div>
+              )
             )}
 
             <div className="flex flex-col sm:flex-row gap-4">

@@ -273,6 +273,46 @@ export function getMachineUrl(make: string, model: string): string {
 }
 
 /**
+ * DISPLAY-ONLY label formatter for machine models.
+ *
+ * Some models (e.g. Ditch Witch SK 750 / SK 755) ship in width variants
+ * ("Narrow" / "Wide") whose suffix can visually run into the model name in
+ * titles and search results. This separates the variant with a dash and adds
+ * the track width so the label reads cleanly, e.g.:
+ *   "SK 755 Narrow" -> "SK 755 - Narrow (180mm)"
+ *   "SK 750 Wide"   -> "SK 750 - Wide (230mm)"
+ *
+ * This does NOT change stored data, slugs, search keys, or canonical URLs —
+ * it only affects how the model string is rendered. Any model without a known
+ * variant suffix is returned unchanged.
+ */
+const MODEL_VARIANT_WIDTHS: Record<string, string> = {
+  narrow: "180mm",
+  wide: "230mm",
+};
+
+export function formatMachineModelLabel(model: string): string {
+  if (!model) return model;
+  // Match the width variant whether or not cleanModelForDisplay has already
+  // collapsed the spaces (e.g. "SK 750 Narrow" or "SK750Narrow"). An optional
+  // separator between the base and the variant keeps both forms working.
+  const match = model.match(/^(.*?)\s*(Narrow|Wide)\s*$/i);
+  if (!match) return model;
+  const base = match[1].trim();
+  // Scope strictly to the Ditch Witch SK 750 / SK 755 width variants. Other
+  // models that happen to end in "Wide" (e.g. Genie "S-65 Trax 400 Wide")
+  // already encode their own width and must be left untouched.
+  if (!/^SK\s*7(50|55)$/i.test(base)) return model;
+  // Normalize the base to its canonical spaced form ("SK 750" / "SK 755").
+  const baseMatch = base.match(/^SK\s*7(50|55)$/i);
+  const normalizedBase = baseMatch ? `SK 7${baseMatch[1]}` : base;
+  const variant = match[2];
+  const width = MODEL_VARIANT_WIDTHS[variant.toLowerCase()];
+  const variantLabel = variant.charAt(0).toUpperCase() + variant.slice(1).toLowerCase();
+  return width ? `${normalizedBase} - ${variantLabel} (${width})` : `${normalizedBase} - ${variantLabel}`;
+}
+
+/**
  * Business contact information - centralized for consistency.
  * Must match Google Business Profile exactly.
  */

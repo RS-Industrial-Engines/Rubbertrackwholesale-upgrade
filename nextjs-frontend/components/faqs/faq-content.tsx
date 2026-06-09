@@ -47,7 +47,7 @@ const fallbackFAQs: FAQ[] = [
     id: 5,
     question: "Do you ship nationwide?",
     answer:
-      "Yes, we ship to all 50 states from our network of 7 strategically located warehouses. Most orders ship same-day if placed before 2PM CST. Shipping is free on orders over $500 to commercial addresses in the contiguous United States. We can also arrange expedited shipping if you need parts urgently.",
+      "Yes, we ship to all 50 states from our Houston, Texas warehouse. Most orders ship same-day if placed before 2PM CST. Shipping is free on orders over $500 to commercial addresses in the contiguous United States. We can also arrange expedited shipping if you need parts urgently.",
     category: "Shipping",
   },
   {
