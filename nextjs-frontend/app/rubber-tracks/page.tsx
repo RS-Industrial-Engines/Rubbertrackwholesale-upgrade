@@ -459,7 +459,7 @@ export default async function RubberTracksPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
                 {TREAD_PATTERNS.map((pattern) => (
                   <Card key={pattern.name} className="h-full overflow-hidden">
                     <div className="aspect-[4/3] relative bg-muted">
