@@ -12,7 +12,7 @@ import {
   formatTrackSizeDisplay,
   ParsedQuery,
 } from "@/lib/search-utils";
-import { createMachineSlug } from "@/lib/url-utils";
+import { createMachineSlug, formatMachineModelLabel } from "@/lib/url-utils";
 import {
   searchMachines,
   getModelsForBrand,
@@ -130,7 +130,7 @@ export function SearchContent() {
                 <span>Searching for track size: <strong className="text-foreground">{formatTrackSizeDisplay(parsed.trackSize || "")}</strong></span>
               )}
               {parsed.type === "machine" && (
-                <span>Searching for: <strong className="text-foreground">{parsed.make} {parsed.model}</strong></span>
+                <span>Searching for: <strong className="text-foreground">{parsed.make} {formatMachineModelLabel(parsed.model || "")}</strong></span>
               )}
               {parsed.type === "brand_only" && (
                 <span>Showing all machines from: <strong className="text-foreground">{parsed.make}</strong></span>
@@ -245,9 +245,9 @@ function MachineResultCard({ result }: { result: CompatibilityResult }) {
           )}
         </div>
         <CardTitle className="text-xl">
-          <Link href={`/machines/${slug}`} className="hover:text-primary transition-colors">
-            {result.make} {result.model}
-          </Link>
+              <Link href={`/machines/${slug}`} className="hover:text-primary transition-colors">
+                {result.make} {formatMachineModelLabel(result.model)}
+              </Link>
         </CardTitle>
       </CardHeader>
       <CardContent>

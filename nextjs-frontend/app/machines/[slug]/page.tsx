@@ -28,6 +28,7 @@ import {
   isMessySlug,
   cleanMalformedSlug,
   parseMachineSlugClean,
+  formatMachineModelLabel,
   BUSINESS_INFO,
 } from "@/lib/url-utils";
 

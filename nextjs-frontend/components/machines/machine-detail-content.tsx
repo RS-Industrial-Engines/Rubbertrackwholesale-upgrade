@@ -26,8 +26,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { CompatibilitySearchResult } from "@/lib/api";
-import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import { createMachineSlug, BUSINESS_INFO, formatMachineModelLabel } from "@/lib/url-utils";
 import RequestQuoteForm from "@/components/forms/request-quote-form";
+import { DualDimensionTable, getDualDimension } from "@/components/track-sizes/dual-dimension-table";
 import {
   getAllMachineComponentCards,
   COMPONENT_PLURAL_NAMES,
@@ -71,6 +72,7 @@ export function MachineDetailContent({
   });
   const primaryTrackSize = trackSizes[0]?.size || "";
   const slug = createMachineSlug(make, model);
+  const modelLabel = formatMachineModelLabel(model);
 
   // Generate equipment-specific content
   const machineUseCases = getMachineUseCases(equipmentType);
@@ -91,7 +93,7 @@ export function MachineDetailContent({
             </Link>
             <ChevronRight className="h-4 w-4" />
             <span className="text-foreground">
-              {make} {model}
+              {make} {modelLabel}
             </span>
           </nav>
         </div>
@@ -105,7 +107,7 @@ export function MachineDetailContent({
               {equipmentType}
             </p>
             <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-              {make} {model} Rubber Tracks & Undercarriage Parts
+              {make} {modelLabel} Rubber Tracks & Undercarriage Parts
             </h1>
             
             {/* Track size summary */}
@@ -167,20 +169,24 @@ export function MachineDetailContent({
                         <h3 className="text-xl font-bold text-foreground group-hover:text-primary mb-3">
                           {track.size}
                         </h3>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Width:</span>
-                            <span className="font-medium">{track.width}mm</span>
+                        {getDualDimension(track.size) ? (
+                          <DualDimensionTable size={track.size} />
+                        ) : (
+                          <div className="space-y-2 text-sm">
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Width:</span>
+                              <span className="font-medium">{track.width}mm</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Pitch:</span>
+                              <span className="font-medium">{track.pitch}mm</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="text-muted-foreground">Links:</span>
+                              <span className="font-medium">{track.links}</span>
+                            </div>
                           </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Pitch:</span>
-                            <span className="font-medium">{track.pitch}mm</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span className="text-muted-foreground">Links:</span>
-                            <span className="font-medium">{track.links}</span>
-                          </div>
-                        </div>
+                        )}
                         <div className="mt-4 pt-4 border-t border-border">
                           <span className="text-sm text-primary font-medium group-hover:underline">
                             View track details →

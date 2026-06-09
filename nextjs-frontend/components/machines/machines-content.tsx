@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import type { MachineModel } from "@/lib/api";
 import { normalizeForMatching, normalizeBrand } from "@/lib/data/full-machine-data";
-import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import { createMachineSlug, BUSINESS_INFO, formatMachineModelLabel } from "@/lib/url-utils";
 
 interface MachinesContentProps {
   machines: MachineModel[];
@@ -290,7 +290,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                       >
                         <div>
                           <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                            {machine.make} {machine.model}
+                            {machine.make} {formatMachineModelLabel(machine.model || "")}
                           </h3>
                           {machine.equipment_type && (
                             <p className="text-sm text-muted-foreground">
@@ -329,7 +329,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                       >
                         <div>
                           <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                            {machine.make} {machine.model}
+                            {machine.make} {formatMachineModelLabel(machine.model || "")}
                           </h3>
                           {machine.equipment_type && (
                             <p className="text-sm text-muted-foreground">
@@ -378,7 +378,7 @@ export function MachinesContent({ machines, brands }: MachinesContentProps) {
                         >
                           <div>
                             <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                              {machine.make} {machine.model}
+                              {machine.make} {formatMachineModelLabel(machine.model || "")}
                             </h3>
                             {machine.equipment_type && (
                               <p className="text-sm text-muted-foreground">
