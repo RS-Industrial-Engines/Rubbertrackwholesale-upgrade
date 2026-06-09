@@ -257,12 +257,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
   
   const { make, model, equipmentType } = machineInfo;
+  const modelLabel = formatMachineModelLabel(model);
   const cleanSlug = createMachineSlug(make, model);
   const trackSizes = getTrackSizesForMachine(make, model);
   const primaryTrackSize = trackSizes[0] || "";
   
-  const title = `${make} ${model} Rubber Tracks & Undercarriage Parts | Houston TX`;
-  const description = `Buy ${make} ${model} ${equipmentType || "equipment"} rubber tracks${primaryTrackSize ? ` (${primaryTrackSize})` : ""}, sprockets, rollers & idlers. Wholesale prices. Houston warehouse. Nationwide shipping. Call ${BUSINESS_INFO.phone}.`;
+  const title = `${make} ${modelLabel} Rubber Tracks & Undercarriage Parts | Houston TX`;
+  const description = `Buy ${make} ${modelLabel} ${equipmentType || "equipment"} rubber tracks${primaryTrackSize ? ` (${primaryTrackSize})` : ""}, sprockets, rollers & idlers. Wholesale prices. Houston warehouse. Nationwide shipping. Call ${BUSINESS_INFO.phone}.`;
 
   return {
     title,
