@@ -4,6 +4,7 @@ import { BUSINESS_INFO } from "@/lib/url-utils";
 
 const quickLinks = [
   { href: "/rubber-tracks", label: "Rubber Tracks" },
+  { href: "/rubber-tracks-houston", label: "Rubber Tracks Houston" },
   { href: "/machines", label: "Shop by Machine" },
   { href: "/track-size", label: "Shop by Track Size" },
   { href: "/brands", label: "Brands" },
