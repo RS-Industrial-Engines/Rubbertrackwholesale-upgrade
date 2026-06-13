@@ -50,6 +50,7 @@ interface MachineDetailContentProps {
   relatedMachines: RelatedMachine[];
   faqs: { question: string; answer: string }[];
   businessInfo: typeof BUSINESS_INFO;
+  priceRange?: { low: number; high: number; pricedCount: number } | null;
 }
 
 export function MachineDetailContent({
@@ -60,6 +61,7 @@ export function MachineDetailContent({
   relatedMachines,
   faqs,
   businessInfo,
+  priceRange,
 }: MachineDetailContentProps) {
   // SAFETY DEDUPE: Ensure no duplicate track sizes in render
   // Dedupe by size string (e.g., "300x52.5x80") before rendering cards
@@ -116,6 +118,28 @@ export function MachineDetailContent({
                 Compatible Track Size: <span className="font-semibold text-foreground">{primaryTrackSize}</span>
                 {trackSizes.length > 1 && ` (+${trackSizes.length - 1} more options)`}
               </p>
+            )}
+
+            {/* Price range — only renders when machine has at least one priced size */}
+            {priceRange && (
+              <div className="mb-6">
+                <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span className="text-3xl lg:text-4xl font-bold text-foreground">
+                    ${priceRange.low.toLocaleString()} &ndash; ${priceRange.high.toLocaleString()}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    <CheckCircle className="h-4 w-4" />
+                    IN STOCK &ndash; Ready to Ship
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
+                  Final price varies with freight, tariff, quantity &amp; availability &ndash;{" "}
+                  <a href={businessInfo.phoneTel} className="text-primary hover:underline font-medium">
+                    contact us for a quote
+                  </a>
+                  .
+                </p>
+              </div>
             )}
             
             <p className="text-xl text-muted-foreground mb-6 text-pretty">

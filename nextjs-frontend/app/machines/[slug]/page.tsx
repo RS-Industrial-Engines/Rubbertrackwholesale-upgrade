@@ -11,9 +11,11 @@ import { MachineDetailContent } from "@/components/machines/machine-detail-conte
 import {
   generateBreadcrumbSchema,
   generateMachineSchema,
+  generateMachineTrackProductSchema,
   generateFAQPageSchema,
   getSiteUrl,
 } from "@/lib/schema";
+import { getMachinePriceRange } from "@/lib/data/price-ranges";
 import {
   fullMachineModels,
   fullMachineCompatibility,
@@ -368,6 +370,10 @@ export default async function MachineDetailPage({ params }: PageProps) {
   const rawTrackSizes = compatibility.track_sizes?.map((t) => t.size) || [];
   const trackSizes = [...new Set(rawTrackSizes)]; // Dedupe by exact size string
   const primaryTrackSize = trackSizes[0] || "";
+
+  // Price range spanning all PRICED sizes for this machine (null = quote-only).
+  // Same value feeds the visible display and the Offer schema, so they match.
+  const priceRange = getMachinePriceRange(trackSizes);
   
   const faqs = [
     {
@@ -419,6 +425,21 @@ export default async function MachineDetailPage({ params }: PageProps) {
           __html: JSON.stringify(generateMachineSchema(make, model, equipmentType || "Compact Equipment", trackSizes)),
         }}
       />
+      {priceRange && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              generateMachineTrackProductSchema(
+                make,
+                model,
+                equipmentType || "Compact Equipment",
+                priceRange
+              )
+            ),
+          }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -433,6 +454,7 @@ export default async function MachineDetailPage({ params }: PageProps) {
         relatedMachines={relatedMachines}
         faqs={faqs}
         businessInfo={BUSINESS_INFO}
+        priceRange={priceRange}
       />
     </>
   );

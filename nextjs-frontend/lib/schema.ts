@@ -380,6 +380,46 @@ export function generateMachineSchema(
   };
 }
 
+/**
+ * Product schema with an AggregateOffer price range for a machine's rubber
+ * tracks. ONLY emit this when the machine has at least one PRICED track size
+ * (range comes from lib/data/price-ranges.ts). The lowPrice/highPrice MUST be
+ * the exact same span shown on-page, so the visible price and schema never
+ * disagree (Google penalizes mismatch). Machines with no priced sizes get NO
+ * Product schema and stay quote-only.
+ */
+export function generateMachineTrackProductSchema(
+  make: string,
+  model: string,
+  equipmentType: string,
+  priceRange: { low: number; high: number }
+) {
+  const slug = createMachineSlug(make, model);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${make} ${model} Rubber Tracks`,
+    description: `Replacement rubber tracks for the ${make} ${model} ${equipmentType}. In stock at our Houston warehouse with same-day pickup and nationwide shipping.`,
+    brand: {
+      "@type": "Brand",
+      name: make,
+    },
+    category: "Rubber Tracks",
+    url: `${SITE_URL}/machines/${slug}`,
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "USD",
+      lowPrice: priceRange.low,
+      highPrice: priceRange.high,
+      availability: "https://schema.org/InStock",
+      seller: {
+        "@type": "Organization",
+        name: BUSINESS_INFO.name,
+      },
+    },
+  };
+}
+
 // ============================================================================
 // BRAND PAGE SCHEMA
 // ============================================================================
