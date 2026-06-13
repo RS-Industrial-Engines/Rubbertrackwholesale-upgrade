@@ -142,8 +142,7 @@ export function Footer() {
                 <Star className="h-5 w-5 text-yellow-500 fill-yellow-500 shrink-0" />
                 <div className="flex items-center gap-1.5">
                   <span className="font-semibold text-foreground">{BUSINESS_INFO.aggregateRating.ratingValue}</span>
-                  <span className="text-muted-foreground">Google rating from</span>
-                  <span className="font-medium text-foreground">{BUSINESS_INFO.aggregateRating.reviewCount} reviews</span>
+                  <span className="text-muted-foreground">Google rating</span>
                 </div>
               </li>
             </ul>

@@ -134,7 +134,7 @@ export function MachineDetailContent({
                 </div>
                 <p className="text-sm text-muted-foreground mt-2 max-w-2xl">
                   Final price varies with freight, tariff, quantity &amp; availability &ndash;{" "}
-                  <a href={businessInfo.phoneTel} className="text-primary hover:underline font-medium">
+                  <a href="/contact" className="text-primary hover:underline font-medium">
                     contact us for a quote
                   </a>
                   .

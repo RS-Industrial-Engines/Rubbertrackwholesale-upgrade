@@ -32,14 +32,9 @@ export function TestimonialsSection() {
                 {BUSINESS_INFO.aggregateRating.ratingValue}
               </div>
               
-              {/* Review Count */}
-              <p className="text-lg text-muted-foreground mb-6">
-                Based on {BUSINESS_INFO.aggregateRating.reviewCount} Google Reviews
-              </p>
-              
               {/* Google Business Profile Link */}
               <a
-                href="https://www.google.com/maps/place/Rubber+Track+Wholesale+Houston/@29.7713,-95.2846,17z"
+                href="https://share.google/SAzceJjbTkGUR6FZr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block"

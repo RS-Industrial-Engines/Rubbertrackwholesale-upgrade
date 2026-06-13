@@ -46,7 +46,7 @@ const faqsForSchema = [
   {
     question: "Do you ship nationwide?",
     answer:
-      "Yes, we ship to all 50 states from our Houston warehouse. Most orders ship same-day if placed before 2PM CST. Free shipping on orders over $500.",
+      "Yes, we ship to all 50 states from our Houston warehouse. Most orders ship same-day if placed before 2PM CST. Fast nationwide shipping, and same-day pickup for local Houston customers.",
   },
   {
     question: "Do you offer local pickup in Houston?",

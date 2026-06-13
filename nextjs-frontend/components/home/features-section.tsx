@@ -1,12 +1,12 @@
-import { Truck, Award, Clock } from "lucide-react";
+import { MapPin, Award, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
   {
-    title: "Free Shipping",
+    title: "Same-Day Pickup",
     description:
-      "Free shipping on orders over $500 to commercial addresses nationwide",
-    icon: Truck,
+      "Pick up your order today from our Houston warehouse - no waiting on freight.",
+    icon: MapPin,
   },
   {
     title: "Premium Quality",
