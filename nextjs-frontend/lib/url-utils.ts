@@ -341,8 +341,8 @@ export const BUSINESS_INFO = {
   },
   // Opening hours
   hours: {
-    weekdays: { opens: "08:00", closes: "17:00" },
-    saturday: { opens: "09:00", closes: "13:00" },
-    sunday: null, // closed
+    weekdays: { opens: "09:00", closes: "17:00" },
+    saturday: null,
+    sunday: null,
   },
 };

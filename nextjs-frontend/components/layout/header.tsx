@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search, ShoppingCart, Menu, X, Phone, Mail } from "lucide-react";
+import { Search, Menu, X, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BUSINESS_INFO } from "@/lib/url-utils";
@@ -55,9 +55,6 @@ export function Header() {
               <span>{BUSINESS_INFO.email}</span>
             </Link>
           </div>
-          <div className="text-primary font-semibold mx-auto sm:mx-0">
-            Free Shipping on Orders Over $500
-          </div>
         </div>
       </div>
 
@@ -97,19 +94,6 @@ export function Header() {
                 <Search className="h-5 w-5" />
                 <span className="sr-only">Search</span>
               </Button>
-              <Link href="/cart">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-muted-foreground hover:text-primary hover:bg-secondary relative"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                    0
-                  </span>
-                  <span className="sr-only">Cart</span>
-                </Button>
-              </Link>
               <Button
                 variant="ghost"
                 size="icon"

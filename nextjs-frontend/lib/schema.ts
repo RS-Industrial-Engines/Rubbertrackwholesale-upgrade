@@ -64,7 +64,7 @@ export function generateOrganizationSchema() {
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "HardwareStore",
     "@id": `${SITE_URL}/#localbusiness`,
     name: BUSINESS_INFO.name,
     // Note: image field omitted until /public/warehouse.jpg exists
@@ -89,12 +89,6 @@ export function generateLocalBusinessSchema() {
         opens: BUSINESS_INFO.hours.weekdays.opens,
         closes: BUSINESS_INFO.hours.weekdays.closes,
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        dayOfWeek: "Saturday",
-        opens: BUSINESS_INFO.hours.saturday.opens,
-        closes: BUSINESS_INFO.hours.saturday.closes,
-      },
     ],
     areaServed: [
       {
@@ -116,15 +110,15 @@ export function generateLocalBusinessSchema() {
     ],
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 29.7604,
-      longitude: -95.3698,
+      latitude: 29.7833985,
+      longitude: -95.2924153,
     },
     serviceArea: {
       "@type": "GeoCircle",
       geoMidpoint: {
         "@type": "GeoCoordinates",
-        latitude: 29.7604,
-        longitude: -95.3698,
+        latitude: 29.7833985,
+        longitude: -95.2924153,
       },
       geoRadius: "50 mi",
     },
@@ -140,11 +134,6 @@ export function generateLocalBusinessSchema() {
       "Skid Steer Parts",
       "Compact Track Loader Parts",
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: BUSINESS_INFO.aggregateRating.ratingValue,
-      reviewCount: BUSINESS_INFO.aggregateRating.reviewCount,
-    },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Rubber Tracks & Undercarriage Parts",
