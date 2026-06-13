@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { API } from "@/lib/api";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -29,7 +28,7 @@ export function ContactForm() {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch(API.contact, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
