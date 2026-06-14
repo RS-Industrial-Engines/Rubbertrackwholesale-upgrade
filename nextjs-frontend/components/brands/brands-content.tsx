@@ -17,7 +17,7 @@ import {
   normalizeForMatching,
   cleanModelForDisplay,
 } from "@/lib/data/full-machine-data";
-import { createMachineSlug } from "@/lib/url-utils";
+import { createMachineSlug, createBrandSlug } from "@/lib/url-utils";
 
 // Convert full brand list to Brand objects with model counts
 function getFullBrands(): Brand[] {
@@ -25,7 +25,7 @@ function getFullBrands(): Brand[] {
   return stats.map((stat, index) => ({
     id: index + 1,
     name: stat.brand,
-    slug: stat.brand.toLowerCase().replace(/\s+/g, "-"),
+    slug: createBrandSlug(stat.brand),
     description: `Premium rubber tracks and undercarriage parts for ${stat.brand} equipment. Find compatible tracks for all ${stat.modelCount} ${stat.brand} models.`,
     logo_url: undefined,
     machine_count: stat.modelCount,

@@ -6,7 +6,7 @@ import {
   isValidMetricTrackSize,
 } from "@/lib/data/full-machine-data";
 import { STATIC_BLOG_POSTS } from "@/lib/data/blog-posts";
-import { createMachineSlug } from "@/lib/url-utils";
+import { createMachineSlug, createBrandSlug } from "@/lib/url-utils";
 import { hasCarrierRoller } from "@/lib/data/undercarriage-data";
 import { getSitemapPartSlugs } from "@/lib/data/verified-parts-data";
 import { hasComponentSEOValue, ComponentType } from "@/lib/sitemap-seo-helpers";
@@ -181,7 +181,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Brand pages - generated from full-machine-data.ts
   const brandPages: MetadataRoute.Sitemap = fullBrands.map((brand) => ({
-    url: `${BASE_URL}/brands/${brand.toLowerCase().replace(/\s+/g, "-")}`,
+    url: `${BASE_URL}/brands/${createBrandSlug(brand)}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7,

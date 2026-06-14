@@ -5,7 +5,7 @@ import {
   fullBrands,
   getTrackSizesForMachine,
 } from "@/lib/data/full-machine-data";
-import { createMachineSlug, BUSINESS_INFO } from "@/lib/url-utils";
+import { createMachineSlug, createBrandSlug, BUSINESS_INFO } from "@/lib/url-utils";
 import { generateBreadcrumbSchema, generateBrandPageSchema } from "@/lib/schema";
 import BrandDetailContent from "@/components/brands/brand-detail-content";
 
@@ -55,7 +55,7 @@ function findBrandBySlug(slug: string): string | null {
   
   // Search in fullBrands for exact slug match
   for (const brand of fullBrands) {
-    const brandSlug = brand.toLowerCase().replace(/\s+/g, "-");
+    const brandSlug = createBrandSlug(brand);
     if (brandSlug === normalizedSlug) {
       return brand;
     }
@@ -79,7 +79,7 @@ function getBrandSlug(brand: string): string {
       return slug;
     }
   }
-  return brand.toLowerCase().replace(/\s+/g, "-");
+  return createBrandSlug(brand);
 }
 
 export async function generateStaticParams() {
