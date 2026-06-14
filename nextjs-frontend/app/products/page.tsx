@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Products",
   description:
     "Browse our complete selection of rubber tracks and undercarriage parts for all major heavy machinery brands.",
+  robots: { index: false, follow: false },
   alternates: {
     canonical: `${SITE_URL}/products`,
   },

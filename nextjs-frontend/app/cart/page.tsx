@@ -9,6 +9,7 @@ const SITE_URL = getSiteUrl();
 export const metadata: Metadata = {
   title: "Cart",
   description: "Your shopping cart",
+  robots: { index: false, follow: false },
   alternates: {
     canonical: `${SITE_URL}/cart`,
   },

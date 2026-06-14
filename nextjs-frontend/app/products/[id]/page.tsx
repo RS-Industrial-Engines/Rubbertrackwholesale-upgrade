@@ -35,6 +35,7 @@ export async function generateMetadata({
   if (!product) {
     return {
       title: "Product Not Found",
+      robots: { index: false, follow: false },
     };
   }
 
@@ -46,6 +47,7 @@ export async function generateMetadata({
   return {
     title: `${title} | Rubber Track Wholesale`,
     description,
+    robots: { index: false, follow: false },
     openGraph: {
       title: `${title} | Rubber Track Wholesale`,
       description,

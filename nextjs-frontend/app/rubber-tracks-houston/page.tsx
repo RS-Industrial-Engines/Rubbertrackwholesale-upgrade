@@ -233,8 +233,8 @@ export default function RubberTracksHoustonPage() {
                 <div className="flex items-start gap-3">
                   <Clock className="h-5 w-5 mt-0.5 text-primary shrink-0" />
                   <div className="text-sm text-muted-foreground">
-                    <p>Monday&ndash;Friday: 8:00 AM &ndash; 5:00 PM</p>
-                    <p>Saturday: 9:00 AM &ndash; 1:00 PM</p>
+                    <p>Monday&ndash;Friday: 9:00 AM &ndash; 5:00 PM</p>
+                    <p>Saturday: Closed</p>
                     <p>Sunday: Closed</p>
                   </div>
                 </div>
