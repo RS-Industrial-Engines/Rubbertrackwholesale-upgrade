@@ -320,7 +320,7 @@ function BrandCard({ brand }: { brand: Brand }) {
           </p>
         )}
         <Link
-          href={`/machines?brand=${encodeURIComponent(brand.name)}`}
+          href={`/brands/${createBrandSlug(brand.name)}`}
           className="inline-block"
         >
           <Button

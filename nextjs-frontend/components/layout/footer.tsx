@@ -8,6 +8,7 @@ const quickLinks = [
   { href: "/machines", label: "Shop by Machine" },
   { href: "/track-size", label: "Shop by Track Size" },
   { href: "/brands", label: "Brands" },
+  { href: "/blog", label: "Blog" },
   { href: "/faqs", label: "FAQs" },
   { href: "/contact", label: "Contact" },
 ];
@@ -118,7 +119,7 @@ export function Footer() {
                   <Link href={BUSINESS_INFO.phoneTel} className="font-medium hover:text-primary transition-colors">
                     {BUSINESS_INFO.phone}
                   </Link>
-                  <p className="text-muted-foreground">Mon-Fri: 8AM - 6PM CST</p>
+                  <p className="text-muted-foreground">Mon-Fri: 9AM - 5PM CST</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
