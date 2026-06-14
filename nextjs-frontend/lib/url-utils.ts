@@ -132,6 +132,41 @@ export function createMachineSlug(make: string, model: string): string {
 }
 
 /**
+ * Create a clean, SEO-safe, XML-safe brand slug.
+ *
+ * CRITICAL: Strips ampersands and other special characters so brand slugs are
+ * safe to embed in URLs and (un-escaped) XML sitemaps. A raw "&" in a sitemap
+ * <loc> causes an "xmlParseEntityRef: no name" parse error.
+ *
+ * For brands without special characters this produces the exact same output as
+ * the previous `brand.toLowerCase().replace(/\s+/g, "-")` pattern, so existing
+ * URLs are unchanged.
+ *
+ * Examples:
+ * - createBrandSlug("Kubota") → "kubota"
+ * - createBrandSlug("New Holland") → "new-holland"
+ * - createBrandSlug("C & F") → "c-f"
+ * - createBrandSlug("Gelai & Castegnaro") → "gelai-castegnaro"
+ */
+export function createBrandSlug(brand: string): string {
+  return brand
+    .toLowerCase()
+    .trim()
+    // Replace slashes with hyphens
+    .replace(/\s*\/\s*/g, "-")
+    // Replace ampersands with hyphens (e.g., "C & F" → "c-f")
+    .replace(/\s*&\s*/g, "-")
+    // Replace spaces with hyphens
+    .replace(/\s+/g, "-")
+    // Remove any remaining special characters except hyphens and alphanumerics
+    .replace(/[^a-z0-9-]/g, "")
+    // Collapse multiple hyphens
+    .replace(/-+/g, "-")
+    // Remove leading/trailing hyphens
+    .replace(/^-|-$/g, "");
+}
+
+/**
  * Check if a URL slug is "messy" and needs cleanup.
  * A messy slug contains parentheses, double hyphens, or equipment type descriptors.
  */
